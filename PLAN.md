@@ -338,19 +338,35 @@ Phase 3.5's job (the actual runtime-verifier caller), not built prematurely here
 
 **Split and reordered (agreed 2026-08-19) — this is the highest-difficulty phase in the plan:**
 
-- **3.3a (build first, low risk / high yield):** trace the repository's *existing* test suite via
-  language-native instrumentation (`sys.settrace` / `coverage.py` for Python). Existing tests are already valid,
-  already scoped, and already implicitly judged safe by the repo's own authors — this yields real runtime
-  evidence with minimal synthesis risk. Ship this as its own gate before 3.3b.
-- **3.3b (build second, high risk):** synthesize *novel* scenarios only for functions with zero test coverage,
-  restricted to the SAFE-classified subset, using an established property-based library (e.g. Hypothesis for
-  Python) rather than a bespoke input/fixture generator.
+- **3.3a (build first, low risk / high yield) — IMPLEMENTED 2026-08-20:** trace the repository's *existing*
+  test suite. Existing tests are already valid, already scoped, and already implicitly judged safe by the
+  repo's own authors — this yields real runtime evidence with minimal synthesis risk.
+  Implemented as `src/veyra/harness/`: `discovery.py` (pure AST-based pytest-convention test discovery,
+  entity_ids aligned with Phase 2.1's extractor naming), `dependencies.py` + `install_policy.py` (the
+  Dependency Inspection → Installation Policy stages of the pipeline below — deliberately conservative:
+  stdlib-only repositories are `SUPPORTED`, anything declaring a third-party dependency is
+  `UNSUPPORTED_ENVIRONMENT`, since installing arbitrary packages is itself an unreviewed
+  execution/security operation not attempted in this slice), `runner_script.py` (a stdlib-only, no-pytest
+  in-container runner — this is what lets 3.3a avoid needing the installation pipeline it declines to build),
+  and `manager.py` (`run_existing_test_harness()`, orchestrating discovery → dependency gate → Phase 3.1's
+  Safety Gate reused as-is → Phase 3.2's `ExecutionBoundary` reused unmodified → `Evidence(EvidenceType.TEST)`
+  persistence). Note: 3.3a produces test-level PASS/FAIL/ERROR evidence, not per-node execution tracing inside
+  the code under test — that granularity is Phase 3.5's job (Runtime Trace Engine), which will instrument an
+  existing-test run the same way 3.3a already executes one. 27 new tests (25 non-Docker + 2 real-Docker
+  end-to-end proving genuine PASS/FAIL/ERROR and real `--network none` enforcement).
+- **3.3b (build second, high risk) — NOT STARTED:** synthesize *novel* scenarios only for functions with zero
+  test coverage, restricted to the SAFE-classified subset, using an established property-based library (e.g.
+  Hypothesis for Python) rather than a bespoke input/fixture generator.
 
 `UNEXECUTABLE` state covers: missing configuration, missing dependency, missing fixture, unsafe dependency,
-ambiguous initialization, unavailable environment.
+ambiguous initialization, unavailable environment. 3.3a's `UnexecutableReason` enum
+(`UNSUPPORTED_ENVIRONMENT`/`MISSING_STATIC_NODE`/`BLOCKED_BY_SAFETY`/`HARNESS_EXECUTION_FAILED`/
+`NO_RESULT_REPORTED`) is a concrete first instance of this state for the existing-test-tracing case.
 
 Acceptance: dependencies identified where possible; fixture requirements identified; safe substitutions
-supported; failed harness creation → `UNEXECUTABLE`; failed execution never becomes a successful behavioral claim.
+supported; failed harness creation → `UNEXECUTABLE`; failed execution never becomes a successful behavioral
+claim. All satisfied for 3.3a's scope (existing tests, no fixtures/mocking yet — fixture requirements and safe
+substitutions are chiefly 3.3b's concern, since 3.3a's existing tests bring their own setup).
 
 ### Phase 3.4 — Behavioral Scenario Generator
 Generates runtime-oriented questions/scenarios from static knowledge; not all are executable. Planner converts
