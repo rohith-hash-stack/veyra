@@ -9,24 +9,83 @@
 ## Current Status
 
 **Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.4,
-and 3.5 done.
-**Current milestone:** 265 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+3.5, and 3.6 done.
+**Current milestone:** 278 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
 cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a and 3.4 (pushed) and now Phase 3.5 (this commit).
+covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a, 3.4, 3.5 (pushed) and now Phase 3.6 (this
+commit).
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
 `src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`,
-`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`, `src/veyra/runtime/`
-(new, Phase 3.5) all implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2
-originally deferred (Evidence, Question/Answer, ClassificationResult, ExecutionEnvironment, Scenario) now
-exists, and Phase 3.5 is the first phase to actually persist real RUNTIME evidence.
+`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`, `src/veyra/runtime/`,
+`src/veyra/exploration/` (new, Phase 3.6) all implemented. SQLite event-sourced store (D3) live. Every
+canonical entity Phase 1.2 originally deferred now exists, and Phase 3.5/3.6 together are the first phases to
+actually build and orchestrate real RUNTIME evidence at scale.
 
 ---
+
+### 2026-08-20 — Phase 3.6 (Multi-Execution Exploration) implemented — 278/278 project-wide
+- **Continued straight down the M3 dependency chain**: 3.6 is the next natural step after 3.5 (iteratively
+  explore using prior observations, per the plan's own text), and now has real RUNTIME evidence from 3.5 to
+  check against for "already explored."
+- **`src/veyra/exploration/engine.py`** — `explore()` is the shared orchestration core: re-runs Phase 3.4's
+  generator fresh to get today's live executable scenarios (same re-derive-don't-trust-a-snapshot discipline as
+  3.5), ranks by plain degree centrality (in+out edge count -- an explicitly stated simple proxy, not
+  betweenness/eigenvector centrality), skips anything that already carries RUNTIME evidence (whether from a
+  prior direct target or an incidental nested-call observation), and calls Phase 3.5's `run_scenario()` on the
+  rest until a wall-clock or execution-count budget is hit.
+- **`explore_at_ingest(store, repo_root, commit, boundary, file_count)`** implements D10's tiered eager policy
+  as real, executable code for the first time (it previously only existed as PLAN.md prose):
+  Tier 1 (<50 files) explores everything, 5 min cap; Tier 2 (50-500 files) restricts to the top-50
+  centrality-ranked nodes, 30 min cap; **Tier 3 (>500 files) performs zero eager executions, verified directly
+  by a test** (`test_explore_at_ingest_tier3_performs_no_eager_execution` -- the boundary's `execute()` is
+  never even called).
+- **`explore_neighborhood(store, ..., entity_id, max_depth, max_executions, max_wall_clock_seconds)`** — the
+  general lazy/query-driven primitive Tier 3's "2 min/20-execution cap per query" describes. Walks *outgoing
+  CALLS edges* breadth-first, **deliberately not Phase 2.4's structural CONTAINS children/grandchildren** --
+  those are a different relationship entirely (containment, not call graph), and are left completely untouched
+  by this module. Re-reading Phase 3.6's own acceptance criterion in that light: "siblings/children/
+  grandchildren stay visible" is a **non-regression guarantee inherited for free from Phase 2.4**, not a
+  target for 3.6 to itself explore -- confirmed directly by a test proving a CONTAINS-only class member never
+  appears as an execution candidate even though it's in the same file. No real caller exists for this function
+  yet (Milestone 4's Query-Time Evidence Retrieval, Phase 4.3, isn't built) -- offered as the reusable
+  primitive that phase will eventually call, not wired to a fabricated trigger, same deferral discipline as
+  Phase 3.3a.
+- **Convergence, without a completeness claim**: `ExplorationReport` reports `already_explored_skipped` and
+  `attempted` per pass; a caller re-running `explore()` against an unchanged commit sees `attempted` trend
+  toward 0 as evidence accumulates -- that's the "convergence measurable" acceptance criterion. The report's
+  own docstring is explicit that this is never a completeness/soundness claim ("unreachable code, code behind
+  a permanently-false condition, and code no scenario was ever planned for are... simply absent from this
+  report"), directly per the AC's own "no completeness claim just because executions stop finding new paths."
+- **Two things deliberately NOT built, stated not hidden**: (1) a per-node execution cap (D10's "max 5
+  scenarios/executions per node" for Tier 2) has nothing to bound yet, since Phase 3.4 still only generates one
+  deterministic scenario per node -- adding a cap now would be dead code; revisit once multi-scenario
+  generation (3.3b or later) exists. (2) precise nested-observation counting in `ExplorationReport` (how many
+  *incidental* entities got their first evidence this pass, beyond the directly-targeted ones) isn't tracked --
+  would need a small API extension to Phase 3.5's `ScenarioExecutionOutcome` that nothing yet needs; the
+  already-explored skip still gets the real efficiency benefit from those incidental observations even without
+  reporting the count.
+- **Tests**: 13 new, all non-Docker (reuses Phase 3.5's `FakeExecutionBoundary` substitutability pattern, with
+  real Nodes/Edges from the actual Phase 2.1 extractor rather than hand-built ones, so CALLS edges for
+  centrality/neighborhood tests are genuine) -- empty-candidate report, full-repo exploration, candidate-set
+  restriction, the already-explored skip (proven via a pre-seeded RUNTIME evidence row), execution-count and
+  wall-clock budgets, centrality ordering, all three tiers (Tier 2's top-N cutoff verified via `monkeypatch`
+  against a small call chain), call-graph-only neighborhood traversal, `max_depth`, and the neighborhood
+  primitive's defaults matching D10's Tier 3 numbers exactly. **278/278 project-wide, 0 failures** (26
+  Docker-gated tests skip cleanly, same as the prior three entries -- none Docker-dependent this phase, since
+  orchestration logic alone was in scope).
+- **Same test-basename collision class caught again, same fix**: `tests/exploration/test_engine.py` collided
+  with `tests/runtime/test_engine.py` (both directories independently chose the generic name). Renamed to
+  `test_exploration_engine.py`. Confirmed no other collisions exist anywhere in `tests/` (checked directly, not
+  assumed).
+- **Not started yet**: 3.3b (novel scenario synthesis), 3.7 (Static/Runtime Evidence Reconciliation -- the
+  named next consumer of the runtime CALLS-edge evidence 3.5/3.6 together now produce plenty of), 3.8
+  (Verification State Engine), 3.9 (Runtime Audit).
 
 ### 2026-08-20 — Phase 3.5 (Runtime Trace Engine) implemented — 265/265 project-wide
 - **Picked 3.5 over 3.3b again**: 3.5 is the actual executor for the `Scenario` candidates 3.4 now produces,
@@ -650,6 +709,11 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   evidence and the first caller of `VBGStore.insert_execution_environment()`. See timeline entry above for the
   sys.settrace-based tracer, the live-state re-derivation discipline, and a real bug (imprecise UNEXECUTABLE
   reason for a currently-a-method target) found and fixed by the tests.
+- **Phase 3.6 — Multi-Execution Exploration** (2026-08-20). `src/veyra/exploration/`. 13 new tests, all
+  non-Docker. **278/278 project-wide.** D10's tiered budgets are now real code (`explore_at_ingest`), plus the
+  general lazy/query-driven primitive (`explore_neighborhood`) Tier 3 and future Phase 4.3 will use. See
+  timeline entry above for the call-graph-vs-structural-neighborhood distinction and what's deliberately not
+  built yet (per-node execution caps, precise nested-observation counts).
 
 ---
 
@@ -752,10 +816,14 @@ Closed:
 21. ~~Phase 3.5 (Runtime Trace Engine)~~ — done 2026-08-20, 15 new tests (12 non-Docker + 3 real-Docker).
     **265/265 project-wide.** Picked over 3.3b again for the same reason; now the project's first source of
     real RUNTIME evidence and real runtime CALLS-edge observations.
-22. **Next up: Phase 3.3b (novel scenario synthesis), 3.6 (Multi-Execution Exploration), or 3.7 (Static/Runtime
-    Evidence Reconciliation)** — 3.3b finally has a real (if narrow) coverage signal to use, from which
-    entity_ids 3.5 has produced RUNTIME evidence for; 3.6 is the next natural step in the
-    Question→Planner→Boundary→Harness→Runtime→Trace pipeline (iteratively exploring unexplored neighborhood
-    using prior observations, with D10's tiered budgets already specified); 3.7 is the explicit, named next
-    consumer of the runtime CALLS-edge evidence 3.5 now produces (reconciling it against static CALLS edges).
-    All three are legitimate; on hold pending explicit go-ahead and a steer on which one first.
+22. ~~Phase 3.6 (Multi-Execution Exploration)~~ — done 2026-08-20, 13 new tests, all non-Docker. **278/278
+    project-wide.** D10's tiered budgets are real code now, not just PLAN.md prose.
+23. **Next up: Phase 3.3b (novel scenario synthesis), 3.7 (Static/Runtime Evidence Reconciliation), 3.8
+    (Verification State Engine), or 3.9 (Runtime Audit)** — 3.7 is the explicit, named next consumer of the
+    runtime CALLS-edge evidence 3.5/3.6 now produce at scale (reconciling it against static CALLS edges); 3.8
+    is the natural sequel to 3.7 (deriving final verification states from the now-much-richer evidence
+    history); 3.9 is straightforward instrumentation, closing Milestone 3's audit story the way 2.8 closed
+    Milestone 2's; 3.3b still has the same open dependency question as before (a real "zero coverage" signal
+    now exists in principle, from RUNTIME evidence presence, but nothing yet formally defines "coverage" as a
+    Milestone 3 concept the way Phase 5.6 will for the final release report). All four are legitimate; on hold
+    pending explicit go-ahead and a steer on which one first.

@@ -448,8 +448,31 @@ failed execution still counts as evidence; multiple observations retained (appen
 as everywhere else -- re-running the same scenario twice adds a second independent observation, never
 overwrites the first).
 
-### Phase 3.6 — Multi-Execution Exploration
+### Phase 3.6 — Multi-Execution Exploration — IMPLEMENTED 2026-08-20
 Use prior observations to explore unexplored neighborhood, iteratively.
+
+**Implemented as `src/veyra/exploration/`**: `explore()` is the shared core (rank Phase 3.4's live executable
+scenarios by degree centrality, skip anything already carrying RUNTIME evidence, run Phase 3.5's
+`run_scenario()` on the rest until a budget is hit); `explore_at_ingest()` implements D10's eager Tier 1/2
+policy directly (Tier 3 performs zero executions here, by design); `explore_neighborhood()` is the general
+lazy/query-driven primitive Tier 3's per-query budget describes, walking outgoing CALLS edges breadth-first
+(deliberately NOT Phase 2.4's structural CONTAINS children/grandchildren -- a different relationship, left
+completely untouched, which is exactly why "siblings/children/grandchildren stay visible" is a free
+non-regression guarantee here rather than something this module has to reimplement). No real M4 query caller
+exists yet for `explore_neighborhood()`, so it's offered as the reusable primitive Phase 4.3 will eventually
+call, not wired to a fabricated trigger -- same deferral discipline Phase 3.3a used.
+- Centrality is plain degree centrality (in+out edge count via Phase 2.4's edge-query primitives) --
+  explicitly a simple, stated proxy for "high-value/public-API," not betweenness/eigenvector centrality.
+- Per-node execution cap (D10's "max 5 scenarios/executions per node" for Tier 2) is NOT implemented: Phase 3.4
+  generates exactly one deterministic scenario per node today, so a per-node cap has nothing to bound yet --
+  stated as a real gap with a concrete revisit trigger (once multi-scenario generation exists), not silently
+  dropped.
+- 13 new tests: empty-candidate report, full-repo exploration, candidate-set restriction, skip-already-explored
+  (a pre-seeded RUNTIME evidence row proves redundant re-treatment doesn't happen), execution-count budget,
+  wall-clock budget, centrality-ordering (a node with both an incoming and outgoing CALLS edge goes first),
+  Tier 1/2/3 policy (Tier 2's top-N cutoff verified via `monkeypatch` against a small call chain, Tier 3's zero
+  eager executions verified directly), call-graph-only neighborhood traversal (a CONTAINS-only sibling is
+  proven absent), max_depth, and the neighborhood primitive's defaults matching D10's Tier 3 numbers exactly.
 
 **Budget decision (agreed 2026-08-19):** default to lazy, query-driven exploration — mirror the Eager/Lazy Q&A
 split from M4 for runtime exploration too. Only high-centrality/public-API nodes get eager scenario execution
