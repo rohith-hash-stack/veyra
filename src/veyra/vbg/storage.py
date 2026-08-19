@@ -28,6 +28,7 @@ from veyra.acquisition import AcquisitionStatus, RepositoryInfo
 from veyra.audit import AuditRecord
 
 from .evidence import Evidence, EvidenceType, Provenance
+from .execution import ExecutionEnvironment
 from .models import Edge, Node, RelationshipType, RepositoryRecord, VerificationState
 from .questions import Answer, AnswerStatus, Question, QuestionCategory
 from .safety import Capability, ClassificationResult, RiskLevel, SafetyClass
@@ -149,6 +150,22 @@ CREATE TABLE IF NOT EXISTS classifications (
 );
 CREATE INDEX IF NOT EXISTS idx_classifications_target_commit
     ON classifications (target, repository_commit);
+
+CREATE TABLE IF NOT EXISTS execution_environments (
+    row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    environment_id TEXT NOT NULL,
+    backend TEXT NOT NULL,
+    image TEXT NOT NULL,
+    network_enabled INTEGER NOT NULL,
+    memory_limit_mb INTEGER NOT NULL,
+    cpu_limit REAL NOT NULL,
+    timeout_seconds REAL NOT NULL,
+    non_privileged INTEGER NOT NULL,
+    read_only_filesystem INTEGER NOT NULL,
+    recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_execution_environments_id
+    ON execution_environments (environment_id);
 """
 
 
@@ -245,6 +262,20 @@ def _row_to_classification_result(row: sqlite3.Row) -> ClassificationResult:
         evidence=tuple(json.loads(row["evidence"])),
         repository_commit=row["repository_commit"],
         policy_version=row["policy_version"],
+    )
+
+
+def _row_to_execution_environment(row: sqlite3.Row) -> ExecutionEnvironment:
+    return ExecutionEnvironment(
+        environment_id=row["environment_id"],
+        backend=row["backend"],
+        image=row["image"],
+        network_enabled=bool(row["network_enabled"]),
+        memory_limit_mb=row["memory_limit_mb"],
+        cpu_limit=row["cpu_limit"],
+        timeout_seconds=row["timeout_seconds"],
+        non_privileged=bool(row["non_privileged"]),
+        read_only_filesystem=bool(row["read_only_filesystem"]),
     )
 
 
@@ -748,4 +779,46 @@ class VBGStore:
 
     def get_latest_classification(self, target: str, repository_commit: str) -> ClassificationResult | None:
         history = self.get_classification_history(target, repository_commit)
+        return history[-1] if history else None
+
+    # -- Execution environments (Phase 3.2) ----------------------------------
+
+    def insert_execution_environment(self, environment: ExecutionEnvironment) -> None:
+        """Makes "container configuration is auditable" (Phase 3.2) real --
+        this is also what future RUNTIME Evidence's environment_id (Phase
+        1.3) will point at."""
+        with closing(self._connect()) as conn:
+            conn.execute(
+                """
+                INSERT INTO execution_environments (
+                    environment_id, backend, image, network_enabled,
+                    memory_limit_mb, cpu_limit, timeout_seconds,
+                    non_privileged, read_only_filesystem, recorded_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    environment.environment_id,
+                    environment.backend,
+                    environment.image,
+                    int(environment.network_enabled),
+                    environment.memory_limit_mb,
+                    environment.cpu_limit,
+                    environment.timeout_seconds,
+                    int(environment.non_privileged),
+                    int(environment.read_only_filesystem),
+                    _now(),
+                ),
+            )
+            conn.commit()
+
+    def get_execution_environment_history(self, environment_id: str) -> list[ExecutionEnvironment]:
+        with closing(self._connect()) as conn:
+            rows = conn.execute(
+                "SELECT * FROM execution_environments WHERE environment_id = ? ORDER BY row_id ASC",
+                (environment_id,),
+            ).fetchall()
+        return [_row_to_execution_environment(row) for row in rows]
+
+    def get_latest_execution_environment(self, environment_id: str) -> ExecutionEnvironment | None:
+        history = self.get_execution_environment_history(environment_id)
         return history[-1] if history else None

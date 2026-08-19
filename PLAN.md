@@ -295,7 +295,7 @@ self-check test enforces this by walking its own source for forbidden `ast.Call`
 external behavior never auto-executed; production/destructive-looking operations blocked; policy decisions
 persisted and auditable (`VBGStore.insert_classification`/`get_classification_history`). 43 tests.
 
-### Phase 3.2 — Execution Boundary — NOT YET STARTED
+### Phase 3.2 — Execution Boundary — IMPLEMENTED 2026-08-20
 Filesystem isolation, network isolation, credential isolation, CPU/memory limits, timeout, process
 restrictions, cleanup.
 
@@ -320,6 +320,19 @@ a silent fallback to unsafe host execution.
 Tests: filesystem escape, network escape, credential access, process creation, resource exhaustion, timeout,
 cleanup. Docker-dependent tests separated from the unit suite (`pytest.mark.skipif` when Docker is unavailable)
 — real behavior tested where the environment permits, never faked via string-matching a Docker command.
+
+**Implemented as `src/veyra/execution/`**: `ExecutionBoundary` (a `typing.Protocol` — `execute`/`terminate`/
+`collect_result`/`cleanup`, zero Docker vocabulary), `DockerExecutionBoundary` (structural typing only — it does
+not inherit from the Protocol, proving substitutability is real, not just declared). Docker Desktop + WSL2
+became available mid-session, so all 26 Docker-backed tests spin up **real disposable containers** — network
+isolation, filesystem isolation (read-only root + tmpfs `/tmp` scratch), memory-limit OOM-kill, CPU/pids-limit
+config, timeout+forced-termination, cleanup-after-timeout, and host-environment-variable non-inheritance are all
+genuinely exercised, not mocked. A `FakeExecutionBoundary` (test-only, in `test_boundary_contract.py`) with zero
+Docker knowledge proves AC1/AC2 (runtime-verifier-shaped code is identical across backends) as a demonstrated
+fact rather than an assertion. `ExecutionEnvironment` (deferred from Phase 1.2, and the real referent of
+Evidence's `environment_id` since Phase 1.3) now has a concrete shape and an append-only `VBGStore` table.
+`DockerExecutionBoundary` itself stays storage-agnostic — persisting `ExecutionEnvironment`/evidence together is
+Phase 3.5's job (the actual runtime-verifier caller), not built prematurely here. 31 tests.
 
 ### Phase 3.3 — Harness & Fixture Manager
 

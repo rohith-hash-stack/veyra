@@ -8,19 +8,61 @@
 
 ## Current Status
 
-**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) started: Phase 3.1 done, stopped there
-per explicit instruction ("do NOT proceed to 3.2 automatically").
-**Current milestone:** 181/181 tests passing project-wide. Docker + WSL2 now installed on the dev machine
-(2026-08-20), specifically so Phase 3.2's container tests can be real rather than mocked when that phase starts.
+**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1 and 3.2 done.
+**Current milestone:** 212/212 tests passing project-wide, including 26 tests against REAL disposable Docker
+containers (network/filesystem isolation, resource limits, timeout, cleanup — all genuinely exercised).
+**Git:** `veyra` is now a git repo (`main` branch), one commit so far covering M1+M2+Phase 3.1 — Phase 3.2 not
+yet committed.
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
-Answer/Classification, all append-only), `src/veyra/git_tracking/`, `src/veyra/audit.py`,
-`src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`, `src/veyra/safety/` (new, Phase
-3.1) all implemented. SQLite event-sourced store (D3) live.
+Answer/Classification/ExecutionEnvironment, all append-only), `src/veyra/git_tracking/`, `src/veyra/audit.py`,
+`src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`, `src/veyra/safety/`,
+`src/veyra/execution/` (new, Phase 3.2) all implemented. SQLite event-sourced store (D3) live.
 
 ---
 
-## Timeline Log
+### 2026-08-20 — Phase 3.2 (Execution Boundary) implemented with REAL Docker — 212/212 project-wide
+- **Set up git for the first time this session**: `veyra` had never been a git repo. Initialized with `main` as
+  the default branch, created `milestone-1-2-and-m3-phase-3.1`, committed all of M1/M2/Phase-3.1 there (one
+  commit, 181/181 passing), merged into `main`. Since `main` had zero prior commits, git resolved this as a
+  fast-forward rather than a two-parent merge commit — the honest outcome given there was no divergent history
+  to merge, not a shortcut.
+- **Docker Desktop was installed but stopped** (the `docker-desktop` WSL distro existed but wasn't running, and
+  the `docker` CLI wasn't on this session's PATH — same PATH-snapshot issue seen earlier with the `claude` CLI).
+  Located it at `%LOCALAPPDATA%\Programs\DockerDesktop`, launched it, waited for the daemon, and added its
+  `resources\bin` to `PATH` for this session so the Python subprocess calls could resolve `docker`. Pulled
+  `python:3.11-alpine` as the test image.
+- **`src/veyra/execution/`**: `ExecutionBoundary` (`typing.Protocol`), `ExecutionRequest`/`ExecutionHandle`/
+  `ExecutionOutcome`/`ExecutionStatus`, `DockerExecutionBoundary`. Every `docker run` unconditionally applies:
+  `--network none`, `--memory`/`--memory-swap` caps, `--cpus`, `--pids-limit`, `--read-only` root filesystem with
+  a size-capped `/tmp` tmpfs as the only writable location, `--cap-drop ALL`, `--security-opt no-new-privileges`,
+  `--user 65534:65534` (never root). Never `--privileged`, never a host Docker socket mount, never more than the
+  caller-specified working/output directories mounted.
+- **All 26 Docker-backed tests are real** (not string-matched): network isolation (an actual outbound connection
+  attempt from inside the container fails), filesystem isolation (an actual write outside `/tmp` fails; the
+  mounted working directory is genuinely read-only; the output directory is genuinely read-write and content
+  lands back on the host), memory limit (an actual 400MB allocation under a 64MB cap gets OOM-killed), CPU/pids
+  limits (verified via real `docker inspect` on the live container, not just checking the args list this code
+  built), timeout (an actual `sleep 30` gets force-terminated within ~2s, confirmed via `docker inspect` showing
+  `Running: false` afterward), cleanup (the container is verified gone via `docker inspect` failing, both after
+  normal completion and after a timeout), and environment isolation (a host env var set via `monkeypatch` is
+  confirmed absent inside the container; only an explicitly-passed var is visible).
+- **`ExecutionEnvironment`** (`vbg/execution.py`) — the entity Phase 1.2 deferred to M3, and the real referent
+  of `Evidence.environment_id`, which has existed unused since Phase 1.3. Now has a concrete shape and an
+  append-only `VBGStore` table (`insert_execution_environment`/`get_execution_environment_history`/
+  `get_latest_execution_environment`), satisfying "container configuration is auditable" directly.
+- **`DockerExecutionBoundary` deliberately does not touch `VBGStore`** — same pure-mechanism-vs-explicit-persist
+  split as Phase 3.1's `classify()`/`classify_and_audit()`. Wiring execution results into real Evidence/
+  `ExecutionEnvironment` persistence together is Phase 3.5's job (the actual runtime-verifier caller); building
+  that wiring now, with no real caller yet, would be the same kind of premature scaffolding avoided everywhere
+  else in this project.
+- **Known limitation, stated not hidden**: CPU throttling itself isn't behaviorally proven (that would need a
+  slow, timing-sensitive saturation test) — the test instead confirms the `--cpus` flag actually reaches the
+  live container's `HostConfig.NanoCpus` via `docker inspect`, which is a real, direct proof that configuration
+  was applied, short of a slower behavioral timing test.
+- **Docker's own security boundary is not re-verified here** (D17 still applies): a kernel/Docker-level container
+  escape is out of scope for what application-level flags can prove; this hardens everything practical at the
+  `docker run` layer.
 
 ### 2026-08-20 — Milestone 3 started: Phase 3.1 (Execution Classification) implemented, then stopped as instructed
 **181/181 tests passing project-wide (43 new). M1/M2's 138 unaffected — confirmed via full-suite rerun.**
@@ -394,6 +436,10 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
 - **Phase 3.1 — Execution Classification** (2026-08-20). `src/veyra/safety/` + `vbg/safety.py`. 43 new tests.
   **181/181 project-wide.** Capability Detection / Policy Evaluation / Classification kept architecturally
   separate per user-supplied design. Stopped here per explicit instruction, not proceeding to 3.2 yet.
+- **Phase 3.2 — Execution Boundary** (2026-08-20). `src/veyra/execution/` + `vbg/execution.py`. 31 new tests, 26
+  against real Docker containers (Docker Desktop started + PATH configured mid-session). **212/212
+  project-wide.** See timeline entry above for the full security-hardening list and what's real vs. mocked
+  (nothing is mocked).
 
 ---
 
@@ -484,6 +530,9 @@ Closed:
 15. ~~Phase 2.7 (Verified/Unverified Knowledge Arms)~~ — done 2026-08-20, 6 new tests. 133/133 project-wide.
 16. ~~Phase 2.8 (Static Audit)~~ — done 2026-08-20, 4 new tests. **138/138 project-wide. M2 gate cleared.**
 17. ~~Phase 3.1 (Execution Classification)~~ — done 2026-08-20, 43 new tests. **181/181 project-wide.**
-18. **Next up: Phase 3.2 (Execution Boundary)** — `ExecutionBoundary` protocol + `DockerExecutionBoundary`
-    (D16/D17). Docker + WSL2 are now installed specifically for this phase's real (non-mocked) container tests.
-    On hold pending explicit go-ahead — not to be started automatically per the current instruction.
+18. ~~Phase 3.2 (Execution Boundary)~~ — done 2026-08-20, 31 new tests (26 real Docker). **212/212 project-wide.**
+19. **Next up: Phase 3.3 (Harness & Fixture Manager)** — per D2, trace the repository's existing test suite
+    first (3.3a, low risk/high yield) before attempting novel scenario synthesis (3.3b). Also where the
+    dependency-installation-as-a-security-operation pipeline (Dependency Inspection → Policy → Environment
+    Construction) from the user's M3 spec gets built, gated by the same Safety Gate as everything else.
+    On hold pending explicit go-ahead.

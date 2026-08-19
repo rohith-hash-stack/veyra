@@ -1,4 +1,5 @@
 from .evidence import Evidence, EvidenceType, Provenance
+from .execution import ExecutionEnvironment
 from .models import Edge, Node, RelationshipType, RepositoryRecord, VerificationState
 from .questions import Answer, AnswerStatus, Question, QuestionCategory
 from .safety import Capability, ClassificationResult, RiskLevel, SafetyClass
@@ -31,6 +32,7 @@ __all__ = [
     "SafetyClass",
     "RiskLevel",
     "ClassificationResult",
+    "ExecutionEnvironment",
     "Neighborhood",
     "get_children",
     "get_descendants",
