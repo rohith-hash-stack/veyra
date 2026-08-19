@@ -403,11 +403,50 @@ Acceptance: scenarios reference actual VBG nodes; required inputs explicit; safe
 unsupported scenarios → unexecutable; scenarios reproducible. All satisfied for this slice's scope (single
 direct-invocation scenario per invokable node; multi-scenario/multi-step planning is future work).
 
-### Phase 3.5 — Runtime Trace Engine
+### Phase 3.5 — Runtime Trace Engine — IMPLEMENTED 2026-08-20
 Capture: node entered/exited, call observed, return, exception, external interaction, execution time, scenario.
 
+**Implemented as `src/veyra/runtime/`**: `run_scenario(store, repository_root, repository_version, scenario,
+boundary)` is where a Phase 3.4 `Scenario` stops being a plan and becomes an observation. Also closes a
+deferral Phase 3.2 itself named: this is the first module to call `store.insert_execution_environment()`
+(`DockerExecutionBoundary` deliberately stayed storage-agnostic).
+- `tracer_script.py` — stdlib-only in-container code (`sys.settrace`, no `coverage.py`) that actually invokes
+  the target with trivial synthesized primitive-literal arguments and traces every call/return/exception whose
+  `co_filename` is under the mounted `/workspace`. A call reaching outside `/workspace` is recorded once as a
+  single `external_interaction` event and not traced further inside -- proves a boundary was crossed without
+  pretending to observe the other side of it. Entity identity is
+  `f"{module.__name__}.{code.co_qualname}"` (`co_qualname`, Python 3.11+) -- lines up exactly with the
+  extractor's own entity_id convention with no extra bookkeeping.
+- `engine.py` — **re-derives executability from live state** rather than trusting the Scenario's own cached
+  `executable` flag (same discipline Phase 2.6's `verify_question()` established: re-derive, don't replay a
+  stale snapshot) -- the target's source or classification may have changed since the scenario was planned.
+  Reconstructs the observed call stack from the flat, time-ordered event list (`call`/`return` are 1:1 per
+  frame even when a frame exits via exception -- CPython still fires `return` with `arg=None`) to derive both
+  which entities were genuinely observed and which caller→callee edges were actually exercised.
+- **"Failed execution still counts as evidence" (Phase 3.5 AC), interpreted precisely**: an `EXCEPTION` outcome
+  means the target genuinely ran and a real trace came back describing what happened -- that IS evidence, and
+  is persisted like any other RUNTIME evidence. A `CONTAINER_EXECUTION_FAILED`/`NO_TRACE_REPORTED` outcome (no
+  usable trace came back at all -- crashed before reaching the target, or timed out) is genuinely ambiguous
+  about whether the target was ever reached, so -- matching Phase 3.3a's harness manager precedent -- it is
+  UNEXECUTABLE with no evidence, not a guess.
+- Persists one `Evidence(RUNTIME, subject_id=entity_id, scenario_id=..., environment_id=...)` per genuinely
+  observed node, plus one per genuinely observed CALLS edge (`subject_id` is a stable edge key,
+  `f"{source}--CALLS-->{target}"`, per Evidence's own "entity_id of the node, or a stable edge key" WHAT
+  contract from Phase 1.3) -- this is the project's first real runtime call-graph evidence, deliberately not
+  reconciled against static CALLS edges here (whether it confirms or conflicts with what Phase 2.3 predicted is
+  Phase 3.7's explicit job, not pre-judged in this phase).
+- Argument synthesis stays deliberately trivial (one fixed zero-value literal per already-synthesizable
+  primitive parameter) -- proving the call executes, not exploring the input space; that remains Phase 3.3b's
+  job.
+- 15 new tests (12 non-Docker via a `FakeExecutionBoundary` covering every `RuntimeUnexecutableReason`, plus
+  real classification/environment/evidence persistence and nested-call edge evidence; 3 real-Docker end-to-end
+  tests proving a genuine nested-call trace, a genuine captured exception, and a genuine
+  `external_interaction` event from a real blocked network call).
+
 Acceptance: runtime observations map to VBG nodes/edges; trace tied to commit, scenario, execution environment;
-failed execution still counts as evidence; multiple observations retained.
+failed execution still counts as evidence; multiple observations retained (append-only `insert_evidence`, same
+as everywhere else -- re-running the same scenario twice adds a second independent observation, never
+overwrites the first).
 
 ### Phase 3.6 — Multi-Execution Exploration
 Use prior observations to explore unexplored neighborhood, iteratively.

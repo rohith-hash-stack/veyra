@@ -8,23 +8,89 @@
 
 ## Current Status
 
-**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, and
-3.4 done.
-**Current milestone:** 253/253 tests passing project-wide (non-Docker environment); 26 Phase 3.2 tests + 2 Phase
-3.3a tests are Docker-gated (`requires_docker`) and were last proven against REAL disposable Docker containers
-in the session that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so those
-23 tests skip cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
+**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.4,
+and 3.5 done.
+**Current milestone:** 265 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
+in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
+sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
+cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a (pushed) and now Phase 3.4 (this commit).
+covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a and 3.4 (pushed) and now Phase 3.5 (this commit).
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
 `src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`,
-`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/` (new, Phase 3.4) all
-implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2 originally deferred
-(Evidence, Question/Answer, ClassificationResult, ExecutionEnvironment, Scenario) now exists.
+`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`, `src/veyra/runtime/`
+(new, Phase 3.5) all implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2
+originally deferred (Evidence, Question/Answer, ClassificationResult, ExecutionEnvironment, Scenario) now
+exists, and Phase 3.5 is the first phase to actually persist real RUNTIME evidence.
 
 ---
+
+### 2026-08-20 — Phase 3.5 (Runtime Trace Engine) implemented — 265/265 project-wide
+- **Picked 3.5 over 3.3b again**: 3.5 is the actual executor for the `Scenario` candidates 3.4 now produces,
+  and is also what would eventually give 3.3b's own acceptance criteria a real "zero test coverage" signal to
+  work from. Same reasoning as the 3.4-over-3.3b choice last entry, one step further down the same dependency
+  chain.
+- **`src/veyra/runtime/tracer_script.py`** — stdlib-only in-container code (`sys.settrace`, no `coverage.py`)
+  that invokes a target function with trivial synthesized primitive arguments and traces every call/return/
+  exception whose `co_filename` is under the mounted `/workspace`. A call reaching outside `/workspace` is
+  recorded once as a single `external_interaction` event and not traced further inside -- proves a boundary
+  was crossed without pretending to observe the other side of it. Entity identity is
+  `f"{module.__name__}.{code.co_qualname}"` -- `co_qualname` (Python 3.11+) already renders `Class.method`,
+  lining up exactly with the extractor's own `f"{parent_id}.{name}"` entity_id convention with zero extra
+  bookkeeping needed on either side.
+- **`src/veyra/runtime/engine.py`** — `run_scenario(store, repository_root, repository_version, scenario,
+  boundary)` is where a Scenario stops being a plan and becomes an observation. Also closes a deferral Phase
+  3.2 itself named: this is the first module to call `store.insert_execution_environment()` for real
+  (`DockerExecutionBoundary` deliberately stayed storage-agnostic since it was written).
+  - **Re-derives executability from live state** rather than trusting the Scenario's own cached `executable`
+    flag -- same discipline Phase 2.6's `verify_question()` established (re-derive, don't replay a stale
+    generation-time snapshot). Fetches the current Node, re-runs `extract_signature()`, and re-checks the
+    latest persisted classification; a scenario that no longer qualifies (code changed, policy changed) becomes
+    UNEXECUTABLE now with a fresh reason, never a silently-forced run of stale intent.
+  - **Reconstructs the observed call graph from a flat, time-ordered event list**: `call`/`return` are 1:1 per
+    frame even when a frame exits via an exception (CPython still fires `return` with `arg=None` in that case),
+    so a simple push/pop stack -- ignoring `exception` events for stack purposes, since they can fire more than
+    once per frame as it unwinds through nested handlers -- is enough to derive both which entities were
+    genuinely observed and which caller→callee edges were actually exercised.
+  - **"Failed execution still counts as evidence" (Phase 3.5 AC), a real interpretive call**: an `EXCEPTION`
+    outcome means the target genuinely ran and a real trace came back describing what happened -- that IS a
+    runtime observation, persisted as Evidence like any other. A `CONTAINER_EXECUTION_FAILED`/
+    `NO_TRACE_REPORTED` outcome (no usable trace at all -- crashed before reaching the target, or timed out) is
+    genuinely ambiguous about whether the target was ever reached, so -- matching Phase 3.3a's harness manager
+    precedent exactly -- it's treated as UNEXECUTABLE with no evidence, rather than guessing.
+  - **Persists the project's first real runtime call-graph evidence**: one `Evidence(RUNTIME)` per genuinely
+    observed node, plus one per genuinely observed CALLS edge, keyed by a stable edge string
+    (`f"{source}--CALLS-->{target}"`) per Evidence's own WHAT contract ("entity_id of the node, or a stable
+    edge key", Phase 1.3). Deliberately NOT reconciled against static CALLS edges here -- whether a runtime
+    observation confirms or conflicts with what Phase 2.3 predicted is explicitly Phase 3.7's job, not
+    pre-judged in this phase.
+  - Argument synthesis stays deliberately trivial -- one fixed zero-value literal (0/""/0.0/False/b"") per
+    already-synthesizable primitive parameter Phase 3.4 identified, nothing more. Proves the call executes;
+    does not explore the input space. That stays Phase 3.3b's job.
+  - Bound methods are never attempted -- Phase 3.4 already refuses to mark any bound method executable, so
+    this module carries no constructor/fixture logic at all, not even a stub.
+- **Real bug found and fixed by the tests, same session**: the initial `run_scenario()` draft gated on
+  `node.type != "Function"` as its very first check, which meant a target that had *become* a bound method
+  since scenario generation got the coarse `NO_SOURCE_AVAILABLE` verdict instead of the correct, more specific
+  `AMBIGUOUS_INITIALIZATION`. Fixed by accepting both `Function` and `Method` at that first gate (matching
+  Phase 3.4's own `_INVOKABLE_TYPES`) and letting `signature.is_bound_method` do the actual, precise branching
+  -- caught by `test_bound_method_is_ambiguous_initialization`, left as a permanent regression test.
+- **Tests**: 15 new (12 non-Docker via a `FakeExecutionBoundary` -- same substitutability pattern as
+  `test_boundary_contract.py`/Phase 3.3a's harness tests -- covering every `RuntimeUnexecutableReason`, real
+  classification/environment/evidence persistence, and nested-call edge evidence from a hand-built trace; 3
+  real-Docker end-to-end tests proving a genuine nested-call trace with correct entity/edge evidence, a genuine
+  captured exception, and a genuine `external_interaction` event from a real network call that Phase 3.2's
+  unmodified `--network none` actually blocks). **265/265 project-wide, 0 failures** (26 Docker-gated tests
+  skip cleanly in this sandbox: 21 Phase 3.2 + 2 Phase 3.3a + 3 Phase 3.5, none re-proven against a live
+  daemon this session, same stated caveat as the prior two entries).
+- **Not started yet**: 3.3b (novel scenario synthesis -- now has a real, if still narrow, coverage signal it
+  could use: which entity_ids Phase 3.5 has already produced RUNTIME evidence for), 3.6 (Multi-Execution
+  Exploration, tiered budgets already specified as D10), 3.7 (Static/Runtime Evidence Reconciliation -- the
+  explicit next consumer of the runtime CALLS-edge evidence this phase now produces), 3.8 (Verification State
+  Engine), 3.9 (Runtime Audit).
 
 ### 2026-08-20 — Phase 3.4 (Behavioral Scenario Generator) implemented — 253/253 project-wide
 - **Chose 3.4 over 3.3b for this slice**: both were reasonable "go ahead" next steps after 3.3a. 3.3b (novel
@@ -579,6 +645,11 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   canonical entities. See timeline entry above for scope (one direct-invocation candidate per invokable node,
   Phase 3.1 classification reused for real), and for a real cross-directory test-import bug found and fixed
   along the way.
+- **Phase 3.5 — Runtime Trace Engine** (2026-08-20). `src/veyra/runtime/`. 15 new tests (12 non-Docker + 3
+  real-Docker end-to-end). **265/265 project-wide.** The project's first phase to persist real RUNTIME
+  evidence and the first caller of `VBGStore.insert_execution_environment()`. See timeline entry above for the
+  sys.settrace-based tracer, the live-state re-derivation discipline, and a real bug (imprecise UNEXECUTABLE
+  reason for a currently-a-method target) found and fixed by the tests.
 
 ---
 
@@ -678,9 +749,13 @@ Closed:
 20. ~~Phase 3.4 (Behavioral Scenario Generator)~~ — done 2026-08-20, 37 new tests. **253/253 project-wide.**
     Picked over 3.3b for this slice since it doesn't depend on coverage data Phase 3.5 hasn't been built to
     produce yet; closes out `Scenario`, the last Phase-1.2-deferred canonical entity.
-21. **Next up: Phase 3.5 (Runtime Trace Engine) or Phase 3.3b (novel scenario synthesis)** — 3.5 is the actual
-    executor for the `Scenario` candidates 3.4 now produces (captures node entered/exited, call observed,
-    return, exception, external interaction; ties observations to commit/scenario/execution environment), and
-    is also what would give 3.3b the real "zero test coverage" signal its own acceptance criteria assume. That
-    dependency makes 3.5 the more naturally unblocking choice, but either is legitimate; on hold pending
-    explicit go-ahead and a steer on which one first.
+21. ~~Phase 3.5 (Runtime Trace Engine)~~ — done 2026-08-20, 15 new tests (12 non-Docker + 3 real-Docker).
+    **265/265 project-wide.** Picked over 3.3b again for the same reason; now the project's first source of
+    real RUNTIME evidence and real runtime CALLS-edge observations.
+22. **Next up: Phase 3.3b (novel scenario synthesis), 3.6 (Multi-Execution Exploration), or 3.7 (Static/Runtime
+    Evidence Reconciliation)** — 3.3b finally has a real (if narrow) coverage signal to use, from which
+    entity_ids 3.5 has produced RUNTIME evidence for; 3.6 is the next natural step in the
+    Question→Planner→Boundary→Harness→Runtime→Trace pipeline (iteratively exploring unexplored neighborhood
+    using prior observations, with D10's tiered budgets already specified); 3.7 is the explicit, named next
+    consumer of the runtime CALLS-edge evidence 3.5 now produces (reconciling it against static CALLS edges).
+    All three are legitimate; on hold pending explicit go-ahead and a steer on which one first.
