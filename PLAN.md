@@ -368,13 +368,40 @@ supported; failed harness creation → `UNEXECUTABLE`; failed execution never be
 claim. All satisfied for 3.3a's scope (existing tests, no fixtures/mocking yet — fixture requirements and safe
 substitutions are chiefly 3.3b's concern, since 3.3a's existing tests bring their own setup).
 
-### Phase 3.4 — Behavioral Scenario Generator
+### Phase 3.4 — Behavioral Scenario Generator — IMPLEMENTED 2026-08-20
 Generates runtime-oriented questions/scenarios from static knowledge; not all are executable. Planner converts
 them into candidate scenarios with input requirements, dependencies, expected observable points, safety
 classification.
 
+**Implemented as `src/veyra/scenarios/`**, and closes the last of Phase 1.2's deferred canonical entities:
+`Scenario` finally gets its shape, defined in `vbg/scenarios.py` (same "shape lives in vbg, logic lives in the
+top-level package" split as Question/ClassificationResult/ExecutionEnvironment). One candidate scenario per
+Function/Method node at a commit: "directly invoke this with zero/default/synthesizable-primitive arguments" --
+deliberately the simplest possible scenario shape for a first slice (multi-call sequences, exception-injection,
+constructed-fixture scenarios are explicitly not attempted here).
+- `introspection.py` — `extract_signature(node)`, pure, re-parses `Node.lexical_representation` via `ast` (the
+  same technique `veyra.safety.capabilities` uses on the same field) to determine parameters, whether each has
+  a synthesizable value (a small primitive-annotation allowlist or an existing default), and whether the target
+  is a bound method.
+- `generator.py` — `generate_scenarios(store, repository_version, policy=None)`, reusing Phase 3.1's
+  `classify_and_audit()` exactly as-is (same precedent as Phase 3.3a) so every scenario's `safety_class` is
+  backed by a real, persisted classification decision, not an unearned claim. A scenario is `executable=True`
+  only when: source was available to introspect, classification is not `BLOCKED`, the target is not a bound
+  method (no constructor/fixture strategy exists yet -- `AMBIGUOUS_INITIALIZATION`), and every parameter is
+  synthesizable (else `MISSING_FIXTURE`). `Scenario.__post_init__` structurally refuses to construct a
+  non-executable Scenario without both a reason and an explanatory detail -- "unsupported scenarios →
+  unexecutable" cannot be silently skipped.
+- `Scenario.dependencies` is deliberately left empty in this slice -- no consumer needs it populated yet;
+  the natural source (outgoing CALLS/IMPORTS edges) is a stated follow-up, not guessed at now.
+- `VBGStore` gained `insert_scenario`/`get_scenario_history`/`get_latest_scenario`/`get_scenarios`, same
+  append-only + current-view discipline as Node/Edge -- re-generating scenarios for the same target under a
+  changed policy is a conflicting write for the same `scenario_id`, kept as history, not an overwrite.
+- 37 new tests (signature introspection, generator behavior across every unexecutable reason, Scenario model
+  validation, and storage round-trip/conflict-preservation).
+
 Acceptance: scenarios reference actual VBG nodes; required inputs explicit; safety classified before execution;
-unsupported scenarios → unexecutable; scenarios reproducible.
+unsupported scenarios → unexecutable; scenarios reproducible. All satisfied for this slice's scope (single
+direct-invocation scenario per invokable node; multi-scenario/multi-step planning is future work).
 
 ### Phase 3.5 — Runtime Trace Engine
 Capture: node entered/exited, call observed, return, exception, external interaction, execution time, scenario.

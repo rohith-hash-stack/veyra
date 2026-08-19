@@ -8,21 +8,84 @@
 
 ## Current Status
 
-**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, and 3.3a done.
-**Current milestone:** 217/217 tests passing project-wide (non-Docker environment); 26 Phase 3.2 tests + 2 Phase
+**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, and
+3.4 done.
+**Current milestone:** 253/253 tests passing project-wide (non-Docker environment); 26 Phase 3.2 tests + 2 Phase
 3.3a tests are Docker-gated (`requires_docker`) and were last proven against REAL disposable Docker containers
 in the session that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so those
 23 tests skip cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
-**Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch), covering
-M1+M2+Phase 3.1+3.2 — Phase 3.3a not yet committed.
+**Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
+covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a (pushed) and now Phase 3.4 (this commit).
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
-Answer/Classification/ExecutionEnvironment, all append-only), `src/veyra/git_tracking/`, `src/veyra/audit.py`,
-`src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`, `src/veyra/safety/`,
-`src/veyra/execution/`, `src/veyra/harness/` (new, Phase 3.3a) all implemented. SQLite event-sourced store
-(D3) live.
+Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
+`src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`,
+`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/` (new, Phase 3.4) all
+implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2 originally deferred
+(Evidence, Question/Answer, ClassificationResult, ExecutionEnvironment, Scenario) now exists.
 
 ---
+
+### 2026-08-20 — Phase 3.4 (Behavioral Scenario Generator) implemented — 253/253 project-wide
+- **Chose 3.4 over 3.3b for this slice**: both were reasonable "go ahead" next steps after 3.3a. 3.3b (novel
+  input synthesis via Hypothesis) has a real dependency this project hasn't built yet -- knowing "zero test
+  coverage" needs per-node execution tracing, which is Phase 3.5's job, not built. 3.4 doesn't have that
+  entanglement (it plans candidate scenarios from static knowledge + Phase 3.1 classification, nothing
+  dynamic), matches the plan's own stated milestone order, and closes out `Scenario` -- the last of Phase 1.2's
+  originally-deferred canonical entities.
+- **`src/veyra/vbg/scenarios.py`** — `Scenario` finally defined (deferred since Phase 1.2), same
+  shape-lives-in-vbg pattern as Question/ClassificationResult/ExecutionEnvironment. A Scenario is a *candidate
+  for runtime observation*, not an execution or its outcome -- it's meant to become the scenario_id a future
+  RUNTIME Evidence record points at once Phase 3.5 actually runs it. `__post_init__` structurally enforces
+  "unsupported scenarios → unexecutable": a non-executable Scenario cannot be constructed without both an
+  `unexecutable_reason` and an explanatory `detail`, and an executable one cannot carry a reason at all.
+- **`src/veyra/scenarios/introspection.py`** — `extract_signature(node)`, pure, re-parses
+  `Node.lexical_representation` via `ast` (same technique `veyra.safety.capabilities` already uses on the same
+  field) to determine a function/method's parameters and whether each has a synthesizable value: a small
+  primitive-annotation allowlist (str/int/float/bool/bytes) or an existing default. Deliberately narrow --
+  this phase only decides whether a candidate scenario is *plannable* at all; it does not synthesize actual
+  values (that stays 3.3b's job, restricted to SAFE-classified targets per D2, whenever it gets built).
+- **`src/veyra/scenarios/generator.py`** — `generate_scenarios(store, repository_version, policy=None)`. One
+  candidate scenario per Function/Method node: "directly invoke this with zero/default/synthesizable-primitive
+  arguments" -- deliberately the simplest possible scenario shape; multi-call sequences, exception-injection,
+  and constructed-fixture scenarios are explicit non-goals for this slice, not oversights.
+  - **Reuses Phase 3.1's `classify_and_audit()` exactly as-is** (same precedent as Phase 3.3a's harness
+    manager) so every scenario's `safety_class` is backed by a real, persisted classification decision, not an
+    unearned claim. A scenario is `executable=True` only when source was available to introspect, the
+    classification is not `BLOCKED`, the target isn't a bound method (no constructor/fixture strategy exists
+    yet to obtain an instance -- `AMBIGUOUS_INITIALIZATION`), and every parameter is synthesizable (else
+    `MISSING_FIXTURE`); otherwise `NO_SOURCE_AVAILABLE` when there's no lexical_representation to begin with.
+  - **`Scenario.dependencies` is deliberately left empty** in this slice -- no consumer needs it populated yet;
+    the natural source (the target's own outgoing CALLS/IMPORTS edges) is a stated, not-hidden follow-up.
+  - **Determinism**: `scenario_id` is a stable hash of `(target_entity_id, repository_version)` only, matching
+    Phase 2.5's Question identity discipline -- regenerating against an unchanged commit and policy is
+    byte-identical. Regenerating under a *different* policy can legitimately produce different
+    executable/safety_class content at the *same* scenario_id -- handled the same way Node/Edge already handle
+    conflicting writes (kept as history, not overwritten), not a new mechanism.
+- **`VBGStore`** gained `insert_scenario`/`get_scenario_history`/`get_latest_scenario`/`get_scenarios` (current
+  view: latest row per scenario_id), same append-only + current-view discipline as everything else.
+- **Tests**: 37 new (12 introspection: primitive/defaulted/complex/kwonly/varargs/bound-method parameter
+  handling, unparsable/missing source; 10 generator: every unexecutable reason plus determinism, real
+  classification persistence, non-invokable node types skipped; 8 Scenario model validation; 7 storage
+  round-trip + conflict-preservation). **253/253 project-wide, 0 failures** (23 Docker-gated tests skip
+  cleanly in this sandbox, same as the prior entry).
+- **Real, pre-existing bug found and fixed while adding these tests**: a bare `from conftest import X` inside a
+  test module is unsafe across this project's `tests/` tree -- with no `__init__.py` anywhere, pytest's default
+  import mode caches whichever directory's `conftest.py` loads first under the single module name `"conftest"`,
+  so a same-named import from a *different* test directory can silently resolve to the wrong file. This had
+  been silently working project-wide only by coincidence (every existing `from conftest import X` happened to
+  reference names that were either unique or redundantly-but-compatibly defined across colliding directories).
+  My first draft of `tests/scenarios/` hit a real `ImportError`/module-identity failure both ways (importing
+  `COMMIT`/`make_node` from a same-named-but-different conftest, and a `test_generator.py` basename collision
+  with the pre-existing `tests/questions/test_generator.py`, the same class of bug Phase 3.1 already hit once
+  for `test_audit.py`). Fixed by defining `make_node`/`COMMIT` locally in each of the two new test files
+  instead of importing them, and renaming to `test_scenario_generator.py`/`test_scenario_introspection.py`.
+  Not fixed project-wide (out of scope for this slice) -- this remains a latent landmine anywhere a *new* test
+  file's `from conftest import X` happens to collide with an existing one; worth a real trigger-based follow-up
+  (e.g. add `__init__.py` throughout `tests/` and switch to qualified imports) if it bites again.
+- **Not started yet**: 3.3b (novel scenario synthesis for SAFE-classified, zero-coverage functions), 3.5
+  (Runtime Trace Engine -- the actual executor for these `Scenario` candidates, and the source of real
+  coverage data 3.3b will eventually need).
 
 ### 2026-08-20 — Phase 3.3a (Harness & Fixture Manager — existing-test tracing) implemented — 217/217 project-wide
 - **Scope, per D2**: this is only 3.3a (trace the repository's *existing* test suite, low risk/high yield).
@@ -511,6 +574,11 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   environment (23 Docker-gated tests skip cleanly).** See timeline entry above for the Dependency
   Inspection/Installation Policy scope boundary, the stdlib-only in-container runner, and the
   never-a-false-success-claim evidence discipline. 3.3b (novel scenario synthesis) not started.
+- **Phase 3.4 — Behavioral Scenario Generator** (2026-08-20). `src/veyra/scenarios/` + `vbg/scenarios.py`. 37
+  new tests. **253/253 project-wide.** Closes out `Scenario`, the last of Phase 1.2's originally-deferred
+  canonical entities. See timeline entry above for scope (one direct-invocation candidate per invokable node,
+  Phase 3.1 classification reused for real), and for a real cross-directory test-import bug found and fixed
+  along the way.
 
 ---
 
@@ -607,7 +675,12 @@ Closed:
     Dependency Inspection → Installation Policy stages of the dependency-installation-as-a-security-operation
     pipeline got built (Environment Construction is just Phase 3.2's existing `ExecutionBoundary`, reused
     unmodified).
-20. **Next up: Phase 3.3b (novel scenario synthesis) or Phase 3.4 (Behavioral Scenario Generator)** — 3.3b
-    synthesizes inputs only for SAFE-classified, zero-coverage functions via Hypothesis (per D2); 3.4 builds the
-    scenario objects that plan runtime-oriented questions from static knowledge more generally. Either could
-    reasonably go next; on hold pending explicit go-ahead and a steer on which one first.
+20. ~~Phase 3.4 (Behavioral Scenario Generator)~~ — done 2026-08-20, 37 new tests. **253/253 project-wide.**
+    Picked over 3.3b for this slice since it doesn't depend on coverage data Phase 3.5 hasn't been built to
+    produce yet; closes out `Scenario`, the last Phase-1.2-deferred canonical entity.
+21. **Next up: Phase 3.5 (Runtime Trace Engine) or Phase 3.3b (novel scenario synthesis)** — 3.5 is the actual
+    executor for the `Scenario` candidates 3.4 now produces (captures node entered/exited, call observed,
+    return, exception, external interaction; ties observations to commit/scenario/execution environment), and
+    is also what would give 3.3b the real "zero test coverage" signal its own acceptance criteria assume. That
+    dependency makes 3.5 the more naturally unblocking choice, but either is legitimate; on hold pending
+    explicit go-ahead and a steer on which one first.

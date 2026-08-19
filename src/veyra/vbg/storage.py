@@ -32,6 +32,7 @@ from .execution import ExecutionEnvironment
 from .models import Edge, Node, RelationshipType, RepositoryRecord, VerificationState
 from .questions import Answer, AnswerStatus, Question, QuestionCategory
 from .safety import Capability, ClassificationResult, RiskLevel, SafetyClass
+from .scenarios import Scenario, ScenarioUnexecutableReason
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS nodes (
@@ -166,6 +167,24 @@ CREATE TABLE IF NOT EXISTS execution_environments (
 );
 CREATE INDEX IF NOT EXISTS idx_execution_environments_id
     ON execution_environments (environment_id);
+
+CREATE TABLE IF NOT EXISTS scenarios (
+    row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    scenario_id TEXT NOT NULL,
+    target_entity_id TEXT NOT NULL,
+    description TEXT NOT NULL,
+    required_inputs TEXT NOT NULL,
+    dependencies TEXT NOT NULL,
+    expected_observable_points TEXT NOT NULL,
+    safety_class TEXT NOT NULL,
+    executable INTEGER NOT NULL,
+    unexecutable_reason TEXT,
+    detail TEXT,
+    repository_version TEXT NOT NULL,
+    recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_scenarios_version
+    ON scenarios (repository_version, scenario_id);
 """
 
 
@@ -276,6 +295,26 @@ def _row_to_execution_environment(row: sqlite3.Row) -> ExecutionEnvironment:
         timeout_seconds=row["timeout_seconds"],
         non_privileged=bool(row["non_privileged"]),
         read_only_filesystem=bool(row["read_only_filesystem"]),
+    )
+
+
+def _row_to_scenario(row: sqlite3.Row) -> Scenario:
+    return Scenario(
+        scenario_id=row["scenario_id"],
+        target_entity_id=row["target_entity_id"],
+        description=row["description"],
+        required_inputs=tuple(json.loads(row["required_inputs"])),
+        dependencies=tuple(json.loads(row["dependencies"])),
+        expected_observable_points=tuple(json.loads(row["expected_observable_points"])),
+        safety_class=SafetyClass(row["safety_class"]),
+        executable=bool(row["executable"]),
+        repository_version=row["repository_version"],
+        unexecutable_reason=(
+            ScenarioUnexecutableReason(row["unexecutable_reason"])
+            if row["unexecutable_reason"] is not None
+            else None
+        ),
+        detail=row["detail"],
     )
 
 
@@ -822,3 +861,72 @@ class VBGStore:
     def get_latest_execution_environment(self, environment_id: str) -> ExecutionEnvironment | None:
         history = self.get_execution_environment_history(environment_id)
         return history[-1] if history else None
+
+    # -- Scenarios (Phase 3.4) -----------------------------------------------
+
+    def insert_scenario(self, scenario: Scenario) -> None:
+        """Append-only, like everything else -- re-generating scenarios for
+        the same target at the same commit (e.g. under a changed policy) is
+        a conflicting write for the same natural key (scenario_id), kept
+        side by side as history, same as Node/Edge (Phase 1.2's "conflicts
+        are representable")."""
+        with closing(self._connect()) as conn:
+            conn.execute(
+                """
+                INSERT INTO scenarios (
+                    scenario_id, target_entity_id, description, required_inputs,
+                    dependencies, expected_observable_points, safety_class,
+                    executable, unexecutable_reason, detail, repository_version,
+                    recorded_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    scenario.scenario_id,
+                    scenario.target_entity_id,
+                    scenario.description,
+                    json.dumps(list(scenario.required_inputs)),
+                    json.dumps(list(scenario.dependencies)),
+                    json.dumps(list(scenario.expected_observable_points)),
+                    scenario.safety_class.value,
+                    int(scenario.executable),
+                    scenario.unexecutable_reason.value if scenario.unexecutable_reason else None,
+                    scenario.detail,
+                    scenario.repository_version,
+                    _now(),
+                ),
+            )
+            conn.commit()
+
+    def get_scenario_history(self, scenario_id: str, repository_version: str) -> list[Scenario]:
+        with closing(self._connect()) as conn:
+            rows = conn.execute(
+                """
+                SELECT * FROM scenarios
+                WHERE scenario_id = ? AND repository_version = ?
+                ORDER BY row_id ASC
+                """,
+                (scenario_id, repository_version),
+            ).fetchall()
+        return [_row_to_scenario(row) for row in rows]
+
+    def get_latest_scenario(self, scenario_id: str, repository_version: str) -> Scenario | None:
+        history = self.get_scenario_history(scenario_id, repository_version)
+        return history[-1] if history else None
+
+    def get_scenarios(self, repository_version: str) -> list[Scenario]:
+        """Current view: the latest row per distinct scenario_id at this commit."""
+        with closing(self._connect()) as conn:
+            rows = conn.execute(
+                """
+                SELECT s.* FROM scenarios s
+                INNER JOIN (
+                    SELECT scenario_id, MAX(row_id) AS max_row_id
+                    FROM scenarios WHERE repository_version = ?
+                    GROUP BY scenario_id
+                ) latest ON s.scenario_id = latest.scenario_id AND s.row_id = latest.max_row_id
+                WHERE s.repository_version = ?
+                ORDER BY s.row_id ASC
+                """,
+                (repository_version, repository_version),
+            ).fetchall()
+        return [_row_to_scenario(row) for row in rows]
