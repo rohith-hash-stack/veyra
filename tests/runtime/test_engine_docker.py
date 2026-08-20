@@ -8,10 +8,11 @@ external_interaction event when the traced code reaches outside
 
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 from typing import Callable
 
-from conftest import requires_docker
+import pytest
 
 from veyra.execution import DockerExecutionBoundary
 from veyra.runtime import run_scenario
@@ -21,6 +22,22 @@ from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import EvidenceType, VBGStore
 
 COMMIT = "commit1"
+
+
+# Defined locally, not imported from conftest -- see
+# tests/execution/test_docker_boundary.py's identical comment for why.
+def _docker_available() -> bool:
+    try:
+        result = subprocess.run(["docker", "version"], capture_output=True, timeout=5)
+        return result.returncode == 0
+    except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
+        return False
+
+
+requires_docker = pytest.mark.skipif(
+    not _docker_available(),
+    reason="Docker is not available in this environment -- see PLAN.md D16/D17",
+)
 
 
 @requires_docker

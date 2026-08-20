@@ -9,6 +9,8 @@ string-matching. Skipped automatically when Docker isn't available
 
 from __future__ import annotations
 
+import json
+import subprocess
 import time
 from pathlib import Path
 
@@ -16,7 +18,40 @@ import pytest
 
 from veyra.execution import DockerExecutionBoundary, ExecutionRequest, ExecutionStatus
 
-from conftest import TEST_IMAGE, container_exists, docker_inspect, requires_docker
+# Defined locally, not imported from conftest -- a bare `from conftest
+# import X` can silently resolve to a *different* test directory's
+# conftest.py under pytest's default import mode (no __init__.py anywhere
+# in tests/), since every directory's conftest.py shares the same bare
+# module name "conftest". See PROGRESS.md's Phase 3.6 entry for the case
+# where this actually broke collection.
+TEST_IMAGE = "python:3.11-alpine"
+
+
+def _docker_available() -> bool:
+    try:
+        result = subprocess.run(["docker", "version"], capture_output=True, timeout=5)
+        return result.returncode == 0
+    except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
+        return False
+
+
+DOCKER_AVAILABLE = _docker_available()
+
+requires_docker = pytest.mark.skipif(
+    not DOCKER_AVAILABLE,
+    reason="Docker is not available in this environment -- see PLAN.md D16/D17",
+)
+
+
+def docker_inspect(container_id: str) -> dict:
+    result = subprocess.run(["docker", "inspect", container_id], capture_output=True, text=True, timeout=15)
+    return json.loads(result.stdout)[0]
+
+
+def container_exists(container_id: str) -> bool:
+    result = subprocess.run(["docker", "inspect", container_id], capture_output=True, timeout=15)
+    return result.returncode == 0
+
 
 pytestmark = requires_docker
 

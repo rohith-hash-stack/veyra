@@ -4,9 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from veyra.vbg import Node, VBGStore
-
-COMMIT = "commit1"
+from veyra.vbg import VBGStore
 
 
 @pytest.fixture
@@ -14,14 +12,11 @@ def store(tmp_path: Path) -> VBGStore:
     return VBGStore(tmp_path / "vbg.sqlite3")
 
 
-def make_node(entity_id: str, source: str, node_type: str = "Function") -> Node:
-    """Builds a Node the way Phase 2.1's extractor would -- lexical_representation
-    holding the exact function source -- without needing a real repo on disk."""
-    return Node(
-        entity_id=entity_id,
-        type=node_type,
-        name=entity_id.rsplit(".", 1)[-1],
-        repository_version=COMMIT,
-        language="Python",
-        lexical_representation=source,
-    )
+# Note: `make_node`/`COMMIT` used to live here and be imported into
+# test_capabilities.py/test_classification.py/test_classification_audit.py
+# via a bare `from conftest import ...`. That import is unsafe across this
+# project's tests/ tree (no __init__.py anywhere, so pytest's default
+# import mode can resolve "conftest" to a *different* directory's file
+# depending on collection order -- see PROGRESS.md's Phase 3.6 entry for
+# where this actually broke). Each of those files now defines its own local
+# copy instead.

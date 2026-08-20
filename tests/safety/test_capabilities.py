@@ -7,9 +7,18 @@ behavior against real capability sets, not source-string matching --
 from __future__ import annotations
 
 from veyra.safety import detect_capabilities
-from veyra.vbg import Capability
+from veyra.vbg import Capability, Node
 
-from conftest import make_node
+COMMIT = "commit1"
+
+
+# Defined locally, not imported from conftest -- see
+# tests/execution/test_docker_boundary.py's identical comment for why.
+def make_node(entity_id: str, source: str, node_type: str = "Function") -> Node:
+    return Node(
+        entity_id=entity_id, type=node_type, name=entity_id.rsplit(".", 1)[-1],
+        repository_version=COMMIT, language="Python", lexical_representation=source,
+    )
 
 
 def _capabilities(node) -> set[Capability]:

@@ -9,16 +9,33 @@ proof PROGRESS.md's Phase 3.2 entry describes for the boundary itself.
 
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 from typing import Callable
+
+import pytest
 
 from veyra.execution import DockerExecutionBoundary
 from veyra.harness import TestStatus, run_existing_test_harness
 from veyra.vbg import EvidenceType, Node, VBGStore
 
-from conftest import requires_docker
-
 COMMIT = "commit1"
+
+
+# Defined locally, not imported from conftest -- see
+# tests/execution/test_docker_boundary.py's identical comment for why.
+def _docker_available() -> bool:
+    try:
+        result = subprocess.run(["docker", "version"], capture_output=True, timeout=5)
+        return result.returncode == 0
+    except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
+        return False
+
+
+requires_docker = pytest.mark.skipif(
+    not _docker_available(),
+    reason="Docker is not available in this environment -- see PLAN.md D16/D17",
+)
 
 _TEST_SOURCE = (
     "import unittest\n\n"

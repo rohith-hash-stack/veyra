@@ -10,9 +10,18 @@ import inspect
 from pathlib import Path
 
 from veyra.safety import PolicyConfig, classify
-from veyra.vbg import Capability, SafetyClass
+from veyra.vbg import Capability, Node, SafetyClass
 
-from conftest import COMMIT, make_node
+COMMIT = "commit1"
+
+
+# Defined locally, not imported from conftest -- see
+# tests/execution/test_docker_boundary.py's identical comment for why.
+def make_node(entity_id: str, source: str, node_type: str = "Function") -> Node:
+    return Node(
+        entity_id=entity_id, type=node_type, name=entity_id.rsplit(".", 1)[-1],
+        repository_version=COMMIT, language="Python", lexical_representation=source,
+    )
 
 
 def test_classify_end_to_end_blocked() -> None:
