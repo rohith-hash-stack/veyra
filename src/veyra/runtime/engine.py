@@ -41,6 +41,7 @@ guessing.
 
 from __future__ import annotations
 
+import base64
 import enum
 import json
 import tempfile
@@ -123,6 +124,14 @@ def _unexecutable(
     )
 
 
+def _encode_override(value: object) -> object:
+    """JSON can't carry raw bytes -- encode as a marker dict the tracer
+    script's `_decode_override()` recognizes and reverses."""
+    if isinstance(value, bytes):
+        return {"__bytes_b64__": base64.b64encode(value).decode("ascii")}
+    return value
+
+
 def _module_and_function(node: Node) -> tuple[str, str, str] | None:
     """Derives (module_id, module_path, function_name) from a module-level
     Function node's own entity_id/source_location -- no extra Node fields
@@ -164,7 +173,19 @@ def run_scenario(
     repository_version: str,
     scenario: Scenario,
     boundary: ExecutionBoundary,
+    argument_overrides: dict[str, object] | None = None,
 ) -> ScenarioExecutionOutcome:
+    """`argument_overrides` (name -> a JSON-safe value, or raw `bytes`) lets
+    a caller supply real concrete values for some or all of the target's
+    non-default parameters instead of the trivial zero-literal this module
+    otherwise uses -- Phase 3.3b's novel-synthesis entry point is the only
+    caller that does, feeding it Hypothesis-generated samples. Purely
+    additive: omitting it (the default) reproduces Phase 3.5's original
+    trivial-literal behavior exactly. Only names that are still independently
+    re-derived as real, synthesizable, non-default parameters of the live
+    signature are ever used -- an override for a stale/nonexistent/no-longer-
+    synthesizable parameter name is silently ignored, never a way to bypass
+    the synthesizability gate below."""
     node = store.get_latest_node(scenario.target_entity_id, repository_version)
     if node is None or node.type not in ("Function", "Method"):
         # Method is accepted here (not just Function) so a target that is
@@ -212,6 +233,11 @@ def run_scenario(
         )
     module_id, module_path, function_name = located
     kwargs_type_tags = {p.name: p.annotation for p in signature.parameters if not p.has_default}
+    kwargs_literal_overrides = {
+        name: _encode_override(value)
+        for name, value in (argument_overrides or {}).items()
+        if name in kwargs_type_tags
+    }
 
     with tempfile.TemporaryDirectory(prefix="veyra-runtime-") as run_dir_raw:
         run_dir = Path(run_dir_raw)
@@ -221,6 +247,7 @@ def run_scenario(
             "module_path": module_path,
             "function_name": function_name,
             "kwargs_type_tags": kwargs_type_tags,
+            "kwargs_literal_overrides": kwargs_literal_overrides,
         }
         (run_dir / "spec.json").write_text(json.dumps(spec), encoding="utf-8")
 

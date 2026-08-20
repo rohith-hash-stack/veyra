@@ -20,15 +20,25 @@ calls, so this lines up exactly with the extractor's own
 
 Only module-level function targets are ever attempted (Phase 3.4 never
 marks a bound method executable, so there is no class-instantiation logic
-here at all, not even a stub for it). Argument values are the trivial
-zero-literal for each primitive type tag the caller already decided was
-synthesizable -- see engine.py's docstring for why this is deliberately not
-meaningful input-space exploration.
+here at all, not even a stub for it). Argument values are, by default, the
+trivial zero-literal for each primitive type tag the caller already decided
+was synthesizable -- see engine.py's docstring for why this is deliberately
+not meaningful input-space exploration on its own.
+
+Phase 3.3b (novel scenario synthesis, restricted to SAFE-classified,
+zero-coverage targets) supplies real, Hypothesis-generated values for some
+or all of those same parameters instead, via `spec["kwargs_literal_overrides"]`
+-- a name -> JSON-safe-value map (bytes values arrive as a
+`{"__bytes_b64__": ...}` marker, since raw bytes cannot cross JSON). This
+script does not know or care which caller supplied which value; a name
+present in that map always wins over the trivial literal for the matching
+type tag.
 """
 
 from __future__ import annotations
 
 TRACER_SOURCE = r'''
+import base64
 import importlib.util
 import json
 import sys
@@ -37,6 +47,12 @@ import time
 sys.path.insert(0, "/workspace")
 
 _PRIMITIVE_LITERALS = {"str": "", "int": 0, "float": 0.0, "bool": False, "bytes": b""}
+
+
+def _decode_override(value):
+    if isinstance(value, dict) and "__bytes_b64__" in value:
+        return base64.b64decode(value["__bytes_b64__"])
+    return value
 
 
 def _load_module(module_id, file_path):
@@ -107,7 +123,11 @@ def main():
             json.dump(result, f)
         return
 
-    kwargs = {name: _PRIMITIVE_LITERALS[tag] for name, tag in spec["kwargs_type_tags"].items()}
+    overrides = spec.get("kwargs_literal_overrides", {})
+    kwargs = {
+        name: _decode_override(overrides[name]) if name in overrides else _PRIMITIVE_LITERALS[tag]
+        for name, tag in spec["kwargs_type_tags"].items()
+    }
 
     start_time = time.perf_counter()
     sys.settrace(tracer)

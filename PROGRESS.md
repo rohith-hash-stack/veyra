@@ -8,26 +8,85 @@
 
 ## Current Status
 
-**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.4,
-3.5, and 3.6 done.
-**Current milestone:** 278 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.3b,
+3.4, 3.5, and 3.6 done. Remaining for the M3 gate: 3.7 (Conflict Reconciliation), 3.8 (Verification States),
+3.9 (Runtime Audit).
+**Current milestone:** 287 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
 cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a, 3.4, 3.5 (pushed) and now Phase 3.6 (this
-commit).
+covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a, 3.4, 3.5, 3.6, and now 3.3b (pushed as this
+session progresses).
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
 `src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`,
-`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`, `src/veyra/runtime/`,
-`src/veyra/exploration/` (new, Phase 3.6) all implemented. SQLite event-sourced store (D3) live. Every
-canonical entity Phase 1.2 originally deferred now exists, and Phase 3.5/3.6 together are the first phases to
-actually build and orchestrate real RUNTIME evidence at scale.
+`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/` (now includes `synthesis.py`, Phase 3.3b),
+`src/veyra/scenarios/`, `src/veyra/runtime/`, `src/veyra/exploration/` all implemented. SQLite event-sourced
+store (D3) live. Every canonical entity Phase 1.2 originally deferred now exists. First runtime dependency
+added: `hypothesis` (Veyra's own trusted tooling dependency for Phase 3.3b, not a repository dependency).
 
 ---
+
+### 2026-08-20 — Phase 3.3b (Novel Scenario Synthesis) implemented — 287/287 project-wide
+- **Closes out Phase 3.3 fully** (3.3a existing-test tracing + 3.3b novel synthesis, per D2's split) and the
+  Harness Manager line item on the M3 gate checklist.
+- **A real bug caught before any code was even run**: adding `src/veyra/exploration/conftest.py` (Phase 3.6,
+  previous entry) without a `requires_docker` definition broke `tests/runtime/test_engine_docker.py`'s bare
+  `from conftest import requires_docker` the moment collection order put `tests/exploration` first -- the exact
+  landmine flagged as "worth a real fix if it bites again" back in the Phase 3.4 entry. It bit. Fixed properly
+  this time, project-wide, not just patched locally: every bare `from conftest import X` for a
+  non-fixture name (6 files: 3 Docker-gated test files, 3 in `tests/safety/`) now defines that helper locally
+  instead of importing it. Verified order-independent by running the full suite with `tests/exploration`
+  collected first as well as in default order -- 278/278 either way, 0 failures. Separate commit from 3.3b
+  itself, since it's an unrelated fix.
+- **`src/veyra/harness/synthesis.py`** — `synthesize_novel_scenarios()`. "Zero test coverage" is defined
+  directly off evidence this project already produces: no `EvidenceType.TEST` (3.3a) and no
+  `EvidenceType.RUNTIME` (3.5/3.6) yet at this commit. "Restricted to SAFE" is real, not just a filter comment
+  -- `SafetyClass.SAFE` is only reachable through an explicit per-target policy allowlist (D13), so under the
+  default policy this module synthesizes **nothing at all**, proven directly by
+  `test_default_policy_synthesizes_nothing`. A caller has to deliberately configure an allowlist before
+  anything gets synthesized -- the same conservative posture as everything else in `veyra.safety`.
+- **Where the property-based generation happens, and where it deliberately doesn't** -- the real design
+  question this phase raised: Hypothesis's own execution/shrinking engine is never run *inside* the sandbox
+  (that would mean installing a third-party package into the sandboxed image over network access
+  `DockerExecutionBoundary` deliberately never opens, per D17 -- the same category of problem 3.3a's
+  `install_policy.py` already declined to solve for arbitrary repo dependencies). Instead: Hypothesis's
+  `strategies`/`@given`/`@settings(max_examples=..., database=None)` machinery runs entirely on the HOST to
+  generate diverse concrete values for the exact same 5-type primitive boundary Phase 3.4/3.5 already use
+  (str/int/float/bool/bytes -- not a wider type surface than the rest of the pipeline supports), and those
+  concrete values are handed unmodified to a **new, purely additive** `argument_overrides` parameter on Phase
+  3.5's `run_scenario()`. The actual invocation of repository code still always happens exactly where D1
+  requires it -- inside the unmodified Phase 3.2 sandbox, through the exact same tracer 3.5 already uses.
+  Hypothesis itself is Veyra's own trusted, pinned tooling dependency (added to `pyproject.toml`
+  `dependencies`), not a repository dependency -- a categorically different case from what `install_policy.py`
+  declines to solve.
+  - `_collect_samples()` uses `@given`/`@settings` with a no-op recording body to pull N examples from a
+    strategy, not bare repeated `.example()` calls -- Hypothesis explicitly discourages and warns against that
+    pattern outside interactive use; this is the idiomatic way to get a bounded example batch programmatically.
+  - `run_scenario()`'s new `argument_overrides` param is additive-only: omitting it reproduces Phase 3.5's
+    original trivial-zero-literal behavior exactly (re-ran the full Phase 3.5 test suite after the change --
+    0 regressions). `tracer_script.py` gained a small, symmetric `kwargs_literal_overrides` spec field (with a
+    `{"__bytes_b64__": ...}` marker for the one primitive type JSON can't carry directly) that a name present
+    in always wins over the trivial literal for that type tag.
+  - Each Hypothesis-generated value combination becomes its own scenario with a distinct `scenario_id`
+    (`novel_synthesis|target|commit|trial_index`), so every trial's evidence is independently persisted, never
+    conflated with another trial's -- directly tested (`test_allowlisted_zero_arg_function_is_synthesized`
+    checks 3 distinct scenario_ids from 3 trials).
+- **Tests**: 9 new, all non-Docker (reuses the `FakeExecutionBoundary` substitutability pattern, inspecting
+  captured `spec.json` contents directly) -- default-policy-synthesizes-nothing, an allowlisted zero-arg
+  function actually running N trials, both TEST-evidence and RUNTIME-evidence coverage skips, an unannotated
+  parameter being unsynthesizable, bound methods never even being considered (filtered before the eligibility
+  loop, since only `Function`-typed nodes are examined), **real value diversity across trials** (not a fixed
+  placeholder -- `len(set(observed_values)) > 1` across 5 draws from a 2,000,001-value integer range, a
+  vanishingly small, explicitly acknowledged flake risk), a default-valued parameter never being overridden,
+  and a `bytes` parameter round-tripping correctly through the JSON transport. **287/287 project-wide, 0
+  failures** (26 Docker-gated tests skip cleanly, same as prior entries -- nothing here needed Docker itself).
+- **M3 gate progress**: "Harness manager (3.3a → 3.3b)" line item is now fully done. Remaining M3 gate items:
+  conflict reconciliation (3.7), verification states (3.8), runtime audit (3.9) -- security tests were already
+  covered by Phase 3.2's own test suite.
 
 ### 2026-08-20 — Phase 3.6 (Multi-Execution Exploration) implemented — 278/278 project-wide
 - **Continued straight down the M3 dependency chain**: 3.6 is the next natural step after 3.5 (iteratively

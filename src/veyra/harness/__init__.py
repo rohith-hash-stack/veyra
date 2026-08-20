@@ -8,6 +8,7 @@ from .manager import (
     UnexecutableReason,
     run_existing_test_harness,
 )
+from .synthesis import SynthesisReport, synthesize_novel_scenarios
 
 __all__ = [
     "DependencyManifest",
@@ -21,4 +22,6 @@ __all__ = [
     "TestStatus",
     "UnexecutableReason",
     "run_existing_test_harness",
+    "SynthesisReport",
+    "synthesize_novel_scenarios",
 ]

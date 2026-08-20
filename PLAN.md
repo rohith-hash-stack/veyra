@@ -354,9 +354,28 @@ Phase 3.5's job (the actual runtime-verifier caller), not built prematurely here
   the code under test — that granularity is Phase 3.5's job (Runtime Trace Engine), which will instrument an
   existing-test run the same way 3.3a already executes one. 27 new tests (25 non-Docker + 2 real-Docker
   end-to-end proving genuine PASS/FAIL/ERROR and real `--network none` enforcement).
-- **3.3b (build second, high risk) — NOT STARTED:** synthesize *novel* scenarios only for functions with zero
-  test coverage, restricted to the SAFE-classified subset, using an established property-based library (e.g.
-  Hypothesis for Python) rather than a bespoke input/fixture generator.
+- **3.3b (build second, high risk) — IMPLEMENTED 2026-08-20:** synthesize *novel* scenarios only for functions
+  with zero test coverage, restricted to the SAFE-classified subset, using an established property-based
+  library (Hypothesis) rather than a bespoke input/fixture generator.
+  Implemented as `src/veyra/harness/synthesis.py`: `synthesize_novel_scenarios()`. "Zero test coverage" is
+  defined directly off evidence this project already produces (no `EvidenceType.TEST` or `EvidenceType.RUNTIME`
+  yet at this commit). "Restricted to SAFE" is real, not just a filter comment: `SafetyClass.SAFE` is only ever
+  reachable through an explicit per-target policy allowlist (D13) -- under the default policy (no allowlist)
+  this module synthesizes nothing at all, by design, proven directly by a test.
+  **Where the property-based generation happens, and where it deliberately doesn't**: Hypothesis's own
+  `strategies`/`@given`/`@settings` machinery generates diverse concrete values for the same 5-type primitive
+  boundary Phase 3.4/3.5 already use (str/int/float/bool/bytes -- not a wider type surface), entirely on the
+  HOST. Those concrete values are handed to Phase 3.5's `run_scenario()` via a new, purely additive
+  `argument_overrides` parameter -- the actual invocation of repository code always still happens exactly
+  where D1 requires it: inside the unmodified Phase 3.2 sandbox, through the exact same tracer Phase 3.5 uses.
+  Hypothesis's own execution engine is never run inside the container (that would need installing a package
+  into the sandboxed image over network access `DockerExecutionBoundary` deliberately never opens -- D17);
+  Hypothesis here is Veyra's own trusted, pinned tooling dependency (added to `pyproject.toml`), not a
+  repository dependency -- categorically different from what `install_policy.py` declines to solve.
+  Each Hypothesis-generated value combination becomes its own scenario with a distinct `scenario_id`, so every
+  trial's evidence is independently persisted and never conflated with another trial's.
+  9 new tests, including one proving the default-policy-synthesizes-nothing behavior directly, and one proving
+  real value diversity across trials (not a fixed placeholder).
 
 `UNEXECUTABLE` state covers: missing configuration, missing dependency, missing fixture, unsafe dependency,
 ambiguous initialization, unavailable environment. 3.3a's `UnexecutableReason` enum
