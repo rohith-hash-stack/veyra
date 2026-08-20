@@ -1,0 +1,26 @@
+{
+  "repo_name": "django",
+  "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+  "wall_clock_seconds": 10856.62668800354,
+  "report_analysis_duration_seconds": 10712.431611299515,
+  "files_analyzed": 2923,
+  "files_failed": 6,
+  "unsupported_rate": 0.0020484807101399795,
+  "unresolved_calls": 151976,
+  "node_count": 95784,
+  "edge_count": 136163,
+  "edges_by_relationship_type": {
+    "imports": 18694,
+    "contains": 92861,
+    "calls": 20660,
+    "inherits": 3944,
+    "references": 4
+  },
+  "questions_generated": 329956,
+  "questions_answered": 329956,
+  "questions_unanswered": 0,
+  "questions_deduplicated": 0,
+  "static_evidence_created": 329956,
+  "static_precision": null,
+  "static_recall": null
+}

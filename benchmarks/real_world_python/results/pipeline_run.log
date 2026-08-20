@@ -5,3 +5,4 @@
 [fastapi] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/fastapi @ c3f316b7e814667e8ee81e03a7330d00ee61e45c
 [fastapi] done in 522.1s -- nodes=13989 edges=19453 files_failed=0 questions=47647
 [django] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/django @ cccc004b46f71b4e54d87b376be691a17de6b903
+[django] done in 10856.6s -- nodes=95784 edges=136163 files_failed=6 questions=329956
