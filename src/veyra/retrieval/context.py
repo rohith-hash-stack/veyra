@@ -24,19 +24,30 @@ Exact and substring name matches (`matched_by in ("exact_name",
 literally names a real symbol should always surface it; the ambiguity
 this benchmark exposed is specific to the TF-IDF tier.
 
-**The calibrated default is honestly limited, not a guess.**
-`benchmarks/real_world_python/scripts/calibrate_confidence_threshold.py`
-measured real TF-IDF scores for ground-truth-correct vs. incorrect
-matches across Flask+FastAPI: the two distributions overlap almost
-completely (relevant median 0.297 vs. irrelevant median 0.267; irrelevant
-p75 0.304 exceeds relevant's median). No single absolute threshold on
-today's score cleanly separates signal from noise -- this is exactly what
-the benchmark's TF-IDF document-length-bias finding predicts, and fixing
-that scoring function is Phase D's job, not this one. `_DEFAULT_MIN_TFIDF_SCORE`
-(0.25) is the real inflection point in that sweep: it roughly halves
-negative-query leakage (4/4 -> 2/4 on the calibration set) while keeping
-82% of true-positive recall, a documented, evidence-backed trade-off, not
-a silently arbitrary number. It should be recalibrated once Phase D lands.
+**Threshold recalibrated after Phase D, still explicitly provisional.**
+Phase B's original calibration (against raw cosine-similarity TF-IDF
+scores, bounded 0-1) found relevant and irrelevant scores overlapped
+almost completely -- no threshold could separate them, because the score
+itself was biased (`search.py`'s Phase D docstring has the full mechanism
+and the real numbers that proved it). Phase D replaced that scoring
+function with BM25 plus per-entity-type length normalization, which
+produces unbounded, much larger raw scores on a different scale entirely
+-- so this threshold had to be recalibrated from scratch, not just
+reused. Re-running `calibrate_confidence_threshold.py` against the *new*
+scores (still real Flask+FastAPI ground-truth data) showed genuine
+separation improvement: relevant/irrelevant medians moved from
+nearly-identical (0.297 vs 0.267) to clearly distinct (35.1 vs 29.9).
+`_PROVISIONAL_MIN_TFIDF_SCORE` (29.0) is chosen for a specific, describable
+relevance-separation property, not to hit any target pass rate (the
+remediation plan explicitly prohibits threshold-tuning-to-benchmark-score):
+it's the point, just above the highest score any negative-query calibration
+case reached (28.59), where none of that calibration set's known false
+positives survive, while 67% of true-positive recall is retained --
+compared to only 45% recall at the equivalent zero-leak point under the
+pre-Phase-D score. Still marked provisional: further ranking refinements
+(source-category weighting, Phase E; stopword filtering, Phase C) will
+change the score distribution again and should trigger another
+recalibration, the same way Phase D did.
 """
 
 from __future__ import annotations
@@ -49,7 +60,7 @@ from veyra.vbg import Edge, Evidence, VBGStore
 from .index import IndexedEntity, RetrievalIndex
 from .search import search
 
-_DEFAULT_MIN_TFIDF_SCORE = 0.25
+_PROVISIONAL_MIN_TFIDF_SCORE = 29.0
 
 
 @dataclass(frozen=True)
@@ -71,7 +82,7 @@ def retrieve_context(
     repository_version: str,
     query: str,
     top_k: int = 10,
-    min_tfidf_score: float = _DEFAULT_MIN_TFIDF_SCORE,
+    min_tfidf_score: float = _PROVISIONAL_MIN_TFIDF_SCORE,
 ) -> RetrievedContext:
     """Retrieves relevant nodes (via Phase 4.2's `search()`), the
     relationships among them, every evidence record attached to each, and

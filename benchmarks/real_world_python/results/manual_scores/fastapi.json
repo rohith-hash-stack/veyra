@@ -1,11 +1,12 @@
 {
   "fastapi-01": {
-    "final_answer_correct": true,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": true,
+    "localization_correct": "PARTIAL",
     "multi_hop": false,
-    "failure_category": null,
-    "notes": "FastAPI class and FastAPI.__init__ both retrieved near the top. Correct."
+    "failure_category": "ranking_failure",
+    "phase_d_change": "REGRESSED (was TRUE through baseline+Phase B, now PARTIAL)",
+    "notes": "PHASE D RESULT: a real, if modest, regression. The fastapi.applications.FastAPI class node itself is no longer in the top 10 (direct re-query: rank 35 of 3228, score 30.95 -- actually above the 29.0 confidence threshold, but excluded by the top_k=10 window applied to the semantic tier before that threshold is even reached). FastAPI.__init__ (38.67) is still retrieved and correctly localizes to applications.py, so this isn't a complete miss, but neither the class definition itself nor its 'extends Starlette' relationship is directly retrieved anymore. Scored PARTIAL rather than FALSE since the file/class is still findable via __init__."
   },
   "fastapi-02": {
     "final_answer_correct": false,
@@ -13,15 +14,17 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "ranking_failure",
-    "notes": "Complete miss -- routing.py's real APIRoute class never appears. Top 10 is entirely GzipRoute/ValidationErrorLoggingRoute/TimedRoute/TrackingRoute variants from tests/ and docs_src/custom_request_and_route/ -- FastAPI's documentation repeats the same tutorial concept across many near-duplicate files (tutorial001_py310, tutorial001_an_py310, tutorial002_py310...), and each duplicate's short-named local variable (get_route_handler.original_route_handler) independently scores well under TF-IDF, collectively burying the one real answer under many small, repetitive, off-target matches."
+    "phase_d_change": "unchanged (still FALSE) -- but the reported file-level hit is now a false positive worth flagging",
+    "notes": "PHASE D RESULT: still a complete miss on the actual entity (fastapi.routing.APIRoute is rank 60 of 4529, score 15.47, nowhere near retrieval). The raw file-level metric shows 'hit'/recall=1.0/precision=1.0 because the one entity that did clear the threshold, APIRouter.__init__ (30.04), happens to live in the same file (routing.py) -- but APIRouter and APIRoute are two different classes; this is name-similarity coincidence, not a real match. Flagged explicitly since it's a concrete illustration of the benchmark spec's own warning that file-level recall can look better than entity-level correctness actually is (same caveat already documented for flask-06)."
   },
   "fastapi-03": {
-    "final_answer_correct": true,
+    "final_answer_correct": false,
     "unsupported_claim": false,
-    "localization_correct": true,
+    "localization_correct": false,
     "multi_hop": false,
-    "failure_category": null,
-    "notes": "Depends function retrieved at rank 1 (exact name match). Correct."
+    "failure_category": "ranking_failure",
+    "phase_d_change": "REGRESSED (was TRUE through baseline+Phase B, now FALSE)",
+    "notes": "PHASE D RESULT: a real regression, root-caused rather than left unexplained. fastapi.param_functions.Depends is not matched by search()'s exact_name tier for this query (that tier requires the full query string to equal an entity's name verbatim -- 'Where is the Depends() function...' never does, for any query phrased as a sentence; this is pre-existing search() behavior Phase D did not touch). The baseline's TRUE verdict therefore came from Depends() ranking first under raw cosine similarity, not from an exact-name match despite the original note's label. Under BM25, Depends() drops to rank 19 of 1778 (score 29.58 -- again just above the confidence threshold, but outside the top_k=10 window), overtaken by FastAPI/APIRouter HTTP-verb decorator methods (get/post/options/...) whose docstrings apparently share more BM25-weighted terms with this query than Depends()'s own short docstring does. A concrete, verified instance of the same top_k=10-window issue found in flask-08/fastapi-01, not a new failure mode."
   },
   "fastapi-04": {
     "final_answer_correct": false,
@@ -29,7 +32,8 @@
     "localization_correct": false,
     "multi_hop": true,
     "failure_category": "ranking_failure",
-    "notes": "routing.py appears in retrieved files but via unrelated entities (RouteContext.route variable, a test-file 'route' variable, an unrelated _IncludedRouter method) -- the actual answer, APIRouter.add_api_route, is completely absent from the top 10. applications.py (the other ground-truth file, containing FastAPI.add_api_route itself) is also absent."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. Neither FastAPI.add_api_route nor APIRouter.add_api_route is retrieved; the reported file-level hits on applications.py/routing.py come from FastAPI.middleware and APIRouter.include_router, both real but unrelated to the actual answer -- the same 'right file, wrong entity via coincidence' pattern as fastapi-02."
   },
   "fastapi-05": {
     "final_answer_correct": false,
@@ -37,7 +41,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "get_dependant() (dependencies/utils.py) never retrieved. Dominated by test-file entities that happen to contain the word 'dependant' or 'calls' as variable/attribute names (test_dependency_models, test_router_include_context.*.calls) -- surface token overlap with the query's 'get_dependant'/'dependency graph' phrasing, none of it the real function."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. get_dependant() is still not retrieved (rank 42, score 17.51, below threshold); top results are internal routing-context classes that share surface vocabulary with the query but not the actual dependency-graph-construction logic."
   },
   "fastapi-06": {
     "final_answer_correct": false,
@@ -45,7 +50,8 @@
     "localization_correct": false,
     "multi_hop": true,
     "failure_category": "retrieval_failure",
-    "notes": "Neither get_dependant() nor solve_dependencies() (both in dependencies/utils.py) is retrieved. routing.py appears only via APIRoute.dependencies, a Variable, not the actual resolution logic. Dominated by test-file 'app' variables from unrelated security/scope test modules that happen to share tokens like 'dependency'/'scope' with the query."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. None of get_dependant/solve_dependencies/get_request_handler retrieved; dominated by the same HTTP-verb decorator methods (FastAPI.get/options/..., APIRouter.get/options/...) seen across several other fastapi queries, which apparently share heavy vocabulary overlap with many of this benchmark's questions."
   },
   "fastapi-07": {
     "final_answer_correct": false,
@@ -53,7 +59,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- get_openapi()/openapi/utils.py never retrieved for the direct 'how does FastAPI generate its OpenAPI schema' question."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. get_openapi() (rank 1662, score 3.92) and get_openapi_path() (rank 1221, score 5.7) are both essentially unretrieved. FastAPI.openapi (34.79), the property that calls get_openapi() internally, is retrieved and is a closer near-miss than baseline's noise, but is not itself the answer."
   },
   "fastapi-08": {
     "final_answer_correct": false,
@@ -62,7 +69,8 @@
     "multi_hop": false,
     "failure_category": "retrieval_failure",
     "phase_b_change": "verdict unchanged (still FALSE); noise removed, now insufficient_evidence=True",
-    "notes": "PHASE B RESULT: verdict unchanged -- was already a complete miss at baseline (RequestValidationError/request_validation_exception_handler never in top 10 either way). All 10 previously-noisy entities now fall below the 0.25 threshold, so this correctly reports insufficient_evidence=True instead of confidently showing 10 wrong entities. A real, honest improvement in what a downstream consumer would see, even though it doesn't change the fully_correct tally for an already-wrong query."
+    "phase_d_change": "unchanged (still correctly reports insufficient_evidence)",
+    "notes": "PHASE D RESULT: unchanged from Phase B. Still a complete miss on RequestValidationError/request_validation_exception_handler, still correctly reports insufficient_evidence=True rather than showing wrong entities."
   },
   "fastapi-09": {
     "final_answer_correct": false,
@@ -70,8 +78,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "phase_b_change": "verdict unchanged (still FALSE); noise removed, now insufficient_evidence=True",
-    "notes": "PHASE B RESULT: same pattern as fastapi-08 -- HTTPException/http_exception_handler were never retrieved at baseline either; now correctly reports insufficient_evidence=True instead of 10 unrelated test entities."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. Neither HTTPException (rank 32, score 20.46) nor http_exception_handler (rank 747, score 6.67) clears the threshold; dominated by the same HTTP-verb decorator methods as fastapi-06."
   },
   "fastapi-10": {
     "final_answer_correct": false,
@@ -79,7 +87,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "get_openapi_path()/openapi/utils.py never retrieved. Instead the query's word 'debug' pulled in FastAPI.build_middleware_stack's local 'debug' variable and two completely unrelated repository-maintenance scripts (scripts/label_approved.py, scripts/notify_translations.py) that happen to have a Settings.debug field -- a clear example of Veyra's retrieval treating CI/tooling scripts as equally relevant to core library code."
+    "phase_d_change": "unchanged (still FALSE); noise composition changed",
+    "notes": "PHASE D RESULT: unchanged verdict. get_openapi_path() still not retrieved. The specific baseline noise (CI/tooling scripts with a coincidental 'debug' field) is gone, replaced by FastAPI.__init__ and the same HTTP-verb decorator methods -- still wrong, but no longer the tooling-script false-relevance pattern baseline flagged."
   },
   "fastapi-11": {
     "final_answer_correct": false,
@@ -87,25 +96,28 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- solve_dependencies() (the function that actually implements per-request dependency caching) never retrieved."
+    "phase_d_change": "unchanged (still FALSE)",
+    "notes": "PHASE D RESULT: unchanged. solve_dependencies() is still not retrieved; dominated by APIRouter/FastAPI constructors and unrelated security-scheme classes."
   },
   "fastapi-12": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": true,
-    "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- OAuth2PasswordBearer/SecurityBase/get_dependant all absent. Top 10 is entirely repeated 'oauth2_scheme' local variables from ~7 near-duplicate docs_src/security/tutorialNNN_*.py files (the same tutorial written multiple ways for different Python/annotation styles) plus one test file's copy of the same pattern -- a clean example of documentation-example duplication burying the real answer."
+    "failure_category": "ranking_failure",
+    "phase_d_change": "IMPROVED (was FALSE/complete miss through baseline+Phase B, now PARTIAL)",
+    "notes": "PHASE D RESULT: a genuine improvement. OAuth2PasswordBearer.__init__ (47.98) and the OAuth2PasswordBearer class itself (45.01) are both now retrieved near the top -- the primary entity the question names. SecurityBase and get_dependant (the mechanism that actually connects a security scheme to a path operation's dependencies) are still absent, so the 'how does it connect' half of the question isn't answered -- scored PARTIAL, not TRUE, since only the named class, not the connecting mechanism, is present."
   },
   "fastapi-13": {
     "final_answer_correct": false,
-    "unsupported_claim": true,
+    "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "negative_query_handled_correctly": false,
-    "failure_category": "reasoning_failure",
+    "negative_query_handled_correctly": true,
+    "failure_category": null,
     "phase_b_change": "NOT improved -- the one risky entity survived thresholding, now more prominent",
-    "notes": "PHASE B RESULT: a real negative result worth stating plainly. 9 of 10 baseline entities were cut, but tests.test_read_with_orm_mode (score 0.265, just above the bar) survived and is now the ONLY result shown -- arguably a worse presentation than before, since it no longer has 9 other results diluting its apparent authority. Thresholding alone cannot fix root cause 3's 'more concerning shape' (a genuinely real entity whose name itself suggests a false premise); that needs either a smarter threshold specifically tuned against this failure mode or Phase H's fuller existence-query handling."
+    "phase_d_change": "FIXED (checked specifically per instruction #10; was 'not improved' after Phase B, now fully correct)",
+    "notes": "PHASE D RESULT, instruction #10. tests.test_read_with_orm_mode -- the single entity that survived Phase B's threshold and made this negative query MORE misleading than baseline -- no longer clears the recalibrated BM25 threshold. RetrievedContext.insufficient_evidence and GroundingContext.insufficient_evidence are both True, with the NO_SUFFICIENT_EVIDENCE disclaimer. This negative query, explicitly flagged by name as still-broken after Phase B, is now handled correctly."
   },
   "fastapi-14": {
     "final_answer_correct": false,
@@ -115,6 +127,7 @@
     "negative_query_handled_correctly": true,
     "failure_category": null,
     "phase_b_change": "FIXED (was reasoning_failure at baseline)",
-    "notes": "PHASE B RESULT: a genuine fix, the same pattern as flask-14. All 10 baseline entities fell below 0.25; RetrievedContext.insufficient_evidence and GroundingContext.insufficient_evidence are both True, disclaimer explicitly prefixed NO_SUFFICIENT_EVIDENCE."
+    "phase_d_change": "unchanged (still correctly handled)",
+    "notes": "PHASE D RESULT: unchanged. Still zero entities survive, insufficient_evidence True on both RetrievedContext and GroundingContext, disclaimer present."
   }
 }

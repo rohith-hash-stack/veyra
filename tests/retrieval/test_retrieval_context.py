@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from veyra.retrieval import build_retrieval_index, retrieve_context
+from veyra.retrieval import build_retrieval_index, retrieve_context, search
 from veyra.vbg import Evidence, EvidenceType, Provenance, RelationshipType, VBGStore, edge_evidence_key
 
 COMMIT = "commit1"
@@ -70,12 +70,28 @@ def test_scores_and_matched_by_are_carried_for_every_retrieved_entity(sample_rep
     assert context.scores["orders.process_order"] == 2.0
 
 
-def test_low_confidence_tfidf_match_is_suppressed_by_default_threshold(sample_repo: Path, store: VBGStore) -> None:
+def test_low_confidence_tfidf_match_is_suppressed_between_two_real_measured_scores(
+    sample_repo: Path, store: VBGStore
+) -> None:
+    """Derives real scores dynamically (rather than hardcoding numbers tied
+    to one scoring algorithm's scale -- Phase D already changed that scale
+    once, from bounded cosine similarity to unbounded BM25 sums) and picks a
+    threshold strictly between two real, currently-measured scores, so this
+    test verifies the suppression *mechanism* itself, decoupled from
+    whatever the current default threshold or scoring formula happens to
+    produce."""
     index = build_retrieval_index(store, COMMIT)
-    # Real, measured scores for this fixture (see calibrate_confidence_threshold.py's
-    # methodology): charge_customer=0.83, process_order=0.36 both clear the default
-    # 0.25 bar; validate_order=0.18 does not and must be dropped.
-    context = retrieve_context(store, index, COMMIT, "charge the customer for their order")
+    query = "charge the customer for their order"
+    raw = search(index, query, top_k=10)
+    tfidf_scores = {r.entity.entity_id: r.score for r in raw if r.matched_by == "tfidf"}
+    assert "orders.charge_customer" in tfidf_scores and "orders.validate_order" in tfidf_scores
+    # charge_customer's docstring/name lexically dominates this query; validate_order
+    # only shares "order". Confirm that real ordering, then threshold strictly between them.
+    assert tfidf_scores["orders.charge_customer"] > tfidf_scores["orders.validate_order"]
+    threshold = (tfidf_scores["orders.charge_customer"] + tfidf_scores["orders.validate_order"]) / 2
+
+    context = retrieve_context(store, index, COMMIT, query, min_tfidf_score=threshold)
+
     ids = {e.entity_id for e in context.entities}
     assert "orders.charge_customer" in ids
     assert "orders.validate_order" not in ids
@@ -84,10 +100,13 @@ def test_low_confidence_tfidf_match_is_suppressed_by_default_threshold(sample_re
 
 def test_custom_min_tfidf_score_can_suppress_every_result(sample_repo: Path, store: VBGStore) -> None:
     index = build_retrieval_index(store, COMMIT)
-    # Same query as above (top TF-IDF score 0.83), but with a threshold no
-    # real result here clears -- must report insufficient evidence, not
-    # silently fall back to returning the best-effort top-k anyway.
-    context = retrieve_context(store, index, COMMIT, "charge the customer for their order", min_tfidf_score=0.95)
+    query = "charge the customer for their order"
+    raw = search(index, query, top_k=10)
+    # A threshold strictly above every real score observed for this query
+    # must suppress everything -- not silently fall back to best-effort top-k.
+    above_everything = max((r.score for r in raw), default=0.0) + 1.0
+
+    context = retrieve_context(store, index, COMMIT, query, min_tfidf_score=above_everything)
     assert context.entities == ()
     assert context.insufficient_evidence is True
 

@@ -2,18 +2,18 @@
 PLAN.md Milestone 4, Phase 4.2 -- Semantic Repository Retrieval.
 
 **A real, stated scope decision**: "semantic" here means lightweight
-lexical/TF-IDF-style token-overlap scoring, computed in pure Python over
-each `IndexedEntity`'s name/docstring/lexical text -- NOT embedding-based
+lexical token-overlap scoring, computed in pure Python over each
+`IndexedEntity`'s name/docstring/lexical text -- NOT embedding-based
 semantic search. A true embedding model is a materially heavier dependency
 (a real ML library, likely GPU-friendly infra, a much bigger footprint than
 anything else this project has added) that nothing has reviewed or
-approved; TF-IDF is a well-understood, zero-new-dependency technique that
-gives real, useful conceptual-query relevance ranking without that cost --
-the same "start with the minimum real thing, not the maximum possible
-thing" discipline as Hypothesis's use in Phase 3.3b (there: a genuine new
-dependency was justified and added; here: a stdlib-only technique is
-judged sufficient for this slice). This is a real, honest limitation, not
-hidden: token-overlap scoring will miss true paraphrases with no shared
+approved; a stdlib-only lexical technique gives real, useful conceptual-
+query relevance ranking without that cost -- the same "start with the
+minimum real thing, not the maximum possible thing" discipline as
+Hypothesis's use in Phase 3.3b (there: a genuine new dependency was
+justified and added; here: a stdlib-only technique is judged sufficient
+for this slice). This is a real, honest limitation, not hidden:
+token-overlap scoring will miss true paraphrases with no shared
 vocabulary (e.g. "how does auth work" won't score `check_credentials`
 without a shared token). Revisit if this proves insufficient once run
 against real repositories and an embedding dependency is explicitly
@@ -23,12 +23,49 @@ approved.
 (Phase 4.1) directly -- not re-implemented here. "lexical + semantic
 retrieval combinable" is `search()`: exact/substring name matches (always
 ranked first, since a query that literally names a symbol should always
-surface it) unioned with TF-IDF-scored matches, deduplicated by entity_id.
+surface it) unioned with lexical-scored matches, deduplicated by entity_id.
 "retrieval never invents graph entities" holds structurally -- every
 `ScoredEntity` wraps a real `IndexedEntity`, itself always built from a
 real Node (Phase 4.1). "evidence accompanies retrieved entities" is
 already true since `IndexedEntity` carries `verification_state`/
 `evidence_counts` on every result.
+
+**Retrieval-quality remediation, Phase D -- document-length bias
+correction.** The real-world benchmark (benchmarks/real_world_python/
+REPORT.md, root cause 1) found that raw cosine-similarity over TF-IDF
+vectors systematically ranks near-empty documents (a `Variable` node
+whose entire indexed text is its own one-word name) above large, genuinely
+correct documents (a `Method`/`Class` whose `lexical_representation` is
+hundreds of tokens of real source). This was root-caused with real
+numbers before any fix was written
+(benchmarks/real_world_python/scripts/instrument_tfidf_ranking.py):
+for the query "What happens when app.run() is called with debug=True?",
+`Flask.run` (1026 raw tokens, 228 unique terms) matched 6 of the query's
+terms but scored *lower* than a `called` variable (2 tokens total, the
+whole "document" is one repeated word) that matched exactly one term.
+The mechanism, confirmed directly: cosine similarity normalizes every
+document to a unit vector regardless of how much real content it has --
+a document that is *entirely* about one word will always look "100%
+relevant" to any query touching that word, no matter how irrelevant the
+word actually is to the query's intent, while a document about hundreds
+of things gets that one relevant word diluted across everything else
+it's about.
+
+**The fix: Okapi BM25** in place of raw cosine similarity for the
+lexical-tier score -- the standard, decades-established information-
+retrieval technique built specifically for this pathology (term-frequency
+saturation + tunable document-length normalization), not a speculative
+swap. It keeps the same bag-of-words token model (`_tokenize`/
+`_entity_text` unchanged -- stopword filtering is Phase C's job, not
+touched here) and the same three-tier `search()` structure (exact ->
+substring -> lexical); only the scoring math inside the lexical tier
+changed. Unlike cosine similarity, BM25 sums independent, saturating
+per-matched-term contributions rather than normalizing by the full
+document vector's norm across every term (matched or not) -- so a
+document's score no longer gets penalized merely for containing many
+*other*, query-irrelevant concepts, while `_BM25_B`'s length
+normalization still prevents unboundedly long documents from winning
+purely on raw token volume.
 """
 
 from __future__ import annotations
@@ -41,6 +78,13 @@ from dataclasses import dataclass
 from .index import IndexedEntity, RetrievalIndex
 
 _TOKEN_RE = re.compile(r"[A-Za-z0-9]+")
+
+# Standard BM25 defaults (Robertson/Sparck Jones); not tuned against this
+# benchmark's pass rate (the remediation plan explicitly forbids that) --
+# these are the field-standard starting values, kept because nothing here
+# has evidence they should move.
+_BM25_K1 = 1.5  # term-frequency saturation: higher = repeated terms keep mattering longer
+_BM25_B = 0.75  # length normalization: 0 = ignore document length, 1 = fully normalize by it
 
 
 def _tokenize(text: str) -> list[str]:
@@ -73,46 +117,95 @@ class ScoredEntity:
     matched_by: str  # "exact_name" | "substring_name" | "tfidf"
 
 
-def _build_tfidf_vectors(index: RetrievalIndex) -> tuple[dict[str, dict[str, float]], dict[str, float]]:
+def _build_bm25_index(
+    index: RetrievalIndex,
+) -> tuple[dict[str, Counter], dict[str, int], dict[str, float], dict[str, float]]:
+    """Precomputes BM25's per-document term counts, document lengths, and
+    inverse document frequencies once per index build, reused across every
+    query issued against it (same "build once, query many times" contract
+    `RetrievalIndex` itself already documents).
+
+    **Length normalization is computed per `node_type`, not one corpus-wide
+    average.** Measured directly against Flask's real index (Phase D):
+    `Method` documents average 103 tokens, `Class` documents average 282,
+    while `Variable` documents average 8 and `Module` documents average 4 --
+    a single global average (52, dragged down by the ~37% of entities that
+    are near-empty `Variable` nodes) would still length-normalize every
+    substantial `Method`/`Class` body as "abnormally long" relative to a
+    corpus average that mostly describes one-line variables, re-introducing
+    the same bias BM25 was chosen to fix. Normalizing each entity against
+    its own type's typical length is the standard field/category-length-
+    normalization technique for exactly this kind of heterogeneous corpus."""
     entities = index.all_entities()
     doc_tokens: dict[str, Counter] = {e.entity_id: Counter(_tokenize(_entity_text(e))) for e in entities}
+    doc_lengths = {entity_id: sum(tokens.values()) for entity_id, tokens in doc_tokens.items()}
 
     document_frequency: Counter = Counter()
     for tokens in doc_tokens.values():
         document_frequency.update(tokens.keys())
 
-    total_docs = max(len(entities), 1)
-    idf = {term: math.log((total_docs + 1) / (df + 1)) + 1.0 for term, df in document_frequency.items()}
+    n = max(len(entities), 1)
+    # The "+1.0 inside the log" (Lucene-style) BM25 IDF variant -- stays
+    # positive even for a term appearing in most documents, unlike the
+    # classic Robertson-Sparck-Jones IDF, which can go negative and
+    # therefore *penalize* a match on a very common term.
+    idf = {term: math.log((n - df + 0.5) / (df + 0.5) + 1.0) for term, df in document_frequency.items()}
 
-    vectors: dict[str, dict[str, float]] = {}
-    for entity_id, tokens in doc_tokens.items():
-        total = sum(tokens.values()) or 1
-        vectors[entity_id] = {term: (count / total) * idf.get(term, 0.0) for term, count in tokens.items()}
-    return vectors, idf
+    lengths_by_type: dict[str, list[int]] = {}
+    for entity in entities:
+        lengths_by_type.setdefault(entity.node_type, []).append(doc_lengths[entity.entity_id])
+    avg_doc_length_by_type = {t: sum(lengths) / len(lengths) for t, lengths in lengths_by_type.items()}
+
+    return doc_tokens, doc_lengths, idf, avg_doc_length_by_type
 
 
-def _cosine_similarity(a: dict[str, float], b: dict[str, float]) -> float:
-    shared = set(a) & set(b)
-    if not shared:
+def _bm25_score(
+    query_terms: set[str],
+    doc_tokens: Counter,
+    doc_length: int,
+    idf: dict[str, float],
+    avg_doc_length_for_type: float,
+) -> float:
+    """Okapi BM25 -- sums a saturating, length-normalized contribution per
+    matched query term, rather than cosine similarity's whole-vector
+    normalization (see module docstring, Phase D, for why that distinction
+    is exactly what fixes the confirmed document-length bias). Length is
+    normalized against `avg_doc_length_for_type` -- the calling entity's
+    own `node_type` average, not one corpus-wide figure (see
+    `_build_bm25_index`)."""
+    if avg_doc_length_for_type <= 0:
         return 0.0
-    dot = sum(a[t] * b[t] for t in shared)
-    norm_a = math.sqrt(sum(v * v for v in a.values())) or 1.0
-    norm_b = math.sqrt(sum(v * v for v in b.values())) or 1.0
-    return dot / (norm_a * norm_b)
+    score = 0.0
+    length_norm = 1 - _BM25_B + _BM25_B * (doc_length / avg_doc_length_for_type)
+    for term in query_terms:
+        f = doc_tokens.get(term)
+        if not f:
+            continue
+        score += idf.get(term, 0.0) * (f * (_BM25_K1 + 1)) / (f + _BM25_K1 * length_norm)
+    return score
 
 
 def search_semantic(index: RetrievalIndex, query: str, top_k: int = 10) -> list[ScoredEntity]:
-    """TF-IDF cosine-similarity ranking -- see module docstring for exactly
-    what "semantic" does and doesn't mean here."""
-    vectors, idf = _build_tfidf_vectors(index)
-    query_tokens = Counter(_tokenize(query))
-    if not query_tokens:
+    """BM25 lexical ranking -- see module docstring for exactly what
+    "semantic" does and doesn't mean here, and for Phase D's document-
+    length-bias fix this function embodies."""
+    doc_tokens, doc_lengths, idf, avg_doc_length_by_type = _build_bm25_index(index)
+    query_terms = set(_tokenize(query))
+    if not query_terms:
         return []
-    total = sum(query_tokens.values())
-    query_vector = {term: (count / total) * idf.get(term, 0.0) for term, count in query_tokens.items()}
 
     scored = [
-        ScoredEntity(entity=entity, score=_cosine_similarity(query_vector, vectors[entity.entity_id]), matched_by="tfidf")
+        ScoredEntity(
+            entity=entity,
+            score=_bm25_score(
+                query_terms,
+                doc_tokens[entity.entity_id],
+                doc_lengths[entity.entity_id],
+                idf,
+                avg_doc_length_by_type.get(entity.node_type, 0.0),
+            ),
+            matched_by="tfidf",
+        )
         for entity in index.all_entities()
     ]
     scored = [s for s in scored if s.score > 0.0]

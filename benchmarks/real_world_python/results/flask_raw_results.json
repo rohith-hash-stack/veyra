@@ -8,42 +8,154 @@
       "query_id": "flask-01",
       "query": "Where is the Flask application class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 0.39404892921447754,
+      "elapsed_seconds": 0.38403964042663574,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "ground_truth_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-02",
+      "query": "Which class implements Flask's default (cookie-based) session storage?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 0.3844296932220459,
       "retrieved_entities": [
         {
-          "entity_id": "src.flask.testing.FlaskClient.application",
-          "node_type": "Variable",
-          "name": "application",
-          "source_location": "src/flask/testing.py:123-123",
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "name": "SessionInterface",
+          "source_location": "src/flask/sessions.py:100-270",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.4190776240932437,
+          "score": 40.542906712076196,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "tests.test_apps.cliapp.inner1.__init__.application",
-          "node_type": "Variable",
-          "name": "application",
-          "source_location": "tests/test_apps/cliapp/inner1/__init__.py:3-3",
+          "entity_id": "src.flask.sessions.SecureCookieSessionInterface",
+          "node_type": "Class",
+          "name": "SecureCookieSessionInterface",
+          "source_location": "src/flask/sessions.py:284-385",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.4009373051235274,
+          "score": 34.02206012861807,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
+      "retrieved_files": [
+        "src/flask/sessions.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sessions.SessionInterface",
+        "src.flask.sessions.SecureCookieSessionInterface"
+      ],
+      "ground_truth_files": [
+        "src/flask/sessions.py"
+      ],
+      "file_level_hits": [
+        "src/flask/sessions.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 1.0,
+      "conflicts": [],
+      "unknowns": [
+        "src.flask.sessions.SecureCookieSessionInterface.digest_method",
+        "src.flask.sessions.SecureCookieSessionInterface.get_signing_serializer",
+        "src.flask.sessions.SecureCookieSessionInterface.key_derivation",
+        "src.flask.sessions.SecureCookieSessionInterface.open_session",
+        "src.flask.sessions.SecureCookieSessionInterface.salt",
+        "src.flask.sessions.SecureCookieSessionInterface.save_session",
+        "src.flask.sessions.SecureCookieSessionInterface.serializer",
+        "src.flask.sessions.SecureCookieSessionInterface.session_class",
+        "src.flask.sessions.SessionInterface.get_cookie_domain",
+        "src.flask.sessions.SessionInterface.get_cookie_httponly",
+        "src.flask.sessions.SessionInterface.get_cookie_name",
+        "src.flask.sessions.SessionInterface.get_cookie_partitioned",
+        "src.flask.sessions.SessionInterface.get_cookie_path",
+        "src.flask.sessions.SessionInterface.get_cookie_samesite",
+        "src.flask.sessions.SessionInterface.get_cookie_secure",
+        "src.flask.sessions.SessionInterface.get_expiration_time",
+        "src.flask.sessions.SessionInterface.is_null_session",
+        "src.flask.sessions.SessionInterface.make_null_session",
+        "src.flask.sessions.SessionInterface.null_session_class",
+        "src.flask.sessions.SessionInterface.open_session",
+        "src.flask.sessions.SessionInterface.pickle_based",
+        "src.flask.sessions.SessionInterface.save_session",
+        "src.flask.sessions.SessionInterface.should_set_cookie"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-03",
+      "query": "Where is the Request class that Flask uses for incoming HTTP requests defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 0.40622615814208984,
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.views.MethodView",
+          "node_type": "Class",
+          "name": "MethodView",
+          "source_location": "src/flask/views.py:138-191",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.421345957505764,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "tests.test_cli.test_find_best_app.Module.application",
-          "node_type": "Variable",
-          "name": "application",
-          "source_location": "tests/test_cli.py:54-54",
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.3195143766242878,
+          "score": 38.34894764330673,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "name": "SessionInterface",
+          "source_location": "src/flask/sessions.py:100-270",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.05215997612239,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "name": "View",
+          "source_location": "src/flask/views.py:16-135",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 35.58531795074879,
           "matched_by": "tfidf"
         },
         {
@@ -55,31 +167,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 0.2768537211932055,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_config.test_custom_config_class.Flask",
-          "node_type": "Class",
-          "name": "Flask",
-          "source_location": "tests/test_config.py:202-203",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 7
-          },
-          "score": 0.26881162206304415,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.app.App.name",
-          "node_type": "Method",
-          "name": "name",
-          "source_location": "src/flask/sansio/app.py:423-437",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2631454389977338,
+          "score": 34.086856012914204,
           "matched_by": "tfidf"
         },
         {
@@ -91,51 +179,87 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 0.2627895525698481,
+          "score": 31.83574159676318,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "src.flask.testing.FlaskClient.session_transaction.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "src/flask/testing.py:160-160",
+          "entity_id": "src.flask.testing.FlaskClient",
+          "node_type": "Class",
+          "name": "FlaskClient",
+          "source_location": "src/flask/testing.py:109-262",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.2500827327581558,
+          "score": 31.4849628526245,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.FormDataRoutingRedirect",
+          "node_type": "Class",
+          "name": "FormDataRoutingRedirect",
+          "source_location": "src/flask/debughelpers.py:50-78",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 30.421441115083212,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "name": "BlueprintSetupState",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 29.28763961872092,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.testing.EnvironBuilder",
+          "node_type": "Class",
+          "name": "EnvironBuilder",
+          "source_location": "src/flask/testing.py:27-94",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 29.010520099589666,
           "matched_by": "tfidf"
         }
       ],
       "insufficient_evidence": false,
       "retrieved_files": [
         "src/flask/app.py",
+        "src/flask/debughelpers.py",
         "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/sessions.py",
         "src/flask/testing.py",
-        "tests/test_apps/cliapp/inner1/__init__.py",
-        "tests/test_cli.py",
-        "tests/test_config.py"
+        "src/flask/views.py"
       ],
       "retrieved_symbols": [
-        "src.flask.testing.FlaskClient.application",
-        "tests.test_apps.cliapp.inner1.__init__.application",
-        "tests.test_cli.test_find_best_app.Module.application",
+        "src.flask.views.MethodView",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.sessions.SessionInterface",
+        "src.flask.views.View",
         "src.flask.sansio.app.App",
-        "tests.test_config.test_custom_config_class.Flask",
-        "src.flask.sansio.app.App.name",
         "src.flask.app.Flask",
-        "src.flask.testing.FlaskClient.session_transaction.app"
+        "src.flask.testing.FlaskClient",
+        "src.flask.debughelpers.FormDataRoutingRedirect",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.testing.EnvironBuilder"
       ],
       "ground_truth_files": [
-        "src/flask/app.py",
-        "src/flask/sansio/app.py"
+        "src/flask/wrappers.py"
       ],
-      "file_level_hits": [
-        "src/flask/app.py",
-        "src/flask/sansio/app.py"
-      ],
-      "file_level_recall": 1.0,
-      "file_level_precision": 0.3333333333333333,
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
       "conflicts": [],
       "unknowns": [
         "src.flask.app.Flask.__call__",
@@ -147,6 +271,611 @@
         "src.flask.app.Flask.create_url_adapter",
         "src.flask.app.Flask.default_config",
         "src.flask.app.Flask.dispatch_request",
+        "src.flask.app.Flask.do_teardown_appcontext",
+        "src.flask.app.Flask.do_teardown_request",
+        "src.flask.app.Flask.ensure_sync",
+        "src.flask.app.Flask.finalize_request",
+        "src.flask.app.Flask.full_dispatch_request",
+        "src.flask.app.Flask.get_send_file_max_age",
+        "src.flask.app.Flask.handle_exception",
+        "src.flask.app.Flask.handle_http_exception",
+        "src.flask.app.Flask.handle_user_exception",
+        "src.flask.app.Flask.log_exception",
+        "src.flask.app.Flask.make_default_options_response",
+        "src.flask.app.Flask.make_response",
+        "src.flask.app.Flask.make_shell_context",
+        "src.flask.app.Flask.open_instance_resource",
+        "src.flask.app.Flask.open_resource",
+        "src.flask.app.Flask.preprocess_request",
+        "src.flask.app.Flask.process_response",
+        "src.flask.app.Flask.raise_routing_exception",
+        "src.flask.app.Flask.request_class",
+        "src.flask.app.Flask.request_context",
+        "src.flask.app.Flask.response_class",
+        "src.flask.app.Flask.run",
+        "src.flask.app.Flask.send_static_file",
+        "src.flask.app.Flask.session_interface",
+        "src.flask.app.Flask.test_cli_runner",
+        "src.flask.app.Flask.test_client",
+        "src.flask.app.Flask.test_request_context",
+        "src.flask.app.Flask.update_template_context",
+        "src.flask.app.Flask.url_for",
+        "src.flask.app.Flask.wsgi_app",
+        "src.flask.debughelpers.FormDataRoutingRedirect.__init__",
+        "src.flask.sansio.app.App.__init__",
+        "src.flask.sansio.app.App._check_setup_finished",
+        "src.flask.sansio.app.App._find_error_handler",
+        "src.flask.sansio.app.App.aborter_class",
+        "src.flask.sansio.app.App.add_template_filter",
+        "src.flask.sansio.app.App.add_template_global",
+        "src.flask.sansio.app.App.add_template_test",
+        "src.flask.sansio.app.App.add_url_rule",
+        "src.flask.sansio.app.App.app_ctx_globals_class",
+        "src.flask.sansio.app.App.auto_find_instance_path",
+        "src.flask.sansio.app.App.config_class",
+        "src.flask.sansio.app.App.create_global_jinja_loader",
+        "src.flask.sansio.app.App.create_jinja_environment",
+        "src.flask.sansio.app.App.debug",
+        "src.flask.sansio.app.App.default_config",
+        "src.flask.sansio.app.App.handle_url_build_error",
+        "src.flask.sansio.app.App.inject_url_defaults",
+        "src.flask.sansio.app.App.iter_blueprints",
+        "src.flask.sansio.app.App.jinja_env",
+        "src.flask.sansio.app.App.jinja_environment",
+        "src.flask.sansio.app.App.jinja_options",
+        "src.flask.sansio.app.App.json_provider_class",
+        "src.flask.sansio.app.App.logger",
+        "src.flask.sansio.app.App.make_aborter",
+        "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
+        "src.flask.sansio.app.App.permanent_session_lifetime",
+        "src.flask.sansio.app.App.redirect",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.sansio.app.App.response_class",
+        "src.flask.sansio.app.App.secret_key",
+        "src.flask.sansio.app.App.select_jinja_autoescape",
+        "src.flask.sansio.app.App.shell_context_processor",
+        "src.flask.sansio.app.App.should_ignore_error",
+        "src.flask.sansio.app.App.teardown_appcontext",
+        "src.flask.sansio.app.App.template_filter",
+        "src.flask.sansio.app.App.template_global",
+        "src.flask.sansio.app.App.template_test",
+        "src.flask.sansio.app.App.test_cli_runner_class",
+        "src.flask.sansio.app.App.test_client_class",
+        "src.flask.sansio.app.App.testing",
+        "src.flask.sansio.app.App.trap_http_exception",
+        "src.flask.sansio.app.App.url_map_class",
+        "src.flask.sansio.app.App.url_rule_class",
+        "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
+        "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.__init__",
+        "src.flask.sansio.scaffold.Scaffold.__repr__",
+        "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+        "src.flask.sansio.scaffold.Scaffold._get_exc_class_and_code",
+        "src.flask.sansio.scaffold.Scaffold._method_route",
+        "src.flask.sansio.scaffold.Scaffold._static_folder",
+        "src.flask.sansio.scaffold.Scaffold._static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.after_request",
+        "src.flask.sansio.scaffold.Scaffold.before_request",
+        "src.flask.sansio.scaffold.Scaffold.cli",
+        "src.flask.sansio.scaffold.Scaffold.context_processor",
+        "src.flask.sansio.scaffold.Scaffold.delete",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.errorhandler",
+        "src.flask.sansio.scaffold.Scaffold.get",
+        "src.flask.sansio.scaffold.Scaffold.has_static_folder",
+        "src.flask.sansio.scaffold.Scaffold.jinja_loader",
+        "src.flask.sansio.scaffold.Scaffold.name",
+        "src.flask.sansio.scaffold.Scaffold.patch",
+        "src.flask.sansio.scaffold.Scaffold.post",
+        "src.flask.sansio.scaffold.Scaffold.put",
+        "src.flask.sansio.scaffold.Scaffold.query",
+        "src.flask.sansio.scaffold.Scaffold.register_error_handler",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.scaffold.Scaffold.static_folder",
+        "src.flask.sansio.scaffold.Scaffold.static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.sansio.scaffold.Scaffold.url_defaults",
+        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.sessions.SessionInterface.get_cookie_domain",
+        "src.flask.sessions.SessionInterface.get_cookie_httponly",
+        "src.flask.sessions.SessionInterface.get_cookie_name",
+        "src.flask.sessions.SessionInterface.get_cookie_partitioned",
+        "src.flask.sessions.SessionInterface.get_cookie_path",
+        "src.flask.sessions.SessionInterface.get_cookie_samesite",
+        "src.flask.sessions.SessionInterface.get_cookie_secure",
+        "src.flask.sessions.SessionInterface.get_expiration_time",
+        "src.flask.sessions.SessionInterface.is_null_session",
+        "src.flask.sessions.SessionInterface.make_null_session",
+        "src.flask.sessions.SessionInterface.null_session_class",
+        "src.flask.sessions.SessionInterface.open_session",
+        "src.flask.sessions.SessionInterface.pickle_based",
+        "src.flask.sessions.SessionInterface.save_session",
+        "src.flask.sessions.SessionInterface.should_set_cookie",
+        "src.flask.testing.EnvironBuilder.__init__",
+        "src.flask.testing.EnvironBuilder.json_dumps",
+        "src.flask.testing.FlaskClient.__enter__",
+        "src.flask.testing.FlaskClient.__exit__",
+        "src.flask.testing.FlaskClient.__init__",
+        "src.flask.testing.FlaskClient._copy_environ",
+        "src.flask.testing.FlaskClient._request_from_builder_args",
+        "src.flask.testing.FlaskClient.application",
+        "src.flask.testing.FlaskClient.open",
+        "src.flask.testing.FlaskClient.session_transaction",
+        "src.flask.views.MethodView.__init_subclass__",
+        "src.flask.views.MethodView.dispatch_request",
+        "src.flask.views.View.as_view",
+        "src.flask.views.View.decorators",
+        "src.flask.views.View.dispatch_request",
+        "src.flask.views.View.init_every_request",
+        "src.flask.views.View.methods",
+        "src.flask.views.View.provide_automatic_options"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-04",
+      "query": "What does the @app.route decorator actually call to register a URL rule?",
+      "category": "B_relationship",
+      "elapsed_seconds": 0.4066753387451172,
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "name": "View",
+          "source_location": "src/flask/views.py:16-135",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 47.96789013890176,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 47.55219846742381,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "node_type": "Method",
+          "name": "add_url_rule",
+          "source_location": "src/flask/sansio/scaffold.py:376-441",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 38.15112158213639,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "name": "Blueprint",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.10099007448356,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.route",
+          "node_type": "Method",
+          "name": "route",
+          "source_location": "src/flask/sansio/scaffold.py:344-373",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 36.02876057626961,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "name": "BlueprintSetupState",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 35.38852717290961,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "name": "App",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 35.0944531331412,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.endpoint",
+          "node_type": "Method",
+          "name": "endpoint",
+          "source_location": "src/flask/sansio/scaffold.py:444-465",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 33.96049190123967,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.app.Flask.dispatch_request",
+          "node_type": "Method",
+          "name": "dispatch_request",
+          "source_location": "src/flask/app.py:969-993",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 33.306748804883,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "name": "Request",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 31.735771247171204,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/views.py",
+        "src/flask/wrappers.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.views.View",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.sansio.app.App",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.app.Flask.dispatch_request",
+        "src.flask.wrappers.Request"
+      ],
+      "ground_truth_files": [
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py"
+      ],
+      "file_level_hits": [
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.3333333333333333,
+      "conflicts": [],
+      "unknowns": [
+        "src.flask.app.Flask.dispatch_request.req",
+        "src.flask.app.Flask.dispatch_request.rule",
+        "src.flask.app.Flask.dispatch_request.view_args",
+        "src.flask.app.Flask.ensure_sync",
+        "src.flask.app.Flask.make_default_options_response",
+        "src.flask.app.Flask.raise_routing_exception",
+        "src.flask.sansio.app.App.__init__",
+        "src.flask.sansio.app.App._check_setup_finished",
+        "src.flask.sansio.app.App._find_error_handler",
+        "src.flask.sansio.app.App.aborter_class",
+        "src.flask.sansio.app.App.add_template_filter",
+        "src.flask.sansio.app.App.add_template_global",
+        "src.flask.sansio.app.App.add_template_test",
+        "src.flask.sansio.app.App.add_url_rule",
+        "src.flask.sansio.app.App.app_ctx_globals_class",
+        "src.flask.sansio.app.App.auto_find_instance_path",
+        "src.flask.sansio.app.App.config_class",
+        "src.flask.sansio.app.App.create_global_jinja_loader",
+        "src.flask.sansio.app.App.create_jinja_environment",
+        "src.flask.sansio.app.App.debug",
+        "src.flask.sansio.app.App.default_config",
+        "src.flask.sansio.app.App.handle_url_build_error",
+        "src.flask.sansio.app.App.inject_url_defaults",
+        "src.flask.sansio.app.App.iter_blueprints",
+        "src.flask.sansio.app.App.jinja_env",
+        "src.flask.sansio.app.App.jinja_environment",
+        "src.flask.sansio.app.App.jinja_options",
+        "src.flask.sansio.app.App.json_provider_class",
+        "src.flask.sansio.app.App.logger",
+        "src.flask.sansio.app.App.make_aborter",
+        "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
+        "src.flask.sansio.app.App.permanent_session_lifetime",
+        "src.flask.sansio.app.App.redirect",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.sansio.app.App.response_class",
+        "src.flask.sansio.app.App.secret_key",
+        "src.flask.sansio.app.App.select_jinja_autoescape",
+        "src.flask.sansio.app.App.shell_context_processor",
+        "src.flask.sansio.app.App.should_ignore_error",
+        "src.flask.sansio.app.App.teardown_appcontext",
+        "src.flask.sansio.app.App.template_filter",
+        "src.flask.sansio.app.App.template_global",
+        "src.flask.sansio.app.App.template_test",
+        "src.flask.sansio.app.App.test_cli_runner_class",
+        "src.flask.sansio.app.App.test_client_class",
+        "src.flask.sansio.app.App.testing",
+        "src.flask.sansio.app.App.trap_http_exception",
+        "src.flask.sansio.app.App.url_map_class",
+        "src.flask.sansio.app.App.url_rule_class",
+        "src.flask.sansio.blueprints.Blueprint.__init__",
+        "src.flask.sansio.blueprints.Blueprint._check_setup_finished",
+        "src.flask.sansio.blueprints.Blueprint._got_registered_once",
+        "src.flask.sansio.blueprints.Blueprint._merge_blueprint_funcs",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.add_url_rule",
+        "src.flask.sansio.blueprints.Blueprint.after_app_request",
+        "src.flask.sansio.blueprints.Blueprint.app_context_processor",
+        "src.flask.sansio.blueprints.Blueprint.app_errorhandler",
+        "src.flask.sansio.blueprints.Blueprint.app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.app_url_defaults",
+        "src.flask.sansio.blueprints.Blueprint.app_url_value_preprocessor",
+        "src.flask.sansio.blueprints.Blueprint.before_app_request",
+        "src.flask.sansio.blueprints.Blueprint.make_setup_state",
+        "src.flask.sansio.blueprints.Blueprint.record",
+        "src.flask.sansio.blueprints.Blueprint.record_once",
+        "src.flask.sansio.blueprints.Blueprint.register",
+        "src.flask.sansio.blueprints.Blueprint.register_blueprint",
+        "src.flask.sansio.blueprints.Blueprint.teardown_app_request",
+        "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
+        "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.__init__",
+        "src.flask.sansio.scaffold.Scaffold.__repr__",
+        "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+        "src.flask.sansio.scaffold.Scaffold._get_exc_class_and_code",
+        "src.flask.sansio.scaffold.Scaffold._method_route",
+        "src.flask.sansio.scaffold.Scaffold._static_folder",
+        "src.flask.sansio.scaffold.Scaffold._static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.after_request",
+        "src.flask.sansio.scaffold.Scaffold.before_request",
+        "src.flask.sansio.scaffold.Scaffold.cli",
+        "src.flask.sansio.scaffold.Scaffold.context_processor",
+        "src.flask.sansio.scaffold.Scaffold.delete",
+        "src.flask.sansio.scaffold.Scaffold.endpoint.decorator",
+        "src.flask.sansio.scaffold.Scaffold.errorhandler",
+        "src.flask.sansio.scaffold.Scaffold.get",
+        "src.flask.sansio.scaffold.Scaffold.has_static_folder",
+        "src.flask.sansio.scaffold.Scaffold.jinja_loader",
+        "src.flask.sansio.scaffold.Scaffold.name",
+        "src.flask.sansio.scaffold.Scaffold.patch",
+        "src.flask.sansio.scaffold.Scaffold.post",
+        "src.flask.sansio.scaffold.Scaffold.put",
+        "src.flask.sansio.scaffold.Scaffold.query",
+        "src.flask.sansio.scaffold.Scaffold.register_error_handler",
+        "src.flask.sansio.scaffold.Scaffold.route.decorator",
+        "src.flask.sansio.scaffold.Scaffold.static_folder",
+        "src.flask.sansio.scaffold.Scaffold.static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.sansio.scaffold.Scaffold.url_defaults",
+        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.views.View.as_view",
+        "src.flask.views.View.decorators",
+        "src.flask.views.View.dispatch_request",
+        "src.flask.views.View.init_every_request",
+        "src.flask.views.View.methods",
+        "src.flask.views.View.provide_automatic_options",
+        "src.flask.wrappers.Request._load_form_data",
+        "src.flask.wrappers.Request._max_content_length",
+        "src.flask.wrappers.Request._max_form_memory_size",
+        "src.flask.wrappers.Request._max_form_parts",
+        "src.flask.wrappers.Request.blueprint",
+        "src.flask.wrappers.Request.blueprints",
+        "src.flask.wrappers.Request.endpoint",
+        "src.flask.wrappers.Request.json_module",
+        "src.flask.wrappers.Request.max_content_length",
+        "src.flask.wrappers.Request.max_form_memory_size",
+        "src.flask.wrappers.Request.max_form_parts",
+        "src.flask.wrappers.Request.on_json_loading_failed",
+        "src.flask.wrappers.Request.routing_exception",
+        "src.flask.wrappers.Request.url_rule",
+        "src.flask.wrappers.Request.view_args"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-05",
+      "query": "What class does Flask's Blueprint inherit from?",
+      "category": "B_relationship",
+      "elapsed_seconds": 0.39992523193359375,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "ground_truth_files": [
+        "src/flask/blueprints.py",
+        "src/flask/sansio/blueprints.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-06",
+      "query": "How does Flask dispatch an incoming WSGI request to the correct view function, end to end?",
+      "category": "C_architecture",
+      "elapsed_seconds": 0.3973374366760254,
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "name": "View",
+          "source_location": "src/flask/views.py:16-135",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.341331692008254,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "name": "Flask",
+          "source_location": "src/flask/app.py:110-1628",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.016666737593866,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 34.03550965957754,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "name": "App",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 32.13384875276705,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.app.Flask.dispatch_request",
+          "node_type": "Method",
+          "name": "dispatch_request",
+          "source_location": "src/flask/app.py:969-993",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 31.792066279216257,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "name": "Request",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 30.609824083076184,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "node_type": "Method",
+          "name": "add_url_rule",
+          "source_location": "src/flask/sansio/scaffold.py:376-441",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 29.28143639314942,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/views.py",
+        "src/flask/wrappers.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.views.View",
+        "src.flask.app.Flask",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.sansio.app.App",
+        "src.flask.app.Flask.dispatch_request",
+        "src.flask.wrappers.Request",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule"
+      ],
+      "ground_truth_files": [
+        "src/flask/app.py"
+      ],
+      "file_level_hits": [
+        "src/flask/app.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.2,
+      "conflicts": [],
+      "unknowns": [
+        "src.flask.app.Flask.__call__",
+        "src.flask.app.Flask.__init__",
+        "src.flask.app.Flask.__init_subclass__",
+        "src.flask.app.Flask.app_context",
+        "src.flask.app.Flask.async_to_sync",
+        "src.flask.app.Flask.create_jinja_environment",
+        "src.flask.app.Flask.create_url_adapter",
+        "src.flask.app.Flask.default_config",
+        "src.flask.app.Flask.dispatch_request.req",
+        "src.flask.app.Flask.dispatch_request.rule",
+        "src.flask.app.Flask.dispatch_request.view_args",
         "src.flask.app.Flask.do_teardown_appcontext",
         "src.flask.app.Flask.do_teardown_request",
         "src.flask.app.Flask.ensure_sync",
@@ -202,6 +931,7 @@
         "src.flask.sansio.app.App.logger",
         "src.flask.sansio.app.App.make_aborter",
         "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
         "src.flask.sansio.app.App.permanent_session_lifetime",
         "src.flask.sansio.app.App.redirect",
         "src.flask.sansio.app.App.register_blueprint",
@@ -220,403 +950,6 @@
         "src.flask.sansio.app.App.trap_http_exception",
         "src.flask.sansio.app.App.url_map_class",
         "src.flask.sansio.app.App.url_rule_class",
-        "tests.test_config.test_custom_config_class.Flask.config_class"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-02",
-      "query": "Which class implements Flask's default (cookie-based) session storage?",
-      "category": "A_symbol_location",
-      "elapsed_seconds": 0.38370299339294434,
-      "retrieved_entities": [
-        {
-          "entity_id": "src.flask.sessions.SecureCookieSessionInterface.session_class",
-          "node_type": "Variable",
-          "name": "session_class",
-          "source_location": "src/flask/sessions.py:301-301",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.3571057337082406,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_max_cookie_size.default",
-          "node_type": "Variable",
-          "name": "default",
-          "source_location": "tests/test_basic.py:1937-1937",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3041289499992481,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sessions.SessionInterface.get_cookie_name",
-          "node_type": "Method",
-          "name": "get_cookie_name",
-          "source_location": "src/flask/sessions.py:171-173",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.30297737989299883,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sessions.SessionInterface",
-          "node_type": "Class",
-          "name": "SessionInterface",
-          "source_location": "src/flask/sessions.py:100-270",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.29695337375950226,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_session_using_session_settings",
-          "node_type": "Function",
-          "name": "test_session_using_session_settings",
-          "source_location": "tests/test_basic.py:313-353",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.2775005299816109,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sessions.SecureCookieSessionInterface",
-          "node_type": "Class",
-          "name": "SecureCookieSessionInterface",
-          "source_location": "src/flask/sessions.py:284-385",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.2759969968331371,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sessions.SessionInterface.get_cookie_path",
-          "node_type": "Method",
-          "name": "get_cookie_path",
-          "source_location": "src/flask/sessions.py:187-193",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.27469877107137974,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_reqctx.test_session_dynamic_cookie_name.PathAwareSessionInterface",
-          "node_type": "Class",
-          "name": "PathAwareSessionInterface",
-          "source_location": "tests/test_reqctx.py:204-209",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.2585585704254795,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.app.Flask.default_config",
-          "node_type": "Variable",
-          "name": "default_config",
-          "source_location": "src/flask/app.py:207-239",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2550792456284175,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sessions.SecureCookieSessionInterface.open_session",
-          "node_type": "Method",
-          "name": "open_session",
-          "source_location": "src/flask/sessions.py:323-335",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.25387373684274456,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/app.py",
-        "src/flask/sessions.py",
-        "tests/test_basic.py",
-        "tests/test_reqctx.py"
-      ],
-      "retrieved_symbols": [
-        "src.flask.sessions.SecureCookieSessionInterface.session_class",
-        "tests.test_basic.test_max_cookie_size.default",
-        "src.flask.sessions.SessionInterface.get_cookie_name",
-        "src.flask.sessions.SessionInterface",
-        "tests.test_basic.test_session_using_session_settings",
-        "src.flask.sessions.SecureCookieSessionInterface",
-        "src.flask.sessions.SessionInterface.get_cookie_path",
-        "tests.test_reqctx.test_session_dynamic_cookie_name.PathAwareSessionInterface",
-        "src.flask.app.Flask.default_config",
-        "src.flask.sessions.SecureCookieSessionInterface.open_session"
-      ],
-      "ground_truth_files": [
-        "src/flask/sessions.py"
-      ],
-      "file_level_hits": [
-        "src/flask/sessions.py"
-      ],
-      "file_level_recall": 1.0,
-      "file_level_precision": 0.25,
-      "conflicts": [],
-      "unknowns": [
-        "src.flask.sessions.SecureCookieSessionInterface.digest_method",
-        "src.flask.sessions.SecureCookieSessionInterface.get_signing_serializer",
-        "src.flask.sessions.SecureCookieSessionInterface.key_derivation",
-        "src.flask.sessions.SecureCookieSessionInterface.open_session.max_age",
-        "src.flask.sessions.SecureCookieSessionInterface.open_session.s",
-        "src.flask.sessions.SecureCookieSessionInterface.open_session.val",
-        "src.flask.sessions.SecureCookieSessionInterface.salt",
-        "src.flask.sessions.SecureCookieSessionInterface.save_session",
-        "src.flask.sessions.SecureCookieSessionInterface.serializer",
-        "src.flask.sessions.SessionInterface.get_cookie_domain",
-        "src.flask.sessions.SessionInterface.get_cookie_httponly",
-        "src.flask.sessions.SessionInterface.get_cookie_partitioned",
-        "src.flask.sessions.SessionInterface.get_cookie_samesite",
-        "src.flask.sessions.SessionInterface.get_cookie_secure",
-        "src.flask.sessions.SessionInterface.get_expiration_time",
-        "src.flask.sessions.SessionInterface.is_null_session",
-        "src.flask.sessions.SessionInterface.make_null_session",
-        "src.flask.sessions.SessionInterface.null_session_class",
-        "src.flask.sessions.SessionInterface.open_session",
-        "src.flask.sessions.SessionInterface.pickle_based",
-        "src.flask.sessions.SessionInterface.save_session",
-        "src.flask.sessions.SessionInterface.should_set_cookie",
-        "tests.test_basic.test_session_using_session_settings.clear",
-        "tests.test_basic.test_session_using_session_settings.cookie",
-        "tests.test_basic.test_session_using_session_settings.index",
-        "tests.test_basic.test_session_using_session_settings.rv",
-        "tests.test_reqctx.test_session_dynamic_cookie_name.PathAwareSessionInterface.get_cookie_name"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-03",
-      "query": "Where is the Request class that Flask uses for incoming HTTP requests defined?",
-      "category": "A_symbol_location",
-      "elapsed_seconds": 0.39272475242614746,
-      "retrieved_entities": [],
-      "insufficient_evidence": true,
-      "retrieved_files": [],
-      "retrieved_symbols": [],
-      "ground_truth_files": [
-        "src/flask/wrappers.py"
-      ],
-      "file_level_hits": [],
-      "file_level_recall": 0.0,
-      "file_level_precision": 0.0,
-      "conflicts": [],
-      "unknowns": [],
-      "facts_verification_states": [],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-04",
-      "query": "What does the @app.route decorator actually call to register a URL rule?",
-      "category": "B_relationship",
-      "elapsed_seconds": 0.3990914821624756,
-      "retrieved_entities": [
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.route",
-          "node_type": "Method",
-          "name": "route",
-          "source_location": "src/flask/sansio/scaffold.py:344-373",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 6
-          },
-          "score": 0.3739074843019462,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.app.Flask.dispatch_request",
-          "node_type": "Method",
-          "name": "dispatch_request",
-          "source_location": "src/flask/app.py:969-993",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 6
-          },
-          "score": 0.32168386336307114,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.add_url_rule",
-          "node_type": "Method",
-          "name": "add_url_rule",
-          "source_location": "src/flask/sansio/scaffold.py:376-441",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.31680943237363846,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.wrappers.Request.url_rule",
-          "node_type": "Variable",
-          "name": "url_rule",
-          "source_location": "src/flask/wrappers.py:43-43",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.31311930709681884,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold",
-          "node_type": "Class",
-          "name": "Scaffold",
-          "source_location": "src/flask/sansio/scaffold.py:52-706",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.3095073296452644,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.app.App.url_rule_class",
-          "node_type": "Variable",
-          "name": "url_rule_class",
-          "source_location": "src/flask/sansio/app.py:254-254",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.3071557690279963,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.app.Flask.dispatch_request.rule",
-          "node_type": "Variable",
-          "name": "rule",
-          "source_location": "src/flask/app.py:983-983",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2934680943785678,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
-          "node_type": "Method",
-          "name": "add_url_rule",
-          "source_location": "src/flask/sansio/blueprints.py:87-116",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.2932275471657277,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.route.decorator",
-          "node_type": "Function",
-          "name": "decorator",
-          "source_location": "src/flask/sansio/scaffold.py:368-371",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.28680795411585086,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.app.App.add_template_test",
-          "node_type": "Method",
-          "name": "add_template_test",
-          "source_location": "src/flask/sansio/app.py:756-770",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.2806684503817905,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/app.py",
-        "src/flask/sansio/app.py",
-        "src/flask/sansio/blueprints.py",
-        "src/flask/sansio/scaffold.py",
-        "src/flask/wrappers.py"
-      ],
-      "retrieved_symbols": [
-        "src.flask.sansio.scaffold.Scaffold.route",
-        "src.flask.app.Flask.dispatch_request",
-        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
-        "src.flask.wrappers.Request.url_rule",
-        "src.flask.sansio.scaffold.Scaffold",
-        "src.flask.sansio.app.App.url_rule_class",
-        "src.flask.app.Flask.dispatch_request.rule",
-        "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
-        "src.flask.sansio.scaffold.Scaffold.route.decorator",
-        "src.flask.sansio.app.App.add_template_test"
-      ],
-      "ground_truth_files": [
-        "src/flask/sansio/app.py",
-        "src/flask/sansio/scaffold.py"
-      ],
-      "file_level_hits": [
-        "src/flask/sansio/app.py",
-        "src/flask/sansio/scaffold.py"
-      ],
-      "file_level_recall": 1.0,
-      "file_level_precision": 0.4,
-      "conflicts": [],
-      "unknowns": [
-        "src.flask.app.Flask.dispatch_request.req",
-        "src.flask.app.Flask.dispatch_request.view_args",
-        "src.flask.app.Flask.ensure_sync",
-        "src.flask.app.Flask.make_default_options_response",
-        "src.flask.app.Flask.raise_routing_exception",
-        "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule.defaults",
         "src.flask.sansio.scaffold.Scaffold.__init__",
         "src.flask.sansio.scaffold.Scaffold.__repr__",
         "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
@@ -640,272 +973,33 @@
         "src.flask.sansio.scaffold.Scaffold.put",
         "src.flask.sansio.scaffold.Scaffold.query",
         "src.flask.sansio.scaffold.Scaffold.register_error_handler",
-        "src.flask.sansio.scaffold.Scaffold.route.decorator.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.route",
         "src.flask.sansio.scaffold.Scaffold.static_folder",
         "src.flask.sansio.scaffold.Scaffold.static_url_path",
         "src.flask.sansio.scaffold.Scaffold.teardown_request",
         "src.flask.sansio.scaffold.Scaffold.url_defaults",
         "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
-        "src.flask.sansio.scaffold.T_route"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-05",
-      "query": "What class does Flask's Blueprint inherit from?",
-      "category": "B_relationship",
-      "elapsed_seconds": 0.37875866889953613,
-      "retrieved_entities": [
-        {
-          "entity_id": "src.flask.debughelpers.explain_template_loading_attempts.blueprint",
-          "node_type": "Variable",
-          "name": "blueprint",
-          "source_location": "src/flask/debughelpers.py:138-138",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2950801888495998,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_async._async_app.blueprint",
-          "node_type": "Variable",
-          "name": "blueprint",
-          "source_location": "tests/test_async.py:58-58",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28850595249622085,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_async.test_async_before_after_request.blueprint",
-          "node_type": "Variable",
-          "name": "blueprint",
-          "source_location": "tests/test_async.py:120-120",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28850595249622085,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_async.BlueprintError",
-          "node_type": "Class",
-          "name": "BlueprintError",
-          "source_location": "tests/test_async.py:18-19",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.2738018137617835,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_config.test_custom_config_class.Flask",
-          "node_type": "Class",
-          "name": "Flask",
-          "source_location": "tests/test_config.py:202-203",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 7
-          },
-          "score": 0.2582714733905495,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.app.App.register_blueprint",
-          "node_type": "Method",
-          "name": "register_blueprint",
-          "source_location": "src/flask/sansio/app.py:570-595",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.25010503235112347,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/debughelpers.py",
-        "src/flask/sansio/app.py",
-        "tests/test_async.py",
-        "tests/test_config.py"
-      ],
-      "retrieved_symbols": [
-        "src.flask.debughelpers.explain_template_loading_attempts.blueprint",
-        "tests.test_async._async_app.blueprint",
-        "tests.test_async.test_async_before_after_request.blueprint",
-        "tests.test_async.BlueprintError",
-        "tests.test_config.test_custom_config_class.Flask",
-        "src.flask.sansio.app.App.register_blueprint"
-      ],
-      "ground_truth_files": [
-        "src/flask/blueprints.py",
-        "src/flask/sansio/blueprints.py"
-      ],
-      "file_level_hits": [],
-      "file_level_recall": 0.0,
-      "file_level_precision": 0.0,
-      "conflicts": [],
-      "unknowns": [
-        "tests.test_config.test_custom_config_class.Flask.config_class"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-06",
-      "query": "How does Flask dispatch an incoming WSGI request to the correct view function, end to end?",
-      "category": "C_architecture",
-      "elapsed_seconds": 0.39902257919311523,
-      "retrieved_entities": [
-        {
-          "entity_id": "tests.test_reqctx.test_teardown_on_pop.end_of_request",
-          "node_type": "Function",
-          "name": "end_of_request",
-          "source_location": "tests/test_reqctx.py:19-20",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3739133428698121,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_reqctx.test_teardown_with_handled_exception.end_of_request",
-          "node_type": "Function",
-          "name": "end_of_request",
-          "source_location": "tests/test_reqctx.py:50-51",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3739133428698121,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_reqctx.test_teardown_with_previous_exception.end_of_request",
-          "node_type": "Function",
-          "name": "end_of_request",
-          "source_location": "tests/test_reqctx.py:33-34",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3739133428698121,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.app.Flask.dispatch_request",
-          "node_type": "Method",
-          "name": "dispatch_request",
-          "source_location": "src/flask/app.py:969-993",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 6
-          },
-          "score": 0.29772590139734706,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.views.View",
-          "node_type": "Class",
-          "name": "View",
-          "source_location": "src/flask/views.py:16-135",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 5
-          },
-          "score": 0.28884495988325765,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_views.test_basic_view.Index.dispatch_request",
-          "node_type": "Method",
-          "name": "dispatch_request",
-          "source_location": "tests/test_views.py:21-22",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2640975399077482,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_views.test_endpoint_override.Index.dispatch_request",
-          "node_type": "Method",
-          "name": "dispatch_request",
-          "source_location": "tests/test_views.py:188-189",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2640975399077482,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/app.py",
-        "src/flask/views.py",
-        "tests/test_reqctx.py",
-        "tests/test_views.py"
-      ],
-      "retrieved_symbols": [
-        "tests.test_reqctx.test_teardown_on_pop.end_of_request",
-        "tests.test_reqctx.test_teardown_with_handled_exception.end_of_request",
-        "tests.test_reqctx.test_teardown_with_previous_exception.end_of_request",
-        "src.flask.app.Flask.dispatch_request",
-        "src.flask.views.View",
-        "tests.test_views.test_basic_view.Index.dispatch_request",
-        "tests.test_views.test_endpoint_override.Index.dispatch_request"
-      ],
-      "ground_truth_files": [
-        "src/flask/app.py"
-      ],
-      "file_level_hits": [
-        "src/flask/app.py"
-      ],
-      "file_level_recall": 1.0,
-      "file_level_precision": 0.25,
-      "conflicts": [],
-      "unknowns": [
-        "src.flask.app.Flask.dispatch_request.req",
-        "src.flask.app.Flask.dispatch_request.rule",
-        "src.flask.app.Flask.dispatch_request.view_args",
-        "src.flask.app.Flask.ensure_sync",
-        "src.flask.app.Flask.make_default_options_response",
-        "src.flask.app.Flask.raise_routing_exception",
         "src.flask.views.View.as_view",
         "src.flask.views.View.decorators",
         "src.flask.views.View.dispatch_request",
         "src.flask.views.View.init_every_request",
         "src.flask.views.View.methods",
-        "src.flask.views.View.provide_automatic_options"
+        "src.flask.views.View.provide_automatic_options",
+        "src.flask.wrappers.Request._load_form_data",
+        "src.flask.wrappers.Request._max_content_length",
+        "src.flask.wrappers.Request._max_form_memory_size",
+        "src.flask.wrappers.Request._max_form_parts",
+        "src.flask.wrappers.Request.blueprint",
+        "src.flask.wrappers.Request.blueprints",
+        "src.flask.wrappers.Request.endpoint",
+        "src.flask.wrappers.Request.json_module",
+        "src.flask.wrappers.Request.max_content_length",
+        "src.flask.wrappers.Request.max_form_memory_size",
+        "src.flask.wrappers.Request.max_form_parts",
+        "src.flask.wrappers.Request.on_json_loading_failed",
+        "src.flask.wrappers.Request.routing_exception",
+        "src.flask.wrappers.Request.url_rule",
+        "src.flask.wrappers.Request.view_args"
       ],
       "facts_verification_states": [
         "STATICALLY_SUPPORTED",
@@ -922,28 +1016,11 @@
       "query_id": "flask-07",
       "query": "How does Flask sign and verify session cookies to prevent tampering?",
       "category": "C_architecture",
-      "elapsed_seconds": 0.38552188873291016,
-      "retrieved_entities": [
-        {
-          "entity_id": "tests.test_testing.test_session_transaction_needs_cookies",
-          "node_type": "Function",
-          "name": "test_session_transaction_needs_cookies",
-          "source_location": "tests/test_testing.py:206-211",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          },
-          "score": 0.2855867269259066,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "tests/test_testing.py"
-      ],
-      "retrieved_symbols": [
-        "tests.test_testing.test_session_transaction_needs_cookies"
-      ],
+      "elapsed_seconds": 0.3897714614868164,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
       "ground_truth_files": [
         "src/flask/sessions.py"
       ],
@@ -951,160 +1028,49 @@
       "file_level_recall": 0.0,
       "file_level_precision": 0.0,
       "conflicts": [],
-      "unknowns": [
-        "tests.test_testing.test_session_transaction_needs_cookies.c"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED"
-      ],
+      "unknowns": [],
+      "facts_verification_states": [],
       "any_runtime_state_present": false
     },
     {
       "query_id": "flask-08",
       "query": "What happens when app.run() is called with debug=True?",
       "category": "D_behavioral",
-      "elapsed_seconds": 0.41587352752685547,
+      "elapsed_seconds": 0.39583563804626465,
       "retrieved_entities": [
         {
-          "entity_id": "tests.test_templating.test_templates_auto_reload_debug_run",
-          "node_type": "Function",
-          "name": "test_templates_auto_reload_debug_run",
-          "source_location": "tests/test_templating.py:475-485",
+          "entity_id": "src.flask.cli.FlaskGroup",
+          "node_type": "Class",
+          "name": "FlaskGroup",
+          "source_location": "src/flask/cli.py:531-688",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 32.6090076511603,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.FormDataRoutingRedirect",
+          "node_type": "Class",
+          "name": "FormDataRoutingRedirect",
+          "source_location": "src/flask/debughelpers.py:50-78",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 0.2973099806764014,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.cli.run_command.debug",
-          "node_type": "Variable",
-          "name": "debug",
-          "source_location": "src/flask/cli.py:973-973",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2935758262420892,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_appctx.test_clean_pop.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_appctx.py:199-199",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_appctx.test_context_refcounts.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_appctx.py:173-173",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_before_after_request_order.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_basic.py:852-852",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_teardown_request_handler.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_basic.py:778-778",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_teardown_request_handler_debug_mode.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_basic.py:796-796",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_basic.test_teardown_request_handler_error.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_basic.py:814-814",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_helpers.TestStreaming.test_streaming_with_context_and_custom_close.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_helpers.py:257-257",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_templating.test_template_loader_debugging.called",
-          "node_type": "Variable",
-          "name": "called",
-          "source_location": "tests/test_templating.py:491-491",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.28929309766752564,
+          "score": 29.787207283555638,
           "matched_by": "tfidf"
         }
       ],
       "insufficient_evidence": false,
       "retrieved_files": [
         "src/flask/cli.py",
-        "tests/test_appctx.py",
-        "tests/test_basic.py",
-        "tests/test_helpers.py",
-        "tests/test_templating.py"
+        "src/flask/debughelpers.py"
       ],
       "retrieved_symbols": [
-        "tests.test_templating.test_templates_auto_reload_debug_run",
-        "src.flask.cli.run_command.debug",
-        "tests.test_appctx.test_clean_pop.called",
-        "tests.test_appctx.test_context_refcounts.called",
-        "tests.test_basic.test_before_after_request_order.called",
-        "tests.test_basic.test_teardown_request_handler.called",
-        "tests.test_basic.test_teardown_request_handler_debug_mode.called",
-        "tests.test_basic.test_teardown_request_handler_error.called",
-        "tests.test_helpers.TestStreaming.test_streaming_with_context_and_custom_close.called",
-        "tests.test_templating.test_template_loader_debugging.called"
+        "src.flask.cli.FlaskGroup",
+        "src.flask.debughelpers.FormDataRoutingRedirect"
       ],
       "ground_truth_files": [
         "src/flask/app.py"
@@ -1114,17 +1080,16 @@
       "file_level_precision": 0.0,
       "conflicts": [],
       "unknowns": [
-        "tests.test_templating.test_templates_auto_reload_debug_run.run_simple_mock"
+        "src.flask.cli.AppGroup",
+        "src.flask.cli.FlaskGroup.__init__",
+        "src.flask.cli.FlaskGroup._load_plugin_commands",
+        "src.flask.cli.FlaskGroup.get_command",
+        "src.flask.cli.FlaskGroup.list_commands",
+        "src.flask.cli.FlaskGroup.make_context",
+        "src.flask.cli.FlaskGroup.parse_args",
+        "src.flask.debughelpers.FormDataRoutingRedirect.__init__"
       ],
       "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED"
       ],
@@ -1134,83 +1099,152 @@
       "query_id": "flask-09",
       "query": "What does Flask do when a request comes in for a URL that doesn't match any registered rule?",
       "category": "D_behavioral",
-      "elapsed_seconds": 0.4245486259460449,
+      "elapsed_seconds": 0.4033229351043701,
       "retrieved_entities": [
         {
-          "entity_id": "examples.celery.src.task_app.views.add.a",
-          "node_type": "Variable",
-          "name": "a",
-          "source_location": "examples/celery/src/task_app/views.py:23-23",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.2881200937565858,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.wrappers.Request.url_rule",
-          "node_type": "Variable",
-          "name": "url_rule",
-          "source_location": "src/flask/wrappers.py:43-43",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.27569242021771156,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.app.App.url_rule_class",
-          "node_type": "Variable",
-          "name": "url_rule_class",
-          "source_location": "src/flask/sansio/app.py:254-254",
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "name": "Request",
+          "source_location": "src/flask/wrappers.py:18-219",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 0.27044169882816216,
+          "score": 50.19994829734414,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "examples.javascript.js_example.views.add.a",
-          "node_type": "Variable",
-          "name": "a",
-          "source_location": "examples/javascript/js_example/views.py:16-16",
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.25975526063714505,
+          "score": 49.4803268897341,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "src.flask.app.Flask.dispatch_request.rule",
-          "node_type": "Variable",
-          "name": "rule",
-          "source_location": "src/flask/app.py:983-983",
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "name": "View",
+          "source_location": "src/flask/views.py:16-135",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 5
           },
-          "score": 0.25839010039355426,
+          "score": 46.82366971241966,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "name": "Flask",
+          "source_location": "src/flask/app.py:110-1628",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 46.6101662596723,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "name": "App",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 45.91745158940231,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "name": "Blueprint",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 45.505337373773884,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.ctx.AppContext",
+          "node_type": "Class",
+          "name": "AppContext",
+          "source_location": "src/flask/ctx.py:260-525",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 43.04545500572459,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "name": "BlueprintSetupState",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 41.72534385197355,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.test_cli.TestRoutes",
+          "node_type": "Class",
+          "name": "TestRoutes",
+          "source_location": "tests/test_cli.py:445-518",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 39.92324588021356,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "name": "SessionInterface",
+          "source_location": "src/flask/sessions.py:100-270",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 36.93089397092049,
           "matched_by": "tfidf"
         }
       ],
       "insufficient_evidence": false,
       "retrieved_files": [
-        "examples/celery/src/task_app/views.py",
-        "examples/javascript/js_example/views.py",
         "src/flask/app.py",
+        "src/flask/ctx.py",
         "src/flask/sansio/app.py",
-        "src/flask/wrappers.py"
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/sessions.py",
+        "src/flask/views.py",
+        "src/flask/wrappers.py",
+        "tests/test_cli.py"
       ],
       "retrieved_symbols": [
-        "examples.celery.src.task_app.views.add.a",
-        "src.flask.wrappers.Request.url_rule",
-        "src.flask.sansio.app.App.url_rule_class",
-        "examples.javascript.js_example.views.add.a",
-        "src.flask.app.Flask.dispatch_request.rule"
+        "src.flask.wrappers.Request",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.views.View",
+        "src.flask.app.Flask",
+        "src.flask.sansio.app.App",
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.ctx.AppContext",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "tests.test_cli.TestRoutes",
+        "src.flask.sessions.SessionInterface"
       ],
       "ground_truth_files": [
         "src/flask/sansio/app.py"
@@ -1219,10 +1253,212 @@
         "src/flask/sansio/app.py"
       ],
       "file_level_recall": 1.0,
-      "file_level_precision": 0.2,
+      "file_level_precision": 0.1111111111111111,
       "conflicts": [],
-      "unknowns": [],
+      "unknowns": [
+        "src.flask.app.Flask.__call__",
+        "src.flask.app.Flask.__init__",
+        "src.flask.app.Flask.__init_subclass__",
+        "src.flask.app.Flask.app_context",
+        "src.flask.app.Flask.async_to_sync",
+        "src.flask.app.Flask.create_jinja_environment",
+        "src.flask.app.Flask.create_url_adapter",
+        "src.flask.app.Flask.default_config",
+        "src.flask.app.Flask.dispatch_request",
+        "src.flask.app.Flask.do_teardown_appcontext",
+        "src.flask.app.Flask.do_teardown_request",
+        "src.flask.app.Flask.ensure_sync",
+        "src.flask.app.Flask.finalize_request",
+        "src.flask.app.Flask.full_dispatch_request",
+        "src.flask.app.Flask.get_send_file_max_age",
+        "src.flask.app.Flask.handle_exception",
+        "src.flask.app.Flask.handle_http_exception",
+        "src.flask.app.Flask.handle_user_exception",
+        "src.flask.app.Flask.log_exception",
+        "src.flask.app.Flask.make_default_options_response",
+        "src.flask.app.Flask.make_response",
+        "src.flask.app.Flask.make_shell_context",
+        "src.flask.app.Flask.open_instance_resource",
+        "src.flask.app.Flask.open_resource",
+        "src.flask.app.Flask.preprocess_request",
+        "src.flask.app.Flask.process_response",
+        "src.flask.app.Flask.raise_routing_exception",
+        "src.flask.app.Flask.request_class",
+        "src.flask.app.Flask.request_context",
+        "src.flask.app.Flask.response_class",
+        "src.flask.app.Flask.run",
+        "src.flask.app.Flask.send_static_file",
+        "src.flask.app.Flask.session_interface",
+        "src.flask.app.Flask.test_cli_runner",
+        "src.flask.app.Flask.test_client",
+        "src.flask.app.Flask.test_request_context",
+        "src.flask.app.Flask.update_template_context",
+        "src.flask.app.Flask.url_for",
+        "src.flask.app.Flask.wsgi_app",
+        "src.flask.ctx.AppContext.__enter__",
+        "src.flask.ctx.AppContext.__exit__",
+        "src.flask.ctx.AppContext.__init__",
+        "src.flask.ctx.AppContext.__repr__",
+        "src.flask.ctx.AppContext._get_session",
+        "src.flask.ctx.AppContext.copy",
+        "src.flask.ctx.AppContext.from_environ",
+        "src.flask.ctx.AppContext.has_request",
+        "src.flask.ctx.AppContext.match_request",
+        "src.flask.ctx.AppContext.pop",
+        "src.flask.ctx.AppContext.push",
+        "src.flask.ctx.AppContext.request",
+        "src.flask.ctx.AppContext.session",
+        "src.flask.sansio.app.App.__init__",
+        "src.flask.sansio.app.App._check_setup_finished",
+        "src.flask.sansio.app.App._find_error_handler",
+        "src.flask.sansio.app.App.aborter_class",
+        "src.flask.sansio.app.App.add_template_filter",
+        "src.flask.sansio.app.App.add_template_global",
+        "src.flask.sansio.app.App.add_template_test",
+        "src.flask.sansio.app.App.add_url_rule",
+        "src.flask.sansio.app.App.app_ctx_globals_class",
+        "src.flask.sansio.app.App.auto_find_instance_path",
+        "src.flask.sansio.app.App.config_class",
+        "src.flask.sansio.app.App.create_global_jinja_loader",
+        "src.flask.sansio.app.App.create_jinja_environment",
+        "src.flask.sansio.app.App.debug",
+        "src.flask.sansio.app.App.default_config",
+        "src.flask.sansio.app.App.handle_url_build_error",
+        "src.flask.sansio.app.App.inject_url_defaults",
+        "src.flask.sansio.app.App.iter_blueprints",
+        "src.flask.sansio.app.App.jinja_env",
+        "src.flask.sansio.app.App.jinja_environment",
+        "src.flask.sansio.app.App.jinja_options",
+        "src.flask.sansio.app.App.json_provider_class",
+        "src.flask.sansio.app.App.logger",
+        "src.flask.sansio.app.App.make_aborter",
+        "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
+        "src.flask.sansio.app.App.permanent_session_lifetime",
+        "src.flask.sansio.app.App.redirect",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.sansio.app.App.response_class",
+        "src.flask.sansio.app.App.secret_key",
+        "src.flask.sansio.app.App.select_jinja_autoescape",
+        "src.flask.sansio.app.App.shell_context_processor",
+        "src.flask.sansio.app.App.should_ignore_error",
+        "src.flask.sansio.app.App.teardown_appcontext",
+        "src.flask.sansio.app.App.template_filter",
+        "src.flask.sansio.app.App.template_global",
+        "src.flask.sansio.app.App.template_test",
+        "src.flask.sansio.app.App.test_cli_runner_class",
+        "src.flask.sansio.app.App.test_client_class",
+        "src.flask.sansio.app.App.testing",
+        "src.flask.sansio.app.App.trap_http_exception",
+        "src.flask.sansio.app.App.url_map_class",
+        "src.flask.sansio.app.App.url_rule_class",
+        "src.flask.sansio.blueprints.Blueprint.__init__",
+        "src.flask.sansio.blueprints.Blueprint._check_setup_finished",
+        "src.flask.sansio.blueprints.Blueprint._got_registered_once",
+        "src.flask.sansio.blueprints.Blueprint._merge_blueprint_funcs",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.add_url_rule",
+        "src.flask.sansio.blueprints.Blueprint.after_app_request",
+        "src.flask.sansio.blueprints.Blueprint.app_context_processor",
+        "src.flask.sansio.blueprints.Blueprint.app_errorhandler",
+        "src.flask.sansio.blueprints.Blueprint.app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.app_url_defaults",
+        "src.flask.sansio.blueprints.Blueprint.app_url_value_preprocessor",
+        "src.flask.sansio.blueprints.Blueprint.before_app_request",
+        "src.flask.sansio.blueprints.Blueprint.make_setup_state",
+        "src.flask.sansio.blueprints.Blueprint.record",
+        "src.flask.sansio.blueprints.Blueprint.record_once",
+        "src.flask.sansio.blueprints.Blueprint.register",
+        "src.flask.sansio.blueprints.Blueprint.register_blueprint",
+        "src.flask.sansio.blueprints.Blueprint.teardown_app_request",
+        "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
+        "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.__init__",
+        "src.flask.sansio.scaffold.Scaffold.__repr__",
+        "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+        "src.flask.sansio.scaffold.Scaffold._get_exc_class_and_code",
+        "src.flask.sansio.scaffold.Scaffold._method_route",
+        "src.flask.sansio.scaffold.Scaffold._static_folder",
+        "src.flask.sansio.scaffold.Scaffold._static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.after_request",
+        "src.flask.sansio.scaffold.Scaffold.before_request",
+        "src.flask.sansio.scaffold.Scaffold.cli",
+        "src.flask.sansio.scaffold.Scaffold.context_processor",
+        "src.flask.sansio.scaffold.Scaffold.delete",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.errorhandler",
+        "src.flask.sansio.scaffold.Scaffold.get",
+        "src.flask.sansio.scaffold.Scaffold.has_static_folder",
+        "src.flask.sansio.scaffold.Scaffold.jinja_loader",
+        "src.flask.sansio.scaffold.Scaffold.name",
+        "src.flask.sansio.scaffold.Scaffold.patch",
+        "src.flask.sansio.scaffold.Scaffold.post",
+        "src.flask.sansio.scaffold.Scaffold.put",
+        "src.flask.sansio.scaffold.Scaffold.query",
+        "src.flask.sansio.scaffold.Scaffold.register_error_handler",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.scaffold.Scaffold.static_folder",
+        "src.flask.sansio.scaffold.Scaffold.static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.sansio.scaffold.Scaffold.url_defaults",
+        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.sessions.SessionInterface.get_cookie_domain",
+        "src.flask.sessions.SessionInterface.get_cookie_httponly",
+        "src.flask.sessions.SessionInterface.get_cookie_name",
+        "src.flask.sessions.SessionInterface.get_cookie_partitioned",
+        "src.flask.sessions.SessionInterface.get_cookie_path",
+        "src.flask.sessions.SessionInterface.get_cookie_samesite",
+        "src.flask.sessions.SessionInterface.get_cookie_secure",
+        "src.flask.sessions.SessionInterface.get_expiration_time",
+        "src.flask.sessions.SessionInterface.is_null_session",
+        "src.flask.sessions.SessionInterface.make_null_session",
+        "src.flask.sessions.SessionInterface.null_session_class",
+        "src.flask.sessions.SessionInterface.open_session",
+        "src.flask.sessions.SessionInterface.pickle_based",
+        "src.flask.sessions.SessionInterface.save_session",
+        "src.flask.sessions.SessionInterface.should_set_cookie",
+        "src.flask.views.View.as_view",
+        "src.flask.views.View.decorators",
+        "src.flask.views.View.dispatch_request",
+        "src.flask.views.View.init_every_request",
+        "src.flask.views.View.methods",
+        "src.flask.views.View.provide_automatic_options",
+        "src.flask.wrappers.Request._load_form_data",
+        "src.flask.wrappers.Request._max_content_length",
+        "src.flask.wrappers.Request._max_form_memory_size",
+        "src.flask.wrappers.Request._max_form_parts",
+        "src.flask.wrappers.Request.blueprint",
+        "src.flask.wrappers.Request.blueprints",
+        "src.flask.wrappers.Request.endpoint",
+        "src.flask.wrappers.Request.json_module",
+        "src.flask.wrappers.Request.max_content_length",
+        "src.flask.wrappers.Request.max_form_memory_size",
+        "src.flask.wrappers.Request.max_form_parts",
+        "src.flask.wrappers.Request.on_json_loading_failed",
+        "src.flask.wrappers.Request.routing_exception",
+        "src.flask.wrappers.Request.url_rule",
+        "src.flask.wrappers.Request.view_args",
+        "tests.test_cli.TestRoutes.app",
+        "tests.test_cli.TestRoutes.expect_order",
+        "tests.test_cli.TestRoutes.invoke",
+        "tests.test_cli.TestRoutes.test_all_methods",
+        "tests.test_cli.TestRoutes.test_host",
+        "tests.test_cli.TestRoutes.test_no_routes",
+        "tests.test_cli.TestRoutes.test_simple",
+        "tests.test_cli.TestRoutes.test_sort",
+        "tests.test_cli.TestRoutes.test_subdomain"
+      ],
       "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
@@ -1235,171 +1471,18 @@
       "query_id": "flask-10",
       "query": "If a Flask view function raises an unhandled exception, where should I look to see how Flask decides what response to send back?",
       "category": "E_debugging",
-      "elapsed_seconds": 0.4066612720489502,
+      "elapsed_seconds": 0.3942115306854248,
       "retrieved_entities": [
         {
-          "entity_id": "src.flask.helpers.make_response",
-          "node_type": "Function",
-          "name": "make_response",
-          "source_location": "src/flask/helpers.py:151-197",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.25171478036422246,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/helpers.py"
-      ],
-      "retrieved_symbols": [
-        "src.flask.helpers.make_response"
-      ],
-      "ground_truth_files": [
-        "src/flask/app.py"
-      ],
-      "file_level_hits": [],
-      "file_level_recall": 0.0,
-      "file_level_precision": 0.0,
-      "conflicts": [],
-      "unknowns": [],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-11",
-      "query": "Where would I investigate if Flask's test_client() isn't preserving cookies across multiple requests in a test?",
-      "category": "E_debugging",
-      "elapsed_seconds": 0.42963337898254395,
-      "retrieved_entities": [
-        {
-          "entity_id": "tests.test_async.test_async_before_after_request.test_client",
-          "node_type": "Variable",
-          "name": "test_client",
-          "source_location": "tests/test_async.py:139-139",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.26128084382632627,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "tests.test_reqctx.test_session_dynamic_cookie_name.test_client",
-          "node_type": "Variable",
-          "name": "test_client",
-          "source_location": "tests/test_reqctx.py:237-237",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.26128084382632627,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "tests/test_async.py",
-        "tests/test_reqctx.py"
-      ],
-      "retrieved_symbols": [
-        "tests.test_async.test_async_before_after_request.test_client",
-        "tests.test_reqctx.test_session_dynamic_cookie_name.test_client"
-      ],
-      "ground_truth_files": [
-        "src/flask/testing.py"
-      ],
-      "file_level_hits": [],
-      "file_level_recall": 0.0,
-      "file_level_precision": 0.0,
-      "conflicts": [],
-      "unknowns": [],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
-      "any_runtime_state_present": false
-    },
-    {
-      "query_id": "flask-12",
-      "query": "How does registering a Blueprint on a Flask app connect the blueprint's routes to the app's URL map?",
-      "category": "F_cross_file",
-      "elapsed_seconds": 0.41745591163635254,
-      "retrieved_entities": [
-        {
-          "entity_id": "src.flask.sansio.app.App.register_blueprint",
-          "node_type": "Method",
-          "name": "register_blueprint",
-          "source_location": "src/flask/sansio/app.py:570-595",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.4485890847619982,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.blueprints.Blueprint.register_blueprint",
-          "node_type": "Method",
-          "name": "register_blueprint",
-          "source_location": "src/flask/sansio/blueprints.py:256-271",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3909798679563696,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "entity_id": "src.flask.app.Flask",
           "node_type": "Class",
-          "name": "Blueprint",
-          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "name": "Flask",
+          "source_location": "src/flask/app.py:110-1628",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 0.3856246651386994,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.url_defaults",
-          "node_type": "Method",
-          "name": "url_defaults",
-          "source_location": "src/flask/sansio/scaffold.py:592-603",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.3400550848118017,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
-          "node_type": "Class",
-          "name": "BlueprintSetupState",
-          "source_location": "src/flask/sansio/blueprints.py:34-116",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 6
-          },
-          "score": 0.3267396391599104,
-          "matched_by": "tfidf"
-        },
-        {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
-          "node_type": "Method",
-          "name": "url_value_preprocessor",
-          "source_location": "src/flask/sansio/scaffold.py:567-589",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.31833471243555334,
+          "score": 52.39085556415239,
           "matched_by": "tfidf"
         },
         {
@@ -1411,64 +1494,596 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 0.3154236933130295,
+          "score": 46.349112848988085,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
-          "node_type": "Method",
-          "name": "__init__",
-          "source_location": "src/flask/sansio/blueprints.py:41-85",
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 44.68086672551436,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "name": "View",
+          "source_location": "src/flask/views.py:16-135",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 44.43122442243591,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "name": "SessionInterface",
+          "source_location": "src/flask/sessions.py:100-270",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 41.08085456151099,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "name": "Request",
+          "source_location": "src/flask/wrappers.py:18-219",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 0.3112275094483937,
+          "score": 37.93364031196156,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "src.flask.sansio.scaffold.Scaffold.context_processor",
+          "entity_id": "src.flask.testing.FlaskCliRunner",
+          "node_type": "Class",
+          "name": "FlaskCliRunner",
+          "source_location": "src/flask/testing.py:265-298",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 33.35652603296823,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.after_request",
           "node_type": "Method",
-          "name": "context_processor",
-          "source_location": "src/flask/sansio/scaffold.py:550-564",
+          "name": "after_request",
+          "source_location": "src/flask/sansio/scaffold.py:495-513",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 0.30680723464312687,
+          "score": 33.12042348856866,
           "matched_by": "tfidf"
         },
         {
-          "entity_id": "src.flask.debughelpers.explain_template_loading_attempts.blueprint",
-          "node_type": "Variable",
-          "name": "blueprint",
-          "source_location": "src/flask/debughelpers.py:138-138",
+          "entity_id": "src.flask.config.Config",
+          "node_type": "Class",
+          "name": "Config",
+          "source_location": "src/flask/config.py:50-367",
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
-            "STATIC": 3
+            "STATIC": 4
           },
-          "score": 0.30562724901321475,
+          "score": 32.53193863926931,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "name": "Blueprint",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 32.21295520330026,
           "matched_by": "tfidf"
         }
       ],
       "insufficient_evidence": false,
       "retrieved_files": [
-        "src/flask/debughelpers.py",
+        "src/flask/app.py",
+        "src/flask/config.py",
         "src/flask/sansio/app.py",
         "src/flask/sansio/blueprints.py",
-        "src/flask/sansio/scaffold.py"
+        "src/flask/sansio/scaffold.py",
+        "src/flask/sessions.py",
+        "src/flask/testing.py",
+        "src/flask/views.py",
+        "src/flask/wrappers.py"
       ],
       "retrieved_symbols": [
-        "src.flask.sansio.app.App.register_blueprint",
-        "src.flask.sansio.blueprints.Blueprint.register_blueprint",
-        "src.flask.sansio.blueprints.Blueprint",
-        "src.flask.sansio.scaffold.Scaffold.url_defaults",
-        "src.flask.sansio.blueprints.BlueprintSetupState",
-        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.app.Flask",
         "src.flask.sansio.app.App",
-        "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.views.View",
+        "src.flask.sessions.SessionInterface",
+        "src.flask.wrappers.Request",
+        "src.flask.testing.FlaskCliRunner",
+        "src.flask.sansio.scaffold.Scaffold.after_request",
+        "src.flask.config.Config",
+        "src.flask.sansio.blueprints.Blueprint"
+      ],
+      "ground_truth_files": [
+        "src/flask/app.py"
+      ],
+      "file_level_hits": [
+        "src/flask/app.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.1111111111111111,
+      "conflicts": [],
+      "unknowns": [
+        "src.flask.app.Flask.__call__",
+        "src.flask.app.Flask.__init__",
+        "src.flask.app.Flask.__init_subclass__",
+        "src.flask.app.Flask.app_context",
+        "src.flask.app.Flask.async_to_sync",
+        "src.flask.app.Flask.create_jinja_environment",
+        "src.flask.app.Flask.create_url_adapter",
+        "src.flask.app.Flask.default_config",
+        "src.flask.app.Flask.dispatch_request",
+        "src.flask.app.Flask.do_teardown_appcontext",
+        "src.flask.app.Flask.do_teardown_request",
+        "src.flask.app.Flask.ensure_sync",
+        "src.flask.app.Flask.finalize_request",
+        "src.flask.app.Flask.full_dispatch_request",
+        "src.flask.app.Flask.get_send_file_max_age",
+        "src.flask.app.Flask.handle_exception",
+        "src.flask.app.Flask.handle_http_exception",
+        "src.flask.app.Flask.handle_user_exception",
+        "src.flask.app.Flask.log_exception",
+        "src.flask.app.Flask.make_default_options_response",
+        "src.flask.app.Flask.make_response",
+        "src.flask.app.Flask.make_shell_context",
+        "src.flask.app.Flask.open_instance_resource",
+        "src.flask.app.Flask.open_resource",
+        "src.flask.app.Flask.preprocess_request",
+        "src.flask.app.Flask.process_response",
+        "src.flask.app.Flask.raise_routing_exception",
+        "src.flask.app.Flask.request_class",
+        "src.flask.app.Flask.request_context",
+        "src.flask.app.Flask.response_class",
+        "src.flask.app.Flask.run",
+        "src.flask.app.Flask.send_static_file",
+        "src.flask.app.Flask.session_interface",
+        "src.flask.app.Flask.test_cli_runner",
+        "src.flask.app.Flask.test_client",
+        "src.flask.app.Flask.test_request_context",
+        "src.flask.app.Flask.update_template_context",
+        "src.flask.app.Flask.url_for",
+        "src.flask.app.Flask.wsgi_app",
+        "src.flask.config.Config.__init__",
+        "src.flask.config.Config.__repr__",
+        "src.flask.config.Config.from_envvar",
+        "src.flask.config.Config.from_file",
+        "src.flask.config.Config.from_mapping",
+        "src.flask.config.Config.from_object",
+        "src.flask.config.Config.from_prefixed_env",
+        "src.flask.config.Config.from_pyfile",
+        "src.flask.config.Config.get_namespace",
+        "src.flask.sansio.app.App.__init__",
+        "src.flask.sansio.app.App._check_setup_finished",
+        "src.flask.sansio.app.App._find_error_handler",
+        "src.flask.sansio.app.App.aborter_class",
+        "src.flask.sansio.app.App.add_template_filter",
+        "src.flask.sansio.app.App.add_template_global",
+        "src.flask.sansio.app.App.add_template_test",
+        "src.flask.sansio.app.App.add_url_rule",
+        "src.flask.sansio.app.App.app_ctx_globals_class",
+        "src.flask.sansio.app.App.auto_find_instance_path",
+        "src.flask.sansio.app.App.config_class",
+        "src.flask.sansio.app.App.create_global_jinja_loader",
+        "src.flask.sansio.app.App.create_jinja_environment",
+        "src.flask.sansio.app.App.debug",
+        "src.flask.sansio.app.App.default_config",
+        "src.flask.sansio.app.App.handle_url_build_error",
+        "src.flask.sansio.app.App.inject_url_defaults",
+        "src.flask.sansio.app.App.iter_blueprints",
+        "src.flask.sansio.app.App.jinja_env",
+        "src.flask.sansio.app.App.jinja_environment",
+        "src.flask.sansio.app.App.jinja_options",
+        "src.flask.sansio.app.App.json_provider_class",
+        "src.flask.sansio.app.App.logger",
+        "src.flask.sansio.app.App.make_aborter",
+        "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
+        "src.flask.sansio.app.App.permanent_session_lifetime",
+        "src.flask.sansio.app.App.redirect",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.sansio.app.App.response_class",
+        "src.flask.sansio.app.App.secret_key",
+        "src.flask.sansio.app.App.select_jinja_autoescape",
+        "src.flask.sansio.app.App.shell_context_processor",
+        "src.flask.sansio.app.App.should_ignore_error",
+        "src.flask.sansio.app.App.teardown_appcontext",
+        "src.flask.sansio.app.App.template_filter",
+        "src.flask.sansio.app.App.template_global",
+        "src.flask.sansio.app.App.template_test",
+        "src.flask.sansio.app.App.test_cli_runner_class",
+        "src.flask.sansio.app.App.test_client_class",
+        "src.flask.sansio.app.App.testing",
+        "src.flask.sansio.app.App.trap_http_exception",
+        "src.flask.sansio.app.App.url_map_class",
+        "src.flask.sansio.app.App.url_rule_class",
+        "src.flask.sansio.blueprints.Blueprint.__init__",
+        "src.flask.sansio.blueprints.Blueprint._check_setup_finished",
+        "src.flask.sansio.blueprints.Blueprint._got_registered_once",
+        "src.flask.sansio.blueprints.Blueprint._merge_blueprint_funcs",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.add_app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.add_url_rule",
+        "src.flask.sansio.blueprints.Blueprint.after_app_request",
+        "src.flask.sansio.blueprints.Blueprint.app_context_processor",
+        "src.flask.sansio.blueprints.Blueprint.app_errorhandler",
+        "src.flask.sansio.blueprints.Blueprint.app_template_filter",
+        "src.flask.sansio.blueprints.Blueprint.app_template_global",
+        "src.flask.sansio.blueprints.Blueprint.app_template_test",
+        "src.flask.sansio.blueprints.Blueprint.app_url_defaults",
+        "src.flask.sansio.blueprints.Blueprint.app_url_value_preprocessor",
+        "src.flask.sansio.blueprints.Blueprint.before_app_request",
+        "src.flask.sansio.blueprints.Blueprint.make_setup_state",
+        "src.flask.sansio.blueprints.Blueprint.record",
+        "src.flask.sansio.blueprints.Blueprint.record_once",
+        "src.flask.sansio.blueprints.Blueprint.register",
+        "src.flask.sansio.blueprints.Blueprint.register_blueprint",
+        "src.flask.sansio.blueprints.Blueprint.teardown_app_request",
+        "src.flask.sansio.scaffold.Scaffold.__init__",
+        "src.flask.sansio.scaffold.Scaffold.__repr__",
+        "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+        "src.flask.sansio.scaffold.Scaffold._get_exc_class_and_code",
+        "src.flask.sansio.scaffold.Scaffold._method_route",
+        "src.flask.sansio.scaffold.Scaffold._static_folder",
+        "src.flask.sansio.scaffold.Scaffold._static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.before_request",
+        "src.flask.sansio.scaffold.Scaffold.cli",
         "src.flask.sansio.scaffold.Scaffold.context_processor",
-        "src.flask.debughelpers.explain_template_loading_attempts.blueprint"
+        "src.flask.sansio.scaffold.Scaffold.delete",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.errorhandler",
+        "src.flask.sansio.scaffold.Scaffold.get",
+        "src.flask.sansio.scaffold.Scaffold.has_static_folder",
+        "src.flask.sansio.scaffold.Scaffold.jinja_loader",
+        "src.flask.sansio.scaffold.Scaffold.name",
+        "src.flask.sansio.scaffold.Scaffold.patch",
+        "src.flask.sansio.scaffold.Scaffold.post",
+        "src.flask.sansio.scaffold.Scaffold.put",
+        "src.flask.sansio.scaffold.Scaffold.query",
+        "src.flask.sansio.scaffold.Scaffold.register_error_handler",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.scaffold.Scaffold.static_folder",
+        "src.flask.sansio.scaffold.Scaffold.static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.sansio.scaffold.Scaffold.url_defaults",
+        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.sansio.scaffold.T_after_request",
+        "src.flask.sessions.SessionInterface.get_cookie_domain",
+        "src.flask.sessions.SessionInterface.get_cookie_httponly",
+        "src.flask.sessions.SessionInterface.get_cookie_name",
+        "src.flask.sessions.SessionInterface.get_cookie_partitioned",
+        "src.flask.sessions.SessionInterface.get_cookie_path",
+        "src.flask.sessions.SessionInterface.get_cookie_samesite",
+        "src.flask.sessions.SessionInterface.get_cookie_secure",
+        "src.flask.sessions.SessionInterface.get_expiration_time",
+        "src.flask.sessions.SessionInterface.is_null_session",
+        "src.flask.sessions.SessionInterface.make_null_session",
+        "src.flask.sessions.SessionInterface.null_session_class",
+        "src.flask.sessions.SessionInterface.open_session",
+        "src.flask.sessions.SessionInterface.pickle_based",
+        "src.flask.sessions.SessionInterface.save_session",
+        "src.flask.sessions.SessionInterface.should_set_cookie",
+        "src.flask.testing.FlaskCliRunner.__init__",
+        "src.flask.testing.FlaskCliRunner.invoke",
+        "src.flask.views.View.as_view",
+        "src.flask.views.View.decorators",
+        "src.flask.views.View.dispatch_request",
+        "src.flask.views.View.init_every_request",
+        "src.flask.views.View.methods",
+        "src.flask.views.View.provide_automatic_options",
+        "src.flask.wrappers.Request._load_form_data",
+        "src.flask.wrappers.Request._max_content_length",
+        "src.flask.wrappers.Request._max_form_memory_size",
+        "src.flask.wrappers.Request._max_form_parts",
+        "src.flask.wrappers.Request.blueprint",
+        "src.flask.wrappers.Request.blueprints",
+        "src.flask.wrappers.Request.endpoint",
+        "src.flask.wrappers.Request.json_module",
+        "src.flask.wrappers.Request.max_content_length",
+        "src.flask.wrappers.Request.max_form_memory_size",
+        "src.flask.wrappers.Request.max_form_parts",
+        "src.flask.wrappers.Request.on_json_loading_failed",
+        "src.flask.wrappers.Request.routing_exception",
+        "src.flask.wrappers.Request.url_rule",
+        "src.flask.wrappers.Request.view_args"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-11",
+      "query": "Where would I investigate if Flask's test_client() isn't preserving cookies across multiple requests in a test?",
+      "category": "E_debugging",
+      "elapsed_seconds": 0.39811182022094727,
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.testing.FlaskClient",
+          "node_type": "Class",
+          "name": "FlaskClient",
+          "source_location": "src/flask/testing.py:109-262",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 41.25951329759012,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "name": "App",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 29.63435866464834,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
+      "retrieved_files": [
+        "src/flask/sansio/app.py",
+        "src/flask/testing.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.testing.FlaskClient",
+        "src.flask.sansio.app.App"
+      ],
+      "ground_truth_files": [
+        "src/flask/testing.py"
+      ],
+      "file_level_hits": [
+        "src/flask/testing.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.5,
+      "conflicts": [],
+      "unknowns": [
+        "src.flask.sansio.app.App.__init__",
+        "src.flask.sansio.app.App._check_setup_finished",
+        "src.flask.sansio.app.App._find_error_handler",
+        "src.flask.sansio.app.App.aborter_class",
+        "src.flask.sansio.app.App.add_template_filter",
+        "src.flask.sansio.app.App.add_template_global",
+        "src.flask.sansio.app.App.add_template_test",
+        "src.flask.sansio.app.App.add_url_rule",
+        "src.flask.sansio.app.App.app_ctx_globals_class",
+        "src.flask.sansio.app.App.auto_find_instance_path",
+        "src.flask.sansio.app.App.config_class",
+        "src.flask.sansio.app.App.create_global_jinja_loader",
+        "src.flask.sansio.app.App.create_jinja_environment",
+        "src.flask.sansio.app.App.debug",
+        "src.flask.sansio.app.App.default_config",
+        "src.flask.sansio.app.App.handle_url_build_error",
+        "src.flask.sansio.app.App.inject_url_defaults",
+        "src.flask.sansio.app.App.iter_blueprints",
+        "src.flask.sansio.app.App.jinja_env",
+        "src.flask.sansio.app.App.jinja_environment",
+        "src.flask.sansio.app.App.jinja_options",
+        "src.flask.sansio.app.App.json_provider_class",
+        "src.flask.sansio.app.App.logger",
+        "src.flask.sansio.app.App.make_aborter",
+        "src.flask.sansio.app.App.make_config",
+        "src.flask.sansio.app.App.name",
+        "src.flask.sansio.app.App.permanent_session_lifetime",
+        "src.flask.sansio.app.App.redirect",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.sansio.app.App.response_class",
+        "src.flask.sansio.app.App.secret_key",
+        "src.flask.sansio.app.App.select_jinja_autoescape",
+        "src.flask.sansio.app.App.shell_context_processor",
+        "src.flask.sansio.app.App.should_ignore_error",
+        "src.flask.sansio.app.App.teardown_appcontext",
+        "src.flask.sansio.app.App.template_filter",
+        "src.flask.sansio.app.App.template_global",
+        "src.flask.sansio.app.App.template_test",
+        "src.flask.sansio.app.App.test_cli_runner_class",
+        "src.flask.sansio.app.App.test_client_class",
+        "src.flask.sansio.app.App.testing",
+        "src.flask.sansio.app.App.trap_http_exception",
+        "src.flask.sansio.app.App.url_map_class",
+        "src.flask.sansio.app.App.url_rule_class",
+        "src.flask.testing.FlaskClient.__enter__",
+        "src.flask.testing.FlaskClient.__exit__",
+        "src.flask.testing.FlaskClient.__init__",
+        "src.flask.testing.FlaskClient._copy_environ",
+        "src.flask.testing.FlaskClient._request_from_builder_args",
+        "src.flask.testing.FlaskClient.application",
+        "src.flask.testing.FlaskClient.open",
+        "src.flask.testing.FlaskClient.session_transaction"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "flask-12",
+      "query": "How does registering a Blueprint on a Flask app connect the blueprint's routes to the app's URL map?",
+      "category": "F_cross_file",
+      "elapsed_seconds": 0.391909122467041,
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "name": "Blueprint",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 45.81299200383681,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "name": "BlueprintSetupState",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 42.24961848126369,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "name": "App",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 41.81882242511385,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "name": "Request",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 38.233363567254855,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App.register_blueprint",
+          "node_type": "Method",
+          "name": "register_blueprint",
+          "source_location": "src/flask/sansio/app.py:570-595",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          },
+          "score": 37.851441900251785,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.templating.Environment",
+          "node_type": "Class",
+          "name": "Environment",
+          "source_location": "src/flask/templating.py:36-46",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 36.50885812845718,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.test_cli.TestRoutes",
+          "node_type": "Class",
+          "name": "TestRoutes",
+          "source_location": "tests/test_cli.py:445-518",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 35.263744007564185,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "name": "Flask",
+          "source_location": "src/flask/app.py:110-1628",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 35.12647352555738,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.blueprints.Blueprint",
+          "node_type": "Class",
+          "name": "Blueprint",
+          "source_location": "src/flask/blueprints.py:18-128",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 34.38357940532282,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "name": "Scaffold",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 34.3322931654579,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/blueprints.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/templating.py",
+        "src/flask/wrappers.py",
+        "tests/test_cli.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.sansio.app.App",
+        "src.flask.wrappers.Request",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.templating.Environment",
+        "tests.test_cli.TestRoutes",
+        "src.flask.app.Flask",
+        "src.flask.blueprints.Blueprint",
+        "src.flask.sansio.scaffold.Scaffold"
       ],
       "ground_truth_files": [
         "src/flask/sansio/app.py",
@@ -1479,9 +2094,52 @@
         "src/flask/sansio/blueprints.py"
       ],
       "file_level_recall": 1.0,
-      "file_level_precision": 0.5,
+      "file_level_precision": 0.25,
       "conflicts": [],
       "unknowns": [
+        "src.flask.app.Flask.__call__",
+        "src.flask.app.Flask.__init__",
+        "src.flask.app.Flask.__init_subclass__",
+        "src.flask.app.Flask.app_context",
+        "src.flask.app.Flask.async_to_sync",
+        "src.flask.app.Flask.create_jinja_environment",
+        "src.flask.app.Flask.create_url_adapter",
+        "src.flask.app.Flask.default_config",
+        "src.flask.app.Flask.dispatch_request",
+        "src.flask.app.Flask.do_teardown_appcontext",
+        "src.flask.app.Flask.do_teardown_request",
+        "src.flask.app.Flask.ensure_sync",
+        "src.flask.app.Flask.finalize_request",
+        "src.flask.app.Flask.full_dispatch_request",
+        "src.flask.app.Flask.get_send_file_max_age",
+        "src.flask.app.Flask.handle_exception",
+        "src.flask.app.Flask.handle_http_exception",
+        "src.flask.app.Flask.handle_user_exception",
+        "src.flask.app.Flask.log_exception",
+        "src.flask.app.Flask.make_default_options_response",
+        "src.flask.app.Flask.make_response",
+        "src.flask.app.Flask.make_shell_context",
+        "src.flask.app.Flask.open_instance_resource",
+        "src.flask.app.Flask.open_resource",
+        "src.flask.app.Flask.preprocess_request",
+        "src.flask.app.Flask.process_response",
+        "src.flask.app.Flask.raise_routing_exception",
+        "src.flask.app.Flask.request_class",
+        "src.flask.app.Flask.request_context",
+        "src.flask.app.Flask.response_class",
+        "src.flask.app.Flask.run",
+        "src.flask.app.Flask.send_static_file",
+        "src.flask.app.Flask.session_interface",
+        "src.flask.app.Flask.test_cli_runner",
+        "src.flask.app.Flask.test_client",
+        "src.flask.app.Flask.test_request_context",
+        "src.flask.app.Flask.update_template_context",
+        "src.flask.app.Flask.url_for",
+        "src.flask.app.Flask.wsgi_app",
+        "src.flask.blueprints.Blueprint.__init__",
+        "src.flask.blueprints.Blueprint.get_send_file_max_age",
+        "src.flask.blueprints.Blueprint.open_resource",
+        "src.flask.blueprints.Blueprint.send_static_file",
         "src.flask.sansio.app.App.__init__",
         "src.flask.sansio.app.App._check_setup_finished",
         "src.flask.sansio.app.App._find_error_handler",
@@ -1546,13 +2204,65 @@
         "src.flask.sansio.blueprints.Blueprint.record",
         "src.flask.sansio.blueprints.Blueprint.record_once",
         "src.flask.sansio.blueprints.Blueprint.register",
+        "src.flask.sansio.blueprints.Blueprint.register_blueprint",
         "src.flask.sansio.blueprints.Blueprint.teardown_app_request",
-        "src.flask.sansio.blueprints.BlueprintSetupState.__init__.subdomain",
-        "src.flask.sansio.blueprints.BlueprintSetupState.__init__.url_prefix",
+        "src.flask.sansio.blueprints.BlueprintSetupState.__init__",
         "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
-        "src.flask.sansio.scaffold.T_template_context_processor",
-        "src.flask.sansio.scaffold.T_url_defaults",
-        "src.flask.sansio.scaffold.T_url_value_preprocessor"
+        "src.flask.sansio.scaffold.Scaffold.__init__",
+        "src.flask.sansio.scaffold.Scaffold.__repr__",
+        "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+        "src.flask.sansio.scaffold.Scaffold._get_exc_class_and_code",
+        "src.flask.sansio.scaffold.Scaffold._method_route",
+        "src.flask.sansio.scaffold.Scaffold._static_folder",
+        "src.flask.sansio.scaffold.Scaffold._static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.after_request",
+        "src.flask.sansio.scaffold.Scaffold.before_request",
+        "src.flask.sansio.scaffold.Scaffold.cli",
+        "src.flask.sansio.scaffold.Scaffold.context_processor",
+        "src.flask.sansio.scaffold.Scaffold.delete",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.errorhandler",
+        "src.flask.sansio.scaffold.Scaffold.get",
+        "src.flask.sansio.scaffold.Scaffold.has_static_folder",
+        "src.flask.sansio.scaffold.Scaffold.jinja_loader",
+        "src.flask.sansio.scaffold.Scaffold.name",
+        "src.flask.sansio.scaffold.Scaffold.patch",
+        "src.flask.sansio.scaffold.Scaffold.post",
+        "src.flask.sansio.scaffold.Scaffold.put",
+        "src.flask.sansio.scaffold.Scaffold.query",
+        "src.flask.sansio.scaffold.Scaffold.register_error_handler",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.scaffold.Scaffold.static_folder",
+        "src.flask.sansio.scaffold.Scaffold.static_url_path",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.sansio.scaffold.Scaffold.url_defaults",
+        "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor",
+        "src.flask.templating.Environment.__init__",
+        "src.flask.wrappers.Request._load_form_data",
+        "src.flask.wrappers.Request._max_content_length",
+        "src.flask.wrappers.Request._max_form_memory_size",
+        "src.flask.wrappers.Request._max_form_parts",
+        "src.flask.wrappers.Request.blueprint",
+        "src.flask.wrappers.Request.blueprints",
+        "src.flask.wrappers.Request.endpoint",
+        "src.flask.wrappers.Request.json_module",
+        "src.flask.wrappers.Request.max_content_length",
+        "src.flask.wrappers.Request.max_form_memory_size",
+        "src.flask.wrappers.Request.max_form_parts",
+        "src.flask.wrappers.Request.on_json_loading_failed",
+        "src.flask.wrappers.Request.routing_exception",
+        "src.flask.wrappers.Request.url_rule",
+        "src.flask.wrappers.Request.view_args",
+        "tests.test_cli.TestRoutes.app",
+        "tests.test_cli.TestRoutes.expect_order",
+        "tests.test_cli.TestRoutes.invoke",
+        "tests.test_cli.TestRoutes.test_all_methods",
+        "tests.test_cli.TestRoutes.test_host",
+        "tests.test_cli.TestRoutes.test_no_routes",
+        "tests.test_cli.TestRoutes.test_simple",
+        "tests.test_cli.TestRoutes.test_sort",
+        "tests.test_cli.TestRoutes.test_subdomain"
       ],
       "facts_verification_states": [
         "STATICALLY_SUPPORTED",
@@ -1572,44 +2282,25 @@
       "query_id": "flask-13",
       "query": "Where does Flask implement CSRF protection for form submissions?",
       "category": "G_negative",
-      "elapsed_seconds": 0.4052598476409912,
-      "retrieved_entities": [
-        {
-          "entity_id": "src.flask.debughelpers.DebugFilesKeyError.__init__.form_matches",
-          "node_type": "Variable",
-          "name": "form_matches",
-          "source_location": "src/flask/debughelpers.py:29-29",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          },
-          "score": 0.27578548875278913,
-          "matched_by": "tfidf"
-        }
-      ],
-      "insufficient_evidence": false,
-      "retrieved_files": [
-        "src/flask/debughelpers.py"
-      ],
-      "retrieved_symbols": [
-        "src.flask.debughelpers.DebugFilesKeyError.__init__.form_matches"
-      ],
+      "elapsed_seconds": 0.3797593116760254,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
       "ground_truth_files": [],
       "file_level_hits": [],
       "file_level_recall": null,
       "file_level_precision": null,
       "conflicts": [],
       "unknowns": [],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED"
-      ],
+      "facts_verification_states": [],
       "any_runtime_state_present": false
     },
     {
       "query_id": "flask-14",
       "query": "Where is Flask's built-in ORM or database layer implemented?",
       "category": "G_negative",
-      "elapsed_seconds": 0.4116854667663574,
+      "elapsed_seconds": 0.39905381202697754,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],

@@ -86,10 +86,16 @@ def main() -> None:
 
     # Sweep candidate thresholds and report precision/recall against the
     # relevant/irrelevant labels, plus how many negative queries would still
-    # leak a TF-IDF result through at each threshold.
+    # leak a TF-IDF result through at each threshold. Range widened for
+    # Phase D's BM25 scores, which are unbounded raw sums (not cosine's
+    # fixed 0-1 range) -- built from the actual observed score distribution
+    # printed above, not guessed.
     print()
     print("=== Threshold sweep ===")
-    candidates = [0.05, 0.08, 0.10, 0.12, 0.15, 0.18, 0.20, 0.25, 0.30]
+    all_scores = sorted(relevant_scores + irrelevant_scores)
+    lo, hi = (all_scores[0], all_scores[-1]) if all_scores else (0.0, 1.0)
+    steps = 12
+    candidates = [lo + (hi - lo) * i / steps for i in range(steps + 1)]
     for t in candidates:
         tp = sum(1 for s in relevant_scores if s >= t)
         fn = sum(1 for s in relevant_scores if s < t)
