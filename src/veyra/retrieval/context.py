@@ -62,6 +62,22 @@ from .search import search
 
 _PROVISIONAL_MIN_TFIDF_SCORE = 29.0
 
+# ARCF Fix 1 -- candidate pool separate from final top_k. `search_semantic()`
+# already fully scores and sorts every entity in the index before any
+# truncation (an O(N) pass regardless of `top_k`), so widening how many of
+# those already-computed candidates this function *considers* for confidence
+# filtering costs nothing extra in scoring -- only in the downstream
+# evidence/edge lookups this function does per *accepted* entity, which stays
+# bounded by the confidence filter itself, not by the pool size. 20x the
+# default top_k (200) is chosen as a generous, fixed multiple with no
+# query-specific tuning: wide enough that an entity BM25's flatter score
+# distribution pushed several ranks past a plain top_k=10 window can still
+# reach the confidence filter (see PHASE_D_RESULTS.md's `fastapi-01`/
+# `fastapi-03`/`flask-08` mechanism), while still bounded well below any real
+# corpus size (Flask ~2,600 entities, FastAPI ~13,900) so this function's
+# per-entity evidence/edge queries don't scale toward "the whole repository."
+_DEFAULT_CANDIDATE_POOL_SIZE = 200
+
 
 @dataclass(frozen=True)
 class RetrievedContext:
@@ -82,6 +98,7 @@ def retrieve_context(
     repository_version: str,
     query: str,
     top_k: int = 10,
+    candidate_pool_size: int = _DEFAULT_CANDIDATE_POOL_SIZE,
     min_tfidf_score: float = _PROVISIONAL_MIN_TFIDF_SCORE,
 ) -> RetrievedContext:
     """Retrieves relevant nodes (via Phase 4.2's `search()`), the
@@ -96,9 +113,18 @@ def retrieve_context(
     and its known limits); exact/substring name matches are never
     filtered. If nothing clears the bar, `entities` is empty and
     `insufficient_evidence` is True -- an explicit "no confident match"
-    signal, not silence a caller has to infer from an empty list."""
-    scored = search(index, query, top_k=top_k)
+    signal, not silence a caller has to infer from an empty list.
+
+    **ARCF Fix 1**: `search()` is called with `candidate_pool_size`
+    entities under consideration (wider than `top_k`), and confidence
+    filtering is applied across that whole wider pool -- *then* the
+    accepted results are cut to `top_k`. This is the fix for the
+    mechanism where a correctly-scored, confidence-clearing entity never
+    reached this filter at all because a plain `top_k`-sized candidate
+    window had already excluded it before confidence was ever consulted."""
+    scored = search(index, query, top_k=top_k, candidate_pool_size=candidate_pool_size)
     accepted = [s for s in scored if s.matched_by != "tfidf" or s.score >= min_tfidf_score]
+    accepted = accepted[:top_k]
     entities = tuple(s.entity for s in accepted)
     entity_ids = {e.entity_id for e in entities}
     scores = {s.entity.entity_id: s.score for s in accepted}

@@ -185,10 +185,25 @@ def _bm25_score(
     return score
 
 
-def search_semantic(index: RetrievalIndex, query: str, top_k: int = 10) -> list[ScoredEntity]:
+def search_semantic(
+    index: RetrievalIndex, query: str, top_k: int = 10, candidate_pool_size: int | None = None
+) -> list[ScoredEntity]:
     """BM25 lexical ranking -- see module docstring for exactly what
     "semantic" does and doesn't mean here, and for Phase D's document-
-    length-bias fix this function embodies."""
+    length-bias fix this function embodies.
+
+    **ARCF Fix 1 -- candidate pool separate from final top_k.** Every
+    entity in `index` is already fully scored and sorted below (an O(N)
+    pass this function always did, regardless of `top_k` -- truncating
+    later costs nothing extra). `candidate_pool_size`, when given,
+    overrides `top_k` for that truncation -- letting a caller (`search()`,
+    `retrieve_context()`) consider a wider slice of the real ranking than
+    it ultimately returns, so a correctly-scored entity a fixed small
+    `top_k` used to cut before anything downstream ever saw it (the
+    original benchmark's `fastapi-01`/`fastapi-03`/`flask-08` failure
+    mechanism -- see PHASE_D_RESULTS.md) can still reach later ranking/
+    confidence stages. `top_k` alone (no `candidate_pool_size`) keeps this
+    function's old, single-parameter behavior for direct callers."""
     doc_tokens, doc_lengths, idf, avg_doc_length_by_type = _build_bm25_index(index)
     query_terms = set(_tokenize(query))
     if not query_terms:
@@ -210,15 +225,30 @@ def search_semantic(index: RetrievalIndex, query: str, top_k: int = 10) -> list[
     ]
     scored = [s for s in scored if s.score > 0.0]
     scored.sort(key=lambda s: (-s.score, s.entity.entity_id))
-    return scored[:top_k]
+    limit = candidate_pool_size if candidate_pool_size is not None else top_k
+    return scored[:limit]
 
 
-def search(index: RetrievalIndex, query: str, top_k: int = 10) -> list[ScoredEntity]:
+def search(
+    index: RetrievalIndex, query: str, top_k: int = 10, candidate_pool_size: int | None = None
+) -> list[ScoredEntity]:
     """Combines exact-name, substring-name, and TF-IDF results, deduplicated
     by entity_id -- exact matches always rank first (score 2.0), substring
-    matches next (score 1.0), TF-IDF results fill the rest, all within
-    top_k. A query that is itself a real symbol name always surfaces that
-    symbol, regardless of what TF-IDF alone would have ranked it."""
+    matches next (score 1.0), TF-IDF results fill the rest.
+
+    With no `candidate_pool_size` (the default, and every pre-Fix-1
+    caller/test), behaves exactly as before: returns at most `top_k`
+    entities total. When a caller explicitly passes `candidate_pool_size`
+    wider than `top_k` -- `retrieve_context()` does exactly this -- this
+    function returns up to `candidate_pool_size` entities *without*
+    re-truncating to `top_k` itself; the caller is expected to apply its
+    own downstream filtering (confidence, in `retrieve_context()`'s case)
+    across that wider pool and only *then* cut to its own final `top_k`.
+    `search()` still guarantees "no more than the requested pool size" --
+    it just isn't the one deciding what the *final* returned size is once
+    a caller has explicitly asked for a wider pool to filter from. A query
+    that is itself a real symbol name always surfaces that symbol,
+    regardless of what TF-IDF alone would have ranked it."""
     seen: set[str] = set()
     results: list[ScoredEntity] = []
 
@@ -232,10 +262,13 @@ def search(index: RetrievalIndex, query: str, top_k: int = 10) -> list[ScoredEnt
             seen.add(entity.entity_id)
             results.append(ScoredEntity(entity=entity, score=1.0, matched_by="substring_name"))
 
-    for scored in search_semantic(index, query, top_k=top_k):
+    limit = candidate_pool_size if candidate_pool_size is not None else top_k
+    for scored in search_semantic(index, query, top_k=top_k, candidate_pool_size=limit):
         if scored.entity.entity_id not in seen:
             seen.add(scored.entity.entity_id)
             results.append(scored)
+
+    return results[:limit]
 
     results.sort(key=lambda s: (-s.score, s.entity.entity_id))
     return results[:top_k]

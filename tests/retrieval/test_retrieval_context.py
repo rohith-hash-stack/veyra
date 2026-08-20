@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Callable
 
 from veyra.retrieval import build_retrieval_index, retrieve_context, search
+from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import Evidence, EvidenceType, Provenance, RelationshipType, VBGStore, edge_evidence_key
 
 COMMIT = "commit1"
@@ -116,3 +118,95 @@ def test_exact_name_match_is_never_suppressed_by_the_confidence_threshold(sample
     context = retrieve_context(store, index, COMMIT, "process_order", min_tfidf_score=0.99)
     assert context.entities[0].entity_id == "orders.process_order"
     assert context.insufficient_evidence is False
+
+
+# -- ARCF Fix 1: candidate pool separate from final top_k --
+
+
+def _write_pool_fixture(write_file: Callable[[str, str], Path]) -> None:
+    """Same construction as test_retrieval_search.py's pool-mechanism
+    fixture: 15 decoys score higher than one genuinely relevant, weakly-
+    matching candidate, pushing it to rank 15 -- outside top_k=10, inside
+    a candidate_pool_size of 20+. Real measured scores: decoys 8.361 each,
+    real candidate 1.198."""
+    for i in range(15):
+        write_file(
+            f"decoys/decoy_{i}.py",
+            "def strong_match_entity(amount, currency):\n"
+            '    """payment gateway validate a transaction how does the"""\n'
+            "    return amount\n",
+        )
+    write_file(
+        "payment.py",
+        "def sparse_match_entity(x):\n"
+        '    """gateway"""\n'
+        "    return x\n",
+    )
+
+
+def test_candidate_recovers_into_final_top_k_when_pool_widened_and_confidence_allows(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """Requirements 1-3: a candidate outside the old top-k, inside the
+    wider pool, that receives sufficient confidence, reaches the final
+    result -- reproducing the real `fastapi-01`/`fastapi-03`-shaped
+    mechanism (PHASE_D_RESULTS.md) where a confidently-scored entity never
+    reached the confidence filter because a plain top_k window excluded it
+    first. No query name from that benchmark is referenced in production
+    code -- this fixture is self-contained."""
+    _write_pool_fixture(write_file)
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the payment gateway validate a transaction"
+
+    # With only the old, narrow candidate window, the real candidate is
+    # invisible to retrieve_context no matter how low the confidence bar is.
+    narrow = retrieve_context(store, index, COMMIT, query, top_k=10, candidate_pool_size=10, min_tfidf_score=0.0)
+    assert "payment.sparse_match_entity" not in {e.entity_id for e in narrow.entities}
+
+    # Widen the pool and confidence-accept the candidate's actual measured
+    # score (1.198 >= 1.0). top_k=16 gives all 15 (also-accepted) decoys
+    # plus the real candidate room to all survive the final truncation --
+    # this test isolates "reaches the confidence filter and is accepted",
+    # not "final result count", which the next test covers on its own.
+    wide = retrieve_context(store, index, COMMIT, query, top_k=16, candidate_pool_size=20, min_tfidf_score=1.0)
+    assert "payment.sparse_match_entity" in {e.entity_id for e in wide.entities}
+    assert wide.scores["payment.sparse_match_entity"] >= 1.0
+
+
+def test_final_result_count_always_respects_top_k_even_with_a_wide_pool(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """Requirement 4."""
+    _write_pool_fixture(write_file)
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the payment gateway validate a transaction"
+
+    context = retrieve_context(store, index, COMMIT, query, top_k=3, candidate_pool_size=200, min_tfidf_score=0.0)
+    assert len(context.entities) <= 3
+
+
+def test_candidate_pool_size_and_top_k_are_independently_configurable(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """Requirement 5: a wide pool with a small top_k still returns only
+    top_k entities; a narrow pool with a larger top_k is bounded by
+    whatever the (smaller) pool actually contained."""
+    _write_pool_fixture(write_file)
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the payment gateway validate a transaction"
+
+    wide_pool_small_top_k = retrieve_context(
+        store, index, COMMIT, query, top_k=2, candidate_pool_size=100, min_tfidf_score=0.0
+    )
+    assert len(wide_pool_small_top_k.entities) == 2
+
+    narrow_pool_large_top_k = retrieve_context(
+        store, index, COMMIT, query, top_k=50, candidate_pool_size=5, min_tfidf_score=0.0
+    )
+    assert len(narrow_pool_large_top_k.entities) <= 5

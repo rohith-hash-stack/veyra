@@ -104,6 +104,69 @@ def test_a_large_relevant_method_outranks_a_tiny_entity_sharing_one_token(
     assert entity_ids.index("app.configure_subsystem") < entity_ids.index("app.widget")
 
 
+def _write_pool_fixture(write_file: Callable[[str, str], Path]) -> None:
+    """15 strongly-matching decoys and one weakly-matching real candidate,
+    reproducing (at fixture scale, without hardcoding any real benchmark
+    query name into production logic) the ARCF-identified mechanism: a
+    genuinely relevant entity that scores low enough to rank outside a
+    plain top_k=10 window, purely because more than 10 *other* entities
+    score higher on this query -- not because the entity itself scored
+    zero or was excluded for any other reason. Real measured scores with
+    this construction: decoys score 8.361 each (rank 0-14), the real
+    candidate scores 1.198 (rank 15) -- solidly outside top_k=10, solidly
+    inside a candidate_pool_size of 20+."""
+    for i in range(15):
+        write_file(
+            f"decoys/decoy_{i}.py",
+            "def strong_match_entity(amount, currency):\n"
+            '    """payment gateway validate a transaction how does the"""\n'
+            "    return amount\n",
+        )
+    write_file(
+        "payment.py",
+        "def sparse_match_entity(x):\n"
+        '    """gateway"""\n'
+        "    return x\n",
+    )
+
+
+# -- ARCF Fix 1: candidate pool separate from final top_k --
+
+
+def test_candidate_outside_old_top_k_is_inside_wider_candidate_pool(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    _write_pool_fixture(write_file)
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the payment gateway validate a transaction"
+
+    narrow = search_semantic(index, query, top_k=10)
+    assert "payment.sparse_match_entity" not in {r.entity.entity_id for r in narrow}
+
+    wide = search_semantic(index, query, top_k=10, candidate_pool_size=20)
+    assert "payment.sparse_match_entity" in {r.entity.entity_id for r in wide}
+    # Widening the pool must not shrink or reorder what a narrow caller gets.
+    assert [r.entity.entity_id for r in wide[:10]] == [r.entity.entity_id for r in narrow]
+
+
+def test_search_widens_candidate_pool_without_relying_on_search_semantic_directly(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    _write_pool_fixture(write_file)
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the payment gateway validate a transaction"
+
+    narrow = search(index, query, top_k=10)
+    assert "payment.sparse_match_entity" not in {r.entity.entity_id for r in narrow}
+
+    wide = search(index, query, top_k=10, candidate_pool_size=20)
+    assert "payment.sparse_match_entity" in {r.entity.entity_id for r in wide}
+
+
 def test_length_normalization_is_per_entity_type_not_corpus_wide(sample_repo: Path, store: VBGStore) -> None:
     """The real-world benchmark's Phase D investigation found a *second*,
     sharper mechanism after the first BM25 pass: Flask's real index has
