@@ -1,12 +1,12 @@
 {
   "django-01": {
-    "final_answer_correct": false,
+    "final_answer_correct": true,
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": true,
     "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
-    "notes": "CHECKPOINT B: db.models.query.QuerySet never retrieved; dominated by unrelated backend/manager/view/template entities."
+    "failure_category": null,
+    "checkpoint_b_change": "IMPROVED (was FALSE at baseline; now TRUE) -- CORRECTED after initial review only checked the first 8 of 10 accepted entities and missed QuerySet at position 9",
+    "notes": "CHECKPOINT B (corrected): db.models.query.QuerySet IS retrieved and confidence-accepted (position 9, score 22.94, z=2.11, coverage=0.72), previously missed in review. QuerySet is a genuinely massive class (7,668 tokens, 45x the corpus's average Class length) which still measurably suppresses its score via BM25 length normalization even after per-node-type normalization -- it clears the bar here, but only barely, ranking behind 8 shorter, less-relevant entities."
   },
   "django-02": {
     "final_answer_correct": false,

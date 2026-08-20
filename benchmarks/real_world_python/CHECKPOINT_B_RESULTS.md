@@ -133,20 +133,28 @@ each other throughout.
 
 ## D. Full benchmark — before/after vs. Phase D baseline
 
+**Correction, disclosed rather than silently fixed:** the first pass of this grading only
+displayed/reviewed the first 8 of up to 10 accepted entities per query, missing real hits
+at position 9-10 for two queries — `django-01` (`QuerySet` at position 9) and `sqla-08`
+(`Session.commit` at position 10). Caught during the next phase's investigation work by
+checking full entity lists directly, verified against real source locations, and corrected
+before anything further was built on top of the wrong numbers. The table below is the
+corrected count.
+
 | Repository | Fully correct | Partial | Incorrect | Negative correct |
 |---|---:|---:|---:|---:|
 | Flask | 5/12 | 2/12 | 5/12 | 1/2 |
 | FastAPI | 2/12 | 1/12 | 9/12 | 2/2 |
-| SQLAlchemy | 2/12 | 2/12 | 8/12 | 1/2 |
-| Django | 3/12 | 2/12 | 7/12 | 2/2 |
-| **TOTAL** | **12/48 (25.0%)** | **7/48** | **29/48** | **6/8 (75%)** |
+| SQLAlchemy | 2/12 | 3/12 | 7/12 | 1/2 |
+| Django | 4/12 | 2/12 | 6/12 | 2/2 |
+| **TOTAL** | **13/48 (27.1%)** | **8/48** | **27/48** | **6/8 (75%)** |
 
-| | Phase D baseline | Checkpoint B | Acceptance gate |
+| | Phase D baseline | Checkpoint B (corrected) | Acceptance gate |
 |---|---:|---:|---:|
-| Fully correct | 7/48 (14.6%) | **12/48 (25.0%)** | 39/48 (81.25%) |
+| Fully correct | 7/48 (14.6%) | **13/48 (27.1%)** | 39/48 (81.25%) |
 | Negative-query correct | 0/8 (0%) | **6/8 (75%)** | — |
 
-**Gate: NOT MET.** 12/48 is real, measured progress (+5 over baseline, entirely from
+**Gate: NOT MET.** 13/48 is real, measured progress (+6 over baseline, entirely from
 genuine ranking/confidence mechanism changes, zero benchmark-specific tuning), but is not
 close to 39/48. Not reporting readiness based on the directional improvement alone.
 
@@ -158,8 +166,7 @@ close to 39/48. Not reporting readiness based on the directional improvement alo
 | `flask-11` | TRUE (`FlaskClient` rank1) | FALSE | `FlaskClient` dropped out of the accepted set entirely — same coverage-floor mechanism, confirmed real. |
 | `flask-14` (negative) | correctly handled | leaks 1 entity | A single weak `App` match clears both the z-score and coverage bars for a genuinely unanswerable query — the residual "weak field, not uniformly weak" risk the z-score design's own docstring already flags as an open limitation. |
 | `sqla-02` | PARTIAL (`Engine.execution_options` rank6) | FALSE | Complete miss now — target no longer in the accepted set at all; not further isolated this checkpoint (see below). |
-| `sqla-08` | PARTIAL | FALSE | Session class present, neither of the 2 needed methods (`flush`/`commit`) present. |
-| `django-04` / `django-09` | TRUE (`authenticate()` hit directly) | FALSE (complete miss, same entity for both queries) | `authenticate()` no longer retrieved at all; dominated instead by `RemoteUserMiddleware`/`check_password`/test-client entities. **Not fully root-caused within this checkpoint's time budget** — flagged honestly as unresolved rather than guessed at. |
+| `django-04` / `django-09` | TRUE (`authenticate()` hit directly) | FALSE (same entity for both queries) | **Root-caused after this checkpoint was first written**, during a follow-up investigation pass: `authenticate()` reaches the candidate pool with a strong z-score (2.48, well above the 1.0 bar) but is rejected by `matched_idf_coverage=0.40 < 0.5` — the same coverage-floor mechanism as `flask-06`/`flask-11`, now confirmed with real numbers rather than left unresolved. |
 
 **Improvements, same rigor (not just listed as a win):** `flask-05`/`flask-08`/`fastapi-01`/
 `fastapi-03` all recovered from FALSE to TRUE — in every case, the target's raw score was
@@ -175,13 +182,20 @@ these; the same unmodified mechanism produced all of them.
 
 The dominant, cross-repo pattern in the FALSE results is **not** confidence rejection —
 it's that the correct entity never enters the ranked candidate set at all. Concretely:
-`sqla-01`, `sqla-03`, `sqla-04`, `sqla-09`, `sqla-10`, `django-01`, `django-02`,
-`django-06`, `fastapi-07`, `fastapi-09` are all **complete misses** (target entity absent
-even from the unfiltered top-10), not cases where a correct-but-unconfident candidate was
-rejected. `fastapi-02`/`fastapi-05`/`fastapi-06`/`fastapi-10`/`sqla-01`/`sqla-03` show a
-distinct, recurring shape: a **file-level hit that is the wrong entity** (`APIRouter`
-retrieved instead of `APIRoute`; `MetaData` instead of `Table`; `ORMExecuteState` instead
-of `Session`) — coincidental co-location in the same file, not confidence miscalibration.
+`sqla-01`, `sqla-03`, `sqla-04`, `sqla-09`, `sqla-10`, `django-02`, `django-06`,
+`fastapi-07`, `fastapi-09` are all **complete misses** (target entity absent even from the
+unfiltered top-10), not cases where a correct-but-unconfident candidate was rejected.
+`fastapi-02`/`fastapi-05`/`fastapi-06`/`fastapi-10`/`sqla-01`/`sqla-03` show a distinct,
+recurring shape: a **file-level hit that is the wrong entity** (`APIRouter` retrieved
+instead of `APIRoute`; `MetaData` instead of `Table`; `ORMExecuteState` instead of
+`Session`) — coincidental co-location in the same file, not confidence miscalibration.
+`django-01` (corrected above) shows a third, related shape worth flagging on its own: the
+target (`QuerySet`) *is* retrieved and accepted, but only barely (rank 9 of 10, z=2.11) —
+directly measured as a real BM25 length-normalization effect (`QuerySet`'s indexed text is
+7,668 tokens, ~45x the corpus's own average `Class` length, even after Fix D's per-node-
+type normalization), pulling a correct, central entity down near the bottom of an
+otherwise-passing result rather than out of it entirely. This is the concrete evidence a follow-up
+investigation into candidate-generation/lexical-ranking failure should build on.
 
 Applying the directive's own Case A-E framework to this evidence: this is **Case E — the
 retrieval architecture (BM25 + lexical matching, however weighted) has a real ceiling on
@@ -192,19 +206,24 @@ all plausible lexical matches for "session"; dozens of `*Middleware` classes for
 "middleware") than Flask/FastAPI — no amount of confidence recalibration fixes a candidate
 that was never ranked in the first place. Fix 3 itself, judged on what it can actually
 control (does a *present* correct candidate get accepted; does a genuinely weak field get
-correctly rejected), continues to behave as designed: the negative-query improvement (0/8
-→ 6/8) is real and directly attributable to it, and the diagnostic table above shows no
-case of "high z, low coverage, correct entity wrongly rejected" among the entities that
-*did* make the ranked list.
+correctly rejected), continues to behave as designed for the negative-query improvement
+(0/8 → 6/8, real and directly attributable to it) — but **update, found in the follow-up
+investigation**: the diagnostic table does show real cases of "high z, low coverage,
+correct entity wrongly rejected" among entities that *did* make the ranked list.
+`django-04`/`django-09`'s `authenticate()` regression is exactly this: z=2.48 (well above
+the 1.0 bar, genuinely the statistically strongest candidate for its query) rejected only
+because `matched_idf_coverage=0.40 < 0.5`. This is the same mechanism as `flask-06`/
+`flask-11`, now confirmed with real numbers in a second, independent repository — no longer
+an isolated Flask-only trade-off.
 
 **Architectural question (instruction 18), answered with this evidence:** `matched_idf_
 coverage` should remain a **separate evidence signal alongside confidence, not be folded
-into a single confidence number** — the two regression cases with an identified mechanism
-(`flask-06`, `flask-11`) are specifically coverage-floor rejections of candidates with
-otherwise strong z-scores, meaning the two signals are *already* doing distinguishable
-work and collapsing them would lose that distinction, not simplify it. No change made this
-checkpoint — recorded as evidence for the next architectural decision, not acted on
-unilaterally.
+into a single confidence number** — it is doing real, distinguishable work (rejecting
+genuinely coincidental matches on `flask-14`/`sqla-14`'s negative queries) even though it
+is *also*, now confirmed across two repositories, costing real true positives. Collapsing
+the two signals into one number would lose the ability to see and reason about that
+trade-off at all. No change made this checkpoint — recorded as decisive evidence for the
+next architectural decision, not acted on unilaterally.
 
 ## G. Remaining issues
 
@@ -216,24 +235,30 @@ unilaterally.
   call-graph-aware signal, not fixed now.
 - **MUST FIX BEFORE NEXT PHASE**: the retrieval-ranking ceiling on SQLAlchemy/Django
   (Section F) — this is the dominant blocker to the 80% gate, not confidence calibration.
-  `django-04`/`django-09`'s regression (authenticate() dropping out entirely) needs
-  root-causing, not just noting.
+  `django-04`/`django-09`'s regression is now root-caused (`matched_idf_coverage` rejection
+  of a strong candidate) — the open item is deciding what to do about that mechanism, not
+  finding it.
+- **MEASURED / ACCEPTABLE, evidence strengthened**: `matched_idf_coverage`'s
+  precision/recall trade-off — now confirmed real in two repositories
+  (`flask-06`/`flask-11` and `django-04`/`django-09`), not tuned against in this pass.
 - **DEFERRED, with justification**: folding `matched_idf_coverage` into a single
   confidence number (Section F concludes the two-signal design is currently earning its
-  keep; revisit only with more evidence, not on this checkpoint's data alone).
+  keep, precisely *because* the trade-off it costs is now visible and measurable; revisit
+  with the next phase's fuller evidence, not unilaterally here).
 
 ## H. Recommendation
 
 ```
 NOT READY — specific blockers:
-  1. 12/48 (25.0%) is far below the unchanged 39/48 (81.25%) gate.
+  1. 13/48 (27.1%, corrected) is far below the unchanged 39/48 (81.25%) gate.
   2. The dominant failure mode on SQLAlchemy/Django is candidates never entering
      the ranked set at all (a lexical-ranking ceiling), which no confidence-layer
      change can fix -- next work belongs in ranking/retrieval, not Fix 3.
-  3. django-04/django-09's regression (authenticate() complete miss) is not yet
-     root-caused.
+  3. matched_idf_coverage's real cost (flask-06/flask-11/django-04/django-09) is
+     now confirmed across two repositories -- a decision on this trade-off is
+     needed before further confidence tuning, not further data-free guessing.
 ```
 
-Real, measured, honestly-attributed progress happened this pass (+5 fully-correct queries,
+Real, measured, honestly-attributed progress happened this pass (+6 fully-correct queries,
 +6 negative queries, and four independent, verified performance fixes with zero
 correctness regressions) — reported as exactly that, not as readiness.

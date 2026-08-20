@@ -44,13 +44,13 @@
     "conflicts_reported": null,
     "unknowns_reported": null,
     "elapsed_seconds": null,
-    "final_answer_correct": false,
+    "final_answer_correct": true,
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": true,
     "multi_hop": false,
     "negative_query_handled_correctly": "UNSCORED",
-    "failure_category": "retrieval_failure",
-    "notes": "CHECKPOINT B: db.models.query.QuerySet never retrieved; dominated by unrelated backend/manager/view/template entities."
+    "failure_category": null,
+    "notes": "CHECKPOINT B (corrected): db.models.query.QuerySet IS retrieved and confidence-accepted (position 9, score 22.94, z=2.11, coverage=0.72), previously missed in review. QuerySet is a genuinely massive class (7,668 tokens, 45x the corpus's average Class length) which still measurably suppresses its score via BM25 length normalization even after per-node-type normalization -- it clears the bar here, but only barely, ranking behind 8 shorter, less-relevant entities."
   },
   {
     "repository": "django",
@@ -2149,13 +2149,13 @@
     "conflicts_reported": null,
     "unknowns_reported": null,
     "elapsed_seconds": null,
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": false,
     "negative_query_handled_correctly": "UNSCORED",
     "failure_category": "ranking_failure",
-    "notes": "CHECKPOINT B: SessionTransaction and the Session class retrieved (file-level), but neither of the 2 specific methods asked about."
+    "notes": "CHECKPOINT B (corrected): Session.commit IS retrieved (position 10, previously missed in review), along with SessionTransaction and the Session class. Session.flush (the other of the 2 needed methods) is still not present, so PARTIAL not TRUE."
   },
   {
     "repository": "sqlalchemy",

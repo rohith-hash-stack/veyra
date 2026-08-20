@@ -63,13 +63,13 @@
     "notes": "CHECKPOINT B: the exact target, orm.strategies._LazyLoader, retrieved at rank3 alongside the closely related _AbstractRelationshipLoader and _NoLoader."
   },
   "sqla-08": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": false,
     "failure_category": "ranking_failure",
-    "checkpoint_b_change": "REGRESSED (was PARTIAL at baseline; now neither Session.flush nor Session.commit present)",
-    "notes": "CHECKPOINT B: SessionTransaction and the Session class retrieved (file-level), but neither of the 2 specific methods asked about."
+    "checkpoint_b_change": "unchanged (PARTIAL, different specific entity than baseline) -- CORRECTED after initial review only checked the first 8 of 10 accepted entities and missed Session.commit at position 10",
+    "notes": "CHECKPOINT B (corrected): Session.commit IS retrieved (position 10, previously missed in review), along with SessionTransaction and the Session class. Session.flush (the other of the 2 needed methods) is still not present, so PARTIAL not TRUE."
   },
   "sqla-09": {
     "final_answer_correct": false,
