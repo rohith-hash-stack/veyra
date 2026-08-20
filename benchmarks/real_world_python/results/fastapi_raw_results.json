@@ -8,7 +8,7 @@
       "query_id": "fastapi-01",
       "query": "Where is the FastAPI application class defined, and what does it extend?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 1.8293993473052979,
+      "elapsed_seconds": 1.6489410400390625,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI.__init__",
@@ -18,7 +18,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.27029032618054255,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.param_functions.Depends",
@@ -28,7 +30,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2603151086998554,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -38,7 +42,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.25470441624337326,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.param_functions.Security",
@@ -48,86 +54,21 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.security.oauth2.OAuth2",
-          "node_type": "Class",
-          "name": "OAuth2",
-          "source_location": "fastapi/security/oauth2.py:330-430",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 6
-          }
-        },
-        {
-          "entity_id": "fastapi.applications.FastAPI.get",
-          "node_type": "Method",
-          "name": "get",
-          "source_location": "fastapi/applications.py:1646-2017",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.routing.APIRouter.get",
-          "node_type": "Method",
-          "name": "get",
-          "source_location": "fastapi/routing.py:3322-3697",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "fastapi.applications.FastAPI.post",
-          "node_type": "Method",
-          "name": "post",
-          "source_location": "fastapi/applications.py:2397-2773",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.applications.FastAPI.options",
-          "node_type": "Method",
-          "name": "options",
-          "source_location": "fastapi/applications.py:3148-3519",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.routing.APIRouter.post",
-          "node_type": "Method",
-          "name": "post",
-          "source_location": "fastapi/routing.py:4081-4461",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
+          },
+          "score": 0.25449100554700615,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "fastapi/applications.py",
-        "fastapi/param_functions.py",
-        "fastapi/routing.py",
-        "fastapi/security/oauth2.py"
+        "fastapi/param_functions.py"
       ],
       "retrieved_symbols": [
         "fastapi.applications.FastAPI.__init__",
         "fastapi.param_functions.Depends",
         "fastapi.applications.FastAPI",
-        "fastapi.param_functions.Security",
-        "fastapi.security.oauth2.OAuth2",
-        "fastapi.applications.FastAPI.get",
-        "fastapi.routing.APIRouter.get",
-        "fastapi.applications.FastAPI.post",
-        "fastapi.applications.FastAPI.options",
-        "fastapi.routing.APIRouter.post"
+        "fastapi.param_functions.Security"
       ],
       "ground_truth_files": [
         "fastapi/applications.py"
@@ -136,7 +77,7 @@
         "fastapi/applications.py"
       ],
       "file_level_recall": 1.0,
-      "file_level_precision": 0.25,
+      "file_level_precision": 0.5,
       "conflicts": [],
       "unknowns": [
         "fastapi.applications.AppType",
@@ -148,30 +89,22 @@
         "fastapi.applications.FastAPI.delete",
         "fastapi.applications.FastAPI.exception_handler",
         "fastapi.applications.FastAPI.frontend",
+        "fastapi.applications.FastAPI.get",
         "fastapi.applications.FastAPI.head",
         "fastapi.applications.FastAPI.include_router",
         "fastapi.applications.FastAPI.middleware",
         "fastapi.applications.FastAPI.on_event",
         "fastapi.applications.FastAPI.openapi",
+        "fastapi.applications.FastAPI.options",
         "fastapi.applications.FastAPI.patch",
+        "fastapi.applications.FastAPI.post",
         "fastapi.applications.FastAPI.put",
         "fastapi.applications.FastAPI.setup",
         "fastapi.applications.FastAPI.trace",
         "fastapi.applications.FastAPI.websocket",
-        "fastapi.applications.FastAPI.websocket_route",
-        "fastapi.routing.APIRouter.api_route",
-        "fastapi.security.base.SecurityBase",
-        "fastapi.security.oauth2.OAuth2.__call__",
-        "fastapi.security.oauth2.OAuth2.__init__",
-        "fastapi.security.oauth2.OAuth2.make_not_authenticated_error"
+        "fastapi.applications.FastAPI.websocket_route"
       ],
       "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
@@ -183,7 +116,7 @@
       "query_id": "fastapi-02",
       "query": "Which class represents a single registered API route (path + handler + metadata)?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 1.5653207302093506,
+      "elapsed_seconds": 1.4985754489898682,
       "retrieved_entities": [
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_get_route_handler_is_called_after_inclusion.TrackingRoute.get_route_handler.handler",
@@ -193,7 +126,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.3599714222870911,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial001_an_py310.GzipRoute.get_route_handler.original_route_handler",
@@ -203,7 +138,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.35797703108244716,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial001_py310.GzipRoute.get_route_handler.original_route_handler",
@@ -213,7 +150,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.35797703108244716,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial002_an_py310.ValidationErrorLoggingRoute.get_route_handler.original_route_handler",
@@ -223,7 +162,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.35797703108244716,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial002_py310.ValidationErrorLoggingRoute.get_route_handler.original_route_handler",
@@ -233,7 +174,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.35797703108244716,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial003_py310.TimedRoute.get_route_handler.original_route_handler",
@@ -243,7 +186,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.35797703108244716,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_get_route_handler_is_called_after_inclusion.TrackingRoute.get_route_handler",
@@ -253,7 +198,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
-          }
+          },
+          "score": 0.350407592194988,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial001_an_py310.GzipRoute.get_route_handler",
@@ -263,7 +210,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
-          }
+          },
+          "score": 0.3423912527347193,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.custom_request_and_route.tutorial001_py310.GzipRoute.get_route_handler",
@@ -273,7 +222,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
-          }
+          },
+          "score": 0.3423912527347193,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_get_route_handler_is_called_after_inclusion.TrackingRoute",
@@ -283,9 +234,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
-          }
+          },
+          "score": 0.34183702781080316,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "docs_src/custom_request_and_route/tutorial001_an_py310.py",
         "docs_src/custom_request_and_route/tutorial001_py310.py",
@@ -340,7 +294,7 @@
       "query_id": "fastapi-03",
       "query": "Where is the Depends() function used for dependency injection defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 2.0655100345611572,
+      "elapsed_seconds": 1.4929840564727783,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.param_functions.Depends",
@@ -350,7 +304,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3284985330606935,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_http_connection_injection",
@@ -360,7 +316,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.3153371355754938,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_partial.function_dependency",
@@ -370,7 +328,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.30019654126104456,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_partial.get_partial_function_dependency",
@@ -380,7 +340,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2890497997699363,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.exceptions.EndpointContext.function",
@@ -390,7 +352,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.27929379584920944,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_partial.get_partial_async_function_dependency",
@@ -400,7 +364,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2665864825422253,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_partial.async_function_dependency",
@@ -410,46 +376,16 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.memory_benchmarks.test_dependency_graph._create_app.create_dependency.dependency",
-          "node_type": "Function",
-          "name": "dependency",
-          "source_location": "tests/memory_benchmarks/test_dependency_graph.py:36-39",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.memory_benchmarks.test_route_dependency_graph._create_app.create_dependency.dependency",
-          "node_type": "Function",
-          "name": "dependency",
-          "source_location": "tests/memory_benchmarks/test_route_dependency_graph.py:35-38",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_dependency_yield_scope.test_function_scope",
-          "node_type": "Function",
-          "name": "test_function_scope",
-          "source_location": "tests/test_dependency_yield_scope.py:152-156",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
+          },
+          "score": 0.25920009242337866,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "fastapi/exceptions.py",
         "fastapi/param_functions.py",
-        "tests/memory_benchmarks/test_dependency_graph.py",
-        "tests/memory_benchmarks/test_route_dependency_graph.py",
         "tests/test_dependency_partial.py",
-        "tests/test_dependency_yield_scope.py",
         "tests/test_http_connection_injection.py"
       ],
       "retrieved_symbols": [
@@ -459,10 +395,7 @@
         "tests.test_dependency_partial.get_partial_function_dependency",
         "fastapi.exceptions.EndpointContext.function",
         "tests.test_dependency_partial.get_partial_async_function_dependency",
-        "tests.test_dependency_partial.async_function_dependency",
-        "tests.memory_benchmarks.test_dependency_graph._create_app.create_dependency.dependency",
-        "tests.memory_benchmarks.test_route_dependency_graph._create_app.create_dependency.dependency",
-        "tests.test_dependency_yield_scope.test_function_scope"
+        "tests.test_dependency_partial.async_function_dependency"
       ],
       "ground_truth_files": [
         "fastapi/param_functions.py"
@@ -471,7 +404,7 @@
         "fastapi/param_functions.py"
       ],
       "file_level_recall": 1.0,
-      "file_level_precision": 0.14285714285714285,
+      "file_level_precision": 0.25,
       "conflicts": [],
       "unknowns": [
         "fastapi.Depends",
@@ -479,8 +412,6 @@
         "fastapi.requests.HTTPConnection",
         "fastapi.testclient.TestClient",
         "starlette.websockets.WebSocket",
-        "tests.test_dependency_yield_scope.test_function_scope.data",
-        "tests.test_dependency_yield_scope.test_function_scope.response",
         "tests.test_http_connection_injection.app",
         "tests.test_http_connection_injection.client",
         "tests.test_http_connection_injection.extract_value_from_http_connection",
@@ -496,9 +427,6 @@
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED"
       ],
       "any_runtime_state_present": false
@@ -507,7 +435,7 @@
       "query_id": "fastapi-04",
       "query": "What does FastAPI.add_api_route actually call to register the route?",
       "category": "B_relationship",
-      "elapsed_seconds": 2.492142677307129,
+      "elapsed_seconds": 1.5206458568572998,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.routing.RouteContext.route",
@@ -517,7 +445,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.4011610805975198,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_route_scope.get_user.route",
@@ -527,7 +457,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.35542705704557837,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing._IncludedRouter._build_effective_context",
@@ -537,7 +469,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 5
-          }
+          },
+          "score": 0.3553083688526919,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.memory_benchmarks.test_route_dependency_graph.test_route_dependency_graph.api_routes",
@@ -547,7 +481,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.34573819950658596,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_included_api_route_without_app_scope_returns_405_response.route",
@@ -557,7 +493,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.34553566108615563,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_route_scope.websocket_item.route",
@@ -567,7 +505,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3450633423599333,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing.iter_route_contexts",
@@ -577,7 +517,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 6
-          }
+          },
+          "score": 0.341810895439578,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing.APIRouter.app.route_path",
@@ -587,7 +529,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.33611910431217834,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing._EffectiveRouteContext.matches.route_path",
@@ -597,7 +541,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.33611910431217834,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.memory_benchmarks.test_route_dependency_graph.test_route_dependency_graph",
@@ -607,9 +553,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.3333379950514268,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "fastapi/routing.py",
         "tests/memory_benchmarks/test_route_dependency_graph.py",
@@ -664,7 +613,7 @@
       "query_id": "fastapi-05",
       "query": "What calls get_dependant() to build a route's dependency graph?",
       "category": "B_relationship",
-      "elapsed_seconds": 2.423726797103882,
+      "elapsed_seconds": 1.5305671691894531,
       "retrieved_entities": [
         {
           "entity_id": "tests.memory_benchmarks.test_route_dependency_graph",
@@ -674,7 +623,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.34944287788031647,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.memory_benchmarks.test_route_dependency_graph.test_route_dependency_graph",
@@ -684,7 +635,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.34754199434992344,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_models.test_derived_values_are_not_stored_on_dependant.dependant",
@@ -694,7 +647,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3454349889014378,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_get_route_handler_is_called_after_inclusion.TrackingRoute.calls",
@@ -704,7 +659,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3170664712562402,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_matches_is_called_after_inclusion.HeaderRoute.calls",
@@ -714,7 +671,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3170664712562402,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_route_subclass_instance_is_called_after_inclusion.TrackingRoute.calls",
@@ -724,7 +683,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3170664712562402,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_api_router_matches_is_called_after_inclusion.HeaderRouter.calls",
@@ -734,7 +695,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3170664712562402,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_router_include_context.test_original_nested_api_router_subclasses_are_called_after_inclusion.TrackingRouter.calls",
@@ -744,7 +707,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3170664712562402,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing.APIRoute.dependant",
@@ -754,7 +719,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3168874296504302,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing._APIRouteLike.dependant",
@@ -764,9 +731,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.3168874296504302,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "fastapi/routing.py",
         "tests/memory_benchmarks/test_route_dependency_graph.py",
@@ -830,7 +800,7 @@
       "query_id": "fastapi-06",
       "query": "How does FastAPI resolve a path operation function's dependencies (Depends(...) parameters) at request time?",
       "category": "C_architecture",
-      "elapsed_seconds": 2.635397434234619,
+      "elapsed_seconds": 1.5747010707855225,
       "retrieved_entities": [
         {
           "entity_id": "tests.test_dependency_yield_scope.test_app_level_dep_scope_function.app",
@@ -840,7 +810,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2958272776434351,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_security_oauth2_authorization_code_bearer_scopes_openapi.app",
@@ -850,7 +822,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2880321602810552,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_security_oauth2_authorization_code_bearer_scopes_openapi_simple.app",
@@ -860,7 +834,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2880321602810552,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI.middleware",
@@ -870,7 +846,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.2823976480243493,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.bigger_applications.app_an_py310.main.app",
@@ -880,7 +858,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.27032285215957147,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing.APIRoute.dependencies",
@@ -890,7 +870,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.26934537038426354,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing._APIRouteLike.dependencies",
@@ -900,7 +882,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.26934537038426354,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.middleware.tutorial001_py310.add_process_time_header",
@@ -910,7 +894,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.2689176868415738,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.param_functions.Depends",
@@ -920,7 +906,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.26821327867122047,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_frontend.test_app_middleware_still_runs_for_frontend_dependencies.app",
@@ -930,9 +918,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2596872454614072,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "docs_src/bigger_applications/app_an_py310/main.py",
         "docs_src/middleware/tutorial001_py310.py",
@@ -990,7 +981,7 @@
       "query_id": "fastapi-07",
       "query": "How does FastAPI generate its OpenAPI schema?",
       "category": "C_architecture",
-      "elapsed_seconds": 2.415423631668091,
+      "elapsed_seconds": 1.4970111846923828,
       "retrieved_entities": [
         {
           "entity_id": "tests.benchmarks.test_openapi.test_openapi_dependency_graph.schema",
@@ -1000,7 +991,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2930790047747506,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.memory_benchmarks.test_openapi.test_openapi_dependency_graph.schema",
@@ -1010,7 +1003,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2930790047747506,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.benchmarks.utils.generate_openapi",
@@ -1020,7 +1015,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.292256806160816,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.generate_clients.tutorial003_py310.app",
@@ -1030,7 +1027,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.path_operation_advanced_configuration.tutorial002_py310.app",
@@ -1040,7 +1039,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_generate_unique_id_function.test_app_path_operation_overrides_generate_unique_id.app",
@@ -1050,7 +1051,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_generate_unique_id_function.test_callback_override_generate_unique_id.app",
@@ -1060,7 +1063,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_generate_unique_id_function.test_router_include_overrides_generate_unique_id.app",
@@ -1070,7 +1075,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_generate_unique_id_function.test_router_overrides_generate_unique_id.app",
@@ -1080,7 +1087,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_generate_unique_id_function.test_router_path_operation_overrides_generate_unique_id.app",
@@ -1090,9 +1099,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2695765277790067,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "docs_src/generate_clients/tutorial003_py310.py",
         "docs_src/path_operation_advanced_configuration/tutorial002_py310.py",
@@ -1139,132 +1151,11 @@
       "query_id": "fastapi-08",
       "query": "What happens when a request body fails Pydantic validation?",
       "category": "D_behavioral",
-      "elapsed_seconds": 2.5249781608581543,
-      "retrieved_entities": [
-        {
-          "entity_id": "fastapi.openapi.models.Operation.requestBody",
-          "node_type": "Variable",
-          "name": "requestBody",
-          "source_location": "fastapi/openapi/models.py:296-296",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.openapi.models.Link.requestBody",
-          "node_type": "Variable",
-          "name": "requestBody",
-          "source_location": "fastapi/openapi/models.py:277-277",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.debugging.tutorial001_py310.root.a",
-          "node_type": "Variable",
-          "name": "a",
-          "source_location": "docs_src/debugging/tutorial001_py310.py:9-9",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_request_params.test_body.utils.get_body_model_name.body",
-          "node_type": "Variable",
-          "name": "body",
-          "source_location": "tests/test_request_params/test_body/utils.py:5-5",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_request_params.test_file.utils.get_body_model_name.body",
-          "node_type": "Variable",
-          "name": "body",
-          "source_location": "tests/test_request_params/test_file/utils.py:5-5",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_request_params.test_form.utils.get_body_model_name.body",
-          "node_type": "Variable",
-          "name": "body",
-          "source_location": "tests/test_request_params/test_form/utils.py:5-5",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_additional_responses_union_duplicate_anyof.ModelA.a",
-          "node_type": "Variable",
-          "name": "a",
-          "source_location": "tests/test_additional_responses_union_duplicate_anyof.py:14-14",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_default_response_class.get_a_a",
-          "node_type": "Function",
-          "name": "get_a_a",
-          "source_location": "tests/test_default_response_class.py:53-54",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_default_response_class_router.get_a_a",
-          "node_type": "Function",
-          "name": "get_a_a",
-          "source_location": "tests/test_default_response_class_router.py:40-41",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.custom_response.tutorial006c_py310.redirect_pydantic",
-          "node_type": "Function",
-          "name": "redirect_pydantic",
-          "source_location": "docs_src/custom_response/tutorial006c_py310.py:8-9",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        }
-      ],
-      "retrieved_files": [
-        "docs_src/custom_response/tutorial006c_py310.py",
-        "docs_src/debugging/tutorial001_py310.py",
-        "fastapi/openapi/models.py",
-        "tests/test_additional_responses_union_duplicate_anyof.py",
-        "tests/test_default_response_class.py",
-        "tests/test_default_response_class_router.py",
-        "tests/test_request_params/test_body/utils.py",
-        "tests/test_request_params/test_file/utils.py",
-        "tests/test_request_params/test_form/utils.py"
-      ],
-      "retrieved_symbols": [
-        "fastapi.openapi.models.Operation.requestBody",
-        "fastapi.openapi.models.Link.requestBody",
-        "docs_src.debugging.tutorial001_py310.root.a",
-        "tests.test_request_params.test_body.utils.get_body_model_name.body",
-        "tests.test_request_params.test_file.utils.get_body_model_name.body",
-        "tests.test_request_params.test_form.utils.get_body_model_name.body",
-        "tests.test_additional_responses_union_duplicate_anyof.ModelA.a",
-        "tests.test_default_response_class.get_a_a",
-        "tests.test_default_response_class_router.get_a_a",
-        "docs_src.custom_response.tutorial006c_py310.redirect_pydantic"
-      ],
+      "elapsed_seconds": 1.4749102592468262,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
       "ground_truth_files": [
         "fastapi/exception_handlers.py",
         "fastapi/exceptions.py"
@@ -1274,148 +1165,18 @@
       "file_level_precision": 0.0,
       "conflicts": [],
       "unknowns": [],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
+      "facts_verification_states": [],
       "any_runtime_state_present": false
     },
     {
       "query_id": "fastapi-09",
       "query": "What response does FastAPI send back when a path operation raises HTTPException?",
       "category": "D_behavioral",
-      "elapsed_seconds": 2.4607222080230713,
-      "retrieved_entities": [
-        {
-          "entity_id": "tests.test_response_model_invalid.test_invalid_response_model_raises",
-          "node_type": "Function",
-          "name": "test_invalid_response_model_raises",
-          "source_location": "tests/test_response_model_invalid.py:10-16",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_response_model_invalid.test_invalid_response_model_sub_type_raises",
-          "node_type": "Function",
-          "name": "test_invalid_response_model_sub_type_raises",
-          "source_location": "tests/test_response_model_invalid.py:19-25",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_default_response_class.get_a_a_path_override",
-          "node_type": "Function",
-          "name": "get_a_a_path_override",
-          "source_location": "tests/test_default_response_class.py:58-59",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_default_response_class_router.get_a_a_path_override",
-          "node_type": "Function",
-          "name": "get_a_a_path_override",
-          "source_location": "tests/test_default_response_class_router.py:45-46",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.debugging.tutorial001_py310.root.a",
-          "node_type": "Variable",
-          "name": "a",
-          "source_location": "docs_src/debugging/tutorial001_py310.py:9-9",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_additional_response_extra.test_path_operation",
-          "node_type": "Function",
-          "name": "test_path_operation",
-          "source_location": "tests/test_additional_response_extra.py:24-27",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "tests.test_additional_responses_router.test_a",
-          "node_type": "Function",
-          "name": "test_a",
-          "source_location": "tests/test_additional_responses_router.py:61-64",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "tests.test_default_response_class_router.test_router_a_a",
-          "node_type": "Function",
-          "name": "test_router_a_a",
-          "source_location": "tests/test_default_response_class_router.py:139-143",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_additional_responses_router.test_a.response",
-          "node_type": "Variable",
-          "name": "response",
-          "source_location": "tests/test_additional_responses_router.py:62-62",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_response_code_no_body.test_get_response.response",
-          "node_type": "Variable",
-          "name": "response",
-          "source_location": "tests/test_response_code_no_body.py:42-42",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        }
-      ],
-      "retrieved_files": [
-        "docs_src/debugging/tutorial001_py310.py",
-        "tests/test_additional_response_extra.py",
-        "tests/test_additional_responses_router.py",
-        "tests/test_default_response_class.py",
-        "tests/test_default_response_class_router.py",
-        "tests/test_response_code_no_body.py",
-        "tests/test_response_model_invalid.py"
-      ],
-      "retrieved_symbols": [
-        "tests.test_response_model_invalid.test_invalid_response_model_raises",
-        "tests.test_response_model_invalid.test_invalid_response_model_sub_type_raises",
-        "tests.test_default_response_class.get_a_a_path_override",
-        "tests.test_default_response_class_router.get_a_a_path_override",
-        "docs_src.debugging.tutorial001_py310.root.a",
-        "tests.test_additional_response_extra.test_path_operation",
-        "tests.test_additional_responses_router.test_a",
-        "tests.test_default_response_class_router.test_router_a_a",
-        "tests.test_additional_responses_router.test_a.response",
-        "tests.test_response_code_no_body.test_get_response.response"
-      ],
+      "elapsed_seconds": 1.501232385635376,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
       "ground_truth_files": [
         "fastapi/exception_handlers.py",
         "fastapi/exceptions.py"
@@ -1424,28 +1185,15 @@
       "file_level_recall": 0.0,
       "file_level_precision": 0.0,
       "conflicts": [],
-      "unknowns": [
-        "tests.test_additional_response_extra.test_path_operation.response"
-      ],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
+      "unknowns": [],
+      "facts_verification_states": [],
       "any_runtime_state_present": false
     },
     {
       "query_id": "fastapi-10",
       "query": "Where would I look to debug why a FastAPI endpoint's OpenAPI docs are showing the wrong response schema?",
       "category": "E_debugging",
-      "elapsed_seconds": 2.3095932006835938,
+      "elapsed_seconds": 1.4615490436553955,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI.__init__",
@@ -1455,7 +1203,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.3212442332421706,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI.build_middleware_stack.debug",
@@ -1465,7 +1215,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.31041099383277965,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -1475,7 +1227,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.2892795315373017,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "scripts.label_approved.Settings.debug",
@@ -1485,7 +1239,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2881756032510135,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "scripts.notify_translations.Settings.debug",
@@ -1495,7 +1251,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2881756032510135,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_stream_cancellation.stream_jsonl.i",
@@ -1505,7 +1263,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.27784617599887973,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_stream_cancellation.stream_raw.i",
@@ -1515,7 +1275,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.27784617599887973,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI.head",
@@ -1525,7 +1287,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.26706356328030884,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.routing.APIRouter.get",
@@ -1535,7 +1299,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
+          },
+          "score": 0.26671450601626157,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "fastapi.applications.FastAPI.get",
@@ -1545,9 +1311,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2665997711407687,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "fastapi/applications.py",
         "fastapi/routing.py",
@@ -1619,7 +1388,7 @@
       "query_id": "fastapi-11",
       "query": "If a dependency function isn't being re-run per request when it should be, where should I look?",
       "category": "E_debugging",
-      "elapsed_seconds": 2.0398101806640625,
+      "elapsed_seconds": 1.4987356662750244,
       "retrieved_entities": [
         {
           "entity_id": "tests.test_stream_cancellation.stream_jsonl.i",
@@ -1629,7 +1398,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.2565010777232698,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_stream_cancellation.stream_raw.i",
@@ -1639,111 +1410,18 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_response_dependency.test_response_dependency_returns_different_response_instance",
-          "node_type": "Function",
-          "name": "test_response_dependency_returns_different_response_instance",
-          "source_location": "tests/test_response_dependency.py:97-121",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "fastapi.param_functions.Depends",
-          "node_type": "Function",
-          "name": "Depends",
-          "source_location": "fastapi/param_functions.py:2283-2369",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_router_include_context.dependency_a",
-          "node_type": "Function",
-          "name": "dependency_a",
-          "source_location": "tests/test_router_include_context.py:24-25",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.benchmarks.test_general_performance.LARGE_ITEMS",
-          "node_type": "Variable",
-          "name": "LARGE_ITEMS",
-          "source_location": "tests/benchmarks/test_general_performance.py:17-29",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "tests.test_dependency_partial.function_dependency",
-          "node_type": "Function",
-          "name": "function_dependency",
-          "source_location": "tests/test_dependency_partial.py:12-13",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "scripts.doc_parsing_utils.HTML_LINK_RE",
-          "node_type": "Variable",
-          "name": "HTML_LINK_RE",
-          "source_location": "scripts/doc_parsing_utils.py:23-23",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.settings.app01_py310.config.Settings.items_per_user",
-          "node_type": "Variable",
-          "name": "items_per_user",
-          "source_location": "docs_src/settings/app01_py310/config.py:7-7",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.settings.app02_an_py310.config.Settings.items_per_user",
-          "node_type": "Variable",
-          "name": "items_per_user",
-          "source_location": "docs_src/settings/app02_an_py310/config.py:7-7",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
+          },
+          "score": 0.2565010777232698,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
-        "docs_src/settings/app01_py310/config.py",
-        "docs_src/settings/app02_an_py310/config.py",
-        "fastapi/param_functions.py",
-        "scripts/doc_parsing_utils.py",
-        "tests/benchmarks/test_general_performance.py",
-        "tests/test_dependency_partial.py",
-        "tests/test_response_dependency.py",
-        "tests/test_router_include_context.py",
         "tests/test_stream_cancellation.py"
       ],
       "retrieved_symbols": [
         "tests.test_stream_cancellation.stream_jsonl.i",
-        "tests.test_stream_cancellation.stream_raw.i",
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance",
-        "fastapi.param_functions.Depends",
-        "tests.test_router_include_context.dependency_a",
-        "tests.benchmarks.test_general_performance.LARGE_ITEMS",
-        "tests.test_dependency_partial.function_dependency",
-        "scripts.doc_parsing_utils.HTML_LINK_RE",
-        "docs_src.settings.app01_py310.config.Settings.items_per_user",
-        "docs_src.settings.app02_an_py310.config.Settings.items_per_user"
+        "tests.test_stream_cancellation.stream_raw.i"
       ],
       "ground_truth_files": [
         "fastapi/dependencies/utils.py"
@@ -1752,22 +1430,8 @@
       "file_level_recall": 0.0,
       "file_level_precision": 0.0,
       "conflicts": [],
-      "unknowns": [
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance.app",
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance.client",
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance.default_response",
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance.endpoint",
-        "tests.test_response_dependency.test_response_dependency_returns_different_response_instance.resp"
-      ],
+      "unknowns": [],
       "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED"
       ],
@@ -1777,7 +1441,7 @@
       "query_id": "fastapi-12",
       "query": "How does a security scheme like OAuth2PasswordBearer connect to a path operation's dependencies?",
       "category": "F_cross_file",
-      "elapsed_seconds": 2.1056768894195557,
+      "elapsed_seconds": 1.4505820274353027,
       "retrieved_entities": [
         {
           "entity_id": "tests.test_security_oauth2_password_bearer_optional_description.oauth2_scheme",
@@ -1787,7 +1451,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.4444178615735293,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial001_an_py310.oauth2_scheme",
@@ -1797,7 +1463,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial001_py310.oauth2_scheme",
@@ -1807,7 +1475,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial002_an_py310.oauth2_scheme",
@@ -1817,7 +1487,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial002_py310.oauth2_scheme",
@@ -1827,7 +1499,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial003_an_py310.oauth2_scheme",
@@ -1837,7 +1511,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial003_py310.oauth2_scheme",
@@ -1847,7 +1523,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial004_an_py310.oauth2_scheme",
@@ -1857,7 +1535,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "docs_src.security.tutorial004_py310.oauth2_scheme",
@@ -1867,7 +1547,9 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         },
         {
           "entity_id": "tests.test_dependency_paramless.oauth2_scheme",
@@ -1877,9 +1559,12 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 3
-          }
+          },
+          "score": 0.39317247056760063,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "docs_src/security/tutorial001_an_py310.py",
         "docs_src/security/tutorial001_py310.py",
@@ -1932,7 +1617,7 @@
       "query_id": "fastapi-13",
       "query": "Where does FastAPI implement its own SQL query builder or ORM?",
       "category": "G_negative",
-      "elapsed_seconds": 2.0595831871032715,
+      "elapsed_seconds": 1.468604564666748,
       "retrieved_entities": [
         {
           "entity_id": "tests.test_read_with_orm_mode",
@@ -1942,122 +1627,17 @@
           "verification_state": "STATICALLY_SUPPORTED",
           "evidence_counts": {
             "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.dependencies.tutorial005_py310.read_query",
-          "node_type": "Function",
-          "name": "read_query",
-          "source_location": "docs_src/dependencies/tutorial005_py310.py:19-20",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.dependencies.tutorial005_an_py310.read_query",
-          "node_type": "Function",
-          "name": "read_query",
-          "source_location": "docs_src/dependencies/tutorial005_an_py310.py:22-25",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.sql_databases.__init__",
-          "node_type": "Module",
-          "name": "docs_src.sql_databases.__init__",
-          "source_location": "docs_src/sql_databases/__init__.py:1",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 1
-          }
-        },
-        {
-          "entity_id": "fastapi.dependencies.utils.get_parameterless_sub_dependant.own_oauth_scopes",
-          "node_type": "Variable",
-          "name": "own_oauth_scopes",
-          "source_location": "fastapi/dependencies/utils.py:136-136",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "fastapi.dependencies.models.Dependant.own_oauth_scopes",
-          "node_type": "Variable",
-          "name": "own_oauth_scopes",
-          "source_location": "fastapi/dependencies/models.py:47-47",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.sql_databases.tutorial001_py310",
-          "node_type": "Module",
-          "name": "docs_src.sql_databases.tutorial001_py310",
-          "source_location": "docs_src/sql_databases/tutorial001_py310.py:1",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "tests.test_tutorial.test_sql_databases.__init__",
-          "node_type": "Module",
-          "name": "tests.test_tutorial.test_sql_databases.__init__",
-          "source_location": "tests/test_tutorial/test_sql_databases/__init__.py:1",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 1
-          }
-        },
-        {
-          "entity_id": "docs_src.sql_databases.tutorial002_py310",
-          "node_type": "Module",
-          "name": "docs_src.sql_databases.tutorial002_py310",
-          "source_location": "docs_src/sql_databases/tutorial002_py310.py:1",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.sql_databases.tutorial001_an_py310",
-          "node_type": "Module",
-          "name": "docs_src.sql_databases.tutorial001_an_py310",
-          "source_location": "docs_src/sql_databases/tutorial001_an_py310.py:1",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
+          },
+          "score": 0.26473000348884645,
+          "matched_by": "tfidf"
         }
       ],
+      "insufficient_evidence": false,
       "retrieved_files": [
-        "docs_src/dependencies/tutorial005_an_py310.py",
-        "docs_src/dependencies/tutorial005_py310.py",
-        "docs_src/sql_databases/__init__.py",
-        "docs_src/sql_databases/tutorial001_an_py310.py",
-        "docs_src/sql_databases/tutorial001_py310.py",
-        "docs_src/sql_databases/tutorial002_py310.py",
-        "fastapi/dependencies/models.py",
-        "fastapi/dependencies/utils.py",
-        "tests/test_read_with_orm_mode.py",
-        "tests/test_tutorial/test_sql_databases/__init__.py"
+        "tests/test_read_with_orm_mode.py"
       ],
       "retrieved_symbols": [
-        "tests.test_read_with_orm_mode",
-        "docs_src.dependencies.tutorial005_py310.read_query",
-        "docs_src.dependencies.tutorial005_an_py310.read_query",
-        "docs_src.sql_databases.__init__",
-        "fastapi.dependencies.utils.get_parameterless_sub_dependant.own_oauth_scopes",
-        "fastapi.dependencies.models.Dependant.own_oauth_scopes",
-        "docs_src.sql_databases.tutorial001_py310",
-        "tests.test_tutorial.test_sql_databases.__init__",
-        "docs_src.sql_databases.tutorial002_py310",
-        "docs_src.sql_databases.tutorial001_an_py310"
+        "tests.test_read_with_orm_mode"
       ],
       "ground_truth_files": [],
       "file_level_hits": [],
@@ -2065,77 +1645,14 @@
       "file_level_precision": null,
       "conflicts": [],
       "unknowns": [
-        "docs_src.sql_databases.tutorial001_an_py310.Hero",
-        "docs_src.sql_databases.tutorial001_an_py310.SessionDep",
-        "docs_src.sql_databases.tutorial001_an_py310.app",
-        "docs_src.sql_databases.tutorial001_an_py310.connect_args",
-        "docs_src.sql_databases.tutorial001_an_py310.create_db_and_tables",
-        "docs_src.sql_databases.tutorial001_an_py310.create_hero",
-        "docs_src.sql_databases.tutorial001_an_py310.delete_hero",
-        "docs_src.sql_databases.tutorial001_an_py310.engine",
-        "docs_src.sql_databases.tutorial001_an_py310.get_session",
-        "docs_src.sql_databases.tutorial001_an_py310.on_startup",
-        "docs_src.sql_databases.tutorial001_an_py310.read_hero",
-        "docs_src.sql_databases.tutorial001_an_py310.read_heroes",
-        "docs_src.sql_databases.tutorial001_an_py310.sqlite_file_name",
-        "docs_src.sql_databases.tutorial001_an_py310.sqlite_url",
-        "docs_src.sql_databases.tutorial001_py310.Hero",
-        "docs_src.sql_databases.tutorial001_py310.app",
-        "docs_src.sql_databases.tutorial001_py310.connect_args",
-        "docs_src.sql_databases.tutorial001_py310.create_db_and_tables",
-        "docs_src.sql_databases.tutorial001_py310.create_hero",
-        "docs_src.sql_databases.tutorial001_py310.delete_hero",
-        "docs_src.sql_databases.tutorial001_py310.engine",
-        "docs_src.sql_databases.tutorial001_py310.get_session",
-        "docs_src.sql_databases.tutorial001_py310.on_startup",
-        "docs_src.sql_databases.tutorial001_py310.read_hero",
-        "docs_src.sql_databases.tutorial001_py310.read_heroes",
-        "docs_src.sql_databases.tutorial001_py310.sqlite_file_name",
-        "docs_src.sql_databases.tutorial001_py310.sqlite_url",
-        "docs_src.sql_databases.tutorial002_py310.Hero",
-        "docs_src.sql_databases.tutorial002_py310.HeroBase",
-        "docs_src.sql_databases.tutorial002_py310.HeroCreate",
-        "docs_src.sql_databases.tutorial002_py310.HeroPublic",
-        "docs_src.sql_databases.tutorial002_py310.HeroUpdate",
-        "docs_src.sql_databases.tutorial002_py310.app",
-        "docs_src.sql_databases.tutorial002_py310.connect_args",
-        "docs_src.sql_databases.tutorial002_py310.create_db_and_tables",
-        "docs_src.sql_databases.tutorial002_py310.create_hero",
-        "docs_src.sql_databases.tutorial002_py310.delete_hero",
-        "docs_src.sql_databases.tutorial002_py310.engine",
-        "docs_src.sql_databases.tutorial002_py310.get_session",
-        "docs_src.sql_databases.tutorial002_py310.on_startup",
-        "docs_src.sql_databases.tutorial002_py310.read_hero",
-        "docs_src.sql_databases.tutorial002_py310.read_heroes",
-        "docs_src.sql_databases.tutorial002_py310.sqlite_file_name",
-        "docs_src.sql_databases.tutorial002_py310.sqlite_url",
-        "docs_src.sql_databases.tutorial002_py310.update_hero",
-        "fastapi.Depends",
         "fastapi.FastAPI",
-        "fastapi.HTTPException",
-        "fastapi.Query",
         "fastapi.testclient.TestClient",
         "pydantic.BaseModel",
         "pydantic.ConfigDict",
-        "sqlmodel.Field",
-        "sqlmodel.SQLModel",
-        "sqlmodel.Session",
-        "sqlmodel.create_engine",
-        "sqlmodel.select",
         "tests.test_read_with_orm_mode.test_read_with_orm_mode",
-        "typing.Annotated",
         "typing.Any"
       ],
       "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
         "STATICALLY_SUPPORTED"
       ],
       "any_runtime_state_present": false
@@ -2144,151 +1661,18 @@
       "query_id": "fastapi-14",
       "query": "Where does FastAPI implement built-in rate limiting for endpoints?",
       "category": "G_negative",
-      "elapsed_seconds": 2.1498663425445557,
-      "retrieved_entities": [
-        {
-          "entity_id": "docs_src.additional_responses.tutorial001_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_responses/tutorial001_py310.py:15-15",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.additional_responses.tutorial002_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_responses/tutorial002_py310.py:11-11",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.additional_responses.tutorial003_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_responses/tutorial003_py310.py:15-15",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.additional_responses.tutorial004_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_responses/tutorial004_py310.py:18-18",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.additional_status_codes.tutorial001_an_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_status_codes/tutorial001_an_py310.py:6-6",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.additional_status_codes.tutorial001_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/additional_status_codes/tutorial001_py310.py:4-4",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        },
-        {
-          "entity_id": "docs_src.advanced_middleware.tutorial001_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/advanced_middleware/tutorial001_py310.py:4-4",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.advanced_middleware.tutorial002_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/advanced_middleware/tutorial002_py310.py:4-4",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.advanced_middleware.tutorial003_py310.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/advanced_middleware/tutorial003_py310.py:4-4",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 4
-          }
-        },
-        {
-          "entity_id": "docs_src.app_testing.app_a_py310.main.app",
-          "node_type": "Variable",
-          "name": "app",
-          "source_location": "docs_src/app_testing/app_a_py310/main.py:3-3",
-          "verification_state": "STATICALLY_SUPPORTED",
-          "evidence_counts": {
-            "STATIC": 3
-          }
-        }
-      ],
-      "retrieved_files": [
-        "docs_src/additional_responses/tutorial001_py310.py",
-        "docs_src/additional_responses/tutorial002_py310.py",
-        "docs_src/additional_responses/tutorial003_py310.py",
-        "docs_src/additional_responses/tutorial004_py310.py",
-        "docs_src/additional_status_codes/tutorial001_an_py310.py",
-        "docs_src/additional_status_codes/tutorial001_py310.py",
-        "docs_src/advanced_middleware/tutorial001_py310.py",
-        "docs_src/advanced_middleware/tutorial002_py310.py",
-        "docs_src/advanced_middleware/tutorial003_py310.py",
-        "docs_src/app_testing/app_a_py310/main.py"
-      ],
-      "retrieved_symbols": [
-        "docs_src.additional_responses.tutorial001_py310.app",
-        "docs_src.additional_responses.tutorial002_py310.app",
-        "docs_src.additional_responses.tutorial003_py310.app",
-        "docs_src.additional_responses.tutorial004_py310.app",
-        "docs_src.additional_status_codes.tutorial001_an_py310.app",
-        "docs_src.additional_status_codes.tutorial001_py310.app",
-        "docs_src.advanced_middleware.tutorial001_py310.app",
-        "docs_src.advanced_middleware.tutorial002_py310.app",
-        "docs_src.advanced_middleware.tutorial003_py310.app",
-        "docs_src.app_testing.app_a_py310.main.app"
-      ],
+      "elapsed_seconds": 1.4614818096160889,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
+      "retrieved_files": [],
+      "retrieved_symbols": [],
       "ground_truth_files": [],
       "file_level_hits": [],
       "file_level_recall": null,
       "file_level_precision": null,
       "conflicts": [],
       "unknowns": [],
-      "facts_verification_states": [
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED",
-        "STATICALLY_SUPPORTED"
-      ],
+      "facts_verification_states": [],
       "any_runtime_state_present": false
     }
   ]

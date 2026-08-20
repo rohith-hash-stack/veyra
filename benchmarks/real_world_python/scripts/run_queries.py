@@ -115,9 +115,12 @@ def main() -> None:
                     "source_location": e.source_location,
                     "verification_state": e.verification_state.value,
                     "evidence_counts": e.evidence_counts,
+                    "score": retrieved.scores.get(e.entity_id),
+                    "matched_by": retrieved.matched_by.get(e.entity_id),
                 }
                 for e in retrieved.entities
             ],
+            "insufficient_evidence": retrieved.insufficient_evidence,
             "retrieved_files": retrieved_files,
             "retrieved_symbols": retrieved_symbols,
             "ground_truth_files": sorted(gt_files),

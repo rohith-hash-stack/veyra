@@ -85,6 +85,39 @@ def test_repository_version_is_explicit(sample_repo: Path, store: VBGStore) -> N
     assert grounding.repository_version == COMMIT
 
 
+def test_grounded_fact_carries_confidence_and_matched_by(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    retrieved = retrieve_context(store, index, COMMIT, "process_order")
+    grounding = build_grounding_context(retrieved)
+
+    fact = next(f for f in grounding.facts if f.entity_id == "orders.process_order")
+    assert fact.matched_by == "exact_name"
+    assert fact.confidence == 2.0
+
+
+def test_insufficient_evidence_propagates_into_grounding_context_with_explicit_disclaimer(
+    sample_repo: Path, store: VBGStore
+) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    retrieved = retrieve_context(store, index, COMMIT, "xylophone quantum teapot")
+
+    grounding = build_grounding_context(retrieved)
+
+    assert grounding.facts == ()
+    assert grounding.insufficient_evidence is True
+    assert "NO_SUFFICIENT_EVIDENCE" in grounding.disclaimer
+
+
+def test_sufficient_evidence_does_not_carry_the_no_evidence_disclaimer(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    retrieved = retrieve_context(store, index, COMMIT, "process_order")
+
+    grounding = build_grounding_context(retrieved)
+
+    assert grounding.insufficient_evidence is False
+    assert "NO_SUFFICIENT_EVIDENCE" not in grounding.disclaimer
+
+
 def test_evidence_excerpts_come_from_real_evidence_details(sample_repo: Path, store: VBGStore) -> None:
     index = build_retrieval_index(store, COMMIT)
     store.insert_evidence(

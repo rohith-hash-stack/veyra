@@ -61,7 +61,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- RequestValidationError/request_validation_exception_handler never retrieved. Retrieved entities (openapi/models.py's Operation.requestBody/Link.requestBody Pydantic model fields, assorted test helper variables) share only the surface token 'requestBody'/'body' with the query, not the actual validation-error handling machinery."
+    "phase_b_change": "verdict unchanged (still FALSE); noise removed, now insufficient_evidence=True",
+    "notes": "PHASE B RESULT: verdict unchanged -- was already a complete miss at baseline (RequestValidationError/request_validation_exception_handler never in top 10 either way). All 10 previously-noisy entities now fall below the 0.25 threshold, so this correctly reports insufficient_evidence=True instead of confidently showing 10 wrong entities. A real, honest improvement in what a downstream consumer would see, even though it doesn't change the fully_correct tally for an already-wrong query."
   },
   "fastapi-09": {
     "final_answer_correct": false,
@@ -69,7 +70,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- HTTPException/http_exception_handler never retrieved. All 10 results are unrelated test functions/variables about response models and a docs_src debugging tutorial."
+    "phase_b_change": "verdict unchanged (still FALSE); noise removed, now insufficient_evidence=True",
+    "notes": "PHASE B RESULT: same pattern as fastapi-08 -- HTTPException/http_exception_handler were never retrieved at baseline either; now correctly reports insufficient_evidence=True instead of 10 unrelated test entities."
   },
   "fastapi-10": {
     "final_answer_correct": false,
@@ -102,15 +104,17 @@
     "multi_hop": false,
     "negative_query_handled_correctly": false,
     "failure_category": "reasoning_failure",
-    "notes": "Negative query (FastAPI has no ORM). Retrieved a module literally named docs_src.sql_databases.__init__ and a test literally named test_read_with_orm_mode -- entity names that, taken at face value by a downstream consumer, could easily be read as confirming FastAPI has SQL/ORM functionality, when they are actually documentation showing users how to combine FastAPI with an external ORM. This is a sharper risk than a generic irrelevant match: the entity names themselves appear to validate the query's false premise. Marked unsupported_claim=true because a plausible downstream reading of this retrieval result is actively misleading, not merely irrelevant."
+    "phase_b_change": "NOT improved -- the one risky entity survived thresholding, now more prominent",
+    "notes": "PHASE B RESULT: a real negative result worth stating plainly. 9 of 10 baseline entities were cut, but tests.test_read_with_orm_mode (score 0.265, just above the bar) survived and is now the ONLY result shown -- arguably a worse presentation than before, since it no longer has 9 other results diluting its apparent authority. Thresholding alone cannot fix root cause 3's 'more concerning shape' (a genuinely real entity whose name itself suggests a false premise); that needs either a smarter threshold specifically tuned against this failure mode or Phase H's fuller existence-query handling."
   },
   "fastapi-14": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "negative_query_handled_correctly": false,
-    "failure_category": "reasoning_failure",
-    "notes": "Negative query (FastAPI has no built-in rate limiting). Retrieved entities are generic 'app' variables from unrelated docs_src/additional_responses and additional_status_codes tutorials -- pure noise, no plausible false-premise risk this time, but still no signal distinguishing 'no relevant evidence' from 'here is my best guess'."
+    "negative_query_handled_correctly": true,
+    "failure_category": null,
+    "phase_b_change": "FIXED (was reasoning_failure at baseline)",
+    "notes": "PHASE B RESULT: a genuine fix, the same pattern as flask-14. All 10 baseline entities fell below 0.25; RetrievedContext.insufficient_evidence and GroundingContext.insufficient_evidence are both True, disclaimer explicitly prefixed NO_SUFFICIENT_EVIDENCE."
   }
 }

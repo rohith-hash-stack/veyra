@@ -30,6 +30,17 @@ about them beyond "referenced"); repository scope explicit
 unsupported repository behavior (the disclaimer says so explicitly);
 evidence references returnable with responses (`GroundedFact.entity_id`
 is always the real, citable VBG identity).
+
+**Retrieval-quality remediation, Phase B.** `GroundedFact.confidence`/
+`matched_by` now carry `context.py`'s `RetrievedContext.scores`/
+`matched_by` through to this final payload -- the real-world benchmark
+found this information was computed by `search()` and then discarded
+before ever reaching an LLM-facing consumer. When `RetrievedContext.insufficient_evidence`
+is set (nothing cleared `retrieve_context()`'s confidence bar),
+`GroundingContext.insufficient_evidence` is set here too and the
+disclaimer is prefixed with an explicit `NO_SUFFICIENT_EVIDENCE`
+instruction, rather than leaving a caller to infer "nothing found" from
+an empty `facts` tuple with no explanation.
 """
 
 from __future__ import annotations
@@ -98,6 +109,8 @@ class GroundedFact:
     verification_state: VerificationState
     verification_note: str
     evidence_excerpts: tuple[str, ...]
+    confidence: float = 0.0
+    matched_by: str = "tfidf"
 
 
 @dataclass(frozen=True)
@@ -108,11 +121,19 @@ class GroundingContext:
     conflicts: tuple[str, ...]
     unknowns: tuple[str, ...]
     disclaimer: str
+    insufficient_evidence: bool = False
 
 
 def _summarize(entity: IndexedEntity) -> str:
     location = f" at {entity.source_location}" if entity.source_location else ""
     return f"{entity.node_type} `{entity.name}`{location}"
+
+
+_NO_EVIDENCE_DISCLAIMER = (
+    "NO_SUFFICIENT_EVIDENCE: nothing in this repository scored as a confident match for this query. "
+    "Do not answer as if the queried functionality exists -- say plainly that no relevant evidence was "
+    "found, rather than presenting a weak or coincidental lexical match as if it were a real answer."
+)
 
 
 def build_grounding_context(retrieved: RetrievedContext) -> GroundingContext:
@@ -128,6 +149,8 @@ def build_grounding_context(retrieved: RetrievedContext) -> GroundingContext:
             evidence_excerpts=tuple(
                 ev.detail for ev in retrieved.evidence_by_entity.get(entity.entity_id, ()) if ev.detail
             ),
+            confidence=retrieved.scores.get(entity.entity_id, 0.0),
+            matched_by=retrieved.matched_by.get(entity.entity_id, "tfidf"),
         )
         for entity in retrieved.entities
     )
@@ -153,11 +176,14 @@ def build_grounding_context(retrieved: RetrievedContext) -> GroundingContext:
         )
     )
 
+    disclaimer = f"{_NO_EVIDENCE_DISCLAIMER} {_DISCLAIMER}" if retrieved.insufficient_evidence else _DISCLAIMER
+
     return GroundingContext(
         query=retrieved.query,
         repository_version=retrieved.repository_version,
         facts=facts,
         conflicts=conflicts,
         unknowns=unknowns,
-        disclaimer=_DISCLAIMER,
+        disclaimer=disclaimer,
+        insufficient_evidence=retrieved.insufficient_evidence,
     )

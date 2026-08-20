@@ -54,3 +54,46 @@ def test_no_matching_entities_returns_empty_context(sample_repo: Path, store: VB
     context = retrieve_context(store, index, COMMIT, "xylophone quantum teapot")
     assert context.entities == ()
     assert context.relationships == ()
+    assert context.insufficient_evidence is True
+
+
+# -- Phase B: confidence propagation (benchmarks/real_world_python/REPORT.md) --
+
+
+def test_scores_and_matched_by_are_carried_for_every_retrieved_entity(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    context = retrieve_context(store, index, COMMIT, "process_order")
+    for entity in context.entities:
+        assert entity.entity_id in context.scores
+        assert entity.entity_id in context.matched_by
+    assert context.matched_by["orders.process_order"] == "exact_name"
+    assert context.scores["orders.process_order"] == 2.0
+
+
+def test_low_confidence_tfidf_match_is_suppressed_by_default_threshold(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    # Real, measured scores for this fixture (see calibrate_confidence_threshold.py's
+    # methodology): charge_customer=0.83, process_order=0.36 both clear the default
+    # 0.25 bar; validate_order=0.18 does not and must be dropped.
+    context = retrieve_context(store, index, COMMIT, "charge the customer for their order")
+    ids = {e.entity_id for e in context.entities}
+    assert "orders.charge_customer" in ids
+    assert "orders.validate_order" not in ids
+    assert context.insufficient_evidence is False
+
+
+def test_custom_min_tfidf_score_can_suppress_every_result(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    # Same query as above (top TF-IDF score 0.83), but with a threshold no
+    # real result here clears -- must report insufficient evidence, not
+    # silently fall back to returning the best-effort top-k anyway.
+    context = retrieve_context(store, index, COMMIT, "charge the customer for their order", min_tfidf_score=0.95)
+    assert context.entities == ()
+    assert context.insufficient_evidence is True
+
+
+def test_exact_name_match_is_never_suppressed_by_the_confidence_threshold(sample_repo: Path, store: VBGStore) -> None:
+    index = build_retrieval_index(store, COMMIT)
+    context = retrieve_context(store, index, COMMIT, "process_order", min_tfidf_score=0.99)
+    assert context.entities[0].entity_id == "orders.process_order"
+    assert context.insufficient_evidence is False
