@@ -1,1 +1,3 @@
 [django] building retrieval index...
+[django] index built in 4054.0s, 92679 entities
+[django] wrote 14 raw query results to /home/user/veyra/benchmarks/real_world_python/results/django_raw_results.json

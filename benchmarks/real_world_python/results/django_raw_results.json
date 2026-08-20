@@ -1,0 +1,2392 @@
+{
+  "repo_name": "django",
+  "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+  "index_entity_count": 92679,
+  "query_count": 14,
+  "results": [
+    {
+      "query_id": "django-01",
+      "query": "Where is Django's QuerySet class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 17.455896854400635,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.postgres.constraints.ExclusionConstraint._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/contrib/postgres/constraints.py:113-113",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.constraints.CheckConstraint._get_check_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/constraints.py:203-203",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.constraints.UniqueConstraint._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/constraints.py:453-453",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.indexes.Index._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/indexes.py:181-181",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_iterable_lookup_value.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:137-137",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.raw_query.tests.RawQueryTests.test_params.query",
+          "node_type": "Variable",
+          "name": "query",
+          "source_location": "tests/raw_query/tests.py:225-225",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_simple_query.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:29-29",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.raw_query.tests.RawQueryTests.test_query_representation.query",
+          "node_type": "Variable",
+          "name": "query",
+          "source_location": "tests/raw_query/tests.py:275-275",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_filter_conditional.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:144-144",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_multiple_fields.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:71-71",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/postgres/constraints.py",
+        "django/db/models/constraints.py",
+        "django/db/models/indexes.py",
+        "tests/queries/test_query.py",
+        "tests/raw_query/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.postgres.constraints.ExclusionConstraint._get_condition_sql.where",
+        "django.db.models.constraints.CheckConstraint._get_check_sql.where",
+        "django.db.models.constraints.UniqueConstraint._get_condition_sql.where",
+        "django.db.models.indexes.Index._get_condition_sql.where",
+        "tests.queries.test_query.TestQuery.test_iterable_lookup_value.where",
+        "tests.raw_query.tests.RawQueryTests.test_params.query",
+        "tests.queries.test_query.TestQuery.test_simple_query.where",
+        "tests.raw_query.tests.RawQueryTests.test_query_representation.query",
+        "tests.queries.test_query.TestQuery.test_filter_conditional.where",
+        "tests.queries.test_query.TestQuery.test_multiple_fields.where"
+      ],
+      "ground_truth_files": [
+        "django/db/models/query.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-02",
+      "query": "Where is Django's base Model class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 15.853584289550781,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.postgres.constraints.ExclusionConstraint._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/contrib/postgres/constraints.py:113-113",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.constraints.CheckConstraint._get_check_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/constraints.py:203-203",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.constraints.UniqueConstraint._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/constraints.py:453-453",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.indexes.Index._get_condition_sql.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "django/db/models/indexes.py:181-181",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.sql.where",
+          "node_type": "Module",
+          "name": "django.db.models.sql.where",
+          "source_location": "django/db/models/sql/where.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.db.models.sql.query.Query.clear_where",
+          "node_type": "Method",
+          "name": "clear_where",
+          "source_location": "django/db/models/sql/query.py:1689-1690",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.delete.models.Base",
+          "node_type": "Class",
+          "name": "Base",
+          "source_location": "tests/delete/models.py:230-231",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.base.models.CustomBaseModel",
+          "node_type": "Class",
+          "name": "CustomBaseModel",
+          "source_location": "tests/base/models.py:8-9",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.models.CustomModelBase",
+          "node_type": "Class",
+          "name": "CustomModelBase",
+          "source_location": "tests/migrations/models.py:5-6",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_iterable_lookup_value.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:137-137",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/postgres/constraints.py",
+        "django/db/models/constraints.py",
+        "django/db/models/indexes.py",
+        "django/db/models/sql/query.py",
+        "django/db/models/sql/where.py",
+        "tests/base/models.py",
+        "tests/delete/models.py",
+        "tests/migrations/models.py",
+        "tests/queries/test_query.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.postgres.constraints.ExclusionConstraint._get_condition_sql.where",
+        "django.db.models.constraints.CheckConstraint._get_check_sql.where",
+        "django.db.models.constraints.UniqueConstraint._get_condition_sql.where",
+        "django.db.models.indexes.Index._get_condition_sql.where",
+        "django.db.models.sql.where",
+        "django.db.models.sql.query.Query.clear_where",
+        "tests.delete.models.Base",
+        "tests.base.models.CustomBaseModel",
+        "tests.migrations.models.CustomModelBase",
+        "tests.queries.test_query.TestQuery.test_iterable_lookup_value.where"
+      ],
+      "ground_truth_files": [
+        "django/db/models/base.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.core.exceptions.EmptyResultSet",
+        "django.core.exceptions.FullResultSet",
+        "django.db.models.expressions.Case",
+        "django.db.models.expressions.When",
+        "django.db.models.functions.Mod",
+        "django.db.models.lookups.Exact",
+        "django.db.models.sql.where.AND",
+        "django.db.models.sql.where.ExtraWhere",
+        "django.db.models.sql.where.NothingNode",
+        "django.db.models.sql.where.OR",
+        "django.db.models.sql.where.WhereNode",
+        "django.db.models.sql.where.XOR",
+        "django.utils.functional.cached_property",
+        "django.utils.tree",
+        "functools.reduce",
+        "operator"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-03",
+      "query": "Where is the CSRF protection middleware implemented?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 15.788440465927124,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.core.checks.security.csrf._csrf_middleware",
+          "node_type": "Function",
+          "name": "_csrf_middleware",
+          "source_location": "django/core/checks/security/csrf.py:23-24",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_with_csrf_middleware",
+          "node_type": "Method",
+          "name": "test_with_csrf_middleware",
+          "source_location": "tests/check_framework/test_security.py:146-147",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_no_csrf_middleware",
+          "node_type": "Method",
+          "name": "test_no_csrf_middleware",
+          "source_location": "tests/check_framework/test_security.py:139-143",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.middleware.csrf",
+          "node_type": "Module",
+          "name": "django.middleware.csrf",
+          "source_location": "django/middleware/csrf.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFMiddlewareTest",
+          "node_type": "Class",
+          "name": "CheckCSRFMiddlewareTest",
+          "source_location": "tests/check_framework/test_security.py:137-147",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFCookieSecureTest",
+          "node_type": "Class",
+          "name": "CheckCSRFCookieSecureTest",
+          "source_location": "tests/check_framework/test_security.py:150-195",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.views.decorators.csrf.csrf_protect",
+          "node_type": "Variable",
+          "name": "csrf_protect",
+          "source_location": "django/views/decorators/csrf.py:7-7",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_false_no_middleware",
+          "node_type": "Method",
+          "name": "test_with_csrf_cookie_secure_false_no_middleware",
+          "source_location": "tests/check_framework/test_security.py:183-188",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login",
+          "node_type": "Method",
+          "name": "test_csrf_validation_passes_after_process_request_login",
+          "source_location": "tests/auth_tests/test_remote_user.py:93-120",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_false",
+          "node_type": "Method",
+          "name": "test_with_csrf_cookie_secure_false",
+          "source_location": "tests/check_framework/test_security.py:155-160",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/core/checks/security/csrf.py",
+        "django/middleware/csrf.py",
+        "django/views/decorators/csrf.py",
+        "tests/auth_tests/test_remote_user.py",
+        "tests/check_framework/test_security.py"
+      ],
+      "retrieved_symbols": [
+        "django.core.checks.security.csrf._csrf_middleware",
+        "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_with_csrf_middleware",
+        "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_no_csrf_middleware",
+        "django.middleware.csrf",
+        "tests.check_framework.test_security.CheckCSRFMiddlewareTest",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest",
+        "django.views.decorators.csrf.csrf_protect",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_false_no_middleware",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_false"
+      ],
+      "ground_truth_files": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_hits": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.2,
+      "conflicts": [],
+      "unknowns": [
+        "collections.defaultdict",
+        "django.conf.settings",
+        "django.core.exceptions.DisallowedHost",
+        "django.core.exceptions.ImproperlyConfigured",
+        "django.http.HttpHeaders",
+        "django.http.UnreadablePostError",
+        "django.middleware.MiddlewareMixin",
+        "django.middleware.csrf.CSRF_ALLOWED_CHARS",
+        "django.middleware.csrf.CSRF_SECRET_LENGTH",
+        "django.middleware.csrf.CSRF_SESSION_KEY",
+        "django.middleware.csrf.CSRF_TOKEN_LENGTH",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.middleware.csrf.InvalidTokenFormat",
+        "django.middleware.csrf.REASON_BAD_ORIGIN",
+        "django.middleware.csrf.REASON_BAD_REFERER",
+        "django.middleware.csrf.REASON_CSRF_TOKEN_MISSING",
+        "django.middleware.csrf.REASON_INCORRECT_LENGTH",
+        "django.middleware.csrf.REASON_INSECURE_REFERER",
+        "django.middleware.csrf.REASON_INVALID_CHARACTERS",
+        "django.middleware.csrf.REASON_MALFORMED_REFERER",
+        "django.middleware.csrf.REASON_NO_CSRF_COOKIE",
+        "django.middleware.csrf.REASON_NO_REFERER",
+        "django.middleware.csrf.RejectRequest",
+        "django.middleware.csrf._add_new_csrf_cookie",
+        "django.middleware.csrf._check_token_format",
+        "django.middleware.csrf._does_token_match",
+        "django.middleware.csrf._get_failure_view",
+        "django.middleware.csrf._get_new_csrf_string",
+        "django.middleware.csrf._mask_cipher_secret",
+        "django.middleware.csrf._unmask_cipher_token",
+        "django.middleware.csrf.get_token",
+        "django.middleware.csrf.invalid_token_chars_re",
+        "django.middleware.csrf.logger",
+        "django.middleware.csrf.rotate_token",
+        "django.urls.get_callable",
+        "django.utils.cache.patch_vary_headers",
+        "django.utils.crypto.constant_time_compare",
+        "django.utils.crypto.get_random_string",
+        "django.utils.functional.cached_property",
+        "django.utils.http.is_same_domain",
+        "django.utils.log.log_response",
+        "django.utils.regex_helper._lazy_re_compile",
+        "logging",
+        "string",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_client",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_secret",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_token",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_token_form",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.data",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.headers",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.response",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_use_sessions_with_csrf_cookie_secure_false",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_true",
+        "tests.check_framework.test_security.CheckCSRFCookieSecureTest.test_with_csrf_cookie_secure_truthy",
+        "urllib.parse.urlsplit"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-04",
+      "query": "What does django.contrib.auth.authenticate() actually call to check a user's credentials?",
+      "category": "B_relationship",
+      "elapsed_seconds": 15.572284698486328,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.test.client.ClientMixin.login.user",
+          "node_type": "Variable",
+          "name": "user",
+          "source_location": "django/test/client.py:841-841",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.__init__.authenticate",
+          "node_type": "Function",
+          "name": "authenticate",
+          "source_location": "django/contrib/auth/__init__.py:124-144",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.base_user",
+          "node_type": "Module",
+          "name": "django.contrib.auth.base_user",
+          "source_location": "django/contrib/auth/base_user.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.__init__.aauthenticate",
+          "node_type": "Function",
+          "name": "aauthenticate",
+          "source_location": "django/contrib/auth/__init__.py:148-166",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin.login",
+          "node_type": "Method",
+          "name": "login",
+          "source_location": "django/test/client.py:832-845",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.process_request.user",
+          "node_type": "Variable",
+          "name": "user",
+          "source_location": "django/contrib/auth/middleware.py:166-166",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.AllowAllUsersModelBackend.user_can_authenticate",
+          "node_type": "Method",
+          "name": "user_can_authenticate",
+          "source_location": "django/contrib/auth/backends.py:251-252",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.AllowAllUsersRemoteUserBackend.user_can_authenticate",
+          "node_type": "Method",
+          "name": "user_can_authenticate",
+          "source_location": "django/contrib/auth/backends.py:346-347",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.models",
+          "node_type": "Module",
+          "name": "django.contrib.auth.models",
+          "source_location": "django/contrib/auth/models.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.admin",
+          "node_type": "Module",
+          "name": "django.contrib.auth.admin",
+          "source_location": "django/contrib/auth/admin.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/auth/__init__.py",
+        "django/contrib/auth/admin.py",
+        "django/contrib/auth/backends.py",
+        "django/contrib/auth/base_user.py",
+        "django/contrib/auth/middleware.py",
+        "django/contrib/auth/models.py",
+        "django/test/client.py"
+      ],
+      "retrieved_symbols": [
+        "django.test.client.ClientMixin.login.user",
+        "django.contrib.auth.__init__.authenticate",
+        "django.contrib.auth.base_user",
+        "django.contrib.auth.__init__.aauthenticate",
+        "django.test.client.ClientMixin.login",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.process_request.user",
+        "django.contrib.auth.backends.AllowAllUsersModelBackend.user_can_authenticate",
+        "django.contrib.auth.backends.AllowAllUsersRemoteUserBackend.user_can_authenticate",
+        "django.contrib.auth.models",
+        "django.contrib.auth.admin"
+      ],
+      "ground_truth_files": [
+        "django/contrib/auth/__init__.py",
+        "django/contrib/auth/backends.py"
+      ],
+      "file_level_hits": [
+        "django/contrib/auth/__init__.py",
+        "django/contrib/auth/backends.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.2857142857142857,
+      "conflicts": [],
+      "unknowns": [
+        ".validators.UnicodeUsernameValidator",
+        "collections.abc.Iterable",
+        "django.apps.apps",
+        "django.conf.settings",
+        "django.contrib.admin",
+        "django.contrib.admin.options.IS_POPUP_VAR",
+        "django.contrib.admin.utils.unquote",
+        "django.contrib.auth",
+        "django.contrib.auth.__init__._clean_credentials",
+        "django.contrib.auth.__init__._get_compatible_backends",
+        "django.contrib.auth.admin.GroupAdmin",
+        "django.contrib.auth.admin.UserAdmin",
+        "django.contrib.auth.authenticate",
+        "django.contrib.auth.base_user.AbstractBaseUser",
+        "django.contrib.auth.base_user.BaseUserManager",
+        "django.contrib.auth.forms.AdminPasswordChangeForm",
+        "django.contrib.auth.forms.AdminUserCreationForm",
+        "django.contrib.auth.forms.UserChangeForm",
+        "django.contrib.auth.hashers.acheck_password",
+        "django.contrib.auth.hashers.check_password",
+        "django.contrib.auth.hashers.is_password_usable",
+        "django.contrib.auth.hashers.make_password",
+        "django.contrib.auth.models.AbstractUser",
+        "django.contrib.auth.models.AnonymousUser",
+        "django.contrib.auth.models.Group",
+        "django.contrib.auth.models.GroupManager",
+        "django.contrib.auth.models.Permission",
+        "django.contrib.auth.models.PermissionManager",
+        "django.contrib.auth.models.PermissionsMixin",
+        "django.contrib.auth.models.User",
+        "django.contrib.auth.models.UserManager",
+        "django.contrib.auth.models._auser_get_permissions",
+        "django.contrib.auth.models._auser_has_module_perms",
+        "django.contrib.auth.models._auser_has_perm",
+        "django.contrib.auth.models._user_get_permissions",
+        "django.contrib.auth.models._user_has_module_perms",
+        "django.contrib.auth.models._user_has_perm",
+        "django.contrib.auth.models.update_last_login",
+        "django.contrib.auth.password_validation",
+        "django.contrib.auth.update_session_auth_hash",
+        "django.contrib.contenttypes.models.ContentType",
+        "django.contrib.messages",
+        "django.core.exceptions.PermissionDenied",
+        "django.core.mail.send_mail",
+        "django.db.models",
+        "django.db.models.manager.EmptyManager",
+        "django.db.router",
+        "django.db.transaction",
+        "django.http.Http404",
+        "django.http.HttpResponseRedirect",
+        "django.template.response.TemplateResponse",
+        "django.test.client.ClientMixin._login",
+        "django.urls.path",
+        "django.urls.reverse",
+        "django.utils.crypto.salted_hmac",
+        "django.utils.decorators.method_decorator",
+        "django.utils.html.escape",
+        "django.utils.timezone",
+        "django.utils.translation.gettext",
+        "django.utils.translation.gettext_lazy",
+        "django.views.decorators.csrf.csrf_protect",
+        "django.views.decorators.debug.sensitive_post_parameters",
+        "unicodedata"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-05",
+      "query": "What is Django's default Manager class actually built from?",
+      "category": "B_relationship",
+      "elapsed_seconds": 15.647072076797485,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.core.serializers.base.deserialize_fk_value.default_manager",
+          "node_type": "Variable",
+          "name": "default_manager",
+          "source_location": "django/core/serializers/base.py:396-396",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.core.serializers.xml_serializer.Deserializer._handle_m2m_field_node.default_manager",
+          "node_type": "Variable",
+          "name": "default_manager",
+          "source_location": "django/core/serializers/xml_serializer.py:398-398",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.core.serializers.base.build_instance.default_manager",
+          "node_type": "Variable",
+          "name": "default_manager",
+          "source_location": "django/core/serializers/base.py:338-338",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.admin_widgets.models.Inventory.default_manager",
+          "node_type": "Variable",
+          "name": "default_manager",
+          "source_location": "tests/admin_widgets/models.py:100-100",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.options.Options.default_manager.default_manager_name",
+          "node_type": "Variable",
+          "name": "default_manager_name",
+          "source_location": "django/db/models/options.py:508-508",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.AbstractModel.Meta.default_manager_name",
+          "node_type": "Variable",
+          "name": "default_manager_name",
+          "source_location": "tests/managers_regress/tests.py:219-219",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.PlainModel.Meta.default_manager_name",
+          "node_type": "Variable",
+          "name": "default_manager_name",
+          "source_location": "tests/managers_regress/tests.py:227-227",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.models.Child4.default",
+          "node_type": "Variable",
+          "name": "default",
+          "source_location": "tests/managers_regress/models.py:93-93",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.base.ModelBase._default_manager",
+          "node_type": "Method",
+          "name": "_default_manager",
+          "source_location": "django/db/models/base.py:465-466",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.options.Options.default_manager",
+          "node_type": "Method",
+          "name": "default_manager",
+          "source_location": "django/db/models/options.py:507-529",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/core/serializers/base.py",
+        "django/core/serializers/xml_serializer.py",
+        "django/db/models/base.py",
+        "django/db/models/options.py",
+        "tests/admin_widgets/models.py",
+        "tests/managers_regress/models.py",
+        "tests/managers_regress/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.core.serializers.base.deserialize_fk_value.default_manager",
+        "django.core.serializers.xml_serializer.Deserializer._handle_m2m_field_node.default_manager",
+        "django.core.serializers.base.build_instance.default_manager",
+        "tests.admin_widgets.models.Inventory.default_manager",
+        "django.db.models.options.Options.default_manager.default_manager_name",
+        "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.AbstractModel.Meta.default_manager_name",
+        "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.PlainModel.Meta.default_manager_name",
+        "tests.managers_regress.models.Child4.default",
+        "django.db.models.base.ModelBase._default_manager",
+        "django.db.models.options.Options.default_manager"
+      ],
+      "ground_truth_files": [
+        "django/db/models/manager.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-06",
+      "query": "How does an incoming WSGI request get dispatched to the correct Django view function, end to end?",
+      "category": "C_architecture",
+      "elapsed_seconds": 15.409229755401611,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.staticfiles.storage.HashedFilesMixin.url_converter._line_at_position.end",
+          "node_type": "Variable",
+          "name": "end",
+          "source_location": "django/contrib/staticfiles/storage.py:264-264",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.expressions.models.Experiment.end",
+          "node_type": "Variable",
+          "name": "end",
+          "source_location": "tests/expressions/models.py:72-72",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.postgres_tests.models.HotelReservation.end",
+          "node_type": "Variable",
+          "name": "end",
+          "source_location": "tests/postgres_tests/models.py:208-208",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.templatetags.i18n.do_block_translate.end_tag_name",
+          "node_type": "Variable",
+          "name": "end_tag_name",
+          "source_location": "django/templatetags/i18n.py:579-579",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.select_related_regress.models.Connection.end",
+          "node_type": "Variable",
+          "name": "end",
+          "source_location": "tests/select_related_regress/models.py:28-33",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.utils.text.Truncator._text_chars.end_index",
+          "node_type": "Variable",
+          "name": "end_index",
+          "source_location": "django/utils/text.py:218-218",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.core.serializers.xml_serializer.Serializer.end_serialization",
+          "node_type": "Method",
+          "name": "end_serialization",
+          "source_location": "django/core/serializers/xml_serializer.py:41-47",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.db_functions.datetime.test_extract_trunc.DateFunctionTests.test_trunc_func.assertDatetimeKind.truncated_end",
+          "node_type": "Variable",
+          "name": "truncated_end",
+          "source_location": "tests/db_functions/datetime/test_extract_trunc.py:943-943",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.backends.base.operations.BaseDatabaseOperations.window_frame_range_start_end.end_",
+          "node_type": "Variable",
+          "name": "end_",
+          "source_location": "django/db/backends/base/operations.py:831-831",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.backends.base.operations.BaseDatabaseOperations.window_frame_rows_start_end.end_",
+          "node_type": "Variable",
+          "name": "end_",
+          "source_location": "django/db/backends/base/operations.py:812-812",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/staticfiles/storage.py",
+        "django/core/serializers/xml_serializer.py",
+        "django/db/backends/base/operations.py",
+        "django/templatetags/i18n.py",
+        "django/utils/text.py",
+        "tests/db_functions/datetime/test_extract_trunc.py",
+        "tests/expressions/models.py",
+        "tests/postgres_tests/models.py",
+        "tests/select_related_regress/models.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.staticfiles.storage.HashedFilesMixin.url_converter._line_at_position.end",
+        "tests.expressions.models.Experiment.end",
+        "tests.postgres_tests.models.HotelReservation.end",
+        "django.templatetags.i18n.do_block_translate.end_tag_name",
+        "tests.select_related_regress.models.Connection.end",
+        "django.utils.text.Truncator._text_chars.end_index",
+        "django.core.serializers.xml_serializer.Serializer.end_serialization",
+        "tests.db_functions.datetime.test_extract_trunc.DateFunctionTests.test_trunc_func.assertDatetimeKind.truncated_end",
+        "django.db.backends.base.operations.BaseDatabaseOperations.window_frame_range_start_end.end_",
+        "django.db.backends.base.operations.BaseDatabaseOperations.window_frame_rows_start_end.end_"
+      ],
+      "ground_truth_files": [
+        "django/core/handlers/base.py",
+        "django/core/handlers/wsgi.py",
+        "django/urls/resolvers.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.core.serializers.xml_serializer.Serializer.indent"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-07",
+      "query": "How does Django apply configured middleware to every request?",
+      "category": "C_architecture",
+      "elapsed_seconds": 15.640738725662231,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+          "node_type": "Method",
+          "name": "process_request",
+          "source_location": "django/contrib/auth/middleware.py:30-40",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "node_type": "Class",
+          "name": "AuthenticationMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:29-40",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.sync_middleware.middleware",
+          "node_type": "Function",
+          "name": "middleware",
+          "source_location": "tests/auth_tests/test_remote_user.py:24-25",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.conf.global_settings.SESSION_SAVE_EVERY_REQUEST",
+          "node_type": "Variable",
+          "name": "SESSION_SAVE_EVERY_REQUEST",
+          "source_location": "django/conf/global_settings.py:506-506",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_middleware.TestAuthenticationMiddleware.test_no_session",
+          "node_type": "Method",
+          "name": "test_no_session",
+          "source_location": "tests/auth_tests/test_middleware.py:48-56",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.runtests.ALWAYS_MIDDLEWARE",
+          "node_type": "Variable",
+          "name": "ALWAYS_MIDDLEWARE",
+          "source_location": "tests/runtests.py:90-96",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.middleware.__init__",
+          "node_type": "Module",
+          "name": "django.middleware.__init__",
+          "source_location": "django/middleware/__init__.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.middleware.http",
+          "node_type": "Module",
+          "name": "django.middleware.http",
+          "source_location": "django/middleware/http.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest.middleware",
+          "node_type": "Variable",
+          "name": "middleware",
+          "source_location": "tests/auth_tests/test_remote_user.py:32-32",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.conf.global_settings.MIDDLEWARE",
+          "node_type": "Variable",
+          "name": "MIDDLEWARE",
+          "source_location": "django/conf/global_settings.py:482-482",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/conf/global_settings.py",
+        "django/contrib/auth/middleware.py",
+        "django/middleware/__init__.py",
+        "django/middleware/http.py",
+        "tests/auth_tests/test_middleware.py",
+        "tests/auth_tests/test_remote_user.py",
+        "tests/runtests.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "tests.auth_tests.test_remote_user.sync_middleware.middleware",
+        "django.conf.global_settings.SESSION_SAVE_EVERY_REQUEST",
+        "tests.auth_tests.test_middleware.TestAuthenticationMiddleware.test_no_session",
+        "tests.runtests.ALWAYS_MIDDLEWARE",
+        "django.middleware.__init__",
+        "django.middleware.http",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.middleware",
+        "django.conf.global_settings.MIDDLEWARE"
+      ],
+      "ground_truth_files": [
+        "django/core/handlers/base.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "asgiref.sync.sync_to_async",
+        "django.contrib.auth.middleware.get_user",
+        "django.core.exceptions.ImproperlyConfigured",
+        "django.middleware.MiddlewareMixin",
+        "django.middleware.__init__.MiddlewareMixin",
+        "django.middleware.__init__.__all__",
+        "django.middleware.http.ConditionalGetMiddleware",
+        "django.utils.cache.get_conditional_response",
+        "django.utils.cache.set_response_etag",
+        "django.utils.functional.SimpleLazyObject",
+        "django.utils.http.parse_http_date_safe",
+        "django.utils.http.split_directive_names",
+        "inspect.iscoroutinefunction",
+        "inspect.markcoroutinefunction",
+        "tests.auth_tests.test_middleware.TestAuthenticationMiddleware.test_no_session.msg"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-08",
+      "query": "What happens when CsrfViewMiddleware detects a POST request without a valid CSRF token?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 15.527852535247803,
+      "retrieved_entities": [
+        {
+          "entity_id": "tests.cache.tests.csrf_view",
+          "node_type": "Function",
+          "name": "csrf_view",
+          "source_location": "tests/cache/tests.py:2845-2846",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware._check_token.request_csrf_token",
+          "node_type": "Variable",
+          "name": "request_csrf_token",
+          "source_location": "django/middleware/csrf.py:365-365",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login",
+          "node_type": "Method",
+          "name": "test_csrf_validation_passes_after_process_request_login",
+          "source_location": "tests/auth_tests/test_remote_user.py:93-120",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async",
+          "node_type": "Method",
+          "name": "test_csrf_validation_passes_after_process_request_login_async",
+          "source_location": "tests/auth_tests/test_remote_user.py:122-145",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "django.template.defaulttags.CsrfTokenNode.render.csrf_token",
+          "node_type": "Variable",
+          "name": "csrf_token",
+          "source_location": "django/template/defaulttags.py:77-77",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.template.library.InclusionNode.render.csrf_token",
+          "node_type": "Variable",
+          "name": "csrf_token",
+          "source_location": "django/template/library.py:400-400",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_with_csrf_middleware",
+          "node_type": "Method",
+          "name": "test_with_csrf_middleware",
+          "source_location": "tests/check_framework/test_security.py:146-147",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.core.checks.security.csrf._csrf_middleware",
+          "node_type": "Function",
+          "name": "_csrf_middleware",
+          "source_location": "django/core/checks/security/csrf.py:23-24",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.csrf_tests.test_context_processor.TestContextProcessor.test_force_token_to_string.token",
+          "node_type": "Variable",
+          "name": "token",
+          "source_location": "tests/csrf_tests/test_context_processor.py:13-13",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_no_csrf_middleware",
+          "node_type": "Method",
+          "name": "test_no_csrf_middleware",
+          "source_location": "tests/check_framework/test_security.py:139-143",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/core/checks/security/csrf.py",
+        "django/middleware/csrf.py",
+        "django/template/defaulttags.py",
+        "django/template/library.py",
+        "tests/auth_tests/test_remote_user.py",
+        "tests/cache/tests.py",
+        "tests/check_framework/test_security.py",
+        "tests/csrf_tests/test_context_processor.py"
+      ],
+      "retrieved_symbols": [
+        "tests.cache.tests.csrf_view",
+        "django.middleware.csrf.CsrfViewMiddleware._check_token.request_csrf_token",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async",
+        "django.template.defaulttags.CsrfTokenNode.render.csrf_token",
+        "django.template.library.InclusionNode.render.csrf_token",
+        "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_with_csrf_middleware",
+        "django.core.checks.security.csrf._csrf_middleware",
+        "tests.csrf_tests.test_context_processor.TestContextProcessor.test_force_token_to_string.token",
+        "tests.check_framework.test_security.CheckCSRFMiddlewareTest.test_no_csrf_middleware"
+      ],
+      "ground_truth_files": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_hits": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.125,
+      "conflicts": [],
+      "unknowns": [
+        "django.middleware.csrf._get_new_csrf_string",
+        "django.middleware.csrf._mask_cipher_secret",
+        "django.template.context_processors.csrf",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_client",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_secret",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_token",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.csrf_token_form",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.data",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.headers",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login.response",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.csrf_client",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.csrf_secret",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.csrf_token",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.csrf_token_form",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.data",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.headers",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async.response"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-09",
+      "query": "What does authenticate() return if the given credentials don't match any configured authentication backend?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 15.45303750038147,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.__init__.authenticate",
+          "node_type": "Function",
+          "name": "authenticate",
+          "source_location": "django/contrib/auth/__init__.py:124-144",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin.login.user",
+          "node_type": "Variable",
+          "name": "user",
+          "source_location": "django/test/client.py:841-841",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.__init__.aauthenticate",
+          "node_type": "Function",
+          "name": "aauthenticate",
+          "source_location": "django/contrib/auth/__init__.py:148-166",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.__init__._get_compatible_backends",
+          "node_type": "Function",
+          "name": "_get_compatible_backends",
+          "source_location": "django/contrib/auth/__init__.py:43-52",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin.login",
+          "node_type": "Method",
+          "name": "login",
+          "source_location": "django/test/client.py:832-845",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.BaseBackend.authenticate",
+          "node_type": "Method",
+          "name": "authenticate",
+          "source_location": "django/contrib/auth/backends.py:16-17",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+          "node_type": "Method",
+          "name": "test_view_with_inactive_login",
+          "source_location": "tests/test_client/tests.py:670-682",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.test_client.tests.ClientTest.test_view_with_inactive_login.credentials",
+          "node_type": "Variable",
+          "name": "credentials",
+          "source_location": "tests/test_client/tests.py:674-674",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.__init__._clean_credentials",
+          "node_type": "Function",
+          "name": "_clean_credentials",
+          "source_location": "django/contrib/auth/__init__.py:77-89",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.AllowAllUsersModelBackend.user_can_authenticate",
+          "node_type": "Method",
+          "name": "user_can_authenticate",
+          "source_location": "django/contrib/auth/backends.py:251-252",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/auth/__init__.py",
+        "django/contrib/auth/backends.py",
+        "django/test/client.py",
+        "tests/test_client/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.auth.__init__.authenticate",
+        "django.test.client.ClientMixin.login.user",
+        "django.contrib.auth.__init__.aauthenticate",
+        "django.contrib.auth.__init__._get_compatible_backends",
+        "django.test.client.ClientMixin.login",
+        "django.contrib.auth.backends.BaseBackend.authenticate",
+        "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+        "tests.test_client.tests.ClientTest.test_view_with_inactive_login.credentials",
+        "django.contrib.auth.__init__._clean_credentials",
+        "django.contrib.auth.backends.AllowAllUsersModelBackend.user_can_authenticate"
+      ],
+      "ground_truth_files": [
+        "django/contrib/auth/__init__.py"
+      ],
+      "file_level_hits": [
+        "django/contrib/auth/__init__.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.25,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.auth.__init__._clean_credentials.CLEANSED_SUBSTITUTE",
+        "django.contrib.auth.__init__._clean_credentials.SENSITIVE_CREDENTIALS",
+        "django.contrib.auth.__init__._get_backends",
+        "django.contrib.auth.authenticate",
+        "django.test.client.ClientMixin._login",
+        "django.utils.inspect.signature"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-10",
+      "query": "If a Django app's migrations aren't being applied in the order I expect, where should I look?",
+      "category": "E_debugging",
+      "elapsed_seconds": 15.906541585922241,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.models.sql.compiler.SQLCompiler.get_converters.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/db/models/sql/compiler.py:1520-1520",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.template.smartif.IfParser.__init__.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/template/smartif.py:168-168",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.test.html.Element._count.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/test/html.py:123-123",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.utils.timesince.timesince.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/utils/timesince.py:117-117",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.utils_tests.test_lazyobject.SimpleLazyObjectTestCase.test_none.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tests/utils_tests/test_lazyobject.py:394-394",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.migrations.writer.OperationWriter.serialize.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/db/migrations/writer.py:94-94",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.schema.tests.SchemaTests.test_alter_int_pk_to_int_unique.IntegerUnique.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tests/schema/tests.py:2420-2420",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.schema.tests.SchemaTests.test_alter_int_pk_to_int_unique.Transitional.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tests/schema/tests.py:2401-2401",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.httpwrappers.tests.HttpResponseTests.test_iterator_isnt_rewound.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tests/httpwrappers/tests.py:456-456",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.backends.tests.BackendTestCase.test_cursor_executemany_with_iterator.args",
+          "node_type": "Variable",
+          "name": "args",
+          "source_location": "tests/backends/tests.py:358-358",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/db/migrations/writer.py",
+        "django/db/models/sql/compiler.py",
+        "django/template/smartif.py",
+        "django/test/html.py",
+        "django/utils/timesince.py",
+        "tests/backends/tests.py",
+        "tests/httpwrappers/tests.py",
+        "tests/schema/tests.py",
+        "tests/utils_tests/test_lazyobject.py"
+      ],
+      "retrieved_symbols": [
+        "django.db.models.sql.compiler.SQLCompiler.get_converters.i",
+        "django.template.smartif.IfParser.__init__.i",
+        "django.test.html.Element._count.i",
+        "django.utils.timesince.timesince.i",
+        "tests.utils_tests.test_lazyobject.SimpleLazyObjectTestCase.test_none.i",
+        "django.db.migrations.writer.OperationWriter.serialize.i",
+        "tests.schema.tests.SchemaTests.test_alter_int_pk_to_int_unique.IntegerUnique.i",
+        "tests.schema.tests.SchemaTests.test_alter_int_pk_to_int_unique.Transitional.i",
+        "tests.httpwrappers.tests.HttpResponseTests.test_iterator_isnt_rewound.i",
+        "tests.backends.tests.BackendTestCase.test_cursor_executemany_with_iterator.args"
+      ],
+      "ground_truth_files": [
+        "django/db/migrations/executor.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-11",
+      "query": "Where would I investigate if a custom Manager isn't exposing a custom QuerySet method I defined?",
+      "category": "E_debugging",
+      "elapsed_seconds": 15.832139253616333,
+      "retrieved_entities": [
+        {
+          "entity_id": "tests.custom_managers.models.CustomManager",
+          "node_type": "Variable",
+          "name": "CustomManager",
+          "source_location": "tests/custom_managers/models.py:72-72",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.custom_managers.tests.CustomManagerTests.test_custom_manager_basic",
+          "node_type": "Method",
+          "name": "test_custom_manager_basic",
+          "source_location": "tests/custom_managers/tests.py:43-47",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_base_manager_inheritance.AbstractModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:253-253",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_base_manager_inheritance.PlainModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:261-261",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.AbstractModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:216-216",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.PlainModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:224-224",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_implicit_inheritance.AbstractModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:180-180",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_implicit_inheritance.PlainModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:186-186",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.managers_regress.tests.TestManagerInheritance.test_manager_no_duplicates.TestModel.custom_manager",
+          "node_type": "Variable",
+          "name": "custom_manager",
+          "source_location": "tests/managers_regress/tests.py:295-295",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.db.models.sql.compiler.SQLCompiler.get_converters.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "django/db/models/sql/compiler.py:1520-1520",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/db/models/sql/compiler.py",
+        "tests/custom_managers/models.py",
+        "tests/custom_managers/tests.py",
+        "tests/managers_regress/tests.py"
+      ],
+      "retrieved_symbols": [
+        "tests.custom_managers.models.CustomManager",
+        "tests.custom_managers.tests.CustomManagerTests.test_custom_manager_basic",
+        "tests.managers_regress.tests.TestManagerInheritance.test_base_manager_inheritance.AbstractModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_base_manager_inheritance.PlainModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.AbstractModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_default_manager_inheritance.PlainModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_implicit_inheritance.AbstractModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_implicit_inheritance.PlainModel.custom_manager",
+        "tests.managers_regress.tests.TestManagerInheritance.test_manager_no_duplicates.TestModel.custom_manager",
+        "django.db.models.sql.compiler.SQLCompiler.get_converters.i"
+      ],
+      "ground_truth_files": [
+        "django/db/models/manager.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-12",
+      "query": "How does registering a model in the admin (admin.site.register) connect it to Django's admin URLs?",
+      "category": "F_cross_file",
+      "elapsed_seconds": 15.888015270233154,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.admin.decorators.register",
+          "node_type": "Function",
+          "name": "register",
+          "source_location": "django/contrib/admin/decorators.py:97-128",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          }
+        },
+        {
+          "entity_id": "tests.admin_views.test_autocomplete_view.model_admin",
+          "node_type": "Function",
+          "name": "model_admin",
+          "source_location": "tests/admin_views/test_autocomplete_view.py:65-77",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.admin_custom_urls.models.site",
+          "node_type": "Variable",
+          "name": "site",
+          "source_location": "tests/admin_custom_urls/models.py:84-84",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.modeladmin.test_actions.AdminActionsTests.test_global_actions_description.admin_site",
+          "node_type": "Variable",
+          "name": "admin_site",
+          "source_location": "tests/modeladmin/test_actions.py:98-98",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.contrib.admin.decorators.register._model_admin_wrapper",
+          "node_type": "Function",
+          "name": "_model_admin_wrapper",
+          "source_location": "django/contrib/admin/decorators.py:112-126",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.admin_views.urls.urlpatterns",
+          "node_type": "Variable",
+          "name": "urlpatterns",
+          "source_location": "tests/admin_views/urls.py:12-44",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.admin_registration.tests.TestRegistrationDecorator",
+          "node_type": "Class",
+          "name": "TestRegistrationDecorator",
+          "source_location": "tests/admin_registration/tests.py:113-170",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.core.checks.registry.Tags.admin",
+          "node_type": "Variable",
+          "name": "admin",
+          "source_location": "django/core/checks/registry.py:13-13",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.modeladmin.test_checks.CheckTestCase.assertIsValid",
+          "node_type": "Method",
+          "name": "assertIsValid",
+          "source_location": "tests/modeladmin/test_checks.py:52-56",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.modeladmin.test_checks.CheckTestCase.assertIsInvalid.admin_obj",
+          "node_type": "Variable",
+          "name": "admin_obj",
+          "source_location": "tests/modeladmin/test_checks.py:31-31",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/contrib/admin/decorators.py",
+        "django/core/checks/registry.py",
+        "tests/admin_custom_urls/models.py",
+        "tests/admin_registration/tests.py",
+        "tests/admin_views/test_autocomplete_view.py",
+        "tests/admin_views/urls.py",
+        "tests/modeladmin/test_actions.py",
+        "tests/modeladmin/test_checks.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.admin.decorators.register",
+        "tests.admin_views.test_autocomplete_view.model_admin",
+        "tests.admin_custom_urls.models.site",
+        "tests.modeladmin.test_actions.AdminActionsTests.test_global_actions_description.admin_site",
+        "django.contrib.admin.decorators.register._model_admin_wrapper",
+        "tests.admin_views.urls.urlpatterns",
+        "tests.admin_registration.tests.TestRegistrationDecorator",
+        "django.core.checks.registry.Tags.admin",
+        "tests.modeladmin.test_checks.CheckTestCase.assertIsValid",
+        "tests.modeladmin.test_checks.CheckTestCase.assertIsInvalid.admin_obj"
+      ],
+      "ground_truth_files": [
+        "django/contrib/admin/options.py",
+        "django/contrib/admin/sites.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.admin.ModelAdmin",
+        "django.contrib.admin.decorators.register._model_admin_wrapper.admin_site",
+        "django.contrib.admin.sites.AdminSite",
+        "django.contrib.admin.sites.site",
+        "tests.admin_registration.tests.TestRegistrationDecorator.setUp",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_basic_registration",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_custom_site_not_an_admin_site",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_custom_site_registration",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_empty_models_list_registration_fails",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_multiple_registration",
+        "tests.admin_registration.tests.TestRegistrationDecorator.test_wrapped_class_not_a_model_admin",
+        "tests.modeladmin.test_checks.CheckTestCase.assertIsValid.admin_obj"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-13",
+      "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "category": "G_negative",
+      "elapsed_seconds": 15.267576932907104,
+      "retrieved_entities": [
+        {
+          "entity_id": "tests.admin_scripts.tests.ManageRunserver.test_hide_production_warning_with_environment_variable",
+          "node_type": "Method",
+          "name": "test_hide_production_warning_with_environment_variable",
+          "source_location": "tests/admin_scripts/tests.py:1686-1702",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_mail.MailersProductionBackendTests.test_production_backends",
+          "node_type": "Method",
+          "name": "test_production_backends",
+          "source_location": "tests/check_framework/test_mail.py:73-83",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "tests.servers.test_liveserverthread.LiveServerThreadTest.test_server_class.server",
+          "node_type": "Variable",
+          "name": "server",
+          "source_location": "tests/servers/test_liveserverthread.py:45-45",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.http.response.HttpResponseServerError",
+          "node_type": "Class",
+          "name": "HttpResponseServerError",
+          "source_location": "django/http/response.py:736-737",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        },
+        {
+          "entity_id": "tests.servers.test_liveserverthread.LiveServerThreadTest.test_server_class.MyServerThread.server_class",
+          "node_type": "Variable",
+          "name": "server_class",
+          "source_location": "tests/servers/test_liveserverthread.py:39-39",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.queries.test_query.TestQuery.test_simple_query.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "tests/queries/test_query.py:29-29",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.servers.tests.CloseConnectionTestLiveServerThread.server_class",
+          "node_type": "Variable",
+          "name": "server_class",
+          "source_location": "tests/servers/tests.py:59-59",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "django.http.response",
+          "node_type": "Module",
+          "name": "django.http.response",
+          "source_location": "django/http/response.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "django.http.request",
+          "node_type": "Module",
+          "name": "django.http.request",
+          "source_location": "django/http/request.py:1",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "tests.check_framework.test_mail.MailersProductionBackendTests.test_production_backends.production_backends",
+          "node_type": "Variable",
+          "name": "production_backends",
+          "source_location": "tests/check_framework/test_mail.py:74-77",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "django/http/request.py",
+        "django/http/response.py",
+        "tests/admin_scripts/tests.py",
+        "tests/check_framework/test_mail.py",
+        "tests/queries/test_query.py",
+        "tests/servers/test_liveserverthread.py",
+        "tests/servers/tests.py"
+      ],
+      "retrieved_symbols": [
+        "tests.admin_scripts.tests.ManageRunserver.test_hide_production_warning_with_environment_variable",
+        "tests.check_framework.test_mail.MailersProductionBackendTests.test_production_backends",
+        "tests.servers.test_liveserverthread.LiveServerThreadTest.test_server_class.server",
+        "django.http.response.HttpResponseServerError",
+        "tests.servers.test_liveserverthread.LiveServerThreadTest.test_server_class.MyServerThread.server_class",
+        "tests.queries.test_query.TestQuery.test_simple_query.where",
+        "tests.servers.tests.CloseConnectionTestLiveServerThread.server_class",
+        "django.http.response",
+        "django.http.request",
+        "tests.check_framework.test_mail.MailersProductionBackendTests.test_production_backends.production_backends"
+      ],
+      "ground_truth_files": [],
+      "file_level_hits": [],
+      "file_level_recall": null,
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [
+        "asgiref.sync.async_to_sync",
+        "asgiref.sync.sync_to_async",
+        "codecs",
+        "copy",
+        "datetime",
+        "django.conf.settings",
+        "django.core.checks.mail.check_mailers_production_backend",
+        "django.core.exceptions.BadRequest",
+        "django.core.exceptions.DisallowedHost",
+        "django.core.exceptions.DisallowedRedirect",
+        "django.core.exceptions.ImproperlyConfigured",
+        "django.core.exceptions.RequestDataTooBig",
+        "django.core.exceptions.TooManyFieldsSent",
+        "django.core.files.uploadhandler",
+        "django.core.serializers.json.DjangoJSONEncoder",
+        "django.core.signals",
+        "django.core.signing",
+        "django.http.cookie.SimpleCookie",
+        "django.http.multipartparser.MultiPartParser",
+        "django.http.multipartparser.MultiPartParserError",
+        "django.http.multipartparser.TooManyFilesSent",
+        "django.http.request.HttpHeaders",
+        "django.http.request.HttpRequest",
+        "django.http.request.MediaType",
+        "django.http.request.QueryDict",
+        "django.http.request.RAISE_ERROR",
+        "django.http.request.RawPostDataException",
+        "django.http.request.UnreadablePostError",
+        "django.http.request.bytes_to_text",
+        "django.http.request.host_validation_re",
+        "django.http.request.split_domain_port",
+        "django.http.request.validate_host",
+        "django.http.response.BadHeaderError",
+        "django.http.response.FileResponse",
+        "django.http.response.Http404",
+        "django.http.response.HttpResponse",
+        "django.http.response.HttpResponseBadRequest",
+        "django.http.response.HttpResponseBase",
+        "django.http.response.HttpResponseForbidden",
+        "django.http.response.HttpResponseGone",
+        "django.http.response.HttpResponseNotAllowed",
+        "django.http.response.HttpResponseNotFound",
+        "django.http.response.HttpResponseNotModified",
+        "django.http.response.HttpResponsePermanentRedirect",
+        "django.http.response.HttpResponseRedirect",
+        "django.http.response.HttpResponseRedirectBase",
+        "django.http.response.HttpResponseServerError.status_code",
+        "django.http.response.JsonResponse",
+        "django.http.response.ResponseHeaders",
+        "django.http.response.StreamingHttpResponse",
+        "django.http.response._charset_from_content_type_re",
+        "django.http.response._control_chars_re",
+        "django.utils.datastructures.CaseInsensitiveMapping",
+        "django.utils.datastructures.ImmutableList",
+        "django.utils.datastructures.MultiValueDict",
+        "django.utils.deprecation.RemovedInDjango71Warning",
+        "django.utils.encoding.escape_uri_path",
+        "django.utils.encoding.iri_to_uri",
+        "django.utils.functional.cached_property",
+        "django.utils.http.MAX_URL_REDIRECT_LENGTH",
+        "django.utils.http.content_disposition_header",
+        "django.utils.http.http_date",
+        "django.utils.http.is_same_domain",
+        "django.utils.http.parse_header_parameters",
+        "django.utils.regex_helper._lazy_re_compile",
+        "django.utils.timezone",
+        "django.utils.version.get_docs_version",
+        "django.utils.warnings.django_file_prefixes",
+        "email.header.Header",
+        "http.client.responses",
+        "io",
+        "io.BytesIO",
+        "itertools.chain",
+        "json",
+        "mimetypes",
+        "operator",
+        "os",
+        "re",
+        "sys",
+        "tests.admin_scripts.tests.ManageRunserver.test_hide_production_warning_with_environment_variable.docs_version",
+        "time",
+        "urllib.parse.parse_qsl",
+        "urllib.parse.quote",
+        "urllib.parse.urlencode",
+        "urllib.parse.urljoin",
+        "urllib.parse.urlsplit",
+        "warnings"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "django-14",
+      "query": "Where does Django implement a built-in GraphQL API layer?",
+      "category": "G_negative",
+      "elapsed_seconds": 15.510115623474121,
+      "retrieved_entities": [
+        {
+          "entity_id": "tests.migrations.test_autodetector.AutodetectorTests.test_arrange_for_graph.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_autodetector.py:1277-1277",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_autodetector.AutodetectorTests.test_arrange_for_graph_with_multiple_initial.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_autodetector.py:1317-1317",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_autodetector.AutodetectorTests.test_custom_migration_name.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_autodetector.py:1367-1367",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_autodetector.AutodetectorTests.test_trim_apps.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_autodetector.py:1355-1355",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_executor.ExecutorUnitTests.test_backwards_nothing_to_do.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_executor.py:988-988",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_executor.ExecutorUnitTests.test_minimize_rollbacks.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_executor.py:893-893",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_executor.ExecutorUnitTests.test_minimize_rollbacks_branchy.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_executor.py:935-935",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_graph.GraphTests.test_circular_graph.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_graph.py:150-150",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_graph.GraphTests.test_circular_graph_2.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_graph.py:166-166",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tests.migrations.test_graph.GraphTests.test_complex_graph.graph",
+          "node_type": "Variable",
+          "name": "graph",
+          "source_location": "tests/migrations/test_graph.py:80-80",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "tests/migrations/test_autodetector.py",
+        "tests/migrations/test_executor.py",
+        "tests/migrations/test_graph.py"
+      ],
+      "retrieved_symbols": [
+        "tests.migrations.test_autodetector.AutodetectorTests.test_arrange_for_graph.graph",
+        "tests.migrations.test_autodetector.AutodetectorTests.test_arrange_for_graph_with_multiple_initial.graph",
+        "tests.migrations.test_autodetector.AutodetectorTests.test_custom_migration_name.graph",
+        "tests.migrations.test_autodetector.AutodetectorTests.test_trim_apps.graph",
+        "tests.migrations.test_executor.ExecutorUnitTests.test_backwards_nothing_to_do.graph",
+        "tests.migrations.test_executor.ExecutorUnitTests.test_minimize_rollbacks.graph",
+        "tests.migrations.test_executor.ExecutorUnitTests.test_minimize_rollbacks_branchy.graph",
+        "tests.migrations.test_graph.GraphTests.test_circular_graph.graph",
+        "tests.migrations.test_graph.GraphTests.test_circular_graph_2.graph",
+        "tests.migrations.test_graph.GraphTests.test_complex_graph.graph"
+      ],
+      "ground_truth_files": [],
+      "file_level_hits": [],
+      "file_level_recall": null,
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    }
+  ]
+}

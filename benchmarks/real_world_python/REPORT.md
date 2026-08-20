@@ -1,10 +1,38 @@
 # Veyra Real-World Python Benchmark -- Baseline Report (v1)
 
-**Status: DRAFT -- results sections pending baseline pipeline completion.**
+**Status: COMPLETE.** All 4 repositories analyzed, all 56 queries scored.
 
 ## 1. Executive Summary
 
-_[TODO: fill in after scoring is complete]_
+Veyra's static-analysis and retrieval pipelines (Phases 2.1-2.8, 4.1-4.7) were run against four real,
+unmodified, pinned-commit open-source Python repositories (Flask, SQLAlchemy, FastAPI, Django) and scored
+against 56 hand-authored, independently-verified ground-truth queries. The honest result: **Veyra's current
+implementation is not yet reliable enough to justify the next development phase without further work on
+retrieval quality.**
+
+The first real-world run immediately found and required fixing a pipeline-blocking bug (`build_retrieval_index()`
+crashed on any repository containing an ordinary variable assignment -- see Section 6). Once fixed, retrieval
+quality itself proved to be the dominant weakness, not a fluke of one repository: the fraction of queries
+where the correct file was **never retrieved at all** rose from 25% (Flask, smallest repo) to 50% (FastAPI)
+to 67% (SQLAlchemy and Django, the two largest, landing at nearly the same miss rate despite very different
+codebases). Fully-correct answers were rare and repository-dependent -- **SQLAlchemy produced zero fully
+correct answers across all 12 answerable queries** -- and **all 8 of the 8 negative/boundary queries across
+all 4 repositories were mishandled**: Veyra's retrieval always returns its best-effort top 10 results with no
+relevance threshold, so a question about functionality that doesn't exist gets a confident-looking (but wrong)
+answer instead of "no relevant evidence found." Three of eight negative queries additionally retrieved real
+entities whose *names* could plausibly mislead a reader into confirming the query's false premise.
+
+Separately, and independently of retrieval quality, Veyra's static-analysis pipeline showed severe,
+code-structure-dependent performance problems: SQLAlchemy (668 files) took 2h 45m to analyze -- 19x longer
+than FastAPI (1,138 files, more code) took for its 522 seconds. Simply getting to a queryable retrieval index
+for SQLAlchemy or Django took **close to 4 hours each**, dominated by per-call SQLite connection overhead that
+compounds as the graph grows.
+
+None of this means the architecture is unsound. Every failure traced to a specific, fixable mechanism (TF-IDF
+document-length bias, no stopword filtering, no source/test/docs weighting, no confidence threshold, per-call
+storage overhead) -- not to a fundamental flaw in the retrieval design, which correctly never fabricated a
+class, function, or fact that doesn't exist anywhere in any of the four repositories. See Section 14 for the
+full honest conclusion and Section 15 for the recommended next step.
 
 ## 2. Experimental Setup
 
@@ -75,11 +103,71 @@ a benchmark design flaw -- and it is itself one of this report's findings (Secti
 
 ## 6. Baseline Results
 
-_[TODO: fill in after scoring is complete -- see results/evaluation_table.json and results/*_static_audit.json]_
+**The pipeline did not run successfully on first contact with real code.** `build_retrieval_index()` crashed
+with `TypeError: 'Assign' can't have docstrings` on Flask -- the smallest, first repository tried -- before a
+single query could execute. Root cause: `_extract_docstring()` (`retrieval/index.py`) assumed every node's
+parsed `lexical_representation` began with a `def`/`class` statement, which is false for `Variable`-typed
+nodes (36.6% of Flask's nodes are exactly this shape -- an ordinary module-level assignment). Full
+documentation (before/problem/root-cause/change/after/regression-check) is in `FINDINGS_experimental_fixes.md`.
+A minimal, additive type-guard fix was applied on this experiment branch only; Veyra's full test suite
+(421 passed, 26 skipped) was re-run and showed zero regressions, both immediately before and after the
+change. **Every result below is from the fixed pipeline** -- the true baseline (zero repositories analyzable
+at all) is recorded above for completeness but is not itself informative about retrieval quality.
+
+| Repository | Static analysis | Retrieval index build | Total time to queryable | Entities indexed |
+|---|---|---|---|---|
+| Flask | 80s | 8s | ~1.5 min | 2,607 |
+| FastAPI | 522s (8.7 min) | 142s | ~11 min | 13,891 |
+| SQLAlchemy | 9,926s (2h 45m) | 3,889s (65 min) | **~3h 50m** | 87,782 |
+| Django | 10,857s (3h 1m) | 4,054s (67.6 min) | **~4h 9m** | 92,679 |
+
+| Repository | Answerable queries: complete miss | Fully correct | Partial | Wrong | Negative queries handled correctly |
+|---|---|---|---|---|---|
+| Flask | 3/12 (25%) | 2/12 | 6/12 | 4/12 | 0/2 |
+| FastAPI | 6/12 (50%) | 2/12 | 0/12 | 10/12 | 0/2 |
+| SQLAlchemy | 8/12 (67%) | **0/12** | 3/12 | 9/12 | 0/2 |
+| Django | 8/12 (67%) | 3/12 | 2/12 | 7/12 | 0/2 |
+| **All 4 combined** | **25/48 (52%)** | **7/48 (15%)** | **11/48 (23%)** | **30/48 (62%)** | **0/8 (0%)** |
+
+Failure-category breakdown across all 56 queries: 22 `retrieval_failure` (correct entity never retrieved at
+all), 15 `ranking_failure` (correct file/entity retrieved but outranked by irrelevant matches or missing at
+the symbol level despite file-level recall), 8 `reasoning_failure` (all 8 negative queries -- no query in any
+other category was scored this way), 3 unsupported-claim flags on negative queries where a retrieved entity's
+name plausibly confirmed a false premise.
 
 ## 7. Per-Repository Results
 
-_[TODO]_
+**Flask (2,607 entities, smallest repo):** the strongest results in the benchmark. 8 of 12 answerable queries
+were at least partially correct, and its complete-miss rate (25%) was the lowest measured. Failures here
+established the baseline mechanism (TF-IDF document-length bias favoring short-named `Variable` nodes) that
+every larger repository's worse results trace back to.
+
+**FastAPI (13,891 entities):** complete-miss rate doubled to 50% despite far more code to search from. The
+repository's own structure -- a large `docs_src/` tree of near-duplicate tutorial variants and a large test
+suite, both weighted identically to core library code -- compounds the Flask-level bias rather than
+introducing a new mechanism. Notably 0 of 12 queries landed as "PARTIAL" -- FastAPI's results were either
+fully right or fully wrong, no middle ground.
+
+**SQLAlchemy (87,782 entities):** the worst *answer-quality* result -- zero fully correct answers across all
+12 answerable queries, a 67% complete-miss rate, and the most severe static-analysis performance pathology
+measured (2h 45m for only 668 files, far slower per-file than any other repository, traced to heavy
+`@overload`-based typing and dynamic class construction defeating the extractor's same-file symbol
+resolution). Two SQLAlchemy-specific mechanisms were newly identified here: no stopword filtering (queries'
+own incidental "a" matched dozens of same-named test variables) and incidental codebase-vocabulary collisions
+(two queries about unrelated classes returned near-identical results because both shared the word "defined,"
+which collides with an unrelated `is_user_defined` naming convention in this specific codebase).
+
+**Django (92,679 entities, most files):** tied SQLAlchemy's 67% complete-miss rate despite a very different
+code structure, landing at a similar total entity count via many more, on average smaller, files (tests,
+migrations, simple views) rather than SQLAlchemy's denser per-file structure -- confirming total entity count,
+not file count, is what drives both the performance and retrieval-quality degradation. Also produced the
+clearest demonstrations yet of the no-stopword-filtering mechanism: this benchmark's own natural query
+phrasing ("...end to end?", "...where I expect") collided with Django's extremely common `end`/`i` local
+variable names, burying two otherwise-reasonable queries under pure noise. Django also supplied this
+benchmark's one genuine positive control: unlike Flask/FastAPI's CSRF negative queries, Django *does*
+implement CSRF protection, and `django-03` retrieved it correctly and directly -- confirming the negative-query
+failures elsewhere are a real false-premise-detection gap, not Veyra being generally unable to handle
+CSRF-related queries.
 
 ## 8. Per-Query Results
 
@@ -89,14 +177,15 @@ Full machine-readable table: `results/evaluation_table.json`. Raw retrieval outp
 ## 9. Failure Analysis
 
 Per-query scoring and reasoning is in `results/manual_scores/<repo>.json`; this section summarizes the
-patterns behind the failures, established from Flask (12 answerable + 2 negative queries), FastAPI (12 + 2),
-and SQLAlchemy (12 + 2), with Django scoring following the same methodology once its query run completes.
+patterns behind the failures, established across all four repositories: Flask, FastAPI, SQLAlchemy, and
+Django (12 answerable + 2 negative queries each, 56 total).
 
 **Complete retrieval misses (correct file never in top 10) are common and get sharply worse, not better, as
-repo/entity count grows:** Flask 3/12 (25%), FastAPI 6/12 (50%), SQLAlchemy 8/12 (67%) -- a clean, monotonic
-trend tracking indexed-entity count (2,607 -> 13,891 -> 87,782), the opposite of what "more code to search"
-alone would predict, and traceable to specific, root-caused mechanisms below rather than a vague "harder on
-bigger repos" story.
+repo/entity count grows:** Flask 3/12 (25%), FastAPI 6/12 (50%), SQLAlchemy 8/12 (67%), Django 8/12 (67%) --
+a clean trend tracking indexed-entity count (2,607 -> 13,891 -> 87,782 -> 92,679) that plateaus once the two
+largest, similarly-sized repositories land at nearly the same miss rate despite very different code
+structures. This is the opposite of what "more code to search" alone would predict, and traceable to
+specific, root-caused mechanisms below rather than a vague "harder on bigger repos" story.
 
 **Root cause 1 -- TF-IDF favors short documents over the correct answer.** `search_semantic()`
 (`veyra/retrieval/search.py`) scores entities by cosine similarity over TF-IDF vectors built from
@@ -237,11 +326,15 @@ index on an 87K-entity codebase took nearly 4 hours end to end (static analysis 
    patterns 1-3 fills the top 10 regardless of whether anything is actually relevant, and in a real-world
    codebase's large surface area, some of that noise's *names* often happen to superficially support the
    query's false premise (`RoutingSession`, `URL.password`, `docs_src.sql_databases`).
-6. A natural-language query's own stopwords ("a", "the", "is") get real TF-IDF weight with no filtering,
-   and in a large enough codebase there is usually *some* real identifier that collides with one of them.
-7. Retrieval quality (complete-miss rate) degrades monotonically with repo/entity size across all three
-   repositories measured so far (25% -> 50% -> 67%), and getting to a queryable index at all becomes a
-   multi-hour undertaking well before code-search quality would be the limiting factor for practical use.
+6. A natural-language query's own stopwords and pronouns ("a", "the", "is", "I") get real TF-IDF weight with
+   no filtering, and in a large enough codebase there is usually *some* real identifier that collides with
+   one of them -- confirmed repeatedly and cleanly: SQLAlchemy's "a" matched dozens of same-named test
+   variables (`sqla-12`); Django's "...end to end?" and "...where I expect" collided with the common
+   variable names `end` and `i` (`django-06`, `django-10`).
+7. Retrieval quality (complete-miss rate) degrades with repo/entity size and plateaus around 67% at the
+   largest scales measured (25% -> 50% -> 67% -> 67% across Flask/FastAPI/SQLAlchemy/Django), and getting to
+   a queryable index at all becomes a multi-hour undertaking (up to ~4 hours for the two largest repos here)
+   well before code-search quality would even be the limiting factor for practical use.
 
 ## 13. Reproducibility Information
 
@@ -265,8 +358,68 @@ experiment branch.
 
 ## 14. Honest Conclusion
 
-_[TODO]_
+**Not yet reliable.** Across 56 real developer-style questions against four real, well-known, well-maintained
+open-source Python repositories, Veyra's retrieval pipeline found the fully correct answer only 15% of the
+time (7/48 answerable queries), got it partially right 23% of the time, and was simply wrong 62% of the time
+-- and on the two largest repositories tested, the correct file was never even retrieved for 67% of queries.
+Every one of the 8 negative/boundary queries (asking about functionality that provably does not exist) was
+mishandled, with no repository-independent exception. This is worse than "promising but limited" would
+suggest, and better than "not yet reliable" might imply if that phrase is read as "the architecture is
+broken" -- it is not. Every failure mode found traces to a specific, identified, narrow mechanism in the
+retrieval layer (TF-IDF document-length bias, no stopword filtering, no source/test/docs weighting, no
+confidence threshold surfaced to callers) or the storage layer (per-call SQLite connection overhead
+compounding at scale) -- not to Veyra's core VBG/evidence/verification-state architecture, which held up
+completely: no hallucinated entities, no fabricated facts, and correct behavior on the one positive control
+(Django's real CSRF implementation) that mirrored the negative queries elsewhere.
+
+The static-analysis and question-verification machinery (Milestones 1-3, previously validated only against
+Veyra's own hand-built fixtures and its own test suite) also proved genuinely fragile on first real-world
+contact -- a benchmark-blocking crash within the first repository tried, and a severe, code-structure-sensitive
+performance problem that makes the two largest repositories here take the better part of a working day each
+to become queryable. Neither of these was visible from the 421-passing-tests state the project was in before
+this benchmark, which is exactly what "don't tell me Veyra is good simply because the tests pass" was
+asking this benchmark to check.
+
+**Direct answer to the benchmark's own question:** "Is Veyra actually working well enough on real-world
+Python repositories to justify the next development phase?" -- **Not yet, on retrieval quality specifically.**
+The underlying architecture (static extraction, evidence/verification-state model, grounding contract) is
+sound and is not what's holding results back. Retrieval ranking is what's holding results back, and every
+identified cause is a scoped, understood engineering problem, not an open research question.
 
 ## 15. Recommended Next Step
 
-_[TODO]_
+Do not proceed to broader validation (more repositories, a second language, real LLM calibration) before
+addressing the retrieval-quality findings from this benchmark -- doing so would only reproduce the same
+failure modes at larger scale, at higher cost, with less clarity about the cause (as this benchmark itself
+demonstrated: without root-causing the length-bias/stopword/weighting mechanisms directly, the aggregate
+numbers alone would have just looked like "gets worse with size" without an actionable fix).
+
+Concretely, in priority order:
+
+1. **Surface `ScoredEntity.score` through `RetrievedContext`/`GroundingContext`** and let a caller (or a
+   simple threshold inside `retrieve_context()`) suppress low-confidence retrievals instead of always
+   returning top-k regardless of relevance. This single change directly addresses the negative-query failure
+   mode (0/8 in this benchmark) and is the smallest, most contained fix of everything found here.
+2. **Add stopword filtering to `_tokenize()`** (`retrieval/search.py`). A short, standard English stopword
+   list would have prevented several of this benchmark's cleanest failures (`sqla-12`'s "a", `django-06`'s
+   "end", `django-10`'s "I").
+3. **Address the TF-IDF document-length bias** -- either normalize differently (e.g. weight by something
+   other than raw term frequency for very short documents) or give `Class`/`Method`/`Function` nodes a
+   ranking floor relative to `Variable` nodes for structurally-oriented queries. This is the single largest
+   contributor to complete misses across every repository tested.
+4. **Weight or segment by source category** (core package vs. `tests/`, docs/tutorial trees, CI/tooling
+   scripts) so a repository's ordinary project structure stops actively degrading retrieval quality as it
+   grows. This was the specific, evidenced reason FastAPI and the two largest repos performed worse than
+   Flask despite having more code to search.
+5. **Investigate and fix the static-pipeline and `build_retrieval_index()` performance pathologies**
+   separately from retrieval quality -- both are real blockers to practical use regardless of how good
+   ranking becomes, and the SQLAlchemy-vs-FastAPI comparison in this report gives a concrete, reproducible
+   starting point (per-call `VBGStore._connect()` overhead compounding with graph size, and specific code
+   patterns like heavy `@overload` usage inflating unresolved-call counts).
+
+Once these are addressed, re-running this exact benchmark (same repos, same commits, same 56 queries,
+`scripts/run_static_pipeline.py` + `scripts/run_queries.py` + `scripts/merge_and_score.py`) gives a direct,
+apples-to-apples measurement of whether they actually moved the numbers -- that re-run, not a new benchmark,
+should be the next real validation step. Only after retrieval quality is materially better here should
+broader real-world validation (more repositories, a second language) or the deferred M5 items (real LLM
+calibration, structural-accuracy ground truth against a labeled repo) be revisited.
