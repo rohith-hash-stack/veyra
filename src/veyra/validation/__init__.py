@@ -4,6 +4,7 @@ from .git_regression import GitRegressionReport, audit_git_regression
 from .performance import PerformanceAuditReport, StageTiming, audit_performance
 from .question_quality import QuestionQualityReport, audit_question_quality
 from .security_audit import SecurityBenchmarkReport, SecurityPropertyResult, audit_security_coverage
+from .traceability import Requirement, TraceabilityReport, TraceabilityResult, check_traceability
 
 __all__ = [
     "QuestionQualityReport",
@@ -20,4 +21,8 @@ __all__ = [
     "SecurityBenchmarkReport",
     "SecurityPropertyResult",
     "audit_security_coverage",
+    "Requirement",
+    "TraceabilityReport",
+    "TraceabilityResult",
+    "check_traceability",
 ]
