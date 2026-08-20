@@ -63,13 +63,14 @@
     "notes": "CHECKPOINT B: the exact target, orm.strategies._LazyLoader, retrieved at rank3 alongside the closely related _AbstractRelationshipLoader and _NoLoader."
   },
   "sqla-08": {
-    "final_answer_correct": "PARTIAL",
+    "final_answer_correct": false,
     "unsupported_claim": false,
-    "localization_correct": "PARTIAL",
+    "localization_correct": false,
     "multi_hop": false,
     "failure_category": "ranking_failure",
     "checkpoint_b_change": "unchanged (PARTIAL, different specific entity than baseline) -- CORRECTED after initial review only checked the first 8 of 10 accepted entities and missed Session.commit at position 10",
-    "notes": "CHECKPOINT B (corrected): Session.commit IS retrieved (position 10, previously missed in review), along with SessionTransaction and the Session class. Session.flush (the other of the 2 needed methods) is still not present, so PARTIAL not TRUE."
+    "final_hardening_change": "REGRESSED (was PARTIAL at Checkpoint B -- Session.commit at position 10 -- now FALSE, neither needed method survives) -- a real, explained ranking-crowding cost of structural corroboration, not a bug",
+    "notes": "CHECKPOINT B (corrected): Session.commit IS retrieved (position 10, previously missed in review), along with SessionTransaction and the Session class. Session.flush (the other of the 2 needed methods) is still not present, so PARTIAL not TRUE. FINAL HARDENING: lib.sqlalchemy.ext.asyncio.session.AsyncSessionTransaction newly clears the confidence bar via structural corroboration (its own coverage was below the floor; a real CONTAINS neighbor's coverage clears it) with a genuinely higher BM25 score (30.08) than Session.commit's (29.03) -- at this query's top_k=10, AsyncSessionTransaction now wins the last slot and Session.commit (position 11) is crowded out entirely, so neither of the 2 needed methods (flush, commit) is retrieved any more. Root-caused directly, not a mystery: this is the real ranking-crowding cost the Final Hardening Pass's own directive (area D) anticipated -- recovering one genuine match can cost a top_k slot to another candidate that also newly clears the (loosened) bar, when that candidate's raw score is competitive. Does not change the fully-correct (TRUE) tally (PARTIAL was never counted there), but is a real, disclosed quality regression on this specific query."
   },
   "sqla-09": {
     "final_answer_correct": false,
@@ -96,7 +97,8 @@
     "multi_hop": true,
     "failure_category": "ranking_failure",
     "checkpoint_b_change": "IMPROVED (was FALSE/complete miss at baseline; now PARTIAL)",
-    "notes": "CHECKPOINT B: RelationshipProperty (relationships.py) and _JoinedLoader (strategies.py) retrieved -- both real, closely-related entities in the right two files, though not the exact _LazyLoader/relationship() symbols named."
+    "final_hardening_change": "unchanged (still PARTIAL, but stronger evidence) -- _LazyLoader, the query's first named symbol, now directly retrieved via structural corroboration",
+    "notes": "CHECKPOINT B: RelationshipProperty (relationships.py) and _JoinedLoader (strategies.py) retrieved -- both real, closely-related entities in the right two files, though not the exact _LazyLoader/relationship() symbols named. FINAL HARDENING: lib.sqlalchemy.orm.strategies._LazyLoader (rank5, score 26.97) -- the query's own first named symbol -- now directly retrieved. relationship() (the second named symbol, an ORM constructor function) is still not present (dynamic_loader, a different function in the same file, is retrieved instead) -- 1 of 2 exact symbols now present, still PARTIAL not TRUE, but on stronger evidence than Checkpoint B's file-level-only match."
   },
   "sqla-12": {
     "final_answer_correct": true,
@@ -125,6 +127,7 @@
     "negative_query_handled_correctly": false,
     "failure_category": "reasoning_failure",
     "checkpoint_b_change": "unchanged (still leaks weak entities)",
-    "notes": "CHECKPOINT B: PyODBCConnector and BinaryExpression both clear the confidence bar despite being unrelated to password hashing/authentication -- this repo's version of the same negative-query leak flask-14 shows."
+    "final_hardening_change": "unchanged (already leaking) -- structural corroboration adds one more leaked entity (PyODBCConnector.create_connect_args, corroborated by its already-leaking parent class) but the query was already incorrectly handled at Checkpoint B, so this does not change the negative-query grade",
+    "notes": "CHECKPOINT B: PyODBCConnector and BinaryExpression both clear the confidence bar despite being unrelated to password hashing/authentication -- this repo's version of the same negative-query leak flask-14 shows. FINAL HARDENING: measured directly against the real, updated mechanism -- verified this query was already leaking before this pass, so the negative-query headline grade (6/8) is unaffected by the new mechanism."
   }
 }

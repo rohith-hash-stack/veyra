@@ -1,0 +1,900 @@
+{
+  "repo_name": "flask",
+  "commit_sha": "d318b683471101618febed18996405ad26462110",
+  "results": [
+    {
+      "query_id": "flask-01",
+      "query": "Where is the Flask application class defined?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/json/provider.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sessions.py",
+        "src/flask/testing.py",
+        "src/flask/views.py",
+        "src/flask/wrappers.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.app.App",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.json.provider.JSONProvider",
+        "src.flask.app.Flask",
+        "src.flask.wrappers.Request",
+        "src.flask.sessions.SessionInterface",
+        "src.flask.views.MethodView",
+        "src.flask.testing.EnvironBuilder",
+        "src.flask.testing.FlaskClient",
+        "src.flask.sansio.blueprints.Blueprint"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 18.028024547519536,
+          "matched_by": "tfidf",
+          "confidence": 4.292749128518968
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "score": 17.969995145756364,
+          "matched_by": "tfidf",
+          "confidence": 4.2726877835565
+        },
+        {
+          "entity_id": "src.flask.json.provider.JSONProvider",
+          "node_type": "Class",
+          "source_location": "src/flask/json/provider.py:19-105",
+          "score": 16.118563661025565,
+          "matched_by": "tfidf",
+          "confidence": 3.6326293896901887
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 16.01247665256289,
+          "matched_by": "tfidf",
+          "confidence": 3.5959540491190114
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "score": 14.593661465349957,
+          "matched_by": "tfidf",
+          "confidence": 3.1054554390380225
+        },
+        {
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "source_location": "src/flask/sessions.py:100-270",
+          "score": 14.592776395057944,
+          "matched_by": "tfidf",
+          "confidence": 3.105149461380067
+        },
+        {
+          "entity_id": "src.flask.views.MethodView",
+          "node_type": "Class",
+          "source_location": "src/flask/views.py:138-191",
+          "score": 13.982542998346206,
+          "matched_by": "tfidf",
+          "confidence": 2.894185668766542
+        },
+        {
+          "entity_id": "src.flask.testing.EnvironBuilder",
+          "node_type": "Class",
+          "source_location": "src/flask/testing.py:27-94",
+          "score": 13.830925544612464,
+          "matched_by": "tfidf",
+          "confidence": 2.841769997584938
+        },
+        {
+          "entity_id": "src.flask.testing.FlaskClient",
+          "node_type": "Class",
+          "source_location": "src/flask/testing.py:109-262",
+          "score": 12.777460575721397,
+          "matched_by": "tfidf",
+          "confidence": 2.477576614495268
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "score": 11.820925705031035,
+          "matched_by": "tfidf",
+          "confidence": 2.1468929364545364
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py"
+      ],
+      "file_level_precision": 0.25,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-02",
+      "query": "Which class implements Flask's default (cookie-based) session storage?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/config.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sessions.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sessions.SessionInterface",
+        "src.flask.sessions.SecureCookieSessionInterface",
+        "src.flask.app.Flask",
+        "src.flask.sansio.app.App",
+        "src.flask.config.Config"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sessions.SessionInterface",
+          "node_type": "Class",
+          "source_location": "src/flask/sessions.py:100-270",
+          "score": 50.59966169826026,
+          "matched_by": "tfidf",
+          "confidence": 6.380124684713507
+        },
+        {
+          "entity_id": "src.flask.sessions.SecureCookieSessionInterface",
+          "node_type": "Class",
+          "source_location": "src/flask/sessions.py:284-385",
+          "score": 41.980158187302976,
+          "matched_by": "tfidf",
+          "confidence": 5.037169273660599
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 25.139226379771532,
+          "matched_by": "tfidf",
+          "confidence": 2.413280267832516
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 24.906094253877654,
+          "matched_by": "tfidf",
+          "confidence": 2.3769572882593364
+        },
+        {
+          "entity_id": "src.flask.config.Config",
+          "node_type": "Class",
+          "source_location": "src/flask/config.py:50-367",
+          "score": 21.751826302381986,
+          "matched_by": "tfidf",
+          "confidence": 1.8855088877816362
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/sessions.py"
+      ],
+      "file_level_precision": 0.25,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-03",
+      "query": "Where is the Request class that Flask uses for incoming HTTP requests defined?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/testing.py",
+        "src/flask/views.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.views.MethodView",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.views.View",
+        "src.flask.sansio.app.App",
+        "src.flask.testing.FlaskClient",
+        "src.flask.app.Flask"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.views.MethodView",
+          "node_type": "Class",
+          "source_location": "src/flask/views.py:138-191",
+          "score": 29.574308101229292,
+          "matched_by": "tfidf",
+          "confidence": 5.2106510452551635
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 26.417245459333717,
+          "matched_by": "tfidf",
+          "confidence": 4.4720024876333255
+        },
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "source_location": "src/flask/views.py:16-135",
+          "score": 24.037598653041677,
+          "matched_by": "tfidf",
+          "confidence": 3.9152436011319
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 22.710825308640086,
+          "matched_by": "tfidf",
+          "confidence": 3.604822387397316
+        },
+        {
+          "entity_id": "src.flask.testing.FlaskClient",
+          "node_type": "Class",
+          "source_location": "src/flask/testing.py:109-262",
+          "score": 21.352251539206573,
+          "matched_by": "tfidf",
+          "confidence": 3.2869609227884293
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 19.26982783487572,
+          "matched_by": "tfidf",
+          "confidence": 2.7997424415491876
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-04",
+      "query": "What does the @app.route decorator actually call to register a URL rule?",
+      "retrieved_files": [
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/views.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.views.View",
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.app.App",
+        "src.flask.sansio.scaffold.Scaffold.route",
+        "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+        "src.flask.sansio.scaffold.Scaffold.endpoint",
+        "src.flask.sansio.scaffold.Scaffold.__init__"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 43.60573960360962,
+          "matched_by": "tfidf",
+          "confidence": 6.619776971208461
+        },
+        {
+          "entity_id": "src.flask.views.View",
+          "node_type": "Class",
+          "source_location": "src/flask/views.py:16-135",
+          "score": 35.02404119467319,
+          "matched_by": "tfidf",
+          "confidence": 4.9536462288970045
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "score": 30.813631964522965,
+          "matched_by": "tfidf",
+          "confidence": 4.1361982224790514
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 25.975020573428356,
+          "matched_by": "tfidf",
+          "confidence": 3.19678520600598
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.route",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/scaffold.py:344-373",
+          "score": 25.05260396500151,
+          "matched_by": "tfidf",
+          "confidence": 3.0176986668055066
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/scaffold.py:376-441",
+          "score": 23.807406995979527,
+          "matched_by": "tfidf",
+          "confidence": 2.7759445464136556
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.endpoint",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/scaffold.py:444-465",
+          "score": 21.812453624218552,
+          "matched_by": "tfidf",
+          "confidence": 2.388625744961998
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.__init__",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/scaffold.py:75-215",
+          "score": 17.700718232597573,
+          "matched_by": "tfidf",
+          "confidence": 1.5903351952619666
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py"
+      ],
+      "file_level_precision": 0.5,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-05",
+      "query": "What class does Flask's Blueprint inherit from?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/blueprints.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/sansio/scaffold.py",
+        "src/flask/templating.py",
+        "src/flask/wrappers.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.wrappers.Request",
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.app.App",
+        "src.flask.templating.Environment",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.blueprints.Blueprint",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.sansio.app.App.register_blueprint",
+        "src.flask.app.Flask"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "score": 20.415985455843128,
+          "matched_by": "tfidf",
+          "confidence": 4.662773038041128
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "score": 20.17082600297262,
+          "matched_by": "tfidf",
+          "confidence": 4.580887606680799
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 18.247327317528782,
+          "matched_by": "tfidf",
+          "confidence": 3.9384219879400426
+        },
+        {
+          "entity_id": "src.flask.templating.Environment",
+          "node_type": "Class",
+          "source_location": "src/flask/templating.py:36-46",
+          "score": 17.02460449920544,
+          "matched_by": "tfidf",
+          "confidence": 3.5300217233766786
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 15.009481617592767,
+          "matched_by": "tfidf",
+          "confidence": 2.8569528105818627
+        },
+        {
+          "entity_id": "src.flask.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/blueprints.py:18-128",
+          "score": 14.546029236983054,
+          "matched_by": "tfidf",
+          "confidence": 2.7021556055104226
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "score": 14.093522748965318,
+          "matched_by": "tfidf",
+          "confidence": 2.5510144256341083
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App.register_blueprint",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/app.py:570-595",
+          "score": 13.966435138244053,
+          "matched_by": "tfidf",
+          "confidence": 2.508566036625991
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 12.686013957838064,
+          "matched_by": "tfidf",
+          "confidence": 2.0808940074514632
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/blueprints.py",
+        "src/flask/sansio/blueprints.py"
+      ],
+      "file_level_precision": 0.2857142857142857,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-06",
+      "query": "How does Flask dispatch an incoming WSGI request to the correct view function, end to end?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.app.Flask",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.sansio.app.App",
+        "src.flask.app.Flask.make_response"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 29.207677171755947,
+          "matched_by": "tfidf",
+          "confidence": 4.484150975792069
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 25.462348612681247,
+          "matched_by": "tfidf",
+          "confidence": 3.6608656425079293
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 22.175881873838712,
+          "matched_by": "tfidf",
+          "confidence": 2.938445747500462
+        },
+        {
+          "entity_id": "src.flask.app.Flask.make_response",
+          "node_type": "Method",
+          "source_location": "src/flask/app.py:1227-1367",
+          "score": 16.173565916387396,
+          "matched_by": "tfidf",
+          "confidence": 1.6190371520826377
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/app.py"
+      ],
+      "file_level_precision": 0.3333333333333333,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-07",
+      "query": "How does Flask sign and verify session cookies to prevent tampering?",
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "retrieved_entities": [],
+      "file_level_hits": [],
+      "file_level_precision": null,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": true
+    },
+    {
+      "query_id": "flask-08",
+      "query": "What happens when app.run() is called with debug=True?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/cli.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py",
+        "tests/test_templating.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.cli.FlaskGroup",
+        "src.flask.app.Flask",
+        "src.flask.cli.FlaskGroup.make_context",
+        "src.flask.sansio.app.App",
+        "src.flask.app.Flask.run",
+        "src.flask.cli.FlaskGroup.__init__",
+        "src.flask.sansio.scaffold.Scaffold",
+        "tests.test_templating.test_templates_auto_reload_debug_run",
+        "src.flask.sansio.scaffold.Scaffold.teardown_request",
+        "src.flask.app.Flask.handle_user_exception"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.cli.FlaskGroup",
+          "node_type": "Class",
+          "source_location": "src/flask/cli.py:531-688",
+          "score": 23.177051820919594,
+          "matched_by": "tfidf",
+          "confidence": 4.797662140110652
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 21.85746190249306,
+          "matched_by": "tfidf",
+          "confidence": 4.407288751424522
+        },
+        {
+          "entity_id": "src.flask.cli.FlaskGroup.make_context",
+          "node_type": "Method",
+          "source_location": "src/flask/cli.py:657-676",
+          "score": 20.695109345151515,
+          "matched_by": "tfidf",
+          "confidence": 4.0634307843990864
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 20.43220209183709,
+          "matched_by": "tfidf",
+          "confidence": 3.985655110340519
+        },
+        {
+          "entity_id": "src.flask.app.Flask.run",
+          "node_type": "Method",
+          "source_location": "src/flask/app.py:633-756",
+          "score": 16.66537220468375,
+          "matched_by": "tfidf",
+          "confidence": 2.871316385014687
+        },
+        {
+          "entity_id": "src.flask.cli.FlaskGroup.__init__",
+          "node_type": "Method",
+          "source_location": "src/flask/cli.py:563-598",
+          "score": 16.06077879280728,
+          "matched_by": "tfidf",
+          "confidence": 2.692459926901586
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 12.91265481118825,
+          "matched_by": "tfidf",
+          "confidence": 1.7611525490958568
+        },
+        {
+          "entity_id": "tests.test_templating.test_templates_auto_reload_debug_run",
+          "node_type": "Function",
+          "source_location": "tests/test_templating.py:475-485",
+          "score": 12.664665539580026,
+          "matched_by": "tfidf",
+          "confidence": 1.687790051426171
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold.teardown_request",
+          "node_type": "Method",
+          "source_location": "src/flask/sansio/scaffold.py:516-547",
+          "score": 12.324842457560662,
+          "matched_by": "tfidf",
+          "confidence": 1.5872604200389866
+        },
+        {
+          "entity_id": "src.flask.app.Flask.handle_user_exception",
+          "node_type": "Method",
+          "source_location": "src/flask/app.py:868-898",
+          "score": 10.382597203192267,
+          "matched_by": "tfidf",
+          "confidence": 1.0126873265195884
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/app.py"
+      ],
+      "file_level_precision": 0.2,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-09",
+      "query": "What does Flask do when a request comes in for a URL that doesn't match any registered rule?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/config.py",
+        "src/flask/ctx.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "src/flask/wrappers.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.wrappers.Request",
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.app.App",
+        "src.flask.ctx.AppContext",
+        "src.flask.app.Flask",
+        "src.flask.config.Config"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "node_type": "Class",
+          "source_location": "src/flask/wrappers.py:18-219",
+          "score": 40.57099266632632,
+          "matched_by": "tfidf",
+          "confidence": 5.5079741465632015
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "score": 35.773871031510524,
+          "matched_by": "tfidf",
+          "confidence": 4.596280775345882
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 30.582746916569015,
+          "matched_by": "tfidf",
+          "confidence": 3.6097071995561403
+        },
+        {
+          "entity_id": "src.flask.ctx.AppContext",
+          "node_type": "Class",
+          "source_location": "src/flask/ctx.py:260-525",
+          "score": 28.812332619217116,
+          "matched_by": "tfidf",
+          "confidence": 3.2732398130530096
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 28.601929058747146,
+          "matched_by": "tfidf",
+          "confidence": 3.233252598643267
+        },
+        {
+          "entity_id": "src.flask.config.Config",
+          "node_type": "Class",
+          "source_location": "src/flask/config.py:50-367",
+          "score": 18.585493890247985,
+          "matched_by": "tfidf",
+          "confidence": 1.3296282502272234
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/sansio/app.py"
+      ],
+      "file_level_precision": 0.16666666666666666,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-10",
+      "query": "If a Flask view function raises an unhandled exception, where should I look to see how Flask decides what response to send back?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/scaffold.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.app.Flask",
+        "src.flask.sansio.scaffold.Scaffold",
+        "src.flask.sansio.app.App"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 42.6521085062854,
+          "matched_by": "tfidf",
+          "confidence": 5.838101926086261
+        },
+        {
+          "entity_id": "src.flask.sansio.scaffold.Scaffold",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/scaffold.py:52-706",
+          "score": 34.93163660462111,
+          "matched_by": "tfidf",
+          "confidence": 4.451550532331324
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 33.37924262119039,
+          "matched_by": "tfidf",
+          "confidence": 4.172749693626292
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/app.py"
+      ],
+      "file_level_precision": 0.3333333333333333,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-11",
+      "query": "Where would I investigate if Flask's test_client() isn't preserving cookies across multiple requests in a test?",
+      "retrieved_files": [
+        "src/flask/sansio/app.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.app.App"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 17.703037734078368,
+          "matched_by": "tfidf",
+          "confidence": 3.307931237716331
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-12",
+      "query": "How does registering a Blueprint on a Flask app connect the blueprint's routes to the app's URL map?",
+      "retrieved_files": [
+        "src/flask/app.py",
+        "src/flask/blueprints.py",
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py",
+        "tests/test_cli.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.blueprints.Blueprint",
+        "src.flask.sansio.app.App",
+        "src.flask.sansio.blueprints.BlueprintSetupState",
+        "src.flask.blueprints.Blueprint",
+        "tests.test_cli.TestRoutes",
+        "src.flask.app.Flask",
+        "tests.test_cli.TestRoutes.test_sort"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:119-692",
+          "score": 35.08397469363024,
+          "matched_by": "tfidf",
+          "confidence": 5.885636274208843
+        },
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 30.814148028576334,
+          "matched_by": "tfidf",
+          "confidence": 4.926715729182553
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/blueprints.py:34-116",
+          "score": 25.79848617703869,
+          "matched_by": "tfidf",
+          "confidence": 3.8002950162041906
+        },
+        {
+          "entity_id": "src.flask.blueprints.Blueprint",
+          "node_type": "Class",
+          "source_location": "src/flask/blueprints.py:18-128",
+          "score": 23.448494045398323,
+          "matched_by": "tfidf",
+          "confidence": 3.27253220228874
+        },
+        {
+          "entity_id": "tests.test_cli.TestRoutes",
+          "node_type": "Class",
+          "source_location": "tests/test_cli.py:445-518",
+          "score": 22.520682207743153,
+          "matched_by": "tfidf",
+          "confidence": 3.0641635955891267
+        },
+        {
+          "entity_id": "src.flask.app.Flask",
+          "node_type": "Class",
+          "source_location": "src/flask/app.py:110-1628",
+          "score": 20.97543538325035,
+          "matched_by": "tfidf",
+          "confidence": 2.7171310241570787
+        },
+        {
+          "entity_id": "tests.test_cli.TestRoutes.test_sort",
+          "node_type": "Method",
+          "source_location": "tests/test_cli.py:473-486",
+          "score": 17.99264040928928,
+          "matched_by": "tfidf",
+          "confidence": 2.047252922185856
+        }
+      ],
+      "file_level_hits": [
+        "src/flask/sansio/app.py",
+        "src/flask/sansio/blueprints.py"
+      ],
+      "file_level_precision": 0.4,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "flask-13",
+      "query": "Where does Flask implement CSRF protection for form submissions?",
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "retrieved_entities": [],
+      "file_level_hits": [],
+      "file_level_precision": null,
+      "file_level_recall": null,
+      "insufficient_evidence": true
+    },
+    {
+      "query_id": "flask-14",
+      "query": "Where is Flask's built-in ORM or database layer implemented?",
+      "retrieved_files": [
+        "src/flask/sansio/app.py"
+      ],
+      "retrieved_symbols": [
+        "src.flask.sansio.app.App"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "src.flask.sansio.app.App",
+          "node_type": "Class",
+          "source_location": "src/flask/sansio/app.py:59-1013",
+          "score": 12.39196945938972,
+          "matched_by": "tfidf",
+          "confidence": 3.3309856196409022
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": null,
+      "insufficient_evidence": false
+    }
+  ]
+}

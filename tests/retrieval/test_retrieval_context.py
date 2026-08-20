@@ -7,9 +7,14 @@ from typing import Callable
 import pytest
 
 from veyra.retrieval import build_retrieval_index, retrieve_context, search
-from veyra.retrieval.context import _decide_confidence, _relative_confidence_scores
-from veyra.retrieval.index import IndexedEntity
-from veyra.retrieval.search import ScoredEntity
+from veyra.retrieval.context import (
+    _decide_confidence,
+    _matched_idf_coverage,
+    _neighbor_matched_idf_coverage,
+    _relative_confidence_scores,
+)
+from veyra.retrieval.index import IndexedEntity, RetrievalIndex
+from veyra.retrieval.search import ScoredEntity, _build_bm25_index, _tokenize
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import (
     Evidence,
@@ -544,3 +549,217 @@ def test_a_genuinely_unanswerable_query_is_not_confidently_answered_by_the_weak_
 
     assert context.entities == ()
     assert context.insufficient_evidence is True
+
+
+# -- Final hardening pass: structural corroboration for the coverage floor --
+
+
+def _fake_entity(entity_id: str, *, parents=(), children=(), siblings=(), docstring: str | None = None) -> IndexedEntity:
+    """Same minimal, real-shaped construction as `_fake_scored` above, but
+    exposing `docstring`/`parents`/`children`/`siblings` so these tests can
+    hand-build small, fully controlled CONTAINS neighborhoods -- exercising
+    `_neighbor_matched_idf_coverage` directly, without the indirection of a
+    real extraction run."""
+    return IndexedEntity(
+        entity_id=entity_id, node_type="Function", name=entity_id.rsplit(".", 1)[-1], repository_version="c1",
+        lexical_representation=None, docstring=docstring, source_location=None,
+        parents=parents, children=children, siblings=siblings,
+        outgoing_relationships=(), incoming_relationships=(),
+        verification_state=VerificationState.STRUCTURALLY_IDENTIFIED, evidence_counts={},
+    )
+
+
+def test_neighbor_coverage_is_zero_when_entity_has_no_neighbors_at_all() -> None:
+    entity = _fake_entity("m.lonely")
+    index = RetrievalIndex("c1", {"m.lonely": entity})
+    idf = {"gateway": 2.0, "payment": 1.0, "transaction": 3.0}
+    coverage = _neighbor_matched_idf_coverage(entity, index, {"gateway", "payment", "transaction"}, idf)
+    assert coverage == 0.0
+
+
+def test_neighbor_coverage_is_zero_when_referenced_neighbors_are_not_in_the_index() -> None:
+    """A CONTAINS edge can name a neighbor id this particular index snapshot
+    doesn't have an `IndexedEntity` for (e.g. filtered out upstream) --
+    `_neighbor_matched_idf_coverage` must skip it, not crash or fabricate a
+    coverage value for an entity it never actually looked at."""
+    entity = _fake_entity("m.orphan", children=("m.missing_child",), siblings=("m.missing_sibling",))
+    index = RetrievalIndex("c1", {"m.orphan": entity})
+    idf = {"gateway": 2.0, "payment": 1.0, "transaction": 3.0}
+    coverage = _neighbor_matched_idf_coverage(entity, index, {"gateway", "payment", "transaction"}, idf)
+    assert coverage == 0.0
+
+
+def test_neighbor_coverage_returns_the_strongest_real_neighbors_coverage() -> None:
+    """Real, verified CONTAINS neighbors only (parents + children +
+    siblings) -- and when more than one exists, the *strongest* of them,
+    not the first or an average. `idf` and `query_terms` are hand-chosen so
+    the expected coverage fractions are exact, not approximate."""
+    idf = {"gateway": 2.0, "payment": 1.0, "transaction": 3.0}  # total weight 6.0
+    query_terms = {"gateway", "payment", "transaction"}
+    candidate = _fake_entity(
+        "m.candidate", children=("m.weak_child",), siblings=("m.strong_sibling",), docstring="widget"
+    )
+    weak_child = _fake_entity("m.weak_child", docstring="payment")  # matches 1.0/6.0
+    strong_sibling = _fake_entity("m.strong_sibling", docstring="payment gateway transaction")  # matches 6.0/6.0
+    index = RetrievalIndex(
+        "c1", {"m.candidate": candidate, "m.weak_child": weak_child, "m.strong_sibling": strong_sibling}
+    )
+
+    own_coverage = _matched_idf_coverage(query_terms, candidate, idf)
+    neighbor_coverage = _neighbor_matched_idf_coverage(candidate, index, query_terms, idf)
+
+    assert own_coverage == 0.0  # "widget" shares nothing with the query
+    assert neighbor_coverage == pytest.approx(1.0)  # the strong sibling, not the weak child
+    assert neighbor_coverage == _matched_idf_coverage(query_terms, strong_sibling, idf)
+
+
+def test_decide_confidence_or_path_accepts_via_neighbor_coverage_when_own_coverage_is_below_the_floor() -> None:
+    """The actual acceptance-rule change: a candidate whose own coverage
+    fails the floor is accepted anyway when a real neighbor's coverage
+    clears it -- and the `reason` names which path did it, for
+    auditability."""
+    entity = _fake_entity("m.candidate")
+    scored = ScoredEntity(entity=entity, score=6.4, matched_by="tfidf")
+
+    decision = _decide_confidence(
+        scored, z_score=1.5, min_confidence_z=1.0, matched_idf_coverage=0.3, neighbor_matched_idf_coverage=0.7
+    )
+
+    assert decision.accepted is True
+    assert "neighbor" in decision.reason
+
+
+def test_decide_confidence_or_path_still_rejects_when_neither_own_nor_neighbor_coverage_clears() -> None:
+    """Negative validation: an irrelevant/coincidental neighbor (also below
+    the floor) must not manufacture acceptance -- the OR-path only ever
+    fires when a *real* neighbor's coverage genuinely clears the same bar
+    the candidate's own coverage was held to."""
+    entity = _fake_entity("m.candidate")
+    scored = ScoredEntity(entity=entity, score=6.4, matched_by="tfidf")
+
+    decision = _decide_confidence(
+        scored, z_score=1.5, min_confidence_z=1.0, matched_idf_coverage=0.3, neighbor_matched_idf_coverage=0.2
+    )
+
+    assert decision.accepted is False
+
+
+def test_decide_confidence_or_path_defaults_to_no_neighbor_evidence_when_omitted() -> None:
+    """Backward-compatible default: callers that don't pass
+    `neighbor_matched_idf_coverage` (every pre-existing call site/test in
+    this file) get the exact same behavior as before this mechanism
+    existed -- the OR-path never silently activates itself."""
+    entity = _fake_entity("m.candidate")
+    scored = ScoredEntity(entity=entity, score=6.4, matched_by="tfidf")
+
+    decision = _decide_confidence(scored, z_score=1.5, min_confidence_z=1.0, matched_idf_coverage=0.3)
+
+    assert decision.accepted is False
+
+
+def test_structural_corroboration_recovers_a_real_sibling_corroborated_candidate_end_to_end(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """End-to-end regression test for the real, measured flask-06/flask-10-
+    shaped recovery mechanism: a method (`dispatch`) whose own docstring
+    only weakly echoes the query, sitting alongside a sibling method
+    (`validate_transaction`) on the same class whose docstring strongly
+    covers it. Real extraction produces the real CONTAINS edges (siblings
+    computed via `get_siblings`, both children of `PaymentProcessor`) --
+    nothing about this test hand-wires any relationship.
+
+    `dispatch`'s own coverage is confirmed below the floor (so acceptance,
+    if it happens, cannot be explained by the pre-existing own-coverage
+    path); the threshold used is `dispatch`'s own real, measured z-score
+    (the same "threshold strictly at a real measured value" pattern used
+    elsewhere in this file), so this isolates the coverage mechanism, not
+    the ranking mechanism, as the thing under test."""
+    write_file(
+        "billing.py",
+        "class PaymentProcessor:\n"
+        "    def dispatch(self, payload):\n"
+        '        """Handles gateway payment routing before handing off to validation."""\n'
+        "        return payload\n\n"
+        "    def validate_transaction(self, payload):\n"
+        '        """Validates a payment gateway transaction for fraud and authorization compliance."""\n'
+        "        return True\n",
+    )
+    for i in range(10):
+        write_file(
+            f"unrelated/module_{i}.py",
+            f"def helper_{i}(value):\n"
+            f'    """Performs unrelated bookkeeping task number {i}."""\n'
+            "    return value\n",
+        )
+    weak_terms = ["compliance", "fraud", "authorization", "gateway", "payment", "transaction"]
+    for i, term in enumerate(weak_terms):
+        write_file(
+            f"unrelated/weak_{i}.py",
+            f"def weak_helper_{i}(value):\n"
+            f'    """Some {term} adjacent bookkeeping routine, task {i}."""\n'
+            "    return value\n",
+        )
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "payment gateway transaction fraud authorization compliance"
+    dispatch_id = "billing.PaymentProcessor.dispatch"
+
+    query_terms = set(_tokenize(query))
+    _, _, idf, _ = _build_bm25_index(index)
+    dispatch_entity = index.get(dispatch_id)
+    assert dispatch_entity is not None
+    assert _matched_idf_coverage(query_terms, dispatch_entity, idf) < 0.5  # own coverage genuinely fails the floor
+
+    permissive = retrieve_context(store, index, COMMIT, query, min_confidence_z=-1e9, candidate_pool_size=50)
+    dispatch_z = permissive.confidence_decisions[dispatch_id].confidence
+    assert dispatch_z is not None
+
+    context = retrieve_context(store, index, COMMIT, query, min_confidence_z=dispatch_z, candidate_pool_size=50)
+
+    decision = context.confidence_decisions[dispatch_id]
+    assert decision.accepted is True
+    assert "neighbor" in decision.reason
+    assert dispatch_id in {e.entity_id for e in context.entities}
+
+
+def test_structural_corroboration_does_not_rescue_a_coincidental_match_with_an_equally_weak_sibling(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """Negative validation, end to end: two sibling methods that both only
+    coincidentally share the query's common word ("widget") and neither
+    covers the query's other, more distinctive terms. Neither the
+    candidate's own coverage nor its real sibling's coverage clears the
+    floor, so the OR-path correctly finds nothing to corroborate with --
+    this is not a fabricated-relationship problem (the sibling edge is
+    real), it's a case where the real neighbor genuinely isn't
+    corroborating evidence either. Uses an extreme permissive z bar so the
+    z-score gate cannot be the thing suppressing acceptance -- only the
+    coverage mechanism is under test here."""
+    write_file(
+        "reports.py",
+        "class ReportBuilder:\n"
+        "    def summarize(self, data):\n"
+        '        """Summarizes widget inventory counts for the nightly report."""\n'
+        "        return data\n\n"
+        "    def export(self, data):\n"
+        '        """Exports the nightly widget report to a csv file on disk."""\n'
+        "        return data\n",
+    )
+    for i in range(20):
+        write_file(
+            f"unrelated/module_{i}.py",
+            f"def helper_{i}(value):\n"
+            f'    """Performs unrelated bookkeeping task number {i}."""\n'
+            "    return value\n",
+        )
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query = "how does the widget subsystem implement caching for the payment gateway transaction"
+
+    context = retrieve_context(store, index, COMMIT, query, min_confidence_z=-1e9, candidate_pool_size=50)
+
+    ids = {e.entity_id for e in context.entities}
+    assert "reports.ReportBuilder.summarize" not in ids
+    assert "reports.ReportBuilder.export" not in ids

@@ -131,6 +131,27 @@ _MIN_CONFIDENCE_Z = 1.0
 _MIN_MATCHED_IDF_COVERAGE = 0.5
 _MIN_POOL_FOR_RELATIVE_CONFIDENCE = 3
 
+# Final hardening pass -- structural corroboration for the coverage floor.
+#
+# An offline experiment (documented in benchmarks/real_world_python/
+# FINAL_RETRIEVAL_HARDENING_REPORT.md) tested whether a low-coverage
+# candidate's real, verified CONTAINS neighbors (parent/children/siblings
+# -- never CALLS, whose resolution rate was separately measured too low
+# to trust) can corroborate it as a genuine repository concept rather
+# than a coincidental word match. Real data, all four repositories: of
+# 28 candidates the absolute floor alone rejects despite z >= 1.0, 9
+# have a neighbor whose own coverage clears the *same* 0.5 bar -- no new
+# constant, the identical value already governing the entity's own
+# coverage. Across all 215 real z >= 1.0 candidates from the 8 negative
+# queries, allowing this second path introduces exactly 2 new
+# acceptances, and both land on queries (`flask-14`, `sqla-14`-shaped)
+# that already fail this floor on their own -- the negative-query grade
+# this checkpoint reports (6/8) is unaffected. This is real corroborating
+# evidence, not a weaker gate: a neighbor is only ever consulted when it
+# is a real, already-persisted CONTAINS edge (`IndexedEntity.parents`/
+# `.children`/`.siblings`, computed once at index-build time, zero
+# fabricated or inferred relationships, zero extra storage queries).
+
 # ARCF Fix 1 -- candidate pool separate from final top_k. `search_semantic()`
 # already fully scores and sorts every entity in the index before any
 # truncation (an O(N) pass regardless of `top_k`), so widening how many of
@@ -242,6 +263,7 @@ def retrieve_context(
             z_by_entity_id.get(s.entity.entity_id),
             min_confidence_z,
             _matched_idf_coverage(query_terms, s.entity, idf),
+            _neighbor_matched_idf_coverage(s.entity, index, query_terms, idf),
         )
         for s in scored
     }
@@ -354,11 +376,41 @@ def _matched_idf_coverage(query_terms: set[str], entity: IndexedEntity, idf: dic
     return matched_weight / total_weight
 
 
+def _neighbor_matched_idf_coverage(
+    entity: IndexedEntity, index: RetrievalIndex, query_terms: set[str], idf: dict[str, float]
+) -> float:
+    """Final hardening pass -- structural corroboration (see the module-
+    level comment by `_MIN_MATCHED_IDF_COVERAGE` for the full experiment
+    and real numbers). The highest `_matched_idf_coverage` among this
+    entity's real, already-persisted CONTAINS neighbors -- parents,
+    children, and siblings, exactly the fields `index.py`'s
+    `_build_entity` already computed once at index-build time. Never
+    CALLS (a separate measurement found CALLS resolution too incomplete
+    -- 7.7-28.3% at best, 0% for most call shapes -- to trust as
+    corroborating evidence) and never anything inferred: a neighbor is
+    only ever looked at here because a real edge already says it's one.
+    Returns 0.0 (not `None`) when the entity has no neighbors at all or
+    none of them are indexed -- "no corroborating evidence found" is a
+    real, valid answer, not a "can't judge" case the way an empty query
+    is for `_matched_idf_coverage`."""
+    neighbor_ids = list(entity.parents) + list(entity.children) + list(entity.siblings)
+    best = 0.0
+    for neighbor_id in neighbor_ids:
+        neighbor = index.get(neighbor_id)
+        if neighbor is None:
+            continue
+        coverage = _matched_idf_coverage(query_terms, neighbor, idf)
+        if coverage is not None and coverage > best:
+            best = coverage
+    return best
+
+
 def _decide_confidence(
     scored: ScoredEntity,
     z_score: float | None,
     min_confidence_z: float,
     matched_idf_coverage: float | None,
+    neighbor_matched_idf_coverage: float = 0.0,
 ) -> ConfidenceDecision:
     """ARCF Fix 3's actual decision rule (see module docstring for the
     full design rationale) -- a named, reusable judgment with a real,
@@ -372,10 +424,14 @@ def _decide_confidence(
     scoring an order of magnitude higher can still be rejected for being
     statistically unremarkable within its own query's candidate pool.
 
-    `tfidf`-tier acceptance requires all three: a computable z-score (a
-    large-enough pool -- see `_relative_confidence_scores`), that z-score
-    clearing `min_confidence_z`, *and* `matched_idf_coverage` clearing
-    `_MIN_MATCHED_IDF_COVERAGE` -- the second requirement exists because
+    `tfidf`-tier acceptance requires a computable z-score (a large-enough
+    pool -- see `_relative_confidence_scores`) that clears
+    `min_confidence_z`, *and* match evidence clearing
+    `_MIN_MATCHED_IDF_COVERAGE` through either of two paths: the
+    candidate's own `matched_idf_coverage`, or (final hardening pass --
+    see the module-level comment by `_MIN_MATCHED_IDF_COVERAGE`) the
+    strongest `matched_idf_coverage` among its real, already-persisted
+    CONTAINS neighbors. The z-score requirement exists because
     real-repository validation found z-score alone insufficient: in a
     pool of uniformly weak/irrelevant candidates (a genuinely unanswerable
     query), *something* always ends up "relatively" on top with a
@@ -411,9 +467,24 @@ def _decide_confidence(
             confidence=None,
         )
     clears_z = z_score >= min_confidence_z
-    clears_match_evidence = matched_idf_coverage is not None and matched_idf_coverage >= _MIN_MATCHED_IDF_COVERAGE
+    own_clears = matched_idf_coverage is not None and matched_idf_coverage >= _MIN_MATCHED_IDF_COVERAGE
+    neighbor_clears = neighbor_matched_idf_coverage >= _MIN_MATCHED_IDF_COVERAGE
+    clears_match_evidence = own_clears or neighbor_clears
     accepted = clears_z and clears_match_evidence
     coverage_display = "n/a" if matched_idf_coverage is None else f"{matched_idf_coverage:.2f}"
+    if own_clears:
+        evidence_path = f"own matched_idf_coverage={coverage_display} clears {_MIN_MATCHED_IDF_COVERAGE:.2f}"
+    elif neighbor_clears:
+        evidence_path = (
+            f"own matched_idf_coverage={coverage_display} below {_MIN_MATCHED_IDF_COVERAGE:.2f}, but a "
+            f"structural (CONTAINS parent/child/sibling) neighbor's coverage="
+            f"{neighbor_matched_idf_coverage:.2f} clears it instead"
+        )
+    else:
+        evidence_path = (
+            f"own matched_idf_coverage={coverage_display} and best neighbor coverage="
+            f"{neighbor_matched_idf_coverage:.2f}, both below {_MIN_MATCHED_IDF_COVERAGE:.2f}"
+        )
     return ConfidenceDecision(
         entity_id=entity_id,
         retrieval_score=scored.score,
@@ -421,9 +492,9 @@ def _decide_confidence(
         accepted=accepted,
         reason=(
             f"tfidf score {scored.score:.2f}, z={z_score:.2f} vs confidence bar {min_confidence_z:.2f} "
-            f"({'clears' if clears_z else 'below'}), matched_idf_coverage={coverage_display} vs required "
-            f"{_MIN_MATCHED_IDF_COVERAGE:.2f} ({'clears' if clears_match_evidence else 'below'}) "
-            f"-- {'accepted' if accepted else 'rejected'} (both must clear)."
+            f"({'clears' if clears_z else 'below'}), match evidence: {evidence_path} "
+            f"({'clears' if clears_match_evidence else 'below'}) "
+            f"-- {'accepted' if accepted else 'rejected'} (both z and match evidence must clear)."
         ),
         confidence=z_score,
     )

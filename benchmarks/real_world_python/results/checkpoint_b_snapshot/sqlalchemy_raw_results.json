@@ -1,0 +1,1240 @@
+{
+  "repo_name": "sqlalchemy",
+  "commit_sha": "16d00eca61cfc690b2709642f4a2656fb6424875",
+  "results": [
+    {
+      "query_id": "sqla-01",
+      "query": "Where is the Session class defined?",
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/hstore.py",
+        "lib/sqlalchemy/ext/declarative/extensions.py",
+        "lib/sqlalchemy/ext/instrumentation.py",
+        "lib/sqlalchemy/orm/interfaces.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/sql/type_api.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType",
+        "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+        "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+        "lib.sqlalchemy.orm.session.ORMExecuteState",
+        "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction",
+        "lib.sqlalchemy.ext.instrumentation._ClassInstrumentationAdapter",
+        "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+        "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+        "lib.sqlalchemy.orm.scoping.scoped_session"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1443-1463",
+          "score": 21.10625148190616,
+          "matched_by": "tfidf",
+          "confidence": 5.446351886216887
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1383-1472",
+          "score": 16.21866817439247,
+          "matched_by": "tfidf",
+          "confidence": 2.8405200367257213
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:133-209",
+          "score": 15.679181079934041,
+          "matched_by": "tfidf",
+          "confidence": 2.5528906369427933
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/instrumentation.py:223-296",
+          "score": 15.574877779286922,
+          "matched_by": "tfidf",
+          "confidence": 2.497280973488979
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:257-831",
+          "score": 15.461173517961093,
+          "matched_by": "tfidf",
+          "confidence": 2.4366591555180777
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:269-272",
+          "score": 15.144046052552996,
+          "matched_by": "tfidf",
+          "confidence": 2.2675815566895463
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.instrumentation._ClassInstrumentationAdapter",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/instrumentation.py:299-393",
+          "score": 14.765084528875773,
+          "matched_by": "tfidf",
+          "confidence": 2.0655369170387585
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/declarative/extensions.py:126-352",
+          "score": 14.64038587737872,
+          "matched_by": "tfidf",
+          "confidence": 1.9990534021368058
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:30-235",
+          "score": 14.580887432574732,
+          "matched_by": "tfidf",
+          "confidence": 1.9673316016659936
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:153-2227",
+          "score": 14.430122268034067,
+          "matched_by": "tfidf",
+          "confidence": 1.8869506356884143
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_precision": 0.14285714285714285,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-02",
+      "query": "Where is the Engine class defined?",
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/types.py",
+        "lib/sqlalchemy/engine/events.py",
+        "lib/sqlalchemy/ext/declarative/extensions.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/sql/base.py",
+        "lib/sqlalchemy/sql/type_api.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.sql.type_api.UserDefinedType",
+        "lib.sqlalchemy.engine.events.ConnectionEvents",
+        "lib.sqlalchemy.sql.type_api.TypeDecorator.Comparator",
+        "lib.sqlalchemy.sql.type_api.TypeEngine.Comparator",
+        "lib.sqlalchemy.sql.type_api.TypeEngine",
+        "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+        "lib.sqlalchemy.sql.base.Executable",
+        "lib.sqlalchemy.orm.events.RegistryEvents",
+        "lib.sqlalchemy.engine.events.DialectEvents",
+        "lib.sqlalchemy.dialects.postgresql.types.BIT.comparator_factory"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1383-1472",
+          "score": 20.6310453589294,
+          "matched_by": "tfidf",
+          "confidence": 3.5051384590361985
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/events.py:46-619",
+          "score": 20.622832513743766,
+          "matched_by": "tfidf",
+          "confidence": 3.501424204167656
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.TypeDecorator.Comparator",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1799-1825",
+          "score": 20.241652616588965,
+          "matched_by": "tfidf",
+          "confidence": 3.3290357983476526
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.TypeEngine.Comparator",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:172-309",
+          "score": 19.7992886730501,
+          "matched_by": "tfidf",
+          "confidence": 3.128976940081196
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.TypeEngine",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:116-1175",
+          "score": 19.56487470671062,
+          "matched_by": "tfidf",
+          "confidence": 3.022963348438938
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/declarative/extensions.py:355-561",
+          "score": 18.710144468405097,
+          "matched_by": "tfidf",
+          "confidence": 2.6364120526139074
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.base.Executable",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/base.py:1322-1622",
+          "score": 18.269663239569912,
+          "matched_by": "tfidf",
+          "confidence": 2.437204651071176
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.RegistryEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:3207-3387",
+          "score": 17.44481110372369,
+          "matched_by": "tfidf",
+          "confidence": 2.064165711197576
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.events.DialectEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/events.py:622-965",
+          "score": 17.274129253118907,
+          "matched_by": "tfidf",
+          "confidence": 1.9869749350108212
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.types.BIT.comparator_factory",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/types.py:333-352",
+          "score": 17.048776141592917,
+          "matched_by": "tfidf",
+          "confidence": 1.8850591101404288
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-03",
+      "query": "Where is the Table class defined?",
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/ext.py",
+        "lib/sqlalchemy/dialects/postgresql/hstore.py",
+        "lib/sqlalchemy/ext/declarative/extensions.py",
+        "lib/sqlalchemy/ext/instrumentation.py",
+        "lib/sqlalchemy/orm/interfaces.py",
+        "lib/sqlalchemy/sql/schema.py",
+        "lib/sqlalchemy/sql/type_api.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.sql.type_api.UserDefinedType",
+        "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+        "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+        "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+        "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+        "lib.sqlalchemy.sql.schema.MetaData",
+        "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+        "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+        "lib.sqlalchemy.sql.schema.PrimaryKeyConstraint",
+        "lib.sqlalchemy.dialects.postgresql.ext.aggregate_order_by"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1383-1472",
+          "score": 19.247520311358404,
+          "matched_by": "tfidf",
+          "confidence": 4.133172396011665
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1443-1463",
+          "score": 16.534514364011997,
+          "matched_by": "tfidf",
+          "confidence": 2.7132834654122875
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/declarative/extensions.py:126-352",
+          "score": 16.43392038479811,
+          "matched_by": "tfidf",
+          "confidence": 2.6606362245500086
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:30-235",
+          "score": 16.284287457291626,
+          "matched_by": "tfidf",
+          "confidence": 2.582323776459931
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:133-209",
+          "score": 15.679181079934041,
+          "matched_by": "tfidf",
+          "confidence": 2.2656330416366286
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.schema.MetaData",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/schema.py:5788-6413",
+          "score": 15.587886825651086,
+          "matched_by": "tfidf",
+          "confidence": 2.2178529395655358
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/instrumentation.py:223-296",
+          "score": 15.574877779286922,
+          "matched_by": "tfidf",
+          "confidence": 2.211044476448012
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/declarative/extensions.py:355-561",
+          "score": 15.526857084879085,
+          "matched_by": "tfidf",
+          "confidence": 2.1859121863783666
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.schema.PrimaryKeyConstraint",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/schema.py:5278-5520",
+          "score": 15.49928088045915,
+          "matched_by": "tfidf",
+          "confidence": 2.1714798009860274
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.ext.aggregate_order_by",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/ext.py:47-138",
+          "score": 15.310548024225549,
+          "matched_by": "tfidf",
+          "confidence": 2.0727038680882
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/sql/schema.py"
+      ],
+      "file_level_precision": 0.14285714285714285,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-04",
+      "query": "What is create_engine()'s return type, and what class actually executes queries against it?",
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/named_types.py",
+        "lib/sqlalchemy/dialects/sqlite/pysqlite.py",
+        "lib/sqlalchemy/ext/asyncio/engine.py",
+        "lib/sqlalchemy/ext/baked.py",
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/sql/elements.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.dialects.postgresql.named_types.NamedType",
+        "lib.sqlalchemy.dialects.postgresql.named_types.ENUM",
+        "lib.sqlalchemy.ext.asyncio.engine.AsyncConnection",
+        "lib.sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite",
+        "lib.sqlalchemy.ext.baked.BakedQuery",
+        "lib.sqlalchemy.orm.relationships.RelationshipProperty.Comparator",
+        "lib.sqlalchemy.sql.elements.AbstractTextClause",
+        "lib.sqlalchemy.dialects.postgresql.named_types.ENUM.drop",
+        "lib.sqlalchemy.dialects.postgresql.named_types.NamedType.drop"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.named_types.NamedType",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/named_types.py:36-142",
+          "score": 42.63431439004552,
+          "matched_by": "tfidf",
+          "confidence": 4.227534396181268
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.named_types.ENUM",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/named_types.py:193-391",
+          "score": 42.355856445773846,
+          "matched_by": "tfidf",
+          "confidence": 4.1566131936070185
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.engine.AsyncConnection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/asyncio/engine.py:196-999",
+          "score": 39.63198556505863,
+          "matched_by": "tfidf",
+          "confidence": 3.462863194760405
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/dialects/sqlite/pysqlite.py:614-838",
+          "score": 36.51473517970687,
+          "matched_by": "tfidf",
+          "confidence": 2.668922312116751
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.baked.BakedQuery",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/baked.py:53-299",
+          "score": 33.48658758553919,
+          "matched_by": "tfidf",
+          "confidence": 1.8976752589489476
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.relationships.RelationshipProperty.Comparator",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/relationships.py:584-1228",
+          "score": 32.54995304940607,
+          "matched_by": "tfidf",
+          "confidence": 1.659121290417432
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.elements.AbstractTextClause",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/elements.py:2328-2542",
+          "score": 32.40648663495124,
+          "matched_by": "tfidf",
+          "confidence": 1.6225814435519923
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.named_types.ENUM.drop",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/named_types.py:367-385",
+          "score": 31.253428861517964,
+          "matched_by": "tfidf",
+          "confidence": 1.3289060587704002
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.named_types.NamedType.drop",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/named_types.py:60-73",
+          "score": 30.745164939787863,
+          "matched_by": "tfidf",
+          "confidence": 1.1994549538702122
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-05",
+      "query": "What does Session.add() do to an object before it's actually written to the database?",
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/events.py",
+        "lib/sqlalchemy/ext/baked.py",
+        "lib/sqlalchemy/orm/collections.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/sql/schema.py",
+        "test/orm/test_session.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.events.SessionEvents",
+        "lib.sqlalchemy.ext.baked.BakedQuery",
+        "lib.sqlalchemy.engine.events.ConnectionEvents",
+        "lib.sqlalchemy.orm.session.Session",
+        "lib.sqlalchemy.orm.events.MapperEvents",
+        "lib.sqlalchemy.orm.scoping.scoped_session",
+        "lib.sqlalchemy.orm.session.sessionmaker",
+        "lib.sqlalchemy.orm.collections.collection",
+        "lib.sqlalchemy.sql.schema.MetaData",
+        "test.orm.test_session.SessionStateTest"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:1532-2400",
+          "score": 39.42585727235083,
+          "matched_by": "tfidf",
+          "confidence": 4.812250551317004
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.baked.BakedQuery",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/baked.py:53-299",
+          "score": 37.42784642529558,
+          "matched_by": "tfidf",
+          "confidence": 4.348548410827147
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/events.py:46-619",
+          "score": 33.24814892704633,
+          "matched_by": "tfidf",
+          "confidence": 3.37851630144457
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:1471-5094",
+          "score": 32.07187104844491,
+          "matched_by": "tfidf",
+          "confidence": 3.1055235041721025
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.MapperEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:726-1511",
+          "score": 32.015136893972205,
+          "matched_by": "tfidf",
+          "confidence": 3.0923565341795975
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:153-2227",
+          "score": 30.947589049658422,
+          "matched_by": "tfidf",
+          "confidence": 2.844598009137944
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.sessionmaker",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:5100-5329",
+          "score": 30.807711437607747,
+          "matched_by": "tfidf",
+          "confidence": 2.8121349480839446
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.collections.collection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/collections.py:185-411",
+          "score": 28.288165109839326,
+          "matched_by": "tfidf",
+          "confidence": 2.2273938657362238
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.schema.MetaData",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/schema.py:5788-6413",
+          "score": 25.48800244462653,
+          "matched_by": "tfidf",
+          "confidence": 1.5775268124653916
+        },
+        {
+          "entity_id": "test.orm.test_session.SessionStateTest",
+          "node_type": "Class",
+          "source_location": "test/orm/test_session.py:740-1753",
+          "score": 24.856539613649332,
+          "matched_by": "tfidf",
+          "confidence": 1.4309757230178706
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_precision": 0.125,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-06",
+      "query": "How does calling session.add(obj) followed by session.commit() turn into an actual SQL INSERT statement?",
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/engine/events.py",
+        "lib/sqlalchemy/ext/asyncio/scoping.py",
+        "lib/sqlalchemy/ext/baked.py",
+        "lib/sqlalchemy/orm/bulk_persistence.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/sql/selectable.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.ext.baked.Result",
+        "lib.sqlalchemy.orm.session.ORMExecuteState",
+        "lib.sqlalchemy.orm.session.Session",
+        "lib.sqlalchemy.orm.scoping.scoped_session",
+        "lib.sqlalchemy.orm.events.SessionEvents",
+        "lib.sqlalchemy.engine.base.Connection",
+        "lib.sqlalchemy.orm.bulk_persistence._BulkORMUpdate",
+        "lib.sqlalchemy.engine.events.ConnectionEvents",
+        "lib.sqlalchemy.sql.selectable.Select",
+        "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.ext.baked.Result",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/baked.py:302-555",
+          "score": 40.79520482933666,
+          "matched_by": "tfidf",
+          "confidence": 3.6243433699549725
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:257-831",
+          "score": 39.65678444610544,
+          "matched_by": "tfidf",
+          "confidence": 3.3915195414301897
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:1471-5094",
+          "score": 37.85799053443232,
+          "matched_by": "tfidf",
+          "confidence": 3.023639546121159
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:153-2227",
+          "score": 35.344694363568664,
+          "matched_by": "tfidf",
+          "confidence": 2.5096332569362403
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:1532-2400",
+          "score": 33.76297993969225,
+          "matched_by": "tfidf",
+          "confidence": 2.186149231857096
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Connection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:90-2436",
+          "score": 33.508473686805075,
+          "matched_by": "tfidf",
+          "confidence": 2.134098933870949
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.bulk_persistence._BulkORMUpdate",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/bulk_persistence.py:1460-1941",
+          "score": 33.161831858424996,
+          "matched_by": "tfidf",
+          "confidence": 2.063205546156642
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/events.py:46-619",
+          "score": 29.883370587443313,
+          "matched_by": "tfidf",
+          "confidence": 1.3927116618028965
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.selectable.Select",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/selectable.py:5449-7033",
+          "score": 28.59123612192252,
+          "matched_by": "tfidf",
+          "confidence": 1.1284510269243375
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/asyncio/scoping.py:122-1677",
+          "score": 28.31105691335303,
+          "matched_by": "tfidf",
+          "confidence": 1.0711502292813433
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_precision": 0.1111111111111111,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-07",
+      "query": "How does relationship() implement lazy loading of related objects?",
+      "retrieved_files": [
+        "examples/versioned_rows/versioned_map.py",
+        "lib/sqlalchemy/ext/horizontal_shard.py",
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/orm/strategies.py",
+        "lib/sqlalchemy/orm/strategy_options.py",
+        "lib/sqlalchemy/orm/writeonly.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+        "lib.sqlalchemy.orm.strategies._NoLoader",
+        "lib.sqlalchemy.orm.strategies._AbstractRelationshipLoader",
+        "lib.sqlalchemy.orm.strategies._LazyLoader",
+        "lib.sqlalchemy.ext.horizontal_shard.set_shard_id",
+        "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection",
+        "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+        "examples.versioned_rows.versioned_map.ConfigValueAssociation",
+        "lib.sqlalchemy.orm.session.ORMExecuteState.is_relationship_load",
+        "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategy_options.py:91-971",
+          "score": 38.901928630946394,
+          "matched_by": "tfidf",
+          "confidence": 5.739333972272993
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategies._NoLoader",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategies.py:659-701",
+          "score": 32.3533324430069,
+          "matched_by": "tfidf",
+          "confidence": 4.192465239696591
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategies._AbstractRelationshipLoader",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategies.py:607-641",
+          "score": 29.822646294877217,
+          "matched_by": "tfidf",
+          "confidence": 3.5946822703152175
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategies._LazyLoader",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategies.py:710-1256",
+          "score": 29.24036975283778,
+          "matched_by": "tfidf",
+          "confidence": 3.4571405207945585
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.horizontal_shard.set_shard_id",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/horizontal_shard.py:376-423",
+          "score": 26.6756988544738,
+          "matched_by": "tfidf",
+          "confidence": 2.8513298847174324
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/writeonly.py:578-701",
+          "score": 26.361051973539475,
+          "matched_by": "tfidf",
+          "confidence": 2.7770059520833845
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/relationships.py:344-2342",
+          "score": 24.239376010301136,
+          "matched_by": "tfidf",
+          "confidence": 2.2758368291136923
+        },
+        {
+          "entity_id": "examples.versioned_rows.versioned_map.ConfigValueAssociation",
+          "node_type": "Class",
+          "source_location": "examples/versioned_rows/versioned_map.py:153-196",
+          "score": 23.081730823838647,
+          "matched_by": "tfidf",
+          "confidence": 2.0023850707575477
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.ORMExecuteState.is_relationship_load",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/orm/session.py:731-754",
+          "score": 22.596301086832305,
+          "matched_by": "tfidf",
+          "confidence": 1.8877198722191468
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/orm/strategy_options.py:513-549",
+          "score": 22.007049571351313,
+          "matched_by": "tfidf",
+          "confidence": 1.7485305377783547
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/strategies.py"
+      ],
+      "file_level_precision": 0.14285714285714285,
+      "file_level_recall": 0.5,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-08",
+      "query": "Does calling Session.flush() commit the current transaction?",
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/ext/asyncio/scoping.py",
+        "lib/sqlalchemy/ext/asyncio/session.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.events.SessionEvents",
+        "lib.sqlalchemy.orm.session.SessionTransaction",
+        "lib.sqlalchemy.engine.base.RootTransaction",
+        "lib.sqlalchemy.orm.session.Session",
+        "lib.sqlalchemy.engine.base.Transaction",
+        "lib.sqlalchemy.orm.scoping.scoped_session",
+        "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session",
+        "lib.sqlalchemy.engine.base.NestedTransaction",
+        "lib.sqlalchemy.ext.asyncio.session.AsyncSession",
+        "lib.sqlalchemy.orm.session.Session.commit"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:1532-2400",
+          "score": 44.32895928702953,
+          "matched_by": "tfidf",
+          "confidence": 4.53149262049747
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.SessionTransaction",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:858-1462",
+          "score": 42.83143688303393,
+          "matched_by": "tfidf",
+          "confidence": 4.258868941365725
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.RootTransaction",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:2630-2735",
+          "score": 42.73748867183698,
+          "matched_by": "tfidf",
+          "confidence": 4.241765686739269
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/session.py:1471-5094",
+          "score": 34.77108524628237,
+          "matched_by": "tfidf",
+          "confidence": 2.791483403464109
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Transaction",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:2486-2627",
+          "score": 34.70050781895473,
+          "matched_by": "tfidf",
+          "confidence": 2.7786347957568887
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:153-2227",
+          "score": 33.78855558636905,
+          "matched_by": "tfidf",
+          "confidence": 2.612614058987565
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/asyncio/scoping.py:122-1677",
+          "score": 33.63022937357376,
+          "matched_by": "tfidf",
+          "confidence": 2.58379080097147
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.NestedTransaction",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:2738-2849",
+          "score": 33.47473053442879,
+          "matched_by": "tfidf",
+          "confidence": 2.55548226581012
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.session.AsyncSession",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/asyncio/session.py:210-1662",
+          "score": 33.17765425787218,
+          "matched_by": "tfidf",
+          "confidence": 2.501399584120998
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session.commit",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/orm/session.py:2040-2076",
+          "score": 29.02878945351985,
+          "matched_by": "tfidf",
+          "confidence": 1.74609950703042
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_precision": 0.16666666666666666,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-09",
+      "query": "What happens when create_engine() is given a malformed database URL string?",
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/engine/interfaces.py",
+        "lib/sqlalchemy/engine/url.py",
+        "lib/sqlalchemy/ext/asyncio/engine.py",
+        "lib/sqlalchemy/pool/events.py",
+        "lib/sqlalchemy/testing/requirements.py",
+        "test/engine/test_parseconnect.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.engine.url.URL",
+        "lib.sqlalchemy.engine.interfaces.Dialect",
+        "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+        "lib.sqlalchemy.engine.base.Engine",
+        "test.engine.test_parseconnect.CreateEngineTest",
+        "lib.sqlalchemy.pool.events.PoolEvents",
+        "lib.sqlalchemy.testing.requirements.SuiteRequirements"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.engine.url.URL",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/url.py:46-836",
+          "score": 61.07687913528905,
+          "matched_by": "tfidf",
+          "confidence": 7.208764239074839
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.interfaces.Dialect",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/interfaces.py:654-2890",
+          "score": 42.31164403153895,
+          "matched_by": "tfidf",
+          "confidence": 3.8346297124081956
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/asyncio/engine.py:1017-1344",
+          "score": 39.31069204783571,
+          "matched_by": "tfidf",
+          "confidence": 3.2950353164361292
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Engine",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:2893-3284",
+          "score": 35.622303743006384,
+          "matched_by": "tfidf",
+          "confidence": 2.6318345487254704
+        },
+        {
+          "entity_id": "test.engine.test_parseconnect.CreateEngineTest",
+          "node_type": "Class",
+          "source_location": "test/engine/test_parseconnect.py:715-1093",
+          "score": 27.969410166755974,
+          "matched_by": "tfidf",
+          "confidence": 1.2557850453876975
+        },
+        {
+          "entity_id": "lib.sqlalchemy.pool.events.PoolEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/pool/events.py:27-375",
+          "score": 27.18675777012691,
+          "matched_by": "tfidf",
+          "confidence": 1.1150580862398858
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.requirements.SuiteRequirements",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/testing/requirements.py:37-1978",
+          "score": 26.942250159641507,
+          "matched_by": "tfidf",
+          "confidence": 1.0710937252281398
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-10",
+      "query": "If SQL statements aren't showing up in my logs despite passing echo=True to create_engine, where should I look?",
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/engine/cursor.py",
+        "lib/sqlalchemy/engine/interfaces.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.engine.interfaces.Dialect",
+        "lib.sqlalchemy.engine.base.Connection",
+        "lib.sqlalchemy.engine.cursor.CursorResult"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.engine.interfaces.Dialect",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/interfaces.py:654-2890",
+          "score": 37.32973802839362,
+          "matched_by": "tfidf",
+          "confidence": 2.9318982486078684
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Connection",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/base.py:90-2436",
+          "score": 36.80297078462073,
+          "matched_by": "tfidf",
+          "confidence": 2.818557840153576
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.cursor.CursorResult",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/engine/cursor.py:1606-2422",
+          "score": 36.71047220056258,
+          "matched_by": "tfidf",
+          "confidence": 2.7986556396607996
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-11",
+      "query": "Where would I investigate if a relationship() isn't lazy-loading the way I expect?",
+      "retrieved_files": [
+        "lib/sqlalchemy/orm/query.py",
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/orm/strategies.py",
+        "lib/sqlalchemy/orm/strategy_options.py",
+        "test/orm/test_options.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+        "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload",
+        "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+        "lib.sqlalchemy.orm.query.Query",
+        "test.orm.test_options.MapperOptionsTest",
+        "lib.sqlalchemy.orm.strategies._JoinedLoader"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategy_options.py:91-971",
+          "score": 37.28900109545921,
+          "matched_by": "tfidf",
+          "confidence": 5.737793824157815
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/orm/strategy_options.py:513-549",
+          "score": 29.08889615372736,
+          "matched_by": "tfidf",
+          "confidence": 3.629878944122906
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/relationships.py:344-2342",
+          "score": 24.301641129761233,
+          "matched_by": "tfidf",
+          "confidence": 2.399269559091201
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/query.py:165-3432",
+          "score": 21.615411650153124,
+          "matched_by": "tfidf",
+          "confidence": 1.708748750944265
+        },
+        {
+          "entity_id": "test.orm.test_options.MapperOptionsTest",
+          "node_type": "Class",
+          "source_location": "test/orm/test_options.py:1547-2079",
+          "score": 20.108476493649512,
+          "matched_by": "tfidf",
+          "confidence": 1.3213767523889846
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategies._JoinedLoader",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/strategies.py:2150-2965",
+          "score": 19.032495807633644,
+          "matched_by": "tfidf",
+          "confidence": 1.0447856947379588
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/orm/strategies.py"
+      ],
+      "file_level_precision": 0.4,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-12",
+      "query": "How does declaring a class with DeclarativeBase and mapped_column attributes end up creating a Table and a Mapper for it?",
+      "retrieved_files": [
+        "lib/sqlalchemy/ext/declarative/extensions.py",
+        "lib/sqlalchemy/orm/decl_base.py",
+        "lib/sqlalchemy/orm/descriptor_props.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/mapper.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig",
+        "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+        "lib.sqlalchemy.orm.decl_base._ClassScanAbstractConfig",
+        "lib.sqlalchemy.orm.mapper.Mapper",
+        "lib.sqlalchemy.orm.events.MapperEvents",
+        "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig._scan_attributes",
+        "lib.sqlalchemy.orm.descriptor_props.CompositeProperty",
+        "lib.sqlalchemy.orm.events.InstanceEvents"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/decl_base.py:925-2035",
+          "score": 57.36506303949686,
+          "matched_by": "tfidf",
+          "confidence": 5.384899218519905
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/ext/declarative/extensions.py:126-352",
+          "score": 49.425028709701074,
+          "matched_by": "tfidf",
+          "confidence": 3.9730493535608877
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.decl_base._ClassScanAbstractConfig",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/decl_base.py:431-922",
+          "score": 42.75586008810609,
+          "matched_by": "tfidf",
+          "confidence": 2.7871772997772153
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.mapper.Mapper",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/mapper.py:168-4101",
+          "score": 41.28548293178444,
+          "matched_by": "tfidf",
+          "confidence": 2.5257235448732445
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.MapperEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:726-1511",
+          "score": 39.560496894295795,
+          "matched_by": "tfidf",
+          "confidence": 2.218996747113017
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig._scan_attributes",
+          "node_type": "Method",
+          "source_location": "lib/sqlalchemy/orm/decl_base.py:1060-1360",
+          "score": 38.945255910809436,
+          "matched_by": "tfidf",
+          "confidence": 2.1095982403341664
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.descriptor_props.CompositeProperty",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/descriptor_props.py:194-917",
+          "score": 38.004593113823134,
+          "matched_by": "tfidf",
+          "confidence": 1.942335154592415
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.InstanceEvents",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/orm/events.py:204-613",
+          "score": 33.49892072682068,
+          "matched_by": "tfidf",
+          "confidence": 1.141163183928832
+        }
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/decl_base.py",
+        "lib/sqlalchemy/orm/mapper.py"
+      ],
+      "file_level_precision": 0.4,
+      "file_level_recall": 0.5,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "sqla-13",
+      "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "retrieved_entities": [],
+      "file_level_hits": [],
+      "file_level_precision": null,
+      "file_level_recall": null,
+      "insufficient_evidence": true
+    },
+    {
+      "query_id": "sqla-14",
+      "query": "Where does SQLAlchemy implement password hashing for user authentication?",
+      "retrieved_files": [
+        "lib/sqlalchemy/connectors/pyodbc.py",
+        "lib/sqlalchemy/sql/elements.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",
+        "lib.sqlalchemy.sql.elements.BinaryExpression"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/connectors/pyodbc.py:34-248",
+          "score": 35.2789871345921,
+          "matched_by": "tfidf",
+          "confidence": 6.371503365388081
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.elements.BinaryExpression",
+          "node_type": "Class",
+          "source_location": "lib/sqlalchemy/sql/elements.py:4167-4316",
+          "score": 21.104111253050245,
+          "matched_by": "tfidf",
+          "confidence": 2.612861220060675
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": null,
+      "insufficient_evidence": false
+    }
+  ]
+}

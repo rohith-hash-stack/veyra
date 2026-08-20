@@ -9,13 +9,14 @@
     "notes": "CHECKPOINT B: fastapi.applications.FastAPI class itself present (rank3, score 15.24) and confidence-accepted."
   },
   "fastapi-02": {
-    "final_answer_correct": false,
+    "final_answer_correct": true,
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": true,
     "multi_hop": false,
-    "failure_category": "ranking_failure",
+    "failure_category": null,
     "checkpoint_b_change": "unchanged (FALSE)",
-    "notes": "CHECKPOINT B: the real target, fastapi.routing.APIRoute, is still never retrieved -- APIRouter (a different class, name-similarity coincidence) is the only routing.py entity present."
+    "final_hardening_change": "IMPROVED (was FALSE at Checkpoint B; now TRUE) -- structural corroboration recovers the real target",
+    "notes": "CHECKPOINT B: the real target, fastapi.routing.APIRoute, is still never retrieved -- APIRouter (a different class, name-similarity coincidence) is the only routing.py entity present. FINAL HARDENING: fastapi.routing.APIRoute (rank7, score 19.11) now clears the bar via structural corroboration -- the sole ground-truth symbol for this query, so a full recovery, not a partial one."
   },
   "fastapi-03": {
     "final_answer_correct": true,
@@ -27,22 +28,24 @@
     "notes": "CHECKPOINT B: fastapi.param_functions.Depends retrieved at rank1, score 18.69, confidence-accepted."
   },
   "fastapi-04": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": true,
     "failure_category": "ranking_failure",
     "checkpoint_b_change": "unchanged (FALSE)",
-    "notes": "CHECKPOINT B: only the FastAPI class survives; neither FastAPI.add_api_route nor APIRouter.add_api_route retrieved."
+    "final_hardening_change": "IMPROVED (was FALSE at Checkpoint B; now PARTIAL) -- structural corroboration recovers 1 of the 2 needed hops",
+    "notes": "CHECKPOINT B: only the FastAPI class survives; neither FastAPI.add_api_route nor APIRouter.add_api_route retrieved. FINAL HARDENING: FastAPI.add_api_route (rank10, score 13.97) now clears the bar via structural corroboration, but APIRouter.add_api_route (the second hop the query's own summary requires) still doesn't -- 1 of 2 needed methods, PARTIAL not TRUE."
   },
   "fastapi-05": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": false,
     "failure_category": "ranking_failure",
     "checkpoint_b_change": "unchanged (FALSE)",
-    "notes": "CHECKPOINT B: file-level hit only (_FrontendRouteGroup, APIWebSocketRoute, _EffectiveRouteContext are all in routing.py) but none is get_dependant() or APIRoute -- the real target entities are still absent."
+    "final_hardening_change": "IMPROVED (was FALSE at Checkpoint B; now PARTIAL) -- structural corroboration recovers 1 of the 2 needed symbols",
+    "notes": "CHECKPOINT B: file-level hit only (_FrontendRouteGroup, APIWebSocketRoute, _EffectiveRouteContext are all in routing.py) but none is get_dependant() or APIRoute -- the real target entities are still absent. FINAL HARDENING: fastapi.routing.APIRoute (rank9, score 19.79) now clears the bar via structural corroboration, but get_dependant() (the other named symbol) still doesn't -- 1 of 2, PARTIAL not TRUE."
   },
   "fastapi-06": {
     "final_answer_correct": false,

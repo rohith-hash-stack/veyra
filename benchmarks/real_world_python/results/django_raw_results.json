@@ -1,10 +1,137 @@
 {
   "repo_name": "django",
   "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+  "index_entity_count": 92679,
+  "query_count": 14,
   "results": [
     {
       "query_id": "django-01",
       "query": "Where is Django's QuerySet class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 17.754143714904785,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.backends.sqlite3.operations.DatabaseOperations",
+          "node_type": "Class",
+          "name": "DatabaseOperations",
+          "source_location": "django/db/backends/sqlite3/operations.py:29-414",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 27.698173138668942,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.manager.BaseManager",
+          "node_type": "Class",
+          "name": "BaseManager",
+          "source_location": "django/db/models/manager.py:10-173",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 26.576238237151863,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.views.generic.detail.SingleObjectMixin",
+          "node_type": "Class",
+          "name": "SingleObjectMixin",
+          "source_location": "django/views/generic/detail.py:8-101",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 26.510322428683416,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "node_type": "Class",
+          "name": "ReverseManyToOneDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 24.81523607804842,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.template.engine.Engine",
+          "node_type": "Class",
+          "name": "Engine",
+          "source_location": "django/template/engine.py:13-234",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 24.328764472135695,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related.RelatedField",
+          "node_type": "Class",
+          "name": "RelatedField",
+          "source_location": "django/db/models/fields/related.py:98-541",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 24.173107193067477,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.apps.config.AppConfig",
+          "node_type": "Class",
+          "name": "AppConfig",
+          "source_location": "django/apps/config.py:13-274",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 23.999220128945293,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.serializers.xml_serializer.Serializer",
+          "node_type": "Class",
+          "name": "Serializer",
+          "source_location": "django/core/serializers/xml_serializer.py:18-229",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 23.942700831273086,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.query.QuerySet",
+          "node_type": "Class",
+          "name": "QuerySet",
+          "source_location": "django/db/models/query.py:374-2424",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 22.936856602369236,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.query_utils.Q",
+          "node_type": "Class",
+          "name": "Q",
+          "source_location": "django/db/models/query_utils.py:41-247",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 22.471109829881176,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/apps/config.py",
         "django/core/serializers/xml_serializer.py",
@@ -29,98 +156,438 @@
         "django.db.models.query.QuerySet",
         "django.db.models.query_utils.Q"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.db.backends.sqlite3.operations.DatabaseOperations",
-          "node_type": "Class",
-          "source_location": "django/db/backends/sqlite3/operations.py:29-414",
-          "score": 27.698173138668942,
-          "matched_by": "tfidf",
-          "confidence": 3.8746082550354126
-        },
-        {
-          "entity_id": "django.db.models.manager.BaseManager",
-          "node_type": "Class",
-          "source_location": "django/db/models/manager.py:10-173",
-          "score": 26.576238237151863,
-          "matched_by": "tfidf",
-          "confidence": 3.458192911308119
-        },
-        {
-          "entity_id": "django.views.generic.detail.SingleObjectMixin",
-          "node_type": "Class",
-          "source_location": "django/views/generic/detail.py:8-101",
-          "score": 26.510322428683416,
-          "matched_by": "tfidf",
-          "confidence": 3.4337277181820873
-        },
-        {
-          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
-          "node_type": "Class",
-          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
-          "score": 24.81523607804842,
-          "matched_by": "tfidf",
-          "confidence": 2.8045825116352088
-        },
-        {
-          "entity_id": "django.template.engine.Engine",
-          "node_type": "Class",
-          "source_location": "django/template/engine.py:13-234",
-          "score": 24.328764472135695,
-          "matched_by": "tfidf",
-          "confidence": 2.624024583794836
-        },
-        {
-          "entity_id": "django.db.models.fields.related.RelatedField",
-          "node_type": "Class",
-          "source_location": "django/db/models/fields/related.py:98-541",
-          "score": 24.173107193067477,
-          "matched_by": "tfidf",
-          "confidence": 2.566251107562658
-        },
-        {
-          "entity_id": "django.apps.config.AppConfig",
-          "node_type": "Class",
-          "source_location": "django/apps/config.py:13-274",
-          "score": 23.999220128945293,
-          "matched_by": "tfidf",
-          "confidence": 2.5017114970395724
-        },
-        {
-          "entity_id": "django.core.serializers.xml_serializer.Serializer",
-          "node_type": "Class",
-          "source_location": "django/core/serializers/xml_serializer.py:18-229",
-          "score": 23.942700831273086,
-          "matched_by": "tfidf",
-          "confidence": 2.4807338959901957
-        },
-        {
-          "entity_id": "django.db.models.query.QuerySet",
-          "node_type": "Class",
-          "source_location": "django/db/models/query.py:374-2424",
-          "score": 22.936856602369236,
-          "matched_by": "tfidf",
-          "confidence": 2.1074065578810557
-        },
-        {
-          "entity_id": "django.db.models.query_utils.Q",
-          "node_type": "Class",
-          "source_location": "django/db/models/query_utils.py:41-247",
-          "score": 22.471109829881176,
-          "matched_by": "tfidf",
-          "confidence": 1.9345408220052556
-        }
+      "ground_truth_files": [
+        "django/db/models/query.py"
       ],
       "file_level_hits": [
         "django/db/models/query.py"
       ],
-      "file_level_precision": 0.1,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.1,
+      "conflicts": [],
+      "unknowns": [
+        "django.apps.config.AppConfig.__init__",
+        "django.apps.config.AppConfig.__repr__",
+        "django.apps.config.AppConfig._is_default_auto_field_overridden",
+        "django.apps.config.AppConfig._path_from_module",
+        "django.apps.config.AppConfig.create",
+        "django.apps.config.AppConfig.default_auto_field",
+        "django.apps.config.AppConfig.get_model",
+        "django.apps.config.AppConfig.get_models",
+        "django.apps.config.AppConfig.import_models",
+        "django.apps.config.AppConfig.ready",
+        "django.core.serializers.xml_serializer.Serializer._start_relational_field",
+        "django.core.serializers.xml_serializer.Serializer.end_object",
+        "django.core.serializers.xml_serializer.Serializer.end_serialization",
+        "django.core.serializers.xml_serializer.Serializer.handle_field",
+        "django.core.serializers.xml_serializer.Serializer.handle_fk_field",
+        "django.core.serializers.xml_serializer.Serializer.handle_m2m_field",
+        "django.core.serializers.xml_serializer.Serializer.indent",
+        "django.core.serializers.xml_serializer.Serializer.start_object",
+        "django.core.serializers.xml_serializer.Serializer.start_serialization",
+        "django.db.backends.base.operations.BaseDatabaseOperations",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.__references_graph",
+        "django.db.backends.sqlite3.operations.DatabaseOperations._convert_tznames_to_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations._create_decimal",
+        "django.db.backends.sqlite3.operations.DatabaseOperations._quote_params_for_last_executed_query",
+        "django.db.backends.sqlite3.operations.DatabaseOperations._references_graph",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.adapt_datetimefield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.adapt_timefield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.cast_char_field_without_max_length",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.cast_data_types",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.check_expression_support",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.combine_duration_expression",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.combine_expression",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.convert_booleanfield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.convert_datefield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.convert_datetimefield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.convert_timefield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.convert_uuidfield_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.date_extract_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.date_trunc_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.datetime_cast_date_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.datetime_cast_time_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.datetime_extract_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.datetime_trunc_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.explain_prefix",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.force_group_by",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.format_for_duration_arithmetic",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.format_json_path_numeric_index",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.get_db_converters",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.get_decimalfield_converter",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.insert_statement",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.integer_field_range",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.jsonfield_datatype_values",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.last_executed_query",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.no_limit_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.on_conflict_suffix_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.pk_default_value",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.quote_name",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.sequence_reset_by_name_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.sql_flush",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.subtract_temporals",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.time_extract_sql",
+        "django.db.backends.sqlite3.operations.DatabaseOperations.time_trunc_sql",
+        "django.db.models.fields.related.RelatedField.__init__",
+        "django.db.models.fields.related.RelatedField._check_clashes",
+        "django.db.models.fields.related.RelatedField._check_referencing_to_swapped_model",
+        "django.db.models.fields.related.RelatedField._check_related_name_is_valid",
+        "django.db.models.fields.related.RelatedField._check_related_query_name_is_valid",
+        "django.db.models.fields.related.RelatedField._check_relation_model_exists",
+        "django.db.models.fields.related.RelatedField.cache_name",
+        "django.db.models.fields.related.RelatedField.check",
+        "django.db.models.fields.related.RelatedField.contribute_to_class",
+        "django.db.models.fields.related.RelatedField.db_type",
+        "django.db.models.fields.related.RelatedField.deconstruct",
+        "django.db.models.fields.related.RelatedField.do_related_class",
+        "django.db.models.fields.related.RelatedField.formfield",
+        "django.db.models.fields.related.RelatedField.get_forward_related_filter",
+        "django.db.models.fields.related.RelatedField.get_limit_choices_to",
+        "django.db.models.fields.related.RelatedField.get_reverse_related_filter",
+        "django.db.models.fields.related.RelatedField.many_to_many",
+        "django.db.models.fields.related.RelatedField.many_to_one",
+        "django.db.models.fields.related.RelatedField.one_to_many",
+        "django.db.models.fields.related.RelatedField.one_to_one",
+        "django.db.models.fields.related.RelatedField.related_model",
+        "django.db.models.fields.related.RelatedField.related_query_name",
+        "django.db.models.fields.related.RelatedField.set_attributes_from_rel",
+        "django.db.models.fields.related.RelatedField.swappable_setting",
+        "django.db.models.fields.related.RelatedField.target_field",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__get__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__set__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor._get_set_deprecation_msg_params",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.related_manager_cls",
+        "django.db.models.manager.BaseManager.__class_getitem__",
+        "django.db.models.manager.BaseManager.__eq__",
+        "django.db.models.manager.BaseManager.__hash__",
+        "django.db.models.manager.BaseManager.__init__",
+        "django.db.models.manager.BaseManager.__new__",
+        "django.db.models.manager.BaseManager.__str__",
+        "django.db.models.manager.BaseManager._get_queryset_methods",
+        "django.db.models.manager.BaseManager._set_creation_counter",
+        "django.db.models.manager.BaseManager.all",
+        "django.db.models.manager.BaseManager.auto_created",
+        "django.db.models.manager.BaseManager.check",
+        "django.db.models.manager.BaseManager.contribute_to_class",
+        "django.db.models.manager.BaseManager.creation_counter",
+        "django.db.models.manager.BaseManager.db",
+        "django.db.models.manager.BaseManager.db_manager",
+        "django.db.models.manager.BaseManager.deconstruct",
+        "django.db.models.manager.BaseManager.from_queryset",
+        "django.db.models.manager.BaseManager.get_queryset",
+        "django.db.models.manager.BaseManager.use_in_migrations",
+        "django.db.models.query.QuerySet.__aiter__",
+        "django.db.models.query.QuerySet.__and__",
+        "django.db.models.query.QuerySet.__bool__",
+        "django.db.models.query.QuerySet.__class_getitem__",
+        "django.db.models.query.QuerySet.__deepcopy__",
+        "django.db.models.query.QuerySet.__getitem__",
+        "django.db.models.query.QuerySet.__getstate__",
+        "django.db.models.query.QuerySet.__init__",
+        "django.db.models.query.QuerySet.__iter__",
+        "django.db.models.query.QuerySet.__len__",
+        "django.db.models.query.QuerySet.__or__",
+        "django.db.models.query.QuerySet.__repr__",
+        "django.db.models.query.QuerySet.__setstate__",
+        "django.db.models.query.QuerySet.__xor__",
+        "django.db.models.query.QuerySet._add_hints",
+        "django.db.models.query.QuerySet._annotate",
+        "django.db.models.query.QuerySet._avoid_cloning",
+        "django.db.models.query.QuerySet._batched_insert",
+        "django.db.models.query.QuerySet._chain",
+        "django.db.models.query.QuerySet._check_bulk_create_options",
+        "django.db.models.query.QuerySet._check_operator_queryset",
+        "django.db.models.query.QuerySet._check_ordering_first_last_queryset_aggregation",
+        "django.db.models.query.QuerySet._clear_ordering_in_combined_queries",
+        "django.db.models.query.QuerySet._clone",
+        "django.db.models.query.QuerySet._combinator_query",
+        "django.db.models.query.QuerySet._disable_cloning",
+        "django.db.models.query.QuerySet._earliest",
+        "django.db.models.query.QuerySet._enable_cloning",
+        "django.db.models.query.QuerySet._extract_model_params",
+        "django.db.models.query.QuerySet._fetch_all",
+        "django.db.models.query.QuerySet._filter_or_exclude",
+        "django.db.models.query.QuerySet._filter_or_exclude_inplace",
+        "django.db.models.query.QuerySet._handle_order_with_respect_to",
+        "django.db.models.query.QuerySet._has_filters",
+        "django.db.models.query.QuerySet._insert",
+        "django.db.models.query.QuerySet._iterator",
+        "django.db.models.query.QuerySet._merge_known_related_objects",
+        "django.db.models.query.QuerySet._merge_sanity_check",
+        "django.db.models.query.QuerySet._next_is_sticky",
+        "django.db.models.query.QuerySet._not_support_combined_queries",
+        "django.db.models.query.QuerySet._prefetch_related_objects",
+        "django.db.models.query.QuerySet._prepare_for_bulk_create",
+        "django.db.models.query.QuerySet._raw_delete",
+        "django.db.models.query.QuerySet._update",
+        "django.db.models.query.QuerySet._validate_values_are_expressions",
+        "django.db.models.query.QuerySet._values",
+        "django.db.models.query.QuerySet.aaggregate",
+        "django.db.models.query.QuerySet.abulk_create",
+        "django.db.models.query.QuerySet.abulk_update",
+        "django.db.models.query.QuerySet.acontains",
+        "django.db.models.query.QuerySet.acount",
+        "django.db.models.query.QuerySet.acreate",
+        "django.db.models.query.QuerySet.adelete",
+        "django.db.models.query.QuerySet.aearliest",
+        "django.db.models.query.QuerySet.aexists",
+        "django.db.models.query.QuerySet.aexplain",
+        "django.db.models.query.QuerySet.afirst",
+        "django.db.models.query.QuerySet.aget",
+        "django.db.models.query.QuerySet.aget_or_create",
+        "django.db.models.query.QuerySet.aggregate",
+        "django.db.models.query.QuerySet.ain_bulk",
+        "django.db.models.query.QuerySet.aiterator",
+        "django.db.models.query.QuerySet.alast",
+        "django.db.models.query.QuerySet.alatest",
+        "django.db.models.query.QuerySet.alias",
+        "django.db.models.query.QuerySet.all",
+        "django.db.models.query.QuerySet.annotate",
+        "django.db.models.query.QuerySet.as_manager",
+        "django.db.models.query.QuerySet.aupdate",
+        "django.db.models.query.QuerySet.aupdate_or_create",
+        "django.db.models.query.QuerySet.bulk_create",
+        "django.db.models.query.QuerySet.bulk_update",
+        "django.db.models.query.QuerySet.complex_filter",
+        "django.db.models.query.QuerySet.contains",
+        "django.db.models.query.QuerySet.count",
+        "django.db.models.query.QuerySet.create",
+        "django.db.models.query.QuerySet.dates",
+        "django.db.models.query.QuerySet.datetimes",
+        "django.db.models.query.QuerySet.db",
+        "django.db.models.query.QuerySet.defer",
+        "django.db.models.query.QuerySet.delete",
+        "django.db.models.query.QuerySet.difference",
+        "django.db.models.query.QuerySet.distinct",
+        "django.db.models.query.QuerySet.earliest",
+        "django.db.models.query.QuerySet.exclude",
+        "django.db.models.query.QuerySet.exists",
+        "django.db.models.query.QuerySet.explain",
+        "django.db.models.query.QuerySet.extra",
+        "django.db.models.query.QuerySet.fetch_mode",
+        "django.db.models.query.QuerySet.filter",
+        "django.db.models.query.QuerySet.first",
+        "django.db.models.query.QuerySet.get",
+        "django.db.models.query.QuerySet.get_or_create",
+        "django.db.models.query.QuerySet.in_bulk",
+        "django.db.models.query.QuerySet.intersection",
+        "django.db.models.query.QuerySet.iterator",
+        "django.db.models.query.QuerySet.last",
+        "django.db.models.query.QuerySet.latest",
+        "django.db.models.query.QuerySet.none",
+        "django.db.models.query.QuerySet.only",
+        "django.db.models.query.QuerySet.order_by",
+        "django.db.models.query.QuerySet.ordered",
+        "django.db.models.query.QuerySet.prefetch_related",
+        "django.db.models.query.QuerySet.query",
+        "django.db.models.query.QuerySet.raw",
+        "django.db.models.query.QuerySet.resolve_expression",
+        "django.db.models.query.QuerySet.reverse",
+        "django.db.models.query.QuerySet.select_for_update",
+        "django.db.models.query.QuerySet.select_related",
+        "django.db.models.query.QuerySet.totally_ordered",
+        "django.db.models.query.QuerySet.union",
+        "django.db.models.query.QuerySet.update",
+        "django.db.models.query.QuerySet.update_or_create",
+        "django.db.models.query.QuerySet.using",
+        "django.db.models.query.QuerySet.values",
+        "django.db.models.query.QuerySet.values_list",
+        "django.db.models.query_utils.Q.AND",
+        "django.db.models.query_utils.Q.OR",
+        "django.db.models.query_utils.Q.XOR",
+        "django.db.models.query_utils.Q.__and__",
+        "django.db.models.query_utils.Q.__eq__",
+        "django.db.models.query_utils.Q.__hash__",
+        "django.db.models.query_utils.Q.__init__",
+        "django.db.models.query_utils.Q.__invert__",
+        "django.db.models.query_utils.Q.__or__",
+        "django.db.models.query_utils.Q.__xor__",
+        "django.db.models.query_utils.Q._check_connector",
+        "django.db.models.query_utils.Q._combine",
+        "django.db.models.query_utils.Q.check",
+        "django.db.models.query_utils.Q.conditional",
+        "django.db.models.query_utils.Q.connectors",
+        "django.db.models.query_utils.Q.create",
+        "django.db.models.query_utils.Q.deconstruct",
+        "django.db.models.query_utils.Q.default",
+        "django.db.models.query_utils.Q.flatten",
+        "django.db.models.query_utils.Q.identity",
+        "django.db.models.query_utils.Q.referenced_base_fields",
+        "django.db.models.query_utils.Q.replace_expressions",
+        "django.db.models.query_utils.Q.resolve_expression",
+        "django.db.models.utils.AltersData",
+        "django.template.engine.Engine.__init__",
+        "django.template.engine.Engine.__repr__",
+        "django.template.engine.Engine.default_builtins",
+        "django.template.engine.Engine.find_template",
+        "django.template.engine.Engine.find_template_loader",
+        "django.template.engine.Engine.from_string",
+        "django.template.engine.Engine.get_default",
+        "django.template.engine.Engine.get_template",
+        "django.template.engine.Engine.get_template_builtins",
+        "django.template.engine.Engine.get_template_libraries",
+        "django.template.engine.Engine.get_template_loaders",
+        "django.template.engine.Engine.render_to_string",
+        "django.template.engine.Engine.select_template",
+        "django.template.engine.Engine.template_context_processors",
+        "django.template.engine.Engine.template_loaders",
+        "django.views.generic.base.ContextMixin",
+        "django.views.generic.detail.SingleObjectMixin.context_object_name",
+        "django.views.generic.detail.SingleObjectMixin.get_context_data",
+        "django.views.generic.detail.SingleObjectMixin.get_context_object_name",
+        "django.views.generic.detail.SingleObjectMixin.get_object",
+        "django.views.generic.detail.SingleObjectMixin.get_queryset",
+        "django.views.generic.detail.SingleObjectMixin.get_slug_field",
+        "django.views.generic.detail.SingleObjectMixin.model",
+        "django.views.generic.detail.SingleObjectMixin.pk_url_kwarg",
+        "django.views.generic.detail.SingleObjectMixin.query_pk_and_slug",
+        "django.views.generic.detail.SingleObjectMixin.queryset",
+        "django.views.generic.detail.SingleObjectMixin.slug_field",
+        "django.views.generic.detail.SingleObjectMixin.slug_url_kwarg"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-02",
       "query": "Where is Django's base Model class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 4.743020534515381,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.contenttypes.models.ContentType",
+          "node_type": "Class",
+          "name": "ContentType",
+          "source_location": "django/contrib/contenttypes/models.py:134-188",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 28.74607491636107,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "name": "Options",
+          "source_location": "django/db/models/options.py:90-1052",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 28.642464912988487,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.management.base.BaseCommand",
+          "node_type": "Class",
+          "name": "BaseCommand",
+          "source_location": "django/core/management/base.py:193-630",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 26.638099466365645,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.postgres.fields.array.ArrayField",
+          "node_type": "Class",
+          "name": "ArrayField",
+          "source_location": "django/contrib/postgres/fields/array.py:21-251",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 26.14587274922246,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.migrations.state.ModelState",
+          "node_type": "Class",
+          "name": "ModelState",
+          "source_location": "django/db/migrations/state.py:737-1021",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 25.98021153340884,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.constraints.BaseConstraint",
+          "node_type": "Class",
+          "name": "BaseConstraint",
+          "source_location": "django/db/models/constraints.py:28-139",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 24.950261762947285,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "node_type": "Class",
+          "name": "BaseDatabaseIntrospection",
+          "source_location": "django/db/backends/base/introspection.py:16-228",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 24.689936743811487,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.checks.messages.CheckMessage",
+          "node_type": "Class",
+          "name": "CheckMessage",
+          "source_location": "django/core/checks/messages.py:9-57",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 24.594750204438526,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.base.ModelBase",
+          "node_type": "Class",
+          "name": "ModelBase",
+          "source_location": "django/db/models/base.py:102-466",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 24.54413135732424,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.admin.sites.AdminSite",
+          "node_type": "Class",
+          "name": "AdminSite",
+          "source_location": "django/contrib/admin/sites.py:31-619",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 24.540488861652754,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/admin/sites.py",
         "django/contrib/contenttypes/models.py",
@@ -145,99 +612,370 @@
         "django.db.models.base.ModelBase",
         "django.contrib.admin.sites.AdminSite"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.contrib.contenttypes.models.ContentType",
-          "node_type": "Class",
-          "source_location": "django/contrib/contenttypes/models.py:134-188",
-          "score": 28.74607491636107,
-          "matched_by": "tfidf",
-          "confidence": 3.4765714769121856
-        },
-        {
-          "entity_id": "django.db.models.options.Options",
-          "node_type": "Class",
-          "source_location": "django/db/models/options.py:90-1052",
-          "score": 28.642464912988487,
-          "matched_by": "tfidf",
-          "confidence": 3.4426102501188187
-        },
-        {
-          "entity_id": "django.core.management.base.BaseCommand",
-          "node_type": "Class",
-          "source_location": "django/core/management/base.py:193-630",
-          "score": 26.638099466365645,
-          "matched_by": "tfidf",
-          "confidence": 2.785620506910697
-        },
-        {
-          "entity_id": "django.contrib.postgres.fields.array.ArrayField",
-          "node_type": "Class",
-          "source_location": "django/contrib/postgres/fields/array.py:21-251",
-          "score": 26.14587274922246,
-          "matched_by": "tfidf",
-          "confidence": 2.624278719143923
-        },
-        {
-          "entity_id": "django.db.migrations.state.ModelState",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/state.py:737-1021",
-          "score": 25.98021153340884,
-          "matched_by": "tfidf",
-          "confidence": 2.5699783819372946
-        },
-        {
-          "entity_id": "django.db.models.constraints.BaseConstraint",
-          "node_type": "Class",
-          "source_location": "django/db/models/constraints.py:28-139",
-          "score": 24.950261762947285,
-          "matched_by": "tfidf",
-          "confidence": 2.2323820437281534
-        },
-        {
-          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
-          "node_type": "Class",
-          "source_location": "django/db/backends/base/introspection.py:16-228",
-          "score": 24.689936743811487,
-          "matched_by": "tfidf",
-          "confidence": 2.147052859990304
-        },
-        {
-          "entity_id": "django.core.checks.messages.CheckMessage",
-          "node_type": "Class",
-          "source_location": "django/core/checks/messages.py:9-57",
-          "score": 24.594750204438526,
-          "matched_by": "tfidf",
-          "confidence": 2.1158526713396366
-        },
-        {
-          "entity_id": "django.db.models.base.ModelBase",
-          "node_type": "Class",
-          "source_location": "django/db/models/base.py:102-466",
-          "score": 24.54413135732424,
-          "matched_by": "tfidf",
-          "confidence": 2.099260855000386
-        },
-        {
-          "entity_id": "django.contrib.admin.sites.AdminSite",
-          "node_type": "Class",
-          "source_location": "django/contrib/admin/sites.py:31-619",
-          "score": 24.54048886165275,
-          "matched_by": "tfidf",
-          "confidence": 2.098066919882476
-        }
+      "ground_truth_files": [
+        "django/db/models/base.py"
       ],
       "file_level_hits": [
         "django/db/models/base.py"
       ],
-      "file_level_precision": 0.1,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.1,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.admin.sites.AdminSite.__init__",
+        "django.contrib.admin.sites.AdminSite.__repr__",
+        "django.contrib.admin.sites.AdminSite._build_app_dict",
+        "django.contrib.admin.sites.AdminSite.actions",
+        "django.contrib.admin.sites.AdminSite.add_action",
+        "django.contrib.admin.sites.AdminSite.admin_view",
+        "django.contrib.admin.sites.AdminSite.app_index",
+        "django.contrib.admin.sites.AdminSite.app_index_template",
+        "django.contrib.admin.sites.AdminSite.autocomplete_view",
+        "django.contrib.admin.sites.AdminSite.catch_all_view",
+        "django.contrib.admin.sites.AdminSite.check",
+        "django.contrib.admin.sites.AdminSite.disable_action",
+        "django.contrib.admin.sites.AdminSite.each_context",
+        "django.contrib.admin.sites.AdminSite.empty_value_display",
+        "django.contrib.admin.sites.AdminSite.enable_nav_sidebar",
+        "django.contrib.admin.sites.AdminSite.final_catch_all_view",
+        "django.contrib.admin.sites.AdminSite.get_action",
+        "django.contrib.admin.sites.AdminSite.get_app_list",
+        "django.contrib.admin.sites.AdminSite.get_log_entries",
+        "django.contrib.admin.sites.AdminSite.get_model_admin",
+        "django.contrib.admin.sites.AdminSite.get_urls",
+        "django.contrib.admin.sites.AdminSite.has_permission",
+        "django.contrib.admin.sites.AdminSite.i18n_javascript",
+        "django.contrib.admin.sites.AdminSite.index",
+        "django.contrib.admin.sites.AdminSite.index_template",
+        "django.contrib.admin.sites.AdminSite.index_title",
+        "django.contrib.admin.sites.AdminSite.is_registered",
+        "django.contrib.admin.sites.AdminSite.login",
+        "django.contrib.admin.sites.AdminSite.login_form",
+        "django.contrib.admin.sites.AdminSite.login_template",
+        "django.contrib.admin.sites.AdminSite.logout",
+        "django.contrib.admin.sites.AdminSite.logout_template",
+        "django.contrib.admin.sites.AdminSite.password_change",
+        "django.contrib.admin.sites.AdminSite.password_change_done",
+        "django.contrib.admin.sites.AdminSite.password_change_done_template",
+        "django.contrib.admin.sites.AdminSite.password_change_form",
+        "django.contrib.admin.sites.AdminSite.password_change_template",
+        "django.contrib.admin.sites.AdminSite.register",
+        "django.contrib.admin.sites.AdminSite.shortcut_view",
+        "django.contrib.admin.sites.AdminSite.site_header",
+        "django.contrib.admin.sites.AdminSite.site_title",
+        "django.contrib.admin.sites.AdminSite.site_url",
+        "django.contrib.admin.sites.AdminSite.unregister",
+        "django.contrib.admin.sites.AdminSite.urls",
+        "django.contrib.contenttypes.models.ContentType.Meta",
+        "django.contrib.contenttypes.models.ContentType.__str__",
+        "django.contrib.contenttypes.models.ContentType.app_label",
+        "django.contrib.contenttypes.models.ContentType.app_labeled_name",
+        "django.contrib.contenttypes.models.ContentType.get_all_objects_for_this_type",
+        "django.contrib.contenttypes.models.ContentType.get_object_for_this_type",
+        "django.contrib.contenttypes.models.ContentType.model",
+        "django.contrib.contenttypes.models.ContentType.model_class",
+        "django.contrib.contenttypes.models.ContentType.name",
+        "django.contrib.contenttypes.models.ContentType.natural_key",
+        "django.contrib.contenttypes.models.ContentType.objects",
+        "django.contrib.postgres.fields.array.ArrayField.__init__",
+        "django.contrib.postgres.fields.array.ArrayField._choices_is_value",
+        "django.contrib.postgres.fields.array.ArrayField._default_hint",
+        "django.contrib.postgres.fields.array.ArrayField._from_db_value",
+        "django.contrib.postgres.fields.array.ArrayField.cast_db_type",
+        "django.contrib.postgres.fields.array.ArrayField.check",
+        "django.contrib.postgres.fields.array.ArrayField.db_parameters",
+        "django.contrib.postgres.fields.array.ArrayField.db_type",
+        "django.contrib.postgres.fields.array.ArrayField.deconstruct",
+        "django.contrib.postgres.fields.array.ArrayField.default_error_messages",
+        "django.contrib.postgres.fields.array.ArrayField.description",
+        "django.contrib.postgres.fields.array.ArrayField.empty_strings_allowed",
+        "django.contrib.postgres.fields.array.ArrayField.formfield",
+        "django.contrib.postgres.fields.array.ArrayField.get_db_prep_save",
+        "django.contrib.postgres.fields.array.ArrayField.get_db_prep_value",
+        "django.contrib.postgres.fields.array.ArrayField.get_placeholder_sql",
+        "django.contrib.postgres.fields.array.ArrayField.get_transform",
+        "django.contrib.postgres.fields.array.ArrayField.model",
+        "django.contrib.postgres.fields.array.ArrayField.run_validators",
+        "django.contrib.postgres.fields.array.ArrayField.set_attributes_from_name",
+        "django.contrib.postgres.fields.array.ArrayField.slice_expression",
+        "django.contrib.postgres.fields.array.ArrayField.to_python",
+        "django.contrib.postgres.fields.array.ArrayField.validate",
+        "django.contrib.postgres.fields.array.ArrayField.value_to_string",
+        "django.contrib.postgres.utils.CheckPostgresInstalledMixin",
+        "django.core.checks.messages.CheckMessage.__eq__",
+        "django.core.checks.messages.CheckMessage.__init__",
+        "django.core.checks.messages.CheckMessage.__repr__",
+        "django.core.checks.messages.CheckMessage.__str__",
+        "django.core.checks.messages.CheckMessage.is_serious",
+        "django.core.checks.messages.CheckMessage.is_silenced",
+        "django.core.management.base.BaseCommand.__init__",
+        "django.core.management.base.BaseCommand._called_from_command_line",
+        "django.core.management.base.BaseCommand.add_arguments",
+        "django.core.management.base.BaseCommand.add_base_argument",
+        "django.core.management.base.BaseCommand.base_stealth_options",
+        "django.core.management.base.BaseCommand.check",
+        "django.core.management.base.BaseCommand.check_migrations",
+        "django.core.management.base.BaseCommand.create_parser",
+        "django.core.management.base.BaseCommand.execute",
+        "django.core.management.base.BaseCommand.get_check_kwargs",
+        "django.core.management.base.BaseCommand.get_version",
+        "django.core.management.base.BaseCommand.handle",
+        "django.core.management.base.BaseCommand.help",
+        "django.core.management.base.BaseCommand.output_transaction",
+        "django.core.management.base.BaseCommand.print_help",
+        "django.core.management.base.BaseCommand.requires_migrations_checks",
+        "django.core.management.base.BaseCommand.requires_settings",
+        "django.core.management.base.BaseCommand.requires_system_checks",
+        "django.core.management.base.BaseCommand.run_from_argv",
+        "django.core.management.base.BaseCommand.stealth_options",
+        "django.core.management.base.BaseCommand.suppressed_base_arguments",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.__del__",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.__init__",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.data_types_reverse",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.django_table_names",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_constraints",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_field_type",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_migratable_models",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_primary_key_column",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_primary_key_columns",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_relations",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_sequences",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_table_description",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_table_list",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.identifier_converter",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.installed_models",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.on_delete_types",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.sequence_list",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.table_names",
+        "django.db.migrations.state.ModelState.__eq__",
+        "django.db.migrations.state.ModelState.__init__",
+        "django.db.migrations.state.ModelState.__repr__",
+        "django.db.migrations.state.ModelState.clone",
+        "django.db.migrations.state.ModelState.construct_managers",
+        "django.db.migrations.state.ModelState.from_model",
+        "django.db.migrations.state.ModelState.get_constraint_by_name",
+        "django.db.migrations.state.ModelState.get_field",
+        "django.db.migrations.state.ModelState.get_index_by_name",
+        "django.db.migrations.state.ModelState.name_lower",
+        "django.db.migrations.state.ModelState.render",
+        "django.db.models.base.ModelBase.__new__",
+        "django.db.models.base.ModelBase._base_manager",
+        "django.db.models.base.ModelBase._default_manager",
+        "django.db.models.base.ModelBase._prepare",
+        "django.db.models.base.ModelBase.add_to_class",
+        "django.db.models.constraints.BaseConstraint.__init__",
+        "django.db.models.constraints.BaseConstraint._check_references",
+        "django.db.models.constraints.BaseConstraint._expression_refs_exclude",
+        "django.db.models.constraints.BaseConstraint.check",
+        "django.db.models.constraints.BaseConstraint.clone",
+        "django.db.models.constraints.BaseConstraint.constraint_sql",
+        "django.db.models.constraints.BaseConstraint.contains_expressions",
+        "django.db.models.constraints.BaseConstraint.create_sql",
+        "django.db.models.constraints.BaseConstraint.deconstruct",
+        "django.db.models.constraints.BaseConstraint.default_violation_error_message",
+        "django.db.models.constraints.BaseConstraint.get_violation_error_message",
+        "django.db.models.constraints.BaseConstraint.non_db_attrs",
+        "django.db.models.constraints.BaseConstraint.remove_sql",
+        "django.db.models.constraints.BaseConstraint.validate",
+        "django.db.models.constraints.BaseConstraint.violation_error_code",
+        "django.db.models.constraints.BaseConstraint.violation_error_message",
+        "django.db.models.fields.mixins.CheckFieldDefaultMixin",
+        "django.db.models.options.Options.FORWARD_PROPERTIES",
+        "django.db.models.options.Options.REVERSE_PROPERTIES",
+        "django.db.models.options.Options.__init__",
+        "django.db.models.options.Options.__repr__",
+        "django.db.models.options.Options.__str__",
+        "django.db.models.options.Options._expire_cache",
+        "django.db.models.options.Options._format_names",
+        "django.db.models.options.Options._forward_fields_map",
+        "django.db.models.options.Options._get_default_pk_class",
+        "django.db.models.options.Options._get_fields",
+        "django.db.models.options.Options._non_pk_concrete_field_names",
+        "django.db.models.options.Options._populate_directed_relation_graph",
+        "django.db.models.options.Options._prepare",
+        "django.db.models.options.Options._property_names",
+        "django.db.models.options.Options._relation_tree",
+        "django.db.models.options.Options._reverse_one_to_one_field_names",
+        "django.db.models.options.Options.add_field",
+        "django.db.models.options.Options.add_manager",
+        "django.db.models.options.Options.all_parents",
+        "django.db.models.options.Options.app_config",
+        "django.db.models.options.Options.base_manager",
+        "django.db.models.options.Options.can_migrate",
+        "django.db.models.options.Options.concrete_fields",
+        "django.db.models.options.Options.contribute_to_class",
+        "django.db.models.options.Options.db_returning_fields",
+        "django.db.models.options.Options.default_apps",
+        "django.db.models.options.Options.default_manager",
+        "django.db.models.options.Options.fields",
+        "django.db.models.options.Options.fields_map",
+        "django.db.models.options.Options.get_ancestor_link",
+        "django.db.models.options.Options.get_base_chain",
+        "django.db.models.options.Options.get_field",
+        "django.db.models.options.Options.get_fields",
+        "django.db.models.options.Options.get_parent_list",
+        "django.db.models.options.Options.get_path_from_parent",
+        "django.db.models.options.Options.get_path_to_parent",
+        "django.db.models.options.Options.is_composite_pk",
+        "django.db.models.options.Options.label",
+        "django.db.models.options.Options.label_lower",
+        "django.db.models.options.Options.local_concrete_fields",
+        "django.db.models.options.Options.managers",
+        "django.db.models.options.Options.managers_map",
+        "django.db.models.options.Options.many_to_many",
+        "django.db.models.options.Options.pk_fields",
+        "django.db.models.options.Options.related_objects",
+        "django.db.models.options.Options.setting_changed",
+        "django.db.models.options.Options.setup_pk",
+        "django.db.models.options.Options.setup_proxy",
+        "django.db.models.options.Options.swapped",
+        "django.db.models.options.Options.total_unique_constraints",
+        "django.db.models.options.Options.verbose_name_raw"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-03",
       "query": "Where is the CSRF protection middleware implemented?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 4.3931615352630615,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
+          "node_type": "Class",
+          "name": "CsrfViewMiddleware",
+          "source_location": "django/middleware/csrf.py:165-484",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 31.117315636410808,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.checks.security.csrf._csrf_middleware",
+          "node_type": "Function",
+          "name": "_csrf_middleware",
+          "source_location": "django/core/checks/security/csrf.py:23-24",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 23.759128781872132,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.views.decorators.csrf._EnsureCsrfToken",
+          "node_type": "Class",
+          "name": "_EnsureCsrfToken",
+          "source_location": "django/views/decorators/csrf.py:16-19",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 23.22827694715702,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.utils.csp.CSP",
+          "node_type": "Class",
+          "name": "CSP",
+          "source_location": "django/utils/csp.py:11-53",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 22.95612217010143,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.checks.security.csrf.check_csrf_middleware",
+          "node_type": "Function",
+          "name": "check_csrf_middleware",
+          "source_location": "django/core/checks/security/csrf.py:28-30",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 22.23703862882737,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.views.decorators.csrf.csrf_exempt",
+          "node_type": "Function",
+          "name": "csrf_exempt",
+          "source_location": "django/views/decorators/csrf.py:50-68",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 21.824677259411157,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "node_type": "Class",
+          "name": "CsrfViewMiddlewareTestMixin",
+          "source_location": "tests/csrf_tests/tests.py:231-1056",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 21.55747597332332,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.template.library.InclusionNode",
+          "node_type": "Class",
+          "name": "InclusionNode",
+          "source_location": "django/template/library.py:369-403",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 8
+          },
+          "score": 21.409177704230885,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.views.csrf.csrf_failure",
+          "node_type": "Function",
+          "name": "csrf_failure",
+          "source_location": "django/views/csrf.py:22-81",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 8
+          },
+          "score": 20.870077232334683,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.views.decorators.csrf._EnsureCsrfCookie",
+          "node_type": "Class",
+          "name": "_EnsureCsrfCookie",
+          "source_location": "django/views/decorators/csrf.py:31-39",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 20.266892268704474,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
+        "django/core/checks/security/csrf.py",
         "django/middleware/csrf.py",
         "django/template/library.py",
         "django/utils/csp.py",
@@ -247,163 +985,464 @@
       ],
       "retrieved_symbols": [
         "django.middleware.csrf.CsrfViewMiddleware",
+        "django.core.checks.security.csrf._csrf_middleware",
+        "django.views.decorators.csrf._EnsureCsrfToken",
         "django.utils.csp.CSP",
+        "django.core.checks.security.csrf.check_csrf_middleware",
         "django.views.decorators.csrf.csrf_exempt",
         "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
         "django.template.library.InclusionNode",
         "django.views.csrf.csrf_failure",
-        "django.template.library.InclusionNode.render",
-        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected"
+        "django.views.decorators.csrf._EnsureCsrfCookie"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
-          "node_type": "Class",
-          "source_location": "django/middleware/csrf.py:165-484",
-          "score": 31.117315636410805,
-          "matched_by": "tfidf",
-          "confidence": 5.414503276700264
-        },
-        {
-          "entity_id": "django.utils.csp.CSP",
-          "node_type": "Class",
-          "source_location": "django/utils/csp.py:11-53",
-          "score": 22.95612217010143,
-          "matched_by": "tfidf",
-          "confidence": 3.0259649486568714
-        },
-        {
-          "entity_id": "django.views.decorators.csrf.csrf_exempt",
-          "node_type": "Function",
-          "source_location": "django/views/decorators/csrf.py:50-68",
-          "score": 21.824677259411157,
-          "matched_by": "tfidf",
-          "confidence": 2.6948247120714166
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
-          "node_type": "Class",
-          "source_location": "tests/csrf_tests/tests.py:231-1056",
-          "score": 21.55747597332332,
-          "matched_by": "tfidf",
-          "confidence": 2.6166228515521244
-        },
-        {
-          "entity_id": "django.template.library.InclusionNode",
-          "node_type": "Class",
-          "source_location": "django/template/library.py:369-403",
-          "score": 21.409177704230885,
-          "matched_by": "tfidf",
-          "confidence": 2.5732203637699107
-        },
-        {
-          "entity_id": "django.views.csrf.csrf_failure",
-          "node_type": "Function",
-          "source_location": "django/views/csrf.py:22-81",
-          "score": 20.870077232334683,
-          "matched_by": "tfidf",
-          "confidence": 2.415441707363097
-        },
-        {
-          "entity_id": "django.template.library.InclusionNode.render",
-          "node_type": "Method",
-          "source_location": "django/template/library.py:374-403",
-          "score": 17.172232806569475,
-          "matched_by": "tfidf",
-          "confidence": 1.333192747263884
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected",
-          "node_type": "Method",
-          "source_location": "tests/csrf_tests/tests.py:488-501",
-          "score": 16.439934480743137,
-          "matched_by": "tfidf",
-          "confidence": 1.1188708314780547
-        }
+      "ground_truth_files": [
+        "django/middleware/csrf.py"
       ],
       "file_level_hits": [
         "django/middleware/csrf.py"
       ],
-      "file_level_precision": 0.16666666666666666,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.14285714285714285,
+      "conflicts": [],
+      "unknowns": [
+        "django.core.checks.security.csrf.check_csrf_middleware.passed_check",
+        "django.middleware.csrf.CsrfViewMiddleware._accept",
+        "django.middleware.csrf.CsrfViewMiddleware._bad_token_message",
+        "django.middleware.csrf.CsrfViewMiddleware._check_referer",
+        "django.middleware.csrf.CsrfViewMiddleware._check_token",
+        "django.middleware.csrf.CsrfViewMiddleware._get_secret",
+        "django.middleware.csrf.CsrfViewMiddleware._origin_verified",
+        "django.middleware.csrf.CsrfViewMiddleware._reject",
+        "django.middleware.csrf.CsrfViewMiddleware._set_csrf_cookie",
+        "django.middleware.csrf.CsrfViewMiddleware.allowed_origin_subdomains",
+        "django.middleware.csrf.CsrfViewMiddleware.allowed_origins_exact",
+        "django.middleware.csrf.CsrfViewMiddleware.csrf_trusted_origins_hosts",
+        "django.middleware.csrf.CsrfViewMiddleware.process_request",
+        "django.middleware.csrf.CsrfViewMiddleware.process_response",
+        "django.middleware.csrf.CsrfViewMiddleware.process_view",
+        "django.middleware.csrf.REASON_NO_CSRF_COOKIE",
+        "django.middleware.csrf.REASON_NO_REFERER",
+        "django.template.context_processors.csp",
+        "django.template.library.InclusionNode.__init__",
+        "django.template.library.InclusionNode.render",
+        "django.template.library.TagHelperNode",
+        "django.utils.csp.CSP.HEADER_ENFORCE",
+        "django.utils.csp.CSP.HEADER_REPORT_ONLY",
+        "django.utils.csp.CSP.NONCE",
+        "django.utils.csp.CSP.NONE",
+        "django.utils.csp.CSP.REPORT_SAMPLE",
+        "django.utils.csp.CSP.SELF",
+        "django.utils.csp.CSP.STRICT_DYNAMIC",
+        "django.utils.csp.CSP.UNSAFE_EVAL",
+        "django.utils.csp.CSP.UNSAFE_HASHES",
+        "django.utils.csp.CSP.UNSAFE_INLINE",
+        "django.utils.csp.CSP.WASM_UNSAFE_EVAL",
+        "django.utils.version.get_docs_version",
+        "django.views.csrf.builtin_template_path",
+        "django.views.csrf.csrf_failure.c",
+        "django.views.decorators.csrf._EnsureCsrfCookie._reject",
+        "django.views.decorators.csrf._EnsureCsrfCookie.process_view",
+        "django.views.decorators.csrf._EnsureCsrfToken._reject",
+        "tests.csrf_tests.tests.CsrfFunctionTestMixin",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_bad_or_missing_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_bad_or_missing_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_referer_rejects",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_token_present",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._csrf_id_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._csrf_id_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_POST_csrf_cookie_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_POST_request_with_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_cookies_set",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_csrf_cookie_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._read_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._set_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_behind_proxy",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_matches_cookie_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_matches_cookie_domain_with_different_port",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_bad_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_bad_protocol",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_cannot_be_parsed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_csrf_trusted_origin_bad_protocol",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_null_origin",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_cookie_not_reset_on_accepted_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_cookie_bad_or_missing_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_cookie_bad_token_custom_header",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_token_in_header",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_token_in_header_with_customized_name",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_ensures_csrf_cookie_no_logging",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_get_token_for_exempt_view",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_get_token_for_requires_csrf_token_view",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_insecure",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_secure",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_wildcard_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_bad_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_csrf_wildcard_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer_2",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_malformed_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_no_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_no_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_origin_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_and_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_response_get_token_not_used",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_reading_post_data_raises_os_error",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_reading_post_data_raises_unreadable_post_error",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_rotate_token_triggers_second_reset",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_empty_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_no_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_with_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_with_new_csrf_cookie"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-04",
       "query": "What does django.contrib.auth.authenticate() actually call to check a user's credentials?",
+      "category": "B_relationship",
+      "elapsed_seconds": 4.6162025928497314,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "name": "RemoteUserMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 47.71985321099399,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.handlers.modwsgi.check_password",
+          "node_type": "Function",
+          "name": "check_password",
+          "source_location": "django/contrib/auth/handlers/modwsgi.py:23-41",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 37.53071981218752,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin",
+          "node_type": "Class",
+          "name": "ClientMixin",
+          "source_location": "django/test/client.py:788-1037",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 37.08639210459053,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.migrations.test_commands.AppLabelErrorTests",
+          "node_type": "Class",
+          "name": "AppLabelErrorTests",
+          "source_location": "tests/migrations/test_commands.py:3473-3540",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 33.73921362164205,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin.login",
+          "node_type": "Method",
+          "name": "login",
+          "source_location": "django/test/client.py:832-845",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 31.788198423787648,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "node_type": "Class",
+          "name": "AuthenticationMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:29-40",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 30.00760125583766,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+          "node_type": "Method",
+          "name": "test_view_with_inactive_login",
+          "source_location": "tests/test_client/tests.py:670-682",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 29.55572165881554,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.auth_tests.test_context_processors.AuthContextProcessorTests",
+          "node_type": "Class",
+          "name": "AuthContextProcessorTests",
+          "source_location": "tests/auth_tests/test_context_processors.py:70-156",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 28.012222231055986,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/auth/handlers/modwsgi.py",
         "django/contrib/auth/middleware.py",
         "django/test/client.py",
         "tests/auth_tests/test_context_processors.py",
+        "tests/migrations/test_commands.py",
         "tests/test_client/tests.py"
       ],
       "retrieved_symbols": [
         "django.contrib.auth.middleware.RemoteUserMiddleware",
         "django.contrib.auth.handlers.modwsgi.check_password",
         "django.test.client.ClientMixin",
+        "tests.migrations.test_commands.AppLabelErrorTests",
         "django.test.client.ClientMixin.login",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
         "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
         "tests.auth_tests.test_context_processors.AuthContextProcessorTests"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/middleware.py:93-278",
-          "score": 47.71985321099399,
-          "matched_by": "tfidf",
-          "confidence": 5.0959270941482835
-        },
-        {
-          "entity_id": "django.contrib.auth.handlers.modwsgi.check_password",
-          "node_type": "Function",
-          "source_location": "django/contrib/auth/handlers/modwsgi.py:23-41",
-          "score": 37.53071981218752,
-          "matched_by": "tfidf",
-          "confidence": 3.0800106124092412
-        },
-        {
-          "entity_id": "django.test.client.ClientMixin",
-          "node_type": "Class",
-          "source_location": "django/test/client.py:788-1037",
-          "score": 37.08639210459054,
-          "matched_by": "tfidf",
-          "confidence": 2.992100530758626
-        },
-        {
-          "entity_id": "django.test.client.ClientMixin.login",
-          "node_type": "Method",
-          "source_location": "django/test/client.py:832-845",
-          "score": 31.788198423787648,
-          "matched_by": "tfidf",
-          "confidence": 1.9438547627890657
-        },
-        {
-          "entity_id": "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
-          "node_type": "Method",
-          "source_location": "tests/test_client/tests.py:670-682",
-          "score": 29.55572165881554,
-          "matched_by": "tfidf",
-          "confidence": 1.502160015114655
-        },
-        {
-          "entity_id": "tests.auth_tests.test_context_processors.AuthContextProcessorTests",
-          "node_type": "Class",
-          "source_location": "tests/auth_tests/test_context_processors.py:70-156",
-          "score": 28.012222231055986,
-          "matched_by": "tfidf",
-          "confidence": 1.196779192802549
-        }
+      "ground_truth_files": [
+        "django/contrib/auth/__init__.py",
+        "django/contrib/auth/backends.py"
       ],
       "file_level_hits": [],
-      "file_level_precision": 0.0,
       "file_level_recall": 0.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.auth.authenticate",
+        "django.contrib.auth.handlers.modwsgi._get_user",
+        "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__acall__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__call__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__init__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._aremove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._remove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aclean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.async_capable",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.clean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.force_logout_if_no_header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.get_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.sync_capable",
+        "django.test.client.ClientMixin._alogin",
+        "django.test.client.ClientMixin._ensure_redirects_not_cyclic",
+        "django.test.client.ClientMixin._follow_redirect",
+        "django.test.client.ClientMixin._get_backend",
+        "django.test.client.ClientMixin._login",
+        "django.test.client.ClientMixin._parse_json",
+        "django.test.client.ClientMixin._set_login_cookies",
+        "django.test.client.ClientMixin.aforce_login",
+        "django.test.client.ClientMixin.alogin",
+        "django.test.client.ClientMixin.alogout",
+        "django.test.client.ClientMixin.asession",
+        "django.test.client.ClientMixin.check_exception",
+        "django.test.client.ClientMixin.force_login",
+        "django.test.client.ClientMixin.login.user",
+        "django.test.client.ClientMixin.logout",
+        "django.test.client.ClientMixin.session",
+        "django.test.client.ClientMixin.store_exc_info",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.setUpTestData",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_message_attrs",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_perm_in_perms_attrs",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_perms_attrs",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_session_is_accessed",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_session_not_accessed",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests.test_user_attrs",
+        "tests.migrations.test_commands.AppLabelErrorTests.did_you_mean_auth_error",
+        "tests.migrations.test_commands.AppLabelErrorTests.nonexistent_app_error",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_makemigrations_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_makemigrations_nonexistent_app_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_migrate_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_migrate_nonexistent_app_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_optimizemigration_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_optimizemigration_nonexistent_app_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_showmigrations_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_showmigrations_nonexistent_app_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_sqlmigrate_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_sqlmigrate_nonexistent_app_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_squashmigrations_app_name_specified_as_label",
+        "tests.migrations.test_commands.AppLabelErrorTests.test_squashmigrations_nonexistent_app_label",
+        "tests.test_client.tests.ClientTest.test_view_with_inactive_login.credentials"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-05",
       "query": "What is Django's default Manager class actually built from?",
+      "category": "B_relationship",
+      "elapsed_seconds": 4.7624266147613525,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.models.manager.BaseManager",
+          "node_type": "Class",
+          "name": "BaseManager",
+          "source_location": "django/db/models/manager.py:10-173",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 36.62991499263309,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "node_type": "Class",
+          "name": "ReverseManyToOneDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 33.56819125381067,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "node_type": "Class",
+          "name": "ManyToManyDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:1026-1070",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 31.53941521122584,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "name": "Options",
+          "source_location": "django/db/models/options.py:90-1052",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 29.23200509662434,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
+          "node_type": "Class",
+          "name": "RemoteUserBackend",
+          "source_location": "django/contrib/auth/backends.py:255-342",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 29.08198079207592,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.migrations.state.ModelState",
+          "node_type": "Class",
+          "name": "ModelState",
+          "source_location": "django/db/migrations/state.py:737-1021",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 28.941832147561904,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.migrations.recorder.MigrationRecorder",
+          "node_type": "Class",
+          "name": "MigrationRecorder",
+          "source_location": "django/db/migrations/recorder.py:9-111",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 28.169043357551807,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.mail.backends.base.BaseEmailBackend",
+          "node_type": "Class",
+          "name": "BaseEmailBackend",
+          "source_location": "django/core/mail/backends/base.py:10-126",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 26.11899680821404,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.manager.BaseManager.deconstruct",
+          "node_type": "Method",
+          "name": "deconstruct",
+          "source_location": "django/db/models/manager.py:42-77",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 25.818207821760957,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.management.commands.createsuperuser.Command",
+          "node_type": "Class",
+          "name": "Command",
+          "source_location": "django/contrib/auth/management/commands/createsuperuser.py:26-321",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 24.597576072728287,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/auth/backends.py",
         "django/contrib/auth/management/commands/createsuperuser.py",
@@ -426,130 +1465,350 @@
         "django.db.models.manager.BaseManager.deconstruct",
         "django.contrib.auth.management.commands.createsuperuser.Command"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.db.models.manager.BaseManager",
-          "node_type": "Class",
-          "source_location": "django/db/models/manager.py:10-173",
-          "score": 36.62991499263309,
-          "matched_by": "tfidf",
-          "confidence": 5.146778050551347
-        },
-        {
-          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
-          "node_type": "Class",
-          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
-          "score": 33.568191253810674,
-          "matched_by": "tfidf",
-          "confidence": 4.304066572807323
-        },
-        {
-          "entity_id": "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
-          "node_type": "Class",
-          "source_location": "django/db/models/fields/related_descriptors.py:1026-1070",
-          "score": 31.53941521122584,
-          "matched_by": "tfidf",
-          "confidence": 3.7456645082513926
-        },
-        {
-          "entity_id": "django.db.models.options.Options",
-          "node_type": "Class",
-          "source_location": "django/db/models/options.py:90-1052",
-          "score": 29.232005096624345,
-          "matched_by": "tfidf",
-          "confidence": 3.110570961834559
-        },
-        {
-          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/backends.py:255-342",
-          "score": 29.081980792075925,
-          "matched_by": "tfidf",
-          "confidence": 3.0692781430931317
-        },
-        {
-          "entity_id": "django.db.migrations.state.ModelState",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/state.py:737-1021",
-          "score": 28.94183214756191,
-          "matched_by": "tfidf",
-          "confidence": 3.0307035095216355
-        },
-        {
-          "entity_id": "django.db.migrations.recorder.MigrationRecorder",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/recorder.py:9-111",
-          "score": 28.169043357551804,
-          "matched_by": "tfidf",
-          "confidence": 2.818000457657162
-        },
-        {
-          "entity_id": "django.core.mail.backends.base.BaseEmailBackend",
-          "node_type": "Class",
-          "source_location": "django/core/mail/backends/base.py:10-126",
-          "score": 26.11899680821404,
-          "matched_by": "tfidf",
-          "confidence": 2.2537438805105494
-        },
-        {
-          "entity_id": "django.db.models.manager.BaseManager.deconstruct",
-          "node_type": "Method",
-          "source_location": "django/db/models/manager.py:42-77",
-          "score": 25.818207821760957,
-          "matched_by": "tfidf",
-          "confidence": 2.1709544609267644
-        },
-        {
-          "entity_id": "django.contrib.auth.management.commands.createsuperuser.Command",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/management/commands/createsuperuser.py:26-321",
-          "score": 24.597576072728287,
-          "matched_by": "tfidf",
-          "confidence": 1.8349867274681522
-        }
+      "ground_truth_files": [
+        "django/db/models/manager.py"
       ],
       "file_level_hits": [
         "django/db/models/manager.py"
       ],
-      "file_level_precision": 0.125,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.125,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.auth.backends.ModelBackend",
+        "django.contrib.auth.backends.RemoteUserBackend.aauthenticate",
+        "django.contrib.auth.backends.RemoteUserBackend.aconfigure_user",
+        "django.contrib.auth.backends.RemoteUserBackend.authenticate",
+        "django.contrib.auth.backends.RemoteUserBackend.clean_username",
+        "django.contrib.auth.backends.RemoteUserBackend.configure_user",
+        "django.contrib.auth.backends.RemoteUserBackend.create_unknown_user",
+        "django.contrib.auth.management.commands.createsuperuser.Command.__init__",
+        "django.contrib.auth.management.commands.createsuperuser.Command._get_input_message",
+        "django.contrib.auth.management.commands.createsuperuser.Command._validate_username",
+        "django.contrib.auth.management.commands.createsuperuser.Command.add_arguments",
+        "django.contrib.auth.management.commands.createsuperuser.Command.execute",
+        "django.contrib.auth.management.commands.createsuperuser.Command.get_input_data",
+        "django.contrib.auth.management.commands.createsuperuser.Command.handle",
+        "django.contrib.auth.management.commands.createsuperuser.Command.help",
+        "django.contrib.auth.management.commands.createsuperuser.Command.natural_key_defined",
+        "django.contrib.auth.management.commands.createsuperuser.Command.requires_migrations_checks",
+        "django.contrib.auth.management.commands.createsuperuser.Command.stealth_options",
+        "django.contrib.auth.management.commands.createsuperuser.Command.username_is_unique",
+        "django.core.mail.backends.base.BaseEmailBackend.__enter__",
+        "django.core.mail.backends.base.BaseEmailBackend.__exit__",
+        "django.core.mail.backends.base.BaseEmailBackend.__getattr__",
+        "django.core.mail.backends.base.BaseEmailBackend.__init__",
+        "django.core.mail.backends.base.BaseEmailBackend.close",
+        "django.core.mail.backends.base.BaseEmailBackend.open",
+        "django.core.mail.backends.base.BaseEmailBackend.send_messages",
+        "django.core.management.base.BaseCommand",
+        "django.db.migrations.recorder.MigrationRecorder.Migration",
+        "django.db.migrations.recorder.MigrationRecorder.__init__",
+        "django.db.migrations.recorder.MigrationRecorder._migration_class",
+        "django.db.migrations.recorder.MigrationRecorder.applied_migrations",
+        "django.db.migrations.recorder.MigrationRecorder.ensure_schema",
+        "django.db.migrations.recorder.MigrationRecorder.flush",
+        "django.db.migrations.recorder.MigrationRecorder.has_table",
+        "django.db.migrations.recorder.MigrationRecorder.migration_qs",
+        "django.db.migrations.recorder.MigrationRecorder.record_applied",
+        "django.db.migrations.recorder.MigrationRecorder.record_unapplied",
+        "django.db.migrations.state.ModelState.__eq__",
+        "django.db.migrations.state.ModelState.__init__",
+        "django.db.migrations.state.ModelState.__repr__",
+        "django.db.migrations.state.ModelState.clone",
+        "django.db.migrations.state.ModelState.construct_managers",
+        "django.db.migrations.state.ModelState.from_model",
+        "django.db.migrations.state.ModelState.get_constraint_by_name",
+        "django.db.migrations.state.ModelState.get_field",
+        "django.db.migrations.state.ModelState.get_index_by_name",
+        "django.db.migrations.state.ModelState.name_lower",
+        "django.db.migrations.state.ModelState.render",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor._get_set_deprecation_msg_params",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.related_manager_cls",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.through",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__get__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__set__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor._get_set_deprecation_msg_params",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.related_manager_cls",
+        "django.db.models.manager.BaseManager.__class_getitem__",
+        "django.db.models.manager.BaseManager.__eq__",
+        "django.db.models.manager.BaseManager.__hash__",
+        "django.db.models.manager.BaseManager.__init__",
+        "django.db.models.manager.BaseManager.__new__",
+        "django.db.models.manager.BaseManager.__str__",
+        "django.db.models.manager.BaseManager._get_queryset_methods",
+        "django.db.models.manager.BaseManager._set_creation_counter",
+        "django.db.models.manager.BaseManager.all",
+        "django.db.models.manager.BaseManager.auto_created",
+        "django.db.models.manager.BaseManager.check",
+        "django.db.models.manager.BaseManager.contribute_to_class",
+        "django.db.models.manager.BaseManager.creation_counter",
+        "django.db.models.manager.BaseManager.db",
+        "django.db.models.manager.BaseManager.db_manager",
+        "django.db.models.manager.BaseManager.deconstruct.qs_class",
+        "django.db.models.manager.BaseManager.from_queryset",
+        "django.db.models.manager.BaseManager.get_queryset",
+        "django.db.models.manager.BaseManager.use_in_migrations",
+        "django.db.models.options.Options.FORWARD_PROPERTIES",
+        "django.db.models.options.Options.REVERSE_PROPERTIES",
+        "django.db.models.options.Options.__init__",
+        "django.db.models.options.Options.__repr__",
+        "django.db.models.options.Options.__str__",
+        "django.db.models.options.Options._expire_cache",
+        "django.db.models.options.Options._format_names",
+        "django.db.models.options.Options._forward_fields_map",
+        "django.db.models.options.Options._get_default_pk_class",
+        "django.db.models.options.Options._get_fields",
+        "django.db.models.options.Options._non_pk_concrete_field_names",
+        "django.db.models.options.Options._populate_directed_relation_graph",
+        "django.db.models.options.Options._prepare",
+        "django.db.models.options.Options._property_names",
+        "django.db.models.options.Options._relation_tree",
+        "django.db.models.options.Options._reverse_one_to_one_field_names",
+        "django.db.models.options.Options.add_field",
+        "django.db.models.options.Options.add_manager",
+        "django.db.models.options.Options.all_parents",
+        "django.db.models.options.Options.app_config",
+        "django.db.models.options.Options.base_manager",
+        "django.db.models.options.Options.can_migrate",
+        "django.db.models.options.Options.concrete_fields",
+        "django.db.models.options.Options.contribute_to_class",
+        "django.db.models.options.Options.db_returning_fields",
+        "django.db.models.options.Options.default_apps",
+        "django.db.models.options.Options.default_manager",
+        "django.db.models.options.Options.fields",
+        "django.db.models.options.Options.fields_map",
+        "django.db.models.options.Options.get_ancestor_link",
+        "django.db.models.options.Options.get_base_chain",
+        "django.db.models.options.Options.get_field",
+        "django.db.models.options.Options.get_fields",
+        "django.db.models.options.Options.get_parent_list",
+        "django.db.models.options.Options.get_path_from_parent",
+        "django.db.models.options.Options.get_path_to_parent",
+        "django.db.models.options.Options.is_composite_pk",
+        "django.db.models.options.Options.label",
+        "django.db.models.options.Options.label_lower",
+        "django.db.models.options.Options.local_concrete_fields",
+        "django.db.models.options.Options.managers",
+        "django.db.models.options.Options.managers_map",
+        "django.db.models.options.Options.many_to_many",
+        "django.db.models.options.Options.pk_fields",
+        "django.db.models.options.Options.related_objects",
+        "django.db.models.options.Options.setting_changed",
+        "django.db.models.options.Options.setup_pk",
+        "django.db.models.options.Options.setup_proxy",
+        "django.db.models.options.Options.swapped",
+        "django.db.models.options.Options.total_unique_constraints",
+        "django.db.models.options.Options.verbose_name_raw"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-06",
       "query": "How does an incoming WSGI request get dispatched to the correct Django view function, end to end?",
+      "category": "C_architecture",
+      "elapsed_seconds": 4.56691837310791,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.test.client.RequestFactory",
+          "node_type": "Class",
+          "name": "RequestFactory",
+          "source_location": "django/test/client.py:373-674",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 25.953393685303553,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/test/client.py"
       ],
       "retrieved_symbols": [
         "django.test.client.RequestFactory"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.test.client.RequestFactory",
-          "node_type": "Class",
-          "source_location": "django/test/client.py:373-674",
-          "score": 25.95339368530355,
-          "matched_by": "tfidf",
-          "confidence": 2.250872296168106
-        }
+      "ground_truth_files": [
+        "django/core/handlers/base.py",
+        "django/core/handlers/wsgi.py",
+        "django/urls/resolvers.py"
       ],
       "file_level_hits": [],
-      "file_level_precision": 0.0,
       "file_level_recall": 0.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.test.client.RequestFactory.__init__",
+        "django.test.client.RequestFactory._base_environ",
+        "django.test.client.RequestFactory._encode_data",
+        "django.test.client.RequestFactory._encode_json",
+        "django.test.client.RequestFactory._get_path",
+        "django.test.client.RequestFactory.delete",
+        "django.test.client.RequestFactory.generic",
+        "django.test.client.RequestFactory.get",
+        "django.test.client.RequestFactory.head",
+        "django.test.client.RequestFactory.options",
+        "django.test.client.RequestFactory.patch",
+        "django.test.client.RequestFactory.post",
+        "django.test.client.RequestFactory.put",
+        "django.test.client.RequestFactory.request",
+        "django.test.client.RequestFactory.trace"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-07",
       "query": "How does Django apply configured middleware to every request?",
+      "category": "C_architecture",
+      "elapsed_seconds": 4.0052289962768555,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "name": "RemoteUserMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 35.54925044211226,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.handlers.base.BaseHandler",
+          "node_type": "Class",
+          "name": "BaseHandler",
+          "source_location": "django/core/handlers/base.py:21-367",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 35.17648685731136,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "node_type": "Class",
+          "name": "AuthenticationMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:29-40",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 34.41531983836966,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.messages.storage.session.SessionStorage",
+          "node_type": "Class",
+          "name": "SessionStorage",
+          "source_location": "django/contrib/messages/storage/session.py:8-52",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 31.084092600149848,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.admindocs.middleware.XViewMiddleware",
+          "node_type": "Class",
+          "name": "XViewMiddleware",
+          "source_location": "django/contrib/admindocs/middleware.py:9-33",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 30.83687206478091,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+          "node_type": "Method",
+          "name": "process_request",
+          "source_location": "django/contrib/auth/middleware.py:30-40",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 30.831348539060297,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+          "node_type": "Class",
+          "name": "RedirectFallbackMiddleware",
+          "source_location": "django/contrib/redirects/middleware.py:10-50",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 29.92762012769085,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.LoginRequiredMiddleware",
+          "node_type": "Class",
+          "name": "LoginRequiredMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:43-90",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 25.833279543998636,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.sessions.middleware.SessionMiddleware",
+          "node_type": "Class",
+          "name": "SessionMiddleware",
+          "source_location": "django/contrib/sessions/middleware.py:12-82",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 25.25771760792775,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.PersistentRemoteUserMiddleware",
+          "node_type": "Class",
+          "name": "PersistentRemoteUserMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:281-292",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 23.601882807130746,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/admindocs/middleware.py",
         "django/contrib/auth/middleware.py",
         "django/contrib/messages/storage/session.py",
         "django/contrib/redirects/middleware.py",
         "django/contrib/sessions/middleware.py",
-        "django/core/handlers/base.py",
-        "django/middleware/csrf.py"
+        "django/core/handlers/base.py"
       ],
       "retrieved_symbols": [
         "django.contrib.auth.middleware.RemoteUserMiddleware",
@@ -561,100 +1820,213 @@
         "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
         "django.contrib.auth.middleware.LoginRequiredMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
-        "django.middleware.csrf.CsrfViewMiddleware"
+        "django.contrib.auth.middleware.PersistentRemoteUserMiddleware"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/middleware.py:93-278",
-          "score": 35.54925044211226,
-          "matched_by": "tfidf",
-          "confidence": 4.464260836672648
-        },
-        {
-          "entity_id": "django.core.handlers.base.BaseHandler",
-          "node_type": "Class",
-          "source_location": "django/core/handlers/base.py:21-367",
-          "score": 35.17648685731137,
-          "matched_by": "tfidf",
-          "confidence": 4.380286433214733
-        },
-        {
-          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/middleware.py:29-40",
-          "score": 34.41531983836967,
-          "matched_by": "tfidf",
-          "confidence": 4.208814355593178
-        },
-        {
-          "entity_id": "django.contrib.messages.storage.session.SessionStorage",
-          "node_type": "Class",
-          "source_location": "django/contrib/messages/storage/session.py:8-52",
-          "score": 31.084092600149848,
-          "matched_by": "tfidf",
-          "confidence": 3.4583713629878705
-        },
-        {
-          "entity_id": "django.contrib.admindocs.middleware.XViewMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/admindocs/middleware.py:9-33",
-          "score": 30.83687206478091,
-          "matched_by": "tfidf",
-          "confidence": 3.402678699255061
-        },
-        {
-          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
-          "node_type": "Method",
-          "source_location": "django/contrib/auth/middleware.py:30-40",
-          "score": 30.831348539060297,
-          "matched_by": "tfidf",
-          "confidence": 3.4014343857108056
-        },
-        {
-          "entity_id": "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/redirects/middleware.py:10-50",
-          "score": 29.92762012769085,
-          "matched_by": "tfidf",
-          "confidence": 3.1978467571787603
-        },
-        {
-          "entity_id": "django.contrib.auth.middleware.LoginRequiredMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/middleware.py:43-90",
-          "score": 25.833279543998636,
-          "matched_by": "tfidf",
-          "confidence": 2.275493227789002
-        },
-        {
-          "entity_id": "django.contrib.sessions.middleware.SessionMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/sessions/middleware.py:12-82",
-          "score": 25.257717607927752,
-          "matched_by": "tfidf",
-          "confidence": 2.1458333784760635
-        },
-        {
-          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
-          "node_type": "Class",
-          "source_location": "django/middleware/csrf.py:165-484",
-          "score": 22.68808225820178,
-          "matched_by": "tfidf",
-          "confidence": 1.56695817607971
-        }
+      "ground_truth_files": [
+        "django/core/handlers/base.py"
       ],
       "file_level_hits": [
         "django/core/handlers/base.py"
       ],
-      "file_level_precision": 0.14285714285714285,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.16666666666666666,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.admindocs.middleware.XViewMiddleware.process_view",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware.get_login_url",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware.get_redirect_field_name",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware.handle_no_permission",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware.process_view",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware.redirect_field_name",
+        "django.contrib.auth.middleware.PersistentRemoteUserMiddleware.force_logout_if_no_header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__acall__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__call__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__init__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._aremove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._remove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aclean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.async_capable",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.clean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.force_logout_if_no_header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.get_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.sync_capable",
+        "django.contrib.auth.middleware.get_user",
+        "django.contrib.messages.storage.base.BaseStorage",
+        "django.contrib.messages.storage.session.SessionStorage.__init__",
+        "django.contrib.messages.storage.session.SessionStorage._get",
+        "django.contrib.messages.storage.session.SessionStorage._store",
+        "django.contrib.messages.storage.session.SessionStorage.deserialize_messages",
+        "django.contrib.messages.storage.session.SessionStorage.serialize_messages",
+        "django.contrib.messages.storage.session.SessionStorage.session_key",
+        "django.contrib.redirects.middleware.RedirectFallbackMiddleware.__init__",
+        "django.contrib.redirects.middleware.RedirectFallbackMiddleware.process_response",
+        "django.contrib.redirects.middleware.RedirectFallbackMiddleware.response_gone_class",
+        "django.contrib.redirects.middleware.RedirectFallbackMiddleware.response_redirect_class",
+        "django.contrib.sessions.middleware.SessionMiddleware.__init__",
+        "django.contrib.sessions.middleware.SessionMiddleware.process_request",
+        "django.contrib.sessions.middleware.SessionMiddleware.process_response",
+        "django.core.exceptions.ImproperlyConfigured",
+        "django.core.handlers.base.BaseHandler._exception_middleware",
+        "django.core.handlers.base.BaseHandler._get_response",
+        "django.core.handlers.base.BaseHandler._get_response_async",
+        "django.core.handlers.base.BaseHandler._middleware_chain",
+        "django.core.handlers.base.BaseHandler._template_response_middleware",
+        "django.core.handlers.base.BaseHandler._view_middleware",
+        "django.core.handlers.base.BaseHandler.adapt_method_mode",
+        "django.core.handlers.base.BaseHandler.check_response",
+        "django.core.handlers.base.BaseHandler.get_response",
+        "django.core.handlers.base.BaseHandler.get_response_async",
+        "django.core.handlers.base.BaseHandler.load_middleware",
+        "django.core.handlers.base.BaseHandler.make_view_atomic",
+        "django.core.handlers.base.BaseHandler.process_exception_by_middleware",
+        "django.core.handlers.base.BaseHandler.resolve_request",
+        "django.utils.functional.SimpleLazyObject"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-08",
       "query": "What happens when CsrfViewMiddleware detects a POST request without a valid CSRF token?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 5.133747577667236,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
+          "node_type": "Class",
+          "name": "CsrfViewMiddleware",
+          "source_location": "django/middleware/csrf.py:165-484",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 59.407130749704365,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
+          "node_type": "Class",
+          "name": "CsrfViewMiddlewareTests",
+          "source_location": "tests/csrf_tests/tests.py:1059-1341",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 49.867294321872265,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "node_type": "Class",
+          "name": "CsrfViewMiddlewareTestMixin",
+          "source_location": "tests/csrf_tests/tests.py:231-1056",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 49.62991295396428,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
+          "node_type": "Class",
+          "name": "CsrfViewMiddlewareUseSessionsTests",
+          "source_location": "tests/csrf_tests/tests.py:1345-1477",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 46.95023281681157,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.auth_tests.test_views.LoginTest",
+          "node_type": "Class",
+          "name": "LoginTest",
+          "source_location": "tests/auth_tests/test_views.py:759-984",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 38.86606005682202,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware._check_token",
+          "node_type": "Method",
+          "name": "_check_token",
+          "source_location": "django/middleware/csrf.py:349-399",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 36.80710064129467,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.middleware.csrf.get_token",
+          "node_type": "Function",
+          "name": "get_token",
+          "source_location": "django/middleware/csrf.py:96-114",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 35.180031382230844,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest",
+          "node_type": "Class",
+          "name": "RemoteUserTest",
+          "source_location": "tests/auth_tests/test_remote_user.py:31-341",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 33.92570765406292,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
+          "node_type": "Method",
+          "name": "test_login_csrf_rotate",
+          "source_location": "tests/auth_tests/test_views.py:864-904",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 33.25562553969066,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view",
+          "node_type": "Method",
+          "name": "test_process_request_csrf_cookie_no_token_exempt_view",
+          "source_location": "tests/csrf_tests/tests.py:453-462",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 33.04248008155959,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/middleware/csrf.py",
         "tests/auth_tests/test_remote_user.py",
@@ -673,98 +2045,270 @@
         "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
         "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
-          "node_type": "Class",
-          "source_location": "django/middleware/csrf.py:165-484",
-          "score": 59.407130749704365,
-          "matched_by": "tfidf",
-          "confidence": 5.540433738586272
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
-          "node_type": "Class",
-          "source_location": "tests/csrf_tests/tests.py:1059-1341",
-          "score": 49.86729432187227,
-          "matched_by": "tfidf",
-          "confidence": 3.9728713181508493
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
-          "node_type": "Class",
-          "source_location": "tests/csrf_tests/tests.py:231-1056",
-          "score": 49.62991295396428,
-          "matched_by": "tfidf",
-          "confidence": 3.9338653965651806
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
-          "node_type": "Class",
-          "source_location": "tests/csrf_tests/tests.py:1345-1477",
-          "score": 46.950232816811564,
-          "matched_by": "tfidf",
-          "confidence": 3.493546957819957
-        },
-        {
-          "entity_id": "tests.auth_tests.test_views.LoginTest",
-          "node_type": "Class",
-          "source_location": "tests/auth_tests/test_views.py:759-984",
-          "score": 38.86606005682202,
-          "matched_by": "tfidf",
-          "confidence": 2.165175605257143
-        },
-        {
-          "entity_id": "django.middleware.csrf.CsrfViewMiddleware._check_token",
-          "node_type": "Method",
-          "source_location": "django/middleware/csrf.py:349-399",
-          "score": 36.80710064129466,
-          "matched_by": "tfidf",
-          "confidence": 1.8268524663439714
-        },
-        {
-          "entity_id": "django.middleware.csrf.get_token",
-          "node_type": "Function",
-          "source_location": "django/middleware/csrf.py:96-114",
-          "score": 35.18003138223084,
-          "matched_by": "tfidf",
-          "confidence": 1.559496453979537
-        },
-        {
-          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest",
-          "node_type": "Class",
-          "source_location": "tests/auth_tests/test_remote_user.py:31-341",
-          "score": 33.92570765406292,
-          "matched_by": "tfidf",
-          "confidence": 1.3533890689933454
-        },
-        {
-          "entity_id": "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
-          "node_type": "Method",
-          "source_location": "tests/auth_tests/test_views.py:864-904",
-          "score": 33.25562553969066,
-          "matched_by": "tfidf",
-          "confidence": 1.2432828267069083
-        },
-        {
-          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view",
-          "node_type": "Method",
-          "source_location": "tests/csrf_tests/tests.py:453-462",
-          "score": 33.04248008155959,
-          "matched_by": "tfidf",
-          "confidence": 1.208259290110622
-        }
+      "ground_truth_files": [
+        "django/middleware/csrf.py"
       ],
       "file_level_hits": [
         "django/middleware/csrf.py"
       ],
-      "file_level_precision": 0.25,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.25,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware._accept",
+        "django.middleware.csrf.CsrfViewMiddleware._bad_token_message",
+        "django.middleware.csrf.CsrfViewMiddleware._check_referer",
+        "django.middleware.csrf.CsrfViewMiddleware._check_token.request_csrf_token",
+        "django.middleware.csrf.CsrfViewMiddleware._get_secret",
+        "django.middleware.csrf.CsrfViewMiddleware._origin_verified",
+        "django.middleware.csrf.CsrfViewMiddleware._reject",
+        "django.middleware.csrf.CsrfViewMiddleware._set_csrf_cookie",
+        "django.middleware.csrf.CsrfViewMiddleware.allowed_origin_subdomains",
+        "django.middleware.csrf.CsrfViewMiddleware.allowed_origins_exact",
+        "django.middleware.csrf.CsrfViewMiddleware.csrf_trusted_origins_hosts",
+        "django.middleware.csrf.CsrfViewMiddleware.process_request",
+        "django.middleware.csrf.CsrfViewMiddleware.process_response",
+        "django.middleware.csrf.CsrfViewMiddleware.process_view",
+        "django.middleware.csrf.RejectRequest",
+        "django.middleware.csrf._add_new_csrf_cookie",
+        "django.middleware.csrf._check_token_format",
+        "django.middleware.csrf._does_token_match",
+        "django.middleware.csrf._mask_cipher_secret",
+        "django.views.decorators.csrf.csrf_exempt",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.backend",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.email_header",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.header",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.known_user",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.known_user2",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.middleware",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.setUpClass",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_csrf_validation_passes_after_process_request_login_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_header_disappears",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_header_disappears_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_inactive_user",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_inactive_user_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_known_user",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_known_user_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_last_login",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_last_login_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_no_remote_user",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_no_remote_user_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_passing_explicit_none",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_unknown_user",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_unknown_user_async",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_user_switch_forces_new_login",
+        "tests.auth_tests.test_remote_user.RemoteUserTest.test_user_switch_forces_new_login_async",
+        "tests.auth_tests.test_views.AuthViewsTestCase",
+        "tests.auth_tests.test_views.LoginTest.test_access_under_login_required_middleware",
+        "tests.auth_tests.test_views.LoginTest.test_current_site_in_context_after_login",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.csrf_cookie",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.get_response",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.req",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.resp",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.token1",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.token2",
+        "tests.auth_tests.test_views.LoginTest.test_login_form_contains_request",
+        "tests.auth_tests.test_views.LoginTest.test_login_get_default_redirect_url",
+        "tests.auth_tests.test_views.LoginTest.test_login_named_next_page_named",
+        "tests.auth_tests.test_views.LoginTest.test_login_next_page",
+        "tests.auth_tests.test_views.LoginTest.test_login_next_page_overrides_login_redirect_url_setting",
+        "tests.auth_tests.test_views.LoginTest.test_login_redirect_url_overrides_get_default_redirect_url",
+        "tests.auth_tests.test_views.LoginTest.test_login_redirect_url_overrides_next_page",
+        "tests.auth_tests.test_views.LoginTest.test_login_session_without_hash_session_key",
+        "tests.auth_tests.test_views.LoginTest.test_security_check",
+        "tests.auth_tests.test_views.LoginTest.test_security_check_https",
+        "tests.auth_tests.test_views.LoginTest.test_session_key_flushed_on_login",
+        "tests.auth_tests.test_views.LoginTest.test_session_key_flushed_on_login_after_password_change",
+        "tests.csrf_tests.tests.CsrfFunctionTestMixin",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_bad_or_missing_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_bad_or_missing_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_referer_rejects",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._check_token_present",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._csrf_id_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._csrf_id_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_POST_csrf_cookie_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_POST_request_with_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_cookies_set",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_csrf_cookie_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._get_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._read_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._set_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_behind_proxy",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_matches_cookie_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin._test_https_good_referer_matches_cookie_domain_with_different_port",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_bad_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_bad_protocol",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_cannot_be_parsed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_csrf_trusted_origin_bad_protocol",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_bad_origin_null_origin",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_cookie_not_reset_on_accepted_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_cookie_bad_or_missing_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_cookie_bad_token_custom_header",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_token_in_header",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_csrf_token_in_header_with_customized_name",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_ensures_csrf_cookie_no_logging",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_get_token_for_exempt_view",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_get_token_for_requires_csrf_token_view",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_insecure",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_secure",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_good_origin_wildcard_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_bad_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_csrf_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_csrf_wildcard_trusted_origin_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer_2",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_good_referer_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_malformed_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_https_no_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_no_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_origin_malformed_host",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_and_token",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view.mw",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view.req",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view.resp",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_response_get_token_not_used",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_allowed",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_reading_post_data_raises_os_error",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_reading_post_data_raises_unreadable_post_error",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_rotate_token_triggers_second_reset",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_empty_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_no_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_with_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_token_node_with_new_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests._get_cookies_set",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests._read_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests._set_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_bad_csrf_cookie_characters",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_bad_csrf_cookie_length",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_bare_secret_accepted_and_not_replaced",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_csrf_cookie_age",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_csrf_cookie_age_none",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_csrf_cookie_samesite",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_ensures_csrf_cookie_no_middleware",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_ensures_csrf_cookie_with_middleware",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_https_good_referer_behind_proxy",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_https_good_referer_matches_cookie_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_https_good_referer_matches_cookie_domain_with_different_port",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_https_reject_insecure_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_invalid_cookie_replaced_on_GET",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_masked_secret_accepted_and_replaced",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_masked_unmasked_combinations",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_process_view_token_invalid_chars",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_process_view_token_too_long",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_set_cookie_called_only_once",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests.test_valid_secret_not_replaced_on_GET",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests._get_cookies_set",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests._read_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests._set_csrf_cookie",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_ensures_csrf_cookie_with_middleware",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_https_good_referer_behind_proxy",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_https_good_referer_matches_cookie_domain",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_https_good_referer_matches_cookie_domain_with_different_port",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_https_reject_insecure_referer",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_masked_unmasked_combinations",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_no_session_on_request",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_process_response_get_token_used",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests.test_session_modify"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-09",
       "query": "What does authenticate() return if the given credentials don't match any configured authentication backend?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 4.76922607421875,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "name": "RemoteUserMiddleware",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 69.15897604605672,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
+          "node_type": "Class",
+          "name": "RemoteUserBackend",
+          "source_location": "django/contrib/auth/backends.py:255-342",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 56.4160910915686,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.ModelBackend",
+          "node_type": "Class",
+          "name": "ModelBackend",
+          "source_location": "django/contrib/auth/backends.py:59-247",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 37.38500525480219,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "node_type": "Class",
+          "name": "BaseDatabaseIntrospection",
+          "source_location": "django/db/backends/base/introspection.py:16-228",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 36.83271945879156,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+          "node_type": "Method",
+          "name": "process_request",
+          "source_location": "django/contrib/auth/middleware.py:134-170",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 32.56681647842565,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request",
+          "node_type": "Method",
+          "name": "aprocess_request",
+          "source_location": "django/contrib/auth/middleware.py:176-215",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 28.62377813630712,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/auth/backends.py",
         "django/contrib/auth/middleware.py",
@@ -778,64 +2322,212 @@
         "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
         "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/middleware.py:93-278",
-          "score": 69.15897604605672,
-          "matched_by": "tfidf",
-          "confidence": 7.534229055689617
-        },
-        {
-          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/backends.py:255-342",
-          "score": 56.41609109156862,
-          "matched_by": "tfidf",
-          "confidence": 5.498926025040523
-        },
-        {
-          "entity_id": "django.contrib.auth.backends.ModelBackend",
-          "node_type": "Class",
-          "source_location": "django/contrib/auth/backends.py:59-247",
-          "score": 37.385005254802195,
-          "matched_by": "tfidf",
-          "confidence": 2.4592668883179996
-        },
-        {
-          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
-          "node_type": "Class",
-          "source_location": "django/db/backends/base/introspection.py:16-228",
-          "score": 36.83271945879155,
-          "matched_by": "tfidf",
-          "confidence": 2.3710553915949593
-        },
-        {
-          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
-          "node_type": "Method",
-          "source_location": "django/contrib/auth/middleware.py:134-170",
-          "score": 32.56681647842565,
-          "matched_by": "tfidf",
-          "confidence": 1.6897022054519943
-        },
-        {
-          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request",
-          "node_type": "Method",
-          "source_location": "django/contrib/auth/middleware.py:176-215",
-          "score": 28.623778136307127,
-          "matched_by": "tfidf",
-          "confidence": 1.0599171986547016
-        }
+      "ground_truth_files": [
+        "django/contrib/auth/__init__.py"
       ],
       "file_level_hits": [],
-      "file_level_precision": 0.0,
       "file_level_recall": 0.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.auth.backends.BaseBackend",
+        "django.contrib.auth.backends.ModelBackend._aget_permissions",
+        "django.contrib.auth.backends.ModelBackend._get_group_permissions",
+        "django.contrib.auth.backends.ModelBackend._get_permissions",
+        "django.contrib.auth.backends.ModelBackend._get_user_permissions",
+        "django.contrib.auth.backends.ModelBackend.aauthenticate",
+        "django.contrib.auth.backends.ModelBackend.aget_group_permissions",
+        "django.contrib.auth.backends.ModelBackend.aget_user",
+        "django.contrib.auth.backends.ModelBackend.aget_user_permissions",
+        "django.contrib.auth.backends.ModelBackend.ahas_module_perms",
+        "django.contrib.auth.backends.ModelBackend.ahas_perm",
+        "django.contrib.auth.backends.ModelBackend.authenticate",
+        "django.contrib.auth.backends.ModelBackend.get_all_permissions",
+        "django.contrib.auth.backends.ModelBackend.get_group_permissions",
+        "django.contrib.auth.backends.ModelBackend.get_user",
+        "django.contrib.auth.backends.ModelBackend.get_user_permissions",
+        "django.contrib.auth.backends.ModelBackend.has_module_perms",
+        "django.contrib.auth.backends.ModelBackend.has_perm",
+        "django.contrib.auth.backends.ModelBackend.user_can_authenticate",
+        "django.contrib.auth.backends.ModelBackend.with_perm",
+        "django.contrib.auth.backends.RemoteUserBackend.aauthenticate",
+        "django.contrib.auth.backends.RemoteUserBackend.aconfigure_user",
+        "django.contrib.auth.backends.RemoteUserBackend.authenticate",
+        "django.contrib.auth.backends.RemoteUserBackend.clean_username",
+        "django.contrib.auth.backends.RemoteUserBackend.configure_user",
+        "django.contrib.auth.backends.RemoteUserBackend.create_unknown_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__acall__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__call__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.__init__",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._aremove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware._remove_invalid_user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aclean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request.user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.async_capable",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.clean_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.force_logout_if_no_header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.get_username",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.header",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.process_request.user",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.sync_capable",
+        "django.core.exceptions.ImproperlyConfigured",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.__del__",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.__init__",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.data_types_reverse",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.django_table_names",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_constraints",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_field_type",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_migratable_models",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_primary_key_column",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_primary_key_columns",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_relations",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_sequences",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_table_description",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.get_table_list",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.identifier_converter",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.installed_models",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.on_delete_types",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.sequence_list",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection.table_names"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-10",
       "query": "If a Django app's migrations aren't being applied in the order I expect, where should I look?",
+      "category": "E_debugging",
+      "elapsed_seconds": 5.511409044265747,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.migrations.loader.MigrationLoader",
+          "node_type": "Class",
+          "name": "MigrationLoader",
+          "source_location": "django/db/migrations/loader.py:21-433",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 54.77101999176931,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.migrations.executor.MigrationExecutor",
+          "node_type": "Class",
+          "name": "MigrationExecutor",
+          "source_location": "django/db/migrations/executor.py:10-413",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 53.40126310908349,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.migrations.migration.Migration",
+          "node_type": "Class",
+          "name": "Migration",
+          "source_location": "django/db/migrations/migration.py:9-222",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 48.67209469200956,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.management.commands.migrate.Command",
+          "node_type": "Class",
+          "name": "Command",
+          "source_location": "django/core/management/commands/migrate.py:18-511",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 39.98507827344924,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.apps.registry.Apps",
+          "node_type": "Class",
+          "name": "Apps",
+          "source_location": "django/apps/registry.py:13-435",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 38.44252904017417,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.management.base.BaseCommand",
+          "node_type": "Class",
+          "name": "BaseCommand",
+          "source_location": "django/core/management/base.py:193-630",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 36.250516623517434,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.migrations.test_executor.ExecutorTests",
+          "node_type": "Class",
+          "name": "ExecutorTests",
+          "source_location": "tests/migrations/test_executor.py:23-854",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 35.63382841295483,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.core.management.commands.squashmigrations.Command",
+          "node_type": "Class",
+          "name": "Command",
+          "source_location": "django/core/management/commands/squashmigrations.py:15-253",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 35.33064819740952,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.migrations.test_loader.LoaderTests",
+          "node_type": "Class",
+          "name": "LoaderTests",
+          "source_location": "tests/migrations/test_loader.py:67-722",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 33.95972925099085,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.migrations.test_commands.SquashMigrationsTests",
+          "node_type": "Class",
+          "name": "SquashMigrationsTests",
+          "source_location": "tests/migrations/test_commands.py:2993-3470",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 30.641349774613662,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/apps/registry.py",
         "django/core/management/base.py",
@@ -860,132 +2552,463 @@
         "tests.migrations.test_loader.LoaderTests",
         "tests.migrations.test_commands.SquashMigrationsTests"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.db.migrations.loader.MigrationLoader",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/loader.py:21-433",
-          "score": 54.77101999176931,
-          "matched_by": "tfidf",
-          "confidence": 4.5631424296843575
-        },
-        {
-          "entity_id": "django.db.migrations.executor.MigrationExecutor",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/executor.py:10-413",
-          "score": 53.40126310908349,
-          "matched_by": "tfidf",
-          "confidence": 4.369981957576812
-        },
-        {
-          "entity_id": "django.db.migrations.migration.Migration",
-          "node_type": "Class",
-          "source_location": "django/db/migrations/migration.py:9-222",
-          "score": 48.67209469200956,
-          "matched_by": "tfidf",
-          "confidence": 3.703083754205914
-        },
-        {
-          "entity_id": "django.core.management.commands.migrate.Command",
-          "node_type": "Class",
-          "source_location": "django/core/management/commands/migrate.py:18-511",
-          "score": 39.98507827344923,
-          "matched_by": "tfidf",
-          "confidence": 2.4780574639018176
-        },
-        {
-          "entity_id": "django.apps.registry.Apps",
-          "node_type": "Class",
-          "source_location": "django/apps/registry.py:13-435",
-          "score": 38.44252904017417,
-          "matched_by": "tfidf",
-          "confidence": 2.2605301479855036
-        },
-        {
-          "entity_id": "django.core.management.base.BaseCommand",
-          "node_type": "Class",
-          "source_location": "django/core/management/base.py:193-630",
-          "score": 36.25051662351743,
-          "matched_by": "tfidf",
-          "confidence": 1.951416787345332
-        },
-        {
-          "entity_id": "tests.migrations.test_executor.ExecutorTests",
-          "node_type": "Class",
-          "source_location": "tests/migrations/test_executor.py:23-854",
-          "score": 35.63382841295482,
-          "matched_by": "tfidf",
-          "confidence": 1.86445260603612
-        },
-        {
-          "entity_id": "django.core.management.commands.squashmigrations.Command",
-          "node_type": "Class",
-          "source_location": "django/core/management/commands/squashmigrations.py:15-253",
-          "score": 35.33064819740952,
-          "matched_by": "tfidf",
-          "confidence": 1.8216987171463137
-        },
-        {
-          "entity_id": "tests.migrations.test_loader.LoaderTests",
-          "node_type": "Class",
-          "source_location": "tests/migrations/test_loader.py:67-722",
-          "score": 33.959729250990854,
-          "matched_by": "tfidf",
-          "confidence": 1.6283743730538243
-        },
-        {
-          "entity_id": "tests.migrations.test_commands.SquashMigrationsTests",
-          "node_type": "Class",
-          "source_location": "tests/migrations/test_commands.py:2993-3470",
-          "score": 30.641349774613662,
-          "matched_by": "tfidf",
-          "confidence": 1.1604229034235527
-        }
+      "ground_truth_files": [
+        "django/db/migrations/executor.py"
       ],
       "file_level_hits": [
         "django/db/migrations/executor.py"
       ],
-      "file_level_precision": 0.1,
       "file_level_recall": 1.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.1,
+      "conflicts": [],
+      "unknowns": [
+        "django.apps.registry.Apps.__init__",
+        "django.apps.registry.Apps.check_apps_ready",
+        "django.apps.registry.Apps.check_models_ready",
+        "django.apps.registry.Apps.clear_cache",
+        "django.apps.registry.Apps.do_pending_operations",
+        "django.apps.registry.Apps.get_app_config",
+        "django.apps.registry.Apps.get_app_configs",
+        "django.apps.registry.Apps.get_containing_app_config",
+        "django.apps.registry.Apps.get_model",
+        "django.apps.registry.Apps.get_models",
+        "django.apps.registry.Apps.get_registered_model",
+        "django.apps.registry.Apps.get_swappable_settings_name",
+        "django.apps.registry.Apps.is_installed",
+        "django.apps.registry.Apps.lazy_model_operation",
+        "django.apps.registry.Apps.populate",
+        "django.apps.registry.Apps.register_model",
+        "django.apps.registry.Apps.set_available_apps",
+        "django.apps.registry.Apps.set_installed_apps",
+        "django.apps.registry.Apps.unset_available_apps",
+        "django.apps.registry.Apps.unset_installed_apps",
+        "django.core.management.base.BaseCommand.__init__",
+        "django.core.management.base.BaseCommand._called_from_command_line",
+        "django.core.management.base.BaseCommand.add_arguments",
+        "django.core.management.base.BaseCommand.add_base_argument",
+        "django.core.management.base.BaseCommand.base_stealth_options",
+        "django.core.management.base.BaseCommand.check",
+        "django.core.management.base.BaseCommand.check_migrations",
+        "django.core.management.base.BaseCommand.create_parser",
+        "django.core.management.base.BaseCommand.execute",
+        "django.core.management.base.BaseCommand.get_check_kwargs",
+        "django.core.management.base.BaseCommand.get_version",
+        "django.core.management.base.BaseCommand.handle",
+        "django.core.management.base.BaseCommand.help",
+        "django.core.management.base.BaseCommand.output_transaction",
+        "django.core.management.base.BaseCommand.print_help",
+        "django.core.management.base.BaseCommand.requires_migrations_checks",
+        "django.core.management.base.BaseCommand.requires_settings",
+        "django.core.management.base.BaseCommand.requires_system_checks",
+        "django.core.management.base.BaseCommand.run_from_argv",
+        "django.core.management.base.BaseCommand.stealth_options",
+        "django.core.management.base.BaseCommand.suppressed_base_arguments",
+        "django.core.management.commands.migrate.Command.add_arguments",
+        "django.core.management.commands.migrate.Command.autodetector",
+        "django.core.management.commands.migrate.Command.describe_operation",
+        "django.core.management.commands.migrate.Command.get_check_kwargs",
+        "django.core.management.commands.migrate.Command.handle",
+        "django.core.management.commands.migrate.Command.help",
+        "django.core.management.commands.migrate.Command.migration_progress_callback",
+        "django.core.management.commands.migrate.Command.sync_apps",
+        "django.core.management.commands.squashmigrations.Command.add_arguments",
+        "django.core.management.commands.squashmigrations.Command.find_migration",
+        "django.core.management.commands.squashmigrations.Command.handle",
+        "django.core.management.commands.squashmigrations.Command.help",
+        "django.db.migrations.executor.MigrationExecutor.__init__",
+        "django.db.migrations.executor.MigrationExecutor._create_project_state",
+        "django.db.migrations.executor.MigrationExecutor._migrate_all_backwards",
+        "django.db.migrations.executor.MigrationExecutor._migrate_all_forwards",
+        "django.db.migrations.executor.MigrationExecutor.apply_migration",
+        "django.db.migrations.executor.MigrationExecutor.check_replacements",
+        "django.db.migrations.executor.MigrationExecutor.detect_soft_applied",
+        "django.db.migrations.executor.MigrationExecutor.migrate",
+        "django.db.migrations.executor.MigrationExecutor.migration_plan",
+        "django.db.migrations.executor.MigrationExecutor.record_migration",
+        "django.db.migrations.executor.MigrationExecutor.unapply_migration",
+        "django.db.migrations.loader.MigrationLoader.__init__",
+        "django.db.migrations.loader.MigrationLoader._resolve_replaced_migration_keys",
+        "django.db.migrations.loader.MigrationLoader.add_external_dependencies",
+        "django.db.migrations.loader.MigrationLoader.add_internal_dependencies",
+        "django.db.migrations.loader.MigrationLoader.all_replaced_applied",
+        "django.db.migrations.loader.MigrationLoader.build_graph",
+        "django.db.migrations.loader.MigrationLoader.check_consistent_history",
+        "django.db.migrations.loader.MigrationLoader.check_key",
+        "django.db.migrations.loader.MigrationLoader.collect_sql",
+        "django.db.migrations.loader.MigrationLoader.detect_conflicts",
+        "django.db.migrations.loader.MigrationLoader.get_migration",
+        "django.db.migrations.loader.MigrationLoader.get_migration_by_prefix",
+        "django.db.migrations.loader.MigrationLoader.load_disk",
+        "django.db.migrations.loader.MigrationLoader.migrations_module",
+        "django.db.migrations.loader.MigrationLoader.project_state",
+        "django.db.migrations.loader.MigrationLoader.replace_migration",
+        "django.db.migrations.migration.Migration.__eq__",
+        "django.db.migrations.migration.Migration.__hash__",
+        "django.db.migrations.migration.Migration.__init__",
+        "django.db.migrations.migration.Migration.__repr__",
+        "django.db.migrations.migration.Migration.__str__",
+        "django.db.migrations.migration.Migration.apply",
+        "django.db.migrations.migration.Migration.atomic",
+        "django.db.migrations.migration.Migration.dependencies",
+        "django.db.migrations.migration.Migration.initial",
+        "django.db.migrations.migration.Migration.mutate_state",
+        "django.db.migrations.migration.Migration.operations",
+        "django.db.migrations.migration.Migration.replaces",
+        "django.db.migrations.migration.Migration.run_before",
+        "django.db.migrations.migration.Migration.suggest_name",
+        "django.db.migrations.migration.Migration.unapply",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_double_replaced_migrations_are_checked_correctly",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_double_replaced_migrations_are_recorded",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_failure_to_format_code",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squash_partially_applied",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashed_name_exists",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashed_name_with_start_migration_name",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashed_name_without_start_migration_name",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_initial_attribute",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_invalid_start",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_manual_porting",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_optimizes",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_replacement_cycle",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_squashes",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_squashes_already_squashed",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_squashmigrations_valid_start",
+        "tests.migrations.test_commands.SquashMigrationsTests.test_ticket_23799_squashmigrations_no_optimize",
+        "tests.migrations.test_executor.ExecutorTests.available_apps",
+        "tests.migrations.test_executor.ExecutorTests.test_alter_id_type_with_fk",
+        "tests.migrations.test_executor.ExecutorTests.test_apply_all_replaced_marks_replacement_as_applied",
+        "tests.migrations.test_executor.ExecutorTests.test_atomic_operation_in_non_atomic_migration",
+        "tests.migrations.test_executor.ExecutorTests.test_custom_user",
+        "tests.migrations.test_executor.ExecutorTests.test_detect_soft_applied_add_field_manytomanyfield",
+        "tests.migrations.test_executor.ExecutorTests.test_empty_plan",
+        "tests.migrations.test_executor.ExecutorTests.test_migrate_backward_to_squashed_migration",
+        "tests.migrations.test_executor.ExecutorTests.test_migrate_marks_replacement_applied_even_if_it_did_nothing",
+        "tests.migrations.test_executor.ExecutorTests.test_migrate_marks_replacement_unapplied",
+        "tests.migrations.test_executor.ExecutorTests.test_migrate_skips_schema_creation",
+        "tests.migrations.test_executor.ExecutorTests.test_migrations_applied_and_recorded_atomically",
+        "tests.migrations.test_executor.ExecutorTests.test_migrations_not_applied_on_deferred_sql_failure",
+        "tests.migrations.test_executor.ExecutorTests.test_mixed_plan_not_supported",
+        "tests.migrations.test_executor.ExecutorTests.test_non_atomic_migration",
+        "tests.migrations.test_executor.ExecutorTests.test_process_callback",
+        "tests.migrations.test_executor.ExecutorTests.test_run",
+        "tests.migrations.test_executor.ExecutorTests.test_run_with_squashed",
+        "tests.migrations.test_executor.ExecutorTests.test_soft_apply",
+        "tests.migrations.test_executor.ExecutorTests.test_unrelated_applied_migrations_mutate_state",
+        "tests.migrations.test_executor.ExecutorTests.test_unrelated_model_lookups_backwards",
+        "tests.migrations.test_executor.ExecutorTests.test_unrelated_model_lookups_forwards",
+        "tests.migrations.test_loader.LoaderTests.record_applied",
+        "tests.migrations.test_loader.LoaderTests.setUp",
+        "tests.migrations.test_loader.LoaderTests.tearDown",
+        "tests.migrations.test_loader.LoaderTests.test_check_consistent_history",
+        "tests.migrations.test_loader.LoaderTests.test_check_consistent_history_squashed",
+        "tests.migrations.test_loader.LoaderTests.test_explicit_missing_module",
+        "tests.migrations.test_loader.LoaderTests.test_first",
+        "tests.migrations.test_loader.LoaderTests.test_ignore_files",
+        "tests.migrations.test_loader.LoaderTests.test_load",
+        "tests.migrations.test_loader.LoaderTests.test_load_empty_dir",
+        "tests.migrations.test_loader.LoaderTests.test_load_import_error",
+        "tests.migrations.test_loader.LoaderTests.test_load_module_file",
+        "tests.migrations.test_loader.LoaderTests.test_load_unmigrated_dependency",
+        "tests.migrations.test_loader.LoaderTests.test_loading_namespace_package",
+        "tests.migrations.test_loader.LoaderTests.test_loading_order_does_not_create_circular_dependency",
+        "tests.migrations.test_loader.LoaderTests.test_loading_package_without__file__",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed_complex",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed_complex_multi_apps",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed_complex_multi_apps_partially_applied",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed_erroneous",
+        "tests.migrations.test_loader.LoaderTests.test_loading_squashed_ref_squashed",
+        "tests.migrations.test_loader.LoaderTests.test_marked_as_migrated",
+        "tests.migrations.test_loader.LoaderTests.test_marked_as_unmigrated",
+        "tests.migrations.test_loader.LoaderTests.test_name_match",
+        "tests.migrations.test_loader.LoaderTests.test_plan_handles_repeated_migrations",
+        "tests.migrations.test_loader.LoaderTests.test_run_before"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-11",
       "query": "Where would I investigate if a custom Manager isn't exposing a custom QuerySet method I defined?",
+      "category": "E_debugging",
+      "elapsed_seconds": 5.395534992218018,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "name": "Options",
+          "source_location": "django/db/models/options.py:90-1052",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 28.387089442199123,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "node_type": "Class",
+          "name": "ReverseManyToOneDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 27.47439956005546,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
+          "node_type": "Class",
+          "name": "ManyRelatedManager",
+          "source_location": "django/db/models/fields/related_descriptors.py:1081-1710",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 26.973904120880064,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "node_type": "Class",
+          "name": "ManyToManyDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:1026-1070",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          },
+          "score": 25.35306989628328,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor",
+          "node_type": "Class",
+          "name": "ReverseOneToOneDescriptor",
+          "source_location": "django/db/models/fields/related_descriptors.py:431-652",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 23.43535583643789,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/db/models/fields/related_descriptors.py",
         "django/db/models/options.py"
       ],
       "retrieved_symbols": [
         "django.db.models.options.Options",
-        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager"
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.db.models.options.Options",
-          "node_type": "Class",
-          "source_location": "django/db/models/options.py:90-1052",
-          "score": 28.38708944219913,
-          "matched_by": "tfidf",
-          "confidence": 2.399739126126088
-        },
-        {
-          "entity_id": "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
-          "node_type": "Class",
-          "source_location": "django/db/models/fields/related_descriptors.py:1081-1710",
-          "score": 26.973904120880075,
-          "matched_by": "tfidf",
-          "confidence": 2.021210678607739
-        }
+      "ground_truth_files": [
+        "django/db/models/manager.py"
       ],
       "file_level_hits": [],
-      "file_level_precision": 0.0,
       "file_level_recall": 0.0,
-      "insufficient_evidence": false
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor._get_set_deprecation_msg_params",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.related_manager_cls",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor.through",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__get__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.__set__",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor._get_set_deprecation_msg_params",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor.related_manager_cls",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.RelatedObjectDoesNotExist",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.__get__",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.__init__",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.__reduce__",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.__set__",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.fetch_many",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.fetch_one",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.field",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.get_prefetch_querysets",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.get_queryset",
+        "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor.is_cached",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.__call__",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.__init__",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._add_base",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._add_items",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._apply_rel_filters",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._build_remove_filters",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._clear_base",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._get_add_plan",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._get_missing_target_ids",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._get_target_ids",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._remove_base",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._remove_items",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager._remove_prefetched_objects",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aadd",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aclear",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.acreate",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.add",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aget_or_create",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aremove",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aset",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.aupdate_or_create",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.clear",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.constrained_target",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.count",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.create",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.do_not_call_in_templates",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.exists",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.get_or_create",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.get_prefetch_cache",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.get_prefetch_querysets",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.get_queryset",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.remove",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.set",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.set_base",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager.update_or_create",
+        "django.db.models.options.Options.FORWARD_PROPERTIES",
+        "django.db.models.options.Options.REVERSE_PROPERTIES",
+        "django.db.models.options.Options.__init__",
+        "django.db.models.options.Options.__repr__",
+        "django.db.models.options.Options.__str__",
+        "django.db.models.options.Options._expire_cache",
+        "django.db.models.options.Options._format_names",
+        "django.db.models.options.Options._forward_fields_map",
+        "django.db.models.options.Options._get_default_pk_class",
+        "django.db.models.options.Options._get_fields",
+        "django.db.models.options.Options._non_pk_concrete_field_names",
+        "django.db.models.options.Options._populate_directed_relation_graph",
+        "django.db.models.options.Options._prepare",
+        "django.db.models.options.Options._property_names",
+        "django.db.models.options.Options._relation_tree",
+        "django.db.models.options.Options._reverse_one_to_one_field_names",
+        "django.db.models.options.Options.add_field",
+        "django.db.models.options.Options.add_manager",
+        "django.db.models.options.Options.all_parents",
+        "django.db.models.options.Options.app_config",
+        "django.db.models.options.Options.base_manager",
+        "django.db.models.options.Options.can_migrate",
+        "django.db.models.options.Options.concrete_fields",
+        "django.db.models.options.Options.contribute_to_class",
+        "django.db.models.options.Options.db_returning_fields",
+        "django.db.models.options.Options.default_apps",
+        "django.db.models.options.Options.default_manager",
+        "django.db.models.options.Options.fields",
+        "django.db.models.options.Options.fields_map",
+        "django.db.models.options.Options.get_ancestor_link",
+        "django.db.models.options.Options.get_base_chain",
+        "django.db.models.options.Options.get_field",
+        "django.db.models.options.Options.get_fields",
+        "django.db.models.options.Options.get_parent_list",
+        "django.db.models.options.Options.get_path_from_parent",
+        "django.db.models.options.Options.get_path_to_parent",
+        "django.db.models.options.Options.is_composite_pk",
+        "django.db.models.options.Options.label",
+        "django.db.models.options.Options.label_lower",
+        "django.db.models.options.Options.local_concrete_fields",
+        "django.db.models.options.Options.managers",
+        "django.db.models.options.Options.managers_map",
+        "django.db.models.options.Options.many_to_many",
+        "django.db.models.options.Options.pk_fields",
+        "django.db.models.options.Options.related_objects",
+        "django.db.models.options.Options.setting_changed",
+        "django.db.models.options.Options.setup_pk",
+        "django.db.models.options.Options.setup_proxy",
+        "django.db.models.options.Options.swapped",
+        "django.db.models.options.Options.total_unique_constraints",
+        "django.db.models.options.Options.verbose_name_raw",
+        "django.db.models.utils.AltersData"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-12",
       "query": "How does registering a model in the admin (admin.site.register) connect it to Django's admin URLs?",
+      "category": "F_cross_file",
+      "elapsed_seconds": 4.567485570907593,
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.admin.sites.AdminSite",
+          "node_type": "Class",
+          "name": "AdminSite",
+          "source_location": "django/contrib/admin/sites.py:31-619",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 53.42029128035063,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.admin.decorators.register",
+          "node_type": "Function",
+          "name": "register",
+          "source_location": "django/contrib/admin/decorators.py:97-128",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 7
+          },
+          "score": 40.5283085673813,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.admin.decorators.register._model_admin_wrapper",
+          "node_type": "Function",
+          "name": "_model_admin_wrapper",
+          "source_location": "django/contrib/admin/decorators.py:112-126",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 31.315397256511897,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "tests.admin_checks.tests.SystemChecksTestCase",
+          "node_type": "Class",
+          "name": "SystemChecksTestCase",
+          "source_location": "tests/admin_checks/tests.py:72-1063",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          },
+          "score": 27.492232438430833,
+          "matched_by": "tfidf"
+        },
+        {
+          "entity_id": "django.contrib.admin.sites.AdminSite.admin_view",
+          "node_type": "Method",
+          "name": "admin_view",
+          "source_location": "django/contrib/admin/sites.py:211-256",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          },
+          "score": 26.280198057347153,
+          "matched_by": "tfidf"
+        }
+      ],
+      "insufficient_evidence": false,
       "retrieved_files": [
         "django/contrib/admin/decorators.py",
         "django/contrib/admin/sites.py",
@@ -994,62 +3017,175 @@
       "retrieved_symbols": [
         "django.contrib.admin.sites.AdminSite",
         "django.contrib.admin.decorators.register",
-        "tests.admin_checks.tests.SystemChecksTestCase"
+        "django.contrib.admin.decorators.register._model_admin_wrapper",
+        "tests.admin_checks.tests.SystemChecksTestCase",
+        "django.contrib.admin.sites.AdminSite.admin_view"
       ],
-      "retrieved_entities": [
-        {
-          "entity_id": "django.contrib.admin.sites.AdminSite",
-          "node_type": "Class",
-          "source_location": "django/contrib/admin/sites.py:31-619",
-          "score": 53.42029128035063,
-          "matched_by": "tfidf",
-          "confidence": 6.38695779640339
-        },
-        {
-          "entity_id": "django.contrib.admin.decorators.register",
-          "node_type": "Function",
-          "source_location": "django/contrib/admin/decorators.py:97-128",
-          "score": 40.5283085673813,
-          "matched_by": "tfidf",
-          "confidence": 3.9023865119451573
-        },
-        {
-          "entity_id": "tests.admin_checks.tests.SystemChecksTestCase",
-          "node_type": "Class",
-          "source_location": "tests/admin_checks/tests.py:72-1063",
-          "score": 27.492232438430833,
-          "matched_by": "tfidf",
-          "confidence": 1.3900452272009276
-        }
+      "ground_truth_files": [
+        "django/contrib/admin/options.py",
+        "django/contrib/admin/sites.py"
       ],
       "file_level_hits": [
         "django/contrib/admin/sites.py"
       ],
-      "file_level_precision": 0.3333333333333333,
       "file_level_recall": 0.5,
-      "insufficient_evidence": false
+      "file_level_precision": 0.3333333333333333,
+      "conflicts": [],
+      "unknowns": [
+        "django.contrib.admin.ModelAdmin",
+        "django.contrib.admin.decorators.register._model_admin_wrapper.admin_site",
+        "django.contrib.admin.sites.AdminSite.__init__",
+        "django.contrib.admin.sites.AdminSite.__repr__",
+        "django.contrib.admin.sites.AdminSite._build_app_dict",
+        "django.contrib.admin.sites.AdminSite.actions",
+        "django.contrib.admin.sites.AdminSite.add_action",
+        "django.contrib.admin.sites.AdminSite.admin_view.inner",
+        "django.contrib.admin.sites.AdminSite.app_index",
+        "django.contrib.admin.sites.AdminSite.app_index_template",
+        "django.contrib.admin.sites.AdminSite.autocomplete_view",
+        "django.contrib.admin.sites.AdminSite.catch_all_view",
+        "django.contrib.admin.sites.AdminSite.check",
+        "django.contrib.admin.sites.AdminSite.disable_action",
+        "django.contrib.admin.sites.AdminSite.each_context",
+        "django.contrib.admin.sites.AdminSite.empty_value_display",
+        "django.contrib.admin.sites.AdminSite.enable_nav_sidebar",
+        "django.contrib.admin.sites.AdminSite.final_catch_all_view",
+        "django.contrib.admin.sites.AdminSite.get_action",
+        "django.contrib.admin.sites.AdminSite.get_app_list",
+        "django.contrib.admin.sites.AdminSite.get_log_entries",
+        "django.contrib.admin.sites.AdminSite.get_model_admin",
+        "django.contrib.admin.sites.AdminSite.get_urls",
+        "django.contrib.admin.sites.AdminSite.has_permission",
+        "django.contrib.admin.sites.AdminSite.i18n_javascript",
+        "django.contrib.admin.sites.AdminSite.index",
+        "django.contrib.admin.sites.AdminSite.index_template",
+        "django.contrib.admin.sites.AdminSite.index_title",
+        "django.contrib.admin.sites.AdminSite.is_registered",
+        "django.contrib.admin.sites.AdminSite.login",
+        "django.contrib.admin.sites.AdminSite.login_form",
+        "django.contrib.admin.sites.AdminSite.login_template",
+        "django.contrib.admin.sites.AdminSite.logout",
+        "django.contrib.admin.sites.AdminSite.logout_template",
+        "django.contrib.admin.sites.AdminSite.password_change",
+        "django.contrib.admin.sites.AdminSite.password_change_done",
+        "django.contrib.admin.sites.AdminSite.password_change_done_template",
+        "django.contrib.admin.sites.AdminSite.password_change_form",
+        "django.contrib.admin.sites.AdminSite.password_change_template",
+        "django.contrib.admin.sites.AdminSite.register",
+        "django.contrib.admin.sites.AdminSite.shortcut_view",
+        "django.contrib.admin.sites.AdminSite.site_header",
+        "django.contrib.admin.sites.AdminSite.site_title",
+        "django.contrib.admin.sites.AdminSite.site_url",
+        "django.contrib.admin.sites.AdminSite.unregister",
+        "django.contrib.admin.sites.AdminSite.urls",
+        "django.contrib.admin.sites.site",
+        "django.views.decorators.cache.never_cache",
+        "django.views.decorators.csrf.csrf_protect",
+        "tests.admin_checks.tests.SystemChecksTestCase.databases",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_admin_check_ignores_import_error_in_middleware",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_allows_checks_relying_on_other_modeladmins",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_app_label_in_admin_checks",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_apps_dependencies",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_cannot_include_through",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_check_fieldset_sublists_for_duplicates",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_check_multiple_duplicates_across_fieldsets",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_check_sublists_for_duplicates",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_checks_are_performed",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_context_processor_dependencies",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_context_processor_dependencies_model_backend_subclass",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_custom_adminsite",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_custom_get_form_with_fieldsets",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_custom_modelforms_with_fields_fieldsets",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_editable",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_exclude_duplicate_values",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_exclude_in_inline",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_exclude_inline_model_admin",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_exclude_values",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_explicit_through_override",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_extra",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_field_name_not_in_list_display",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_fieldsets_fields_non_tuple",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_fk_exclusion",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_generic_inline_model_admin_bad_ct_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_generic_inline_model_admin_bad_fk_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_generic_inline_model_admin_non_generic_model",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_generic_inline_model_admin_non_gfk_ct_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_generic_inline_model_admin_non_gfk_fk_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_graceful_m2m_fail",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_inline_self_check",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_inline_with_specified",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_inlines_property",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_list_editable_missing_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_list_editable_not_a_list_or_tuple",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_list_filter_works_on_through_field_even_when_apps_not_ready",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_middleware_dependencies",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_middleware_subclasses",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_nested_fields",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_nested_fieldsets",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_no_template_engines",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_non_model_fields",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_non_model_first_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_nonexistent_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_nonexistent_field_on_inline",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_nonfirst_fieldset",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_pk_not_editable",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_and_editable",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_dynamic_attribute_on_modeladmin",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_fields_not_list_or_tuple",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_lambda",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_method_on_model",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_on_method",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_readonly_on_modeladmin",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_related_field_list_display",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_related_field_list_display_wrong_field",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_several_templates_backends",
+        "tests.admin_checks.tests.SystemChecksTestCase.test_valid_generic_inline_model_admin"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-13",
       "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "category": "G_negative",
+      "elapsed_seconds": 4.438593149185181,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
       "retrieved_files": [],
       "retrieved_symbols": [],
-      "retrieved_entities": [],
+      "ground_truth_files": [],
       "file_level_hits": [],
-      "file_level_precision": null,
       "file_level_recall": null,
-      "insufficient_evidence": true
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [],
+      "any_runtime_state_present": false
     },
     {
       "query_id": "django-14",
       "query": "Where does Django implement a built-in GraphQL API layer?",
+      "category": "G_negative",
+      "elapsed_seconds": 4.304494619369507,
+      "retrieved_entities": [],
+      "insufficient_evidence": true,
       "retrieved_files": [],
       "retrieved_symbols": [],
-      "retrieved_entities": [],
+      "ground_truth_files": [],
       "file_level_hits": [],
-      "file_level_precision": null,
       "file_level_recall": null,
-      "insufficient_evidence": true
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [],
+      "any_runtime_state_present": false
     }
   ]
 }

@@ -1,0 +1,1055 @@
+{
+  "repo_name": "django",
+  "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+  "results": [
+    {
+      "query_id": "django-01",
+      "query": "Where is Django's QuerySet class defined?",
+      "retrieved_files": [
+        "django/apps/config.py",
+        "django/core/serializers/xml_serializer.py",
+        "django/db/backends/sqlite3/operations.py",
+        "django/db/models/fields/related.py",
+        "django/db/models/fields/related_descriptors.py",
+        "django/db/models/manager.py",
+        "django/db/models/query.py",
+        "django/db/models/query_utils.py",
+        "django/template/engine.py",
+        "django/views/generic/detail.py"
+      ],
+      "retrieved_symbols": [
+        "django.db.backends.sqlite3.operations.DatabaseOperations",
+        "django.db.models.manager.BaseManager",
+        "django.views.generic.detail.SingleObjectMixin",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+        "django.template.engine.Engine",
+        "django.db.models.fields.related.RelatedField",
+        "django.apps.config.AppConfig",
+        "django.core.serializers.xml_serializer.Serializer",
+        "django.db.models.query.QuerySet",
+        "django.db.models.query_utils.Q"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.backends.sqlite3.operations.DatabaseOperations",
+          "node_type": "Class",
+          "source_location": "django/db/backends/sqlite3/operations.py:29-414",
+          "score": 27.698173138668942,
+          "matched_by": "tfidf",
+          "confidence": 3.8746082550354126
+        },
+        {
+          "entity_id": "django.db.models.manager.BaseManager",
+          "node_type": "Class",
+          "source_location": "django/db/models/manager.py:10-173",
+          "score": 26.576238237151863,
+          "matched_by": "tfidf",
+          "confidence": 3.458192911308119
+        },
+        {
+          "entity_id": "django.views.generic.detail.SingleObjectMixin",
+          "node_type": "Class",
+          "source_location": "django/views/generic/detail.py:8-101",
+          "score": 26.510322428683416,
+          "matched_by": "tfidf",
+          "confidence": 3.4337277181820873
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "node_type": "Class",
+          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
+          "score": 24.81523607804842,
+          "matched_by": "tfidf",
+          "confidence": 2.8045825116352088
+        },
+        {
+          "entity_id": "django.template.engine.Engine",
+          "node_type": "Class",
+          "source_location": "django/template/engine.py:13-234",
+          "score": 24.328764472135695,
+          "matched_by": "tfidf",
+          "confidence": 2.624024583794836
+        },
+        {
+          "entity_id": "django.db.models.fields.related.RelatedField",
+          "node_type": "Class",
+          "source_location": "django/db/models/fields/related.py:98-541",
+          "score": 24.173107193067477,
+          "matched_by": "tfidf",
+          "confidence": 2.566251107562658
+        },
+        {
+          "entity_id": "django.apps.config.AppConfig",
+          "node_type": "Class",
+          "source_location": "django/apps/config.py:13-274",
+          "score": 23.999220128945293,
+          "matched_by": "tfidf",
+          "confidence": 2.5017114970395724
+        },
+        {
+          "entity_id": "django.core.serializers.xml_serializer.Serializer",
+          "node_type": "Class",
+          "source_location": "django/core/serializers/xml_serializer.py:18-229",
+          "score": 23.942700831273086,
+          "matched_by": "tfidf",
+          "confidence": 2.4807338959901957
+        },
+        {
+          "entity_id": "django.db.models.query.QuerySet",
+          "node_type": "Class",
+          "source_location": "django/db/models/query.py:374-2424",
+          "score": 22.936856602369236,
+          "matched_by": "tfidf",
+          "confidence": 2.1074065578810557
+        },
+        {
+          "entity_id": "django.db.models.query_utils.Q",
+          "node_type": "Class",
+          "source_location": "django/db/models/query_utils.py:41-247",
+          "score": 22.471109829881176,
+          "matched_by": "tfidf",
+          "confidence": 1.9345408220052556
+        }
+      ],
+      "file_level_hits": [
+        "django/db/models/query.py"
+      ],
+      "file_level_precision": 0.1,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-02",
+      "query": "Where is Django's base Model class defined?",
+      "retrieved_files": [
+        "django/contrib/admin/sites.py",
+        "django/contrib/contenttypes/models.py",
+        "django/contrib/postgres/fields/array.py",
+        "django/core/checks/messages.py",
+        "django/core/management/base.py",
+        "django/db/backends/base/introspection.py",
+        "django/db/migrations/state.py",
+        "django/db/models/base.py",
+        "django/db/models/constraints.py",
+        "django/db/models/options.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.contenttypes.models.ContentType",
+        "django.db.models.options.Options",
+        "django.core.management.base.BaseCommand",
+        "django.contrib.postgres.fields.array.ArrayField",
+        "django.db.migrations.state.ModelState",
+        "django.db.models.constraints.BaseConstraint",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+        "django.core.checks.messages.CheckMessage",
+        "django.db.models.base.ModelBase",
+        "django.contrib.admin.sites.AdminSite"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.contenttypes.models.ContentType",
+          "node_type": "Class",
+          "source_location": "django/contrib/contenttypes/models.py:134-188",
+          "score": 28.74607491636107,
+          "matched_by": "tfidf",
+          "confidence": 3.4765714769121856
+        },
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "source_location": "django/db/models/options.py:90-1052",
+          "score": 28.642464912988487,
+          "matched_by": "tfidf",
+          "confidence": 3.4426102501188187
+        },
+        {
+          "entity_id": "django.core.management.base.BaseCommand",
+          "node_type": "Class",
+          "source_location": "django/core/management/base.py:193-630",
+          "score": 26.638099466365645,
+          "matched_by": "tfidf",
+          "confidence": 2.785620506910697
+        },
+        {
+          "entity_id": "django.contrib.postgres.fields.array.ArrayField",
+          "node_type": "Class",
+          "source_location": "django/contrib/postgres/fields/array.py:21-251",
+          "score": 26.14587274922246,
+          "matched_by": "tfidf",
+          "confidence": 2.624278719143923
+        },
+        {
+          "entity_id": "django.db.migrations.state.ModelState",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/state.py:737-1021",
+          "score": 25.98021153340884,
+          "matched_by": "tfidf",
+          "confidence": 2.5699783819372946
+        },
+        {
+          "entity_id": "django.db.models.constraints.BaseConstraint",
+          "node_type": "Class",
+          "source_location": "django/db/models/constraints.py:28-139",
+          "score": 24.950261762947285,
+          "matched_by": "tfidf",
+          "confidence": 2.2323820437281534
+        },
+        {
+          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "node_type": "Class",
+          "source_location": "django/db/backends/base/introspection.py:16-228",
+          "score": 24.689936743811487,
+          "matched_by": "tfidf",
+          "confidence": 2.147052859990304
+        },
+        {
+          "entity_id": "django.core.checks.messages.CheckMessage",
+          "node_type": "Class",
+          "source_location": "django/core/checks/messages.py:9-57",
+          "score": 24.594750204438526,
+          "matched_by": "tfidf",
+          "confidence": 2.1158526713396366
+        },
+        {
+          "entity_id": "django.db.models.base.ModelBase",
+          "node_type": "Class",
+          "source_location": "django/db/models/base.py:102-466",
+          "score": 24.54413135732424,
+          "matched_by": "tfidf",
+          "confidence": 2.099260855000386
+        },
+        {
+          "entity_id": "django.contrib.admin.sites.AdminSite",
+          "node_type": "Class",
+          "source_location": "django/contrib/admin/sites.py:31-619",
+          "score": 24.54048886165275,
+          "matched_by": "tfidf",
+          "confidence": 2.098066919882476
+        }
+      ],
+      "file_level_hits": [
+        "django/db/models/base.py"
+      ],
+      "file_level_precision": 0.1,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-03",
+      "query": "Where is the CSRF protection middleware implemented?",
+      "retrieved_files": [
+        "django/middleware/csrf.py",
+        "django/template/library.py",
+        "django/utils/csp.py",
+        "django/views/csrf.py",
+        "django/views/decorators/csrf.py",
+        "tests/csrf_tests/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.utils.csp.CSP",
+        "django.views.decorators.csrf.csrf_exempt",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+        "django.template.library.InclusionNode",
+        "django.views.csrf.csrf_failure",
+        "django.template.library.InclusionNode.render",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
+          "node_type": "Class",
+          "source_location": "django/middleware/csrf.py:165-484",
+          "score": 31.117315636410805,
+          "matched_by": "tfidf",
+          "confidence": 5.414503276700264
+        },
+        {
+          "entity_id": "django.utils.csp.CSP",
+          "node_type": "Class",
+          "source_location": "django/utils/csp.py:11-53",
+          "score": 22.95612217010143,
+          "matched_by": "tfidf",
+          "confidence": 3.0259649486568714
+        },
+        {
+          "entity_id": "django.views.decorators.csrf.csrf_exempt",
+          "node_type": "Function",
+          "source_location": "django/views/decorators/csrf.py:50-68",
+          "score": 21.824677259411157,
+          "matched_by": "tfidf",
+          "confidence": 2.6948247120714166
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "node_type": "Class",
+          "source_location": "tests/csrf_tests/tests.py:231-1056",
+          "score": 21.55747597332332,
+          "matched_by": "tfidf",
+          "confidence": 2.6166228515521244
+        },
+        {
+          "entity_id": "django.template.library.InclusionNode",
+          "node_type": "Class",
+          "source_location": "django/template/library.py:369-403",
+          "score": 21.409177704230885,
+          "matched_by": "tfidf",
+          "confidence": 2.5732203637699107
+        },
+        {
+          "entity_id": "django.views.csrf.csrf_failure",
+          "node_type": "Function",
+          "source_location": "django/views/csrf.py:22-81",
+          "score": 20.870077232334683,
+          "matched_by": "tfidf",
+          "confidence": 2.415441707363097
+        },
+        {
+          "entity_id": "django.template.library.InclusionNode.render",
+          "node_type": "Method",
+          "source_location": "django/template/library.py:374-403",
+          "score": 17.172232806569475,
+          "matched_by": "tfidf",
+          "confidence": 1.333192747263884
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_put_and_delete_rejected",
+          "node_type": "Method",
+          "source_location": "tests/csrf_tests/tests.py:488-501",
+          "score": 16.439934480743137,
+          "matched_by": "tfidf",
+          "confidence": 1.1188708314780547
+        }
+      ],
+      "file_level_hits": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_precision": 0.16666666666666666,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-04",
+      "query": "What does django.contrib.auth.authenticate() actually call to check a user's credentials?",
+      "retrieved_files": [
+        "django/contrib/auth/handlers/modwsgi.py",
+        "django/contrib/auth/middleware.py",
+        "django/test/client.py",
+        "tests/auth_tests/test_context_processors.py",
+        "tests/test_client/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.auth.middleware.RemoteUserMiddleware",
+        "django.contrib.auth.handlers.modwsgi.check_password",
+        "django.test.client.ClientMixin",
+        "django.test.client.ClientMixin.login",
+        "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+        "tests.auth_tests.test_context_processors.AuthContextProcessorTests"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "score": 47.71985321099399,
+          "matched_by": "tfidf",
+          "confidence": 5.0959270941482835
+        },
+        {
+          "entity_id": "django.contrib.auth.handlers.modwsgi.check_password",
+          "node_type": "Function",
+          "source_location": "django/contrib/auth/handlers/modwsgi.py:23-41",
+          "score": 37.53071981218752,
+          "matched_by": "tfidf",
+          "confidence": 3.0800106124092412
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin",
+          "node_type": "Class",
+          "source_location": "django/test/client.py:788-1037",
+          "score": 37.08639210459054,
+          "matched_by": "tfidf",
+          "confidence": 2.992100530758626
+        },
+        {
+          "entity_id": "django.test.client.ClientMixin.login",
+          "node_type": "Method",
+          "source_location": "django/test/client.py:832-845",
+          "score": 31.788198423787648,
+          "matched_by": "tfidf",
+          "confidence": 1.9438547627890657
+        },
+        {
+          "entity_id": "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+          "node_type": "Method",
+          "source_location": "tests/test_client/tests.py:670-682",
+          "score": 29.55572165881554,
+          "matched_by": "tfidf",
+          "confidence": 1.502160015114655
+        },
+        {
+          "entity_id": "tests.auth_tests.test_context_processors.AuthContextProcessorTests",
+          "node_type": "Class",
+          "source_location": "tests/auth_tests/test_context_processors.py:70-156",
+          "score": 28.012222231055986,
+          "matched_by": "tfidf",
+          "confidence": 1.196779192802549
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-05",
+      "query": "What is Django's default Manager class actually built from?",
+      "retrieved_files": [
+        "django/contrib/auth/backends.py",
+        "django/contrib/auth/management/commands/createsuperuser.py",
+        "django/core/mail/backends/base.py",
+        "django/db/migrations/recorder.py",
+        "django/db/migrations/state.py",
+        "django/db/models/fields/related_descriptors.py",
+        "django/db/models/manager.py",
+        "django/db/models/options.py"
+      ],
+      "retrieved_symbols": [
+        "django.db.models.manager.BaseManager",
+        "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+        "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+        "django.db.models.options.Options",
+        "django.contrib.auth.backends.RemoteUserBackend",
+        "django.db.migrations.state.ModelState",
+        "django.db.migrations.recorder.MigrationRecorder",
+        "django.core.mail.backends.base.BaseEmailBackend",
+        "django.db.models.manager.BaseManager.deconstruct",
+        "django.contrib.auth.management.commands.createsuperuser.Command"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.models.manager.BaseManager",
+          "node_type": "Class",
+          "source_location": "django/db/models/manager.py:10-173",
+          "score": 36.62991499263309,
+          "matched_by": "tfidf",
+          "confidence": 5.146778050551347
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "node_type": "Class",
+          "source_location": "django/db/models/fields/related_descriptors.py:655-709",
+          "score": 33.568191253810674,
+          "matched_by": "tfidf",
+          "confidence": 4.304066572807323
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "node_type": "Class",
+          "source_location": "django/db/models/fields/related_descriptors.py:1026-1070",
+          "score": 31.53941521122584,
+          "matched_by": "tfidf",
+          "confidence": 3.7456645082513926
+        },
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "source_location": "django/db/models/options.py:90-1052",
+          "score": 29.232005096624345,
+          "matched_by": "tfidf",
+          "confidence": 3.110570961834559
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/backends.py:255-342",
+          "score": 29.081980792075925,
+          "matched_by": "tfidf",
+          "confidence": 3.0692781430931317
+        },
+        {
+          "entity_id": "django.db.migrations.state.ModelState",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/state.py:737-1021",
+          "score": 28.94183214756191,
+          "matched_by": "tfidf",
+          "confidence": 3.0307035095216355
+        },
+        {
+          "entity_id": "django.db.migrations.recorder.MigrationRecorder",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/recorder.py:9-111",
+          "score": 28.169043357551804,
+          "matched_by": "tfidf",
+          "confidence": 2.818000457657162
+        },
+        {
+          "entity_id": "django.core.mail.backends.base.BaseEmailBackend",
+          "node_type": "Class",
+          "source_location": "django/core/mail/backends/base.py:10-126",
+          "score": 26.11899680821404,
+          "matched_by": "tfidf",
+          "confidence": 2.2537438805105494
+        },
+        {
+          "entity_id": "django.db.models.manager.BaseManager.deconstruct",
+          "node_type": "Method",
+          "source_location": "django/db/models/manager.py:42-77",
+          "score": 25.818207821760957,
+          "matched_by": "tfidf",
+          "confidence": 2.1709544609267644
+        },
+        {
+          "entity_id": "django.contrib.auth.management.commands.createsuperuser.Command",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/management/commands/createsuperuser.py:26-321",
+          "score": 24.597576072728287,
+          "matched_by": "tfidf",
+          "confidence": 1.8349867274681522
+        }
+      ],
+      "file_level_hits": [
+        "django/db/models/manager.py"
+      ],
+      "file_level_precision": 0.125,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-06",
+      "query": "How does an incoming WSGI request get dispatched to the correct Django view function, end to end?",
+      "retrieved_files": [
+        "django/test/client.py"
+      ],
+      "retrieved_symbols": [
+        "django.test.client.RequestFactory"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.test.client.RequestFactory",
+          "node_type": "Class",
+          "source_location": "django/test/client.py:373-674",
+          "score": 25.95339368530355,
+          "matched_by": "tfidf",
+          "confidence": 2.250872296168106
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-07",
+      "query": "How does Django apply configured middleware to every request?",
+      "retrieved_files": [
+        "django/contrib/admindocs/middleware.py",
+        "django/contrib/auth/middleware.py",
+        "django/contrib/messages/storage/session.py",
+        "django/contrib/redirects/middleware.py",
+        "django/contrib/sessions/middleware.py",
+        "django/core/handlers/base.py",
+        "django/middleware/csrf.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.auth.middleware.RemoteUserMiddleware",
+        "django.core.handlers.base.BaseHandler",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.storage.session.SessionStorage",
+        "django.contrib.admindocs.middleware.XViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+        "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+        "django.contrib.auth.middleware.LoginRequiredMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "score": 35.54925044211226,
+          "matched_by": "tfidf",
+          "confidence": 4.464260836672648
+        },
+        {
+          "entity_id": "django.core.handlers.base.BaseHandler",
+          "node_type": "Class",
+          "source_location": "django/core/handlers/base.py:21-367",
+          "score": 35.17648685731137,
+          "matched_by": "tfidf",
+          "confidence": 4.380286433214733
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/middleware.py:29-40",
+          "score": 34.41531983836967,
+          "matched_by": "tfidf",
+          "confidence": 4.208814355593178
+        },
+        {
+          "entity_id": "django.contrib.messages.storage.session.SessionStorage",
+          "node_type": "Class",
+          "source_location": "django/contrib/messages/storage/session.py:8-52",
+          "score": 31.084092600149848,
+          "matched_by": "tfidf",
+          "confidence": 3.4583713629878705
+        },
+        {
+          "entity_id": "django.contrib.admindocs.middleware.XViewMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/admindocs/middleware.py:9-33",
+          "score": 30.83687206478091,
+          "matched_by": "tfidf",
+          "confidence": 3.402678699255061
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+          "node_type": "Method",
+          "source_location": "django/contrib/auth/middleware.py:30-40",
+          "score": 30.831348539060297,
+          "matched_by": "tfidf",
+          "confidence": 3.4014343857108056
+        },
+        {
+          "entity_id": "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/redirects/middleware.py:10-50",
+          "score": 29.92762012769085,
+          "matched_by": "tfidf",
+          "confidence": 3.1978467571787603
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.LoginRequiredMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/middleware.py:43-90",
+          "score": 25.833279543998636,
+          "matched_by": "tfidf",
+          "confidence": 2.275493227789002
+        },
+        {
+          "entity_id": "django.contrib.sessions.middleware.SessionMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/sessions/middleware.py:12-82",
+          "score": 25.257717607927752,
+          "matched_by": "tfidf",
+          "confidence": 2.1458333784760635
+        },
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
+          "node_type": "Class",
+          "source_location": "django/middleware/csrf.py:165-484",
+          "score": 22.68808225820178,
+          "matched_by": "tfidf",
+          "confidence": 1.56695817607971
+        }
+      ],
+      "file_level_hits": [
+        "django/core/handlers/base.py"
+      ],
+      "file_level_precision": 0.14285714285714285,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-08",
+      "query": "What happens when CsrfViewMiddleware detects a POST request without a valid CSRF token?",
+      "retrieved_files": [
+        "django/middleware/csrf.py",
+        "tests/auth_tests/test_remote_user.py",
+        "tests/auth_tests/test_views.py",
+        "tests/csrf_tests/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
+        "tests.auth_tests.test_views.LoginTest",
+        "django.middleware.csrf.CsrfViewMiddleware._check_token",
+        "django.middleware.csrf.get_token",
+        "tests.auth_tests.test_remote_user.RemoteUserTest",
+        "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
+        "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
+          "node_type": "Class",
+          "source_location": "django/middleware/csrf.py:165-484",
+          "score": 59.407130749704365,
+          "matched_by": "tfidf",
+          "confidence": 5.540433738586272
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
+          "node_type": "Class",
+          "source_location": "tests/csrf_tests/tests.py:1059-1341",
+          "score": 49.86729432187227,
+          "matched_by": "tfidf",
+          "confidence": 3.9728713181508493
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "node_type": "Class",
+          "source_location": "tests/csrf_tests/tests.py:231-1056",
+          "score": 49.62991295396428,
+          "matched_by": "tfidf",
+          "confidence": 3.9338653965651806
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
+          "node_type": "Class",
+          "source_location": "tests/csrf_tests/tests.py:1345-1477",
+          "score": 46.950232816811564,
+          "matched_by": "tfidf",
+          "confidence": 3.493546957819957
+        },
+        {
+          "entity_id": "tests.auth_tests.test_views.LoginTest",
+          "node_type": "Class",
+          "source_location": "tests/auth_tests/test_views.py:759-984",
+          "score": 38.86606005682202,
+          "matched_by": "tfidf",
+          "confidence": 2.165175605257143
+        },
+        {
+          "entity_id": "django.middleware.csrf.CsrfViewMiddleware._check_token",
+          "node_type": "Method",
+          "source_location": "django/middleware/csrf.py:349-399",
+          "score": 36.80710064129466,
+          "matched_by": "tfidf",
+          "confidence": 1.8268524663439714
+        },
+        {
+          "entity_id": "django.middleware.csrf.get_token",
+          "node_type": "Function",
+          "source_location": "django/middleware/csrf.py:96-114",
+          "score": 35.18003138223084,
+          "matched_by": "tfidf",
+          "confidence": 1.559496453979537
+        },
+        {
+          "entity_id": "tests.auth_tests.test_remote_user.RemoteUserTest",
+          "node_type": "Class",
+          "source_location": "tests/auth_tests/test_remote_user.py:31-341",
+          "score": 33.92570765406292,
+          "matched_by": "tfidf",
+          "confidence": 1.3533890689933454
+        },
+        {
+          "entity_id": "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
+          "node_type": "Method",
+          "source_location": "tests/auth_tests/test_views.py:864-904",
+          "score": 33.25562553969066,
+          "matched_by": "tfidf",
+          "confidence": 1.2432828267069083
+        },
+        {
+          "entity_id": "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view",
+          "node_type": "Method",
+          "source_location": "tests/csrf_tests/tests.py:453-462",
+          "score": 33.04248008155959,
+          "matched_by": "tfidf",
+          "confidence": 1.208259290110622
+        }
+      ],
+      "file_level_hits": [
+        "django/middleware/csrf.py"
+      ],
+      "file_level_precision": 0.25,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-09",
+      "query": "What does authenticate() return if the given credentials don't match any configured authentication backend?",
+      "retrieved_files": [
+        "django/contrib/auth/backends.py",
+        "django/contrib/auth/middleware.py",
+        "django/db/backends/base/introspection.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.auth.middleware.RemoteUserMiddleware",
+        "django.contrib.auth.backends.RemoteUserBackend",
+        "django.contrib.auth.backends.ModelBackend",
+        "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+        "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/middleware.py:93-278",
+          "score": 69.15897604605672,
+          "matched_by": "tfidf",
+          "confidence": 7.534229055689617
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/backends.py:255-342",
+          "score": 56.41609109156862,
+          "matched_by": "tfidf",
+          "confidence": 5.498926025040523
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.ModelBackend",
+          "node_type": "Class",
+          "source_location": "django/contrib/auth/backends.py:59-247",
+          "score": 37.385005254802195,
+          "matched_by": "tfidf",
+          "confidence": 2.4592668883179996
+        },
+        {
+          "entity_id": "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "node_type": "Class",
+          "source_location": "django/db/backends/base/introspection.py:16-228",
+          "score": 36.83271945879155,
+          "matched_by": "tfidf",
+          "confidence": 2.3710553915949593
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+          "node_type": "Method",
+          "source_location": "django/contrib/auth/middleware.py:134-170",
+          "score": 32.56681647842565,
+          "matched_by": "tfidf",
+          "confidence": 1.6897022054519943
+        },
+        {
+          "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request",
+          "node_type": "Method",
+          "source_location": "django/contrib/auth/middleware.py:176-215",
+          "score": 28.623778136307127,
+          "matched_by": "tfidf",
+          "confidence": 1.0599171986547016
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-10",
+      "query": "If a Django app's migrations aren't being applied in the order I expect, where should I look?",
+      "retrieved_files": [
+        "django/apps/registry.py",
+        "django/core/management/base.py",
+        "django/core/management/commands/migrate.py",
+        "django/core/management/commands/squashmigrations.py",
+        "django/db/migrations/executor.py",
+        "django/db/migrations/loader.py",
+        "django/db/migrations/migration.py",
+        "tests/migrations/test_commands.py",
+        "tests/migrations/test_executor.py",
+        "tests/migrations/test_loader.py"
+      ],
+      "retrieved_symbols": [
+        "django.db.migrations.loader.MigrationLoader",
+        "django.db.migrations.executor.MigrationExecutor",
+        "django.db.migrations.migration.Migration",
+        "django.core.management.commands.migrate.Command",
+        "django.apps.registry.Apps",
+        "django.core.management.base.BaseCommand",
+        "tests.migrations.test_executor.ExecutorTests",
+        "django.core.management.commands.squashmigrations.Command",
+        "tests.migrations.test_loader.LoaderTests",
+        "tests.migrations.test_commands.SquashMigrationsTests"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.migrations.loader.MigrationLoader",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/loader.py:21-433",
+          "score": 54.77101999176931,
+          "matched_by": "tfidf",
+          "confidence": 4.5631424296843575
+        },
+        {
+          "entity_id": "django.db.migrations.executor.MigrationExecutor",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/executor.py:10-413",
+          "score": 53.40126310908349,
+          "matched_by": "tfidf",
+          "confidence": 4.369981957576812
+        },
+        {
+          "entity_id": "django.db.migrations.migration.Migration",
+          "node_type": "Class",
+          "source_location": "django/db/migrations/migration.py:9-222",
+          "score": 48.67209469200956,
+          "matched_by": "tfidf",
+          "confidence": 3.703083754205914
+        },
+        {
+          "entity_id": "django.core.management.commands.migrate.Command",
+          "node_type": "Class",
+          "source_location": "django/core/management/commands/migrate.py:18-511",
+          "score": 39.98507827344923,
+          "matched_by": "tfidf",
+          "confidence": 2.4780574639018176
+        },
+        {
+          "entity_id": "django.apps.registry.Apps",
+          "node_type": "Class",
+          "source_location": "django/apps/registry.py:13-435",
+          "score": 38.44252904017417,
+          "matched_by": "tfidf",
+          "confidence": 2.2605301479855036
+        },
+        {
+          "entity_id": "django.core.management.base.BaseCommand",
+          "node_type": "Class",
+          "source_location": "django/core/management/base.py:193-630",
+          "score": 36.25051662351743,
+          "matched_by": "tfidf",
+          "confidence": 1.951416787345332
+        },
+        {
+          "entity_id": "tests.migrations.test_executor.ExecutorTests",
+          "node_type": "Class",
+          "source_location": "tests/migrations/test_executor.py:23-854",
+          "score": 35.63382841295482,
+          "matched_by": "tfidf",
+          "confidence": 1.86445260603612
+        },
+        {
+          "entity_id": "django.core.management.commands.squashmigrations.Command",
+          "node_type": "Class",
+          "source_location": "django/core/management/commands/squashmigrations.py:15-253",
+          "score": 35.33064819740952,
+          "matched_by": "tfidf",
+          "confidence": 1.8216987171463137
+        },
+        {
+          "entity_id": "tests.migrations.test_loader.LoaderTests",
+          "node_type": "Class",
+          "source_location": "tests/migrations/test_loader.py:67-722",
+          "score": 33.959729250990854,
+          "matched_by": "tfidf",
+          "confidence": 1.6283743730538243
+        },
+        {
+          "entity_id": "tests.migrations.test_commands.SquashMigrationsTests",
+          "node_type": "Class",
+          "source_location": "tests/migrations/test_commands.py:2993-3470",
+          "score": 30.641349774613662,
+          "matched_by": "tfidf",
+          "confidence": 1.1604229034235527
+        }
+      ],
+      "file_level_hits": [
+        "django/db/migrations/executor.py"
+      ],
+      "file_level_precision": 0.1,
+      "file_level_recall": 1.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-11",
+      "query": "Where would I investigate if a custom Manager isn't exposing a custom QuerySet method I defined?",
+      "retrieved_files": [
+        "django/db/models/fields/related_descriptors.py",
+        "django/db/models/options.py"
+      ],
+      "retrieved_symbols": [
+        "django.db.models.options.Options",
+        "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.db.models.options.Options",
+          "node_type": "Class",
+          "source_location": "django/db/models/options.py:90-1052",
+          "score": 28.38708944219913,
+          "matched_by": "tfidf",
+          "confidence": 2.399739126126088
+        },
+        {
+          "entity_id": "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
+          "node_type": "Class",
+          "source_location": "django/db/models/fields/related_descriptors.py:1081-1710",
+          "score": 26.973904120880075,
+          "matched_by": "tfidf",
+          "confidence": 2.021210678607739
+        }
+      ],
+      "file_level_hits": [],
+      "file_level_precision": 0.0,
+      "file_level_recall": 0.0,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-12",
+      "query": "How does registering a model in the admin (admin.site.register) connect it to Django's admin URLs?",
+      "retrieved_files": [
+        "django/contrib/admin/decorators.py",
+        "django/contrib/admin/sites.py",
+        "tests/admin_checks/tests.py"
+      ],
+      "retrieved_symbols": [
+        "django.contrib.admin.sites.AdminSite",
+        "django.contrib.admin.decorators.register",
+        "tests.admin_checks.tests.SystemChecksTestCase"
+      ],
+      "retrieved_entities": [
+        {
+          "entity_id": "django.contrib.admin.sites.AdminSite",
+          "node_type": "Class",
+          "source_location": "django/contrib/admin/sites.py:31-619",
+          "score": 53.42029128035063,
+          "matched_by": "tfidf",
+          "confidence": 6.38695779640339
+        },
+        {
+          "entity_id": "django.contrib.admin.decorators.register",
+          "node_type": "Function",
+          "source_location": "django/contrib/admin/decorators.py:97-128",
+          "score": 40.5283085673813,
+          "matched_by": "tfidf",
+          "confidence": 3.9023865119451573
+        },
+        {
+          "entity_id": "tests.admin_checks.tests.SystemChecksTestCase",
+          "node_type": "Class",
+          "source_location": "tests/admin_checks/tests.py:72-1063",
+          "score": 27.492232438430833,
+          "matched_by": "tfidf",
+          "confidence": 1.3900452272009276
+        }
+      ],
+      "file_level_hits": [
+        "django/contrib/admin/sites.py"
+      ],
+      "file_level_precision": 0.3333333333333333,
+      "file_level_recall": 0.5,
+      "insufficient_evidence": false
+    },
+    {
+      "query_id": "django-13",
+      "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "retrieved_entities": [],
+      "file_level_hits": [],
+      "file_level_precision": null,
+      "file_level_recall": null,
+      "insufficient_evidence": true
+    },
+    {
+      "query_id": "django-14",
+      "query": "Where does Django implement a built-in GraphQL API layer?",
+      "retrieved_files": [],
+      "retrieved_symbols": [],
+      "retrieved_entities": [],
+      "file_level_hits": [],
+      "file_level_precision": null,
+      "file_level_recall": null,
+      "insufficient_evidence": true
+    }
+  ]
+}

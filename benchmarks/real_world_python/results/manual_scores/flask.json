@@ -15,7 +15,8 @@
     "multi_hop": false,
     "failure_category": null,
     "checkpoint_b_change": "unchanged (TRUE)",
-    "notes": "CHECKPOINT B: SessionInterface (rank1) and SecureCookieSessionInterface (rank2, the exact target) both present and well-ranked."
+    "final_hardening_change": "unchanged (already TRUE) -- structural corroboration additionally surfaces SecureCookieSession (rank3), the second ground-truth symbol, strengthening an already-correct answer",
+    "notes": "CHECKPOINT B: SessionInterface (rank1) and SecureCookieSessionInterface (rank2, the exact target) both present and well-ranked. FINAL HARDENING: SecureCookieSession (the produced-instance class, the query's second named symbol) now also present at rank3 -- no category change, already TRUE."
   },
   "flask-03": {
     "final_answer_correct": false,
@@ -45,13 +46,14 @@
     "notes": "CHECKPOINT B: both flask.sansio.blueprints.Blueprint (rank2) and flask.blueprints.Blueprint (rank6) now retrieved and confidence-accepted -- the query-relative z-score plus source/structural weighting together did what a fixed absolute threshold could not."
   },
   "flask-06": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": true,
-    "failure_category": "retrieval_failure",
+    "failure_category": "ranking_failure",
     "checkpoint_b_change": "REGRESSED (was PARTIAL -- dispatch_request present -- now FALSE, no target method survives)",
-    "notes": "CHECKPOINT B: only the Flask class (rank1) and the unrelated Flask.make_response survive; none of the 5 needed methods (wsgi_app, full_dispatch_request, dispatch_request, preprocess_request, finalize_request) clear matched_idf_coverage>=0.5 for this long, generic-sounding query. User-flagged trade-off case, confirmed real."
+    "final_hardening_change": "IMPROVED (was FALSE at Checkpoint B; now PARTIAL) -- structural corroboration recovers 2 of the 5 needed methods",
+    "notes": "CHECKPOINT B: only the Flask class (rank1) and the unrelated Flask.make_response survive; none of the 5 needed methods (wsgi_app, full_dispatch_request, dispatch_request, preprocess_request, finalize_request) clear matched_idf_coverage>=0.5 for this long, generic-sounding query. FINAL HARDENING: Flask.dispatch_request (rank4) and Flask.wsgi_app (rank6) now both clear the bar via a sibling/parent's own coverage (the class-level docstring corroborates), but the other 3 needed methods (full_dispatch_request, preprocess_request, finalize_request) still don't -- per this query's own multi-hop instruction (\"a shallow retrieval that surfaces only one of these methods should not be scored as fully correct\"), 2 of 5 is a real partial credit improvement, not a full recovery."
   },
   "flask-07": {
     "final_answer_correct": false,
@@ -81,13 +83,14 @@
     "notes": "CHECKPOINT B: App class present (rank3) but the specific answering method, App.raise_routing_exception, is not. Right file, wrong entity, same as every prior phase."
   },
   "flask-10": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": "PARTIAL",
     "multi_hop": true,
-    "failure_category": "retrieval_failure",
+    "failure_category": "ranking_failure",
     "checkpoint_b_change": "unchanged (FALSE)",
-    "notes": "CHECKPOINT B: only the Flask class present; neither handle_user_exception nor handle_exception retrieved."
+    "final_hardening_change": "IMPROVED (was FALSE at Checkpoint B; now PARTIAL) -- structural corroboration recovers 1 of the 2 needed methods",
+    "notes": "CHECKPOINT B: only the Flask class present; neither handle_user_exception nor handle_exception retrieved. FINAL HARDENING: Flask.handle_exception (rank7) now clears the bar via structural corroboration, but Flask.handle_user_exception (the first method in the causal chain) still doesn't -- 1 of 2 needed methods is a real but incomplete recovery, PARTIAL not TRUE."
   },
   "flask-11": {
     "final_answer_correct": false,
@@ -105,7 +108,8 @@
     "multi_hop": true,
     "failure_category": null,
     "checkpoint_b_change": "unchanged (PARTIAL)",
-    "notes": "CHECKPOINT B: Blueprint, App, and BlueprintSetupState all retrieved (both files represented), but the specific Blueprint.register/BlueprintSetupState.add_url_rule methods are still missing -- same shape as every prior phase, still the strongest multi-hop result in the Flask set."
+    "final_hardening_change": "unchanged (still PARTIAL, but stronger evidence) -- App.register_blueprint and Blueprint.register (2 of 3 needed method-level symbols) now both directly retrieved, not just their containing classes",
+    "notes": "CHECKPOINT B: Blueprint, App, and BlueprintSetupState all retrieved (both files represented), but the specific Blueprint.register/BlueprintSetupState.add_url_rule methods are still missing -- same shape as every prior phase, still the strongest multi-hop result in the Flask set. FINAL HARDENING: App.register_blueprint (rank6) and Blueprint.register (rank10) now both directly retrieved via structural corroboration -- 2 of 3 needed method-level symbols present (up from 0 of 3), but BlueprintSetupState.add_url_rule (the third hop) is still absent -- category stays PARTIAL, not TRUE, but on materially stronger evidence."
   },
   "flask-13": {
     "final_answer_correct": false,
@@ -125,6 +129,7 @@
     "negative_query_handled_correctly": false,
     "failure_category": "reasoning_failure",
     "checkpoint_b_change": "REGRESSED (was correctly handled after Phase B/D; now leaks one weak entity)",
-    "notes": "CHECKPOINT B: one weak App match (score 12.39) clears both the z-score and matched_idf_coverage bars for this negative query, so insufficient_evidence=False. Real, measured regression: the same fundamental risk Phase B/D fixed for other reasons -- a lone, coincidentally-scoring entity slipping past a relative (not absolute) confidence check when the whole candidate pool for a genuinely unanswerable query is weak but not perfectly uniform."
+    "final_hardening_change": "unchanged (already leaking) -- structural corroboration adds one more leaked entity (App.create_jinja_environment, corroborated by its already-leaking parent class) but the query was already incorrectly handled at Checkpoint B, so this does not change the negative-query grade",
+    "notes": "CHECKPOINT B: one weak App match (score 12.39) clears both the z-score and matched_idf_coverage bars for this negative query, so insufficient_evidence=False. Real, measured regression: the same fundamental risk Phase B/D fixed for other reasons -- a lone, coincidentally-scoring entity slipping past a relative (not absolute) confidence check when the whole candidate pool for a genuinely unanswerable query is weak but not perfectly uniform. FINAL HARDENING: measured directly against the real, updated mechanism -- verified this query was already leaking before this pass, so the negative-query headline grade (6/8) is unaffected by the new mechanism."
   }
 }

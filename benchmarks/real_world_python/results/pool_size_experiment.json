@@ -1,0 +1,420 @@
+{
+  "flask": [
+    {
+      "query_id": "flask-03",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "flask.wrappers.Request": 11
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.3198270797729492
+    },
+    {
+      "query_id": "flask-06",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "Flask.wsgi_app": 16,
+        "Flask.full_dispatch_request": 47,
+        "Flask.dispatch_request": 4,
+        "Flask.preprocess_request": 82,
+        "Flask.finalize_request": 51
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.01821279525756836
+    },
+    {
+      "query_id": "flask-07",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 470
+      },
+      "recoverable_by_widening_to_500": {
+        "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 470
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.01587653160095215
+    },
+    {
+      "query_id": "flask-09",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "App.raise_routing_exception": 217
+      },
+      "recoverable_by_widening_to_500": {
+        "App.raise_routing_exception": 217
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.017059803009033203
+    },
+    {
+      "query_id": "flask-10",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "Flask.handle_user_exception": 23,
+        "Flask.handle_exception": 16
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.01760721206665039
+    },
+    {
+      "query_id": "flask-11",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "flask.testing.FlaskClient": 1,
+        "flask.testing.EnvironBuilder": 59
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.01821160316467285
+    },
+    {
+      "query_id": "flask-12",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "App.register_blueprint": 7,
+        "Blueprint.register": 12,
+        "BlueprintSetupState.add_url_rule": 15
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.0182797908782959
+    }
+  ],
+  "fastapi": [
+    {
+      "query_id": "fastapi-04",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "FastAPI.add_api_route": 19,
+        "APIRouter.add_api_route": 19
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 1.1314332485198975
+    },
+    {
+      "query_id": "fastapi-05",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "get_dependant": 25,
+        "APIRoute": 13
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.09995627403259277
+    },
+    {
+      "query_id": "fastapi-06",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "get_dependant": 47,
+        "solve_dependencies": 100,
+        "get_request_handler": 357
+      },
+      "recoverable_by_widening_to_500": {
+        "get_request_handler": 357
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.09969353675842285
+    },
+    {
+      "query_id": "fastapi-07",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "get_openapi": null,
+        "get_openapi_path": 272
+      },
+      "recoverable_by_widening_to_500": {
+        "get_openapi_path": 272
+      },
+      "absent_even_at_500": [
+        "get_openapi"
+      ],
+      "search_500_elapsed_s": 0.08860445022583008
+    },
+    {
+      "query_id": "fastapi-08",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "RequestValidationError": 1,
+        "request_validation_exception_handler": 9
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.0884857177734375
+    },
+    {
+      "query_id": "fastapi-09",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "HTTPException": 4,
+        "http_exception_handler": 228
+      },
+      "recoverable_by_widening_to_500": {
+        "http_exception_handler": 228
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.11742615699768066
+    },
+    {
+      "query_id": "fastapi-10",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "get_openapi_path": 281,
+        "APIRoute": 301
+      },
+      "recoverable_by_widening_to_500": {
+        "get_openapi_path": 281,
+        "APIRoute": 301
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.10503602027893066
+    },
+    {
+      "query_id": "fastapi-11",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "solve_dependencies": 16
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.09309124946594238
+    },
+    {
+      "query_id": "fastapi-12",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "OAuth2PasswordBearer": 2,
+        "SecurityBase": 47,
+        "get_dependant": 383
+      },
+      "recoverable_by_widening_to_500": {
+        "get_dependant": 383
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.09632396697998047
+    }
+  ],
+  "sqlalchemy": [
+    {
+      "query_id": "sqla-01",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "sqlalchemy.orm.session.Session": 60
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 11.820393562316895
+    },
+    {
+      "query_id": "sqla-02",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "sqlalchemy.engine.base.Engine": 18
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7150876522064209
+    },
+    {
+      "query_id": "sqla-03",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "sqlalchemy.sql.schema.Table": 15
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7319426536560059
+    },
+    {
+      "query_id": "sqla-04",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "create_engine": 341,
+        "Engine": 31,
+        "Connection": 38
+      },
+      "recoverable_by_widening_to_500": {
+        "create_engine": 341
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.813572883605957
+    },
+    {
+      "query_id": "sqla-05",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "Session.add": 72
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7669250965118408
+    },
+    {
+      "query_id": "sqla-06",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "Session.add": null,
+        "Session.commit": null,
+        "Session.flush": null
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [
+        "Session.add",
+        "Session.commit",
+        "Session.flush"
+      ],
+      "search_500_elapsed_s": 0.9340653419494629
+    },
+    {
+      "query_id": "sqla-08",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "Session.flush": 50,
+        "Session.commit": 11
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7271552085876465
+    },
+    {
+      "query_id": "sqla-09",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "create_engine": 49
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7332518100738525
+    },
+    {
+      "query_id": "sqla-10",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "sqlalchemy.log": null
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [
+        "sqlalchemy.log"
+      ],
+      "search_500_elapsed_s": 0.825402021408081
+    },
+    {
+      "query_id": "sqla-11",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "_LazyLoader": 7,
+        "relationship": 295
+      },
+      "recoverable_by_widening_to_500": {
+        "relationship": 295
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.7833356857299805
+    }
+  ],
+  "django": [
+    {
+      "query_id": "django-02",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "django.db.models.base.Model": 36
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 11.760254383087158
+    },
+    {
+      "query_id": "django-04",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "authenticate": 8,
+        "ModelBackend.authenticate": 8
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.8702142238616943
+    },
+    {
+      "query_id": "django-05",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "django.db.models.manager.Manager": 201,
+        "django.db.models.query.QuerySet": 146
+      },
+      "recoverable_by_widening_to_500": {
+        "django.db.models.manager.Manager": 201
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 1.002650499343872
+    },
+    {
+      "query_id": "django-06",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "WSGIHandler": 24,
+        "BaseHandler.get_response": null,
+        "BaseHandler._get_response": 374,
+        "URLResolver.resolve": null
+      },
+      "recoverable_by_widening_to_500": {
+        "BaseHandler._get_response": 374
+      },
+      "absent_even_at_500": [
+        "BaseHandler.get_response",
+        "URLResolver.resolve"
+      ],
+      "search_500_elapsed_s": 0.8930764198303223
+    },
+    {
+      "query_id": "django-07",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "BaseHandler.load_middleware": 145,
+        "BaseHandler.get_response": 277
+      },
+      "recoverable_by_widening_to_500": {
+        "BaseHandler.get_response": 277
+      },
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.8157200813293457
+    },
+    {
+      "query_id": "django-09",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "authenticate": 3
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.8585567474365234
+    },
+    {
+      "query_id": "django-11",
+      "current_grade": false,
+      "ranks_in_top_500": {
+        "Manager": 32,
+        "BaseManager.from_queryset": null
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [
+        "BaseManager.from_queryset"
+      ],
+      "search_500_elapsed_s": 0.8583633899688721
+    },
+    {
+      "query_id": "django-12",
+      "current_grade": "PARTIAL",
+      "ranks_in_top_500": {
+        "ModelAdmin": 24,
+        "AdminSite.get_urls": 27
+      },
+      "recoverable_by_widening_to_500": {},
+      "absent_even_at_500": [],
+      "search_500_elapsed_s": 0.8884761333465576
+    }
+  ]
+}
