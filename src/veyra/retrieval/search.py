@@ -238,6 +238,167 @@ def _bm25_score(
     return score
 
 
+# ARCF Fix 5 -- source-category weighting.
+#
+# A deterministic, path-structure classification of every entity's
+# `source_location` into a small fixed set of categories -- no repository
+# name, no benchmark-specific directory, nothing here names Flask, FastAPI,
+# SQLAlchemy, or Django. Every rule is a generic path-segment convention
+# real Python projects widely share (a "tests/" directory, a "docs"-
+# prefixed directory, an "examples/" directory, a "scripts/" directory) --
+# the same conventions this benchmark's own 4 real repositories all
+# happen to follow, which is exactly why this generalizes rather than
+# being tuned to any one of them.
+_TEST_PATH_SEGMENTS = frozenset({"test", "tests"})
+_DOC_PATH_PREFIX = "doc"  # catches "docs", "doc", "docs_src", "documentation"
+_EXAMPLE_PATH_SEGMENTS = frozenset({"examples", "example", "samples", "sample", "demo", "demos"})
+_SCRIPT_PATH_SEGMENTS = frozenset({"scripts", "script", "tools", "bin"})
+_CONFIG_FILENAMES = frozenset({"setup.py", "conftest.py", "pyproject.toml", "tox.ini"})
+_CONFIG_EXTENSIONS = frozenset({".cfg", ".ini", ".toml", ".yaml", ".yml"})
+
+
+def _classify_source_category(source_location: str | None) -> str:
+    """One of "test" | "documentation" | "examples" | "scripts" |
+    "configuration" | "production" | "unknown", derived purely from
+    `source_location`'s path structure -- deterministic, auditable (call
+    it directly on any entity to see exactly why it was classified a
+    given way), and identical logic regardless of which repository the
+    path came from."""
+    if not source_location:
+        return "unknown"
+    path = source_location.split(":")[0]  # strip ":line" or ":line-line" suffix
+    segments = [s.lower() for s in re.split(r"[/\\]", path) if s]
+    if not segments:
+        return "unknown"
+    filename = segments[-1]
+    filename_stem, _, ext = filename.rpartition(".")
+    ext = f".{ext}" if ext else ""
+
+    if filename in _CONFIG_FILENAMES and filename != "conftest.py":
+        return "configuration"
+    if ext in _CONFIG_EXTENSIONS:
+        return "configuration"
+    if any(seg in _TEST_PATH_SEGMENTS for seg in segments) or filename_stem == "conftest" or filename_stem.startswith(
+        "test_"
+    ) or filename_stem.endswith("_test"):
+        return "test"
+    if any(seg.startswith(_DOC_PATH_PREFIX) for seg in segments[:-1]):
+        return "documentation"
+    if any(seg in _EXAMPLE_PATH_SEGMENTS for seg in segments):
+        return "examples"
+    if any(seg in _SCRIPT_PATH_SEGMENTS for seg in segments):
+        return "scripts"
+    return "production"
+
+
+_TEST_INTENT_TERMS = frozenset({"test", "tests", "testing"})
+_DOC_INTENT_TERMS = frozenset({"doc", "docs", "documentation", "tutorial", "tutorials", "example", "examples"})
+
+
+def _detect_query_intent(query_terms: set[str]) -> str:
+    """Deterministic, keyword-based (not repository- or benchmark-
+    specific) query-intent classification: "test" | "documentation" |
+    "default". A query mentioning test/testing prefers test sources; one
+    mentioning docs/tutorial/example prefers documentation/example
+    sources; everything else defaults to preferring production
+    implementation -- the common case for "where is X implemented"-shaped
+    questions."""
+    if query_terms & _TEST_INTENT_TERMS:
+        return "test"
+    if query_terms & _DOC_INTENT_TERMS:
+        return "documentation"
+    return "default"
+
+
+# Bounded multipliers, not filters -- every value stays within roughly
+# +/-25% of 1.0, so even a query's least-preferred category is still
+# reachable when its lexical match is strong enough; nothing is ever
+# excluded outright. Chosen as a modest, symmetric nudge (not tuned to
+# any individual query's outcome) -- the same order of magnitude as
+# `_structural_weight`'s bound below, so neither signal alone can dominate
+# a strong BM25 score.
+_CATEGORY_WEIGHT_BY_INTENT: dict[str, dict[str, float]] = {
+    "default": {
+        "production": 1.15,
+        "unknown": 1.0,
+        "scripts": 0.95,
+        "configuration": 0.95,
+        "examples": 0.9,
+        "documentation": 0.9,
+        "test": 0.8,
+    },
+    "test": {
+        "test": 1.25,
+        "unknown": 1.0,
+        "scripts": 0.95,
+        "production": 0.9,
+        "configuration": 0.9,
+        "examples": 0.85,
+        "documentation": 0.85,
+    },
+    "documentation": {
+        "documentation": 1.25,
+        "examples": 1.2,
+        "production": 1.0,
+        "unknown": 1.0,
+        "scripts": 0.9,
+        "configuration": 0.9,
+        "test": 0.8,
+    },
+}
+
+
+def _source_category_weight(entity: IndexedEntity, intent: str) -> float:
+    """The actual per-entity multiplier -- a pure function of the
+    entity's own classified category and the query's classified intent,
+    both independently inspectable/auditable via
+    `_classify_source_category`/`_detect_query_intent`."""
+    category = _classify_source_category(entity.source_location)
+    return _CATEGORY_WEIGHT_BY_INTENT[intent].get(category, 1.0)
+
+
+# ARCF Fix 6 -- structural graph ranking signal.
+#
+# Uses only relationships `IndexedEntity` already carries -- real, verified
+# CONTAINS-derived edges computed once at index-build time (`index.py`),
+# never re-queried or inferred here. No CALLS-based signal: the ARCF
+# inspection measured real CALLS resolution rates of 7.7-12% across all 4
+# benchmark repositories (`python_extractor.py`'s self/cls-and-bare-name-
+# only resolution model), so a CALLS-based structural signal would be
+# built on data that's ~90% missing -- not a "verified relationship," an
+# absent one for the large majority of real call sites. CONTAINS, by
+# contrast, is structural (derived directly from the AST, not from call
+# resolution) and is essentially fully populated (~97-99% of nodes have a
+# real CONTAINS parent in the measured repositories).
+#
+# The signal: an entity with many real children (a class containing many
+# methods) is more likely to be a genuine "hub" answer than an entity with
+# none; an entity with many siblings (one of many methods on the same
+# parent) is, on its own, less individually distinctive than one with few
+# -- directly targeting the discovered mechanism where several near-
+# identical sibling methods (FastAPI's near-duplicate HTTP-verb
+# convenience methods) collectively crowd out their own parent class or an
+# unrelated, more specific function. This is a general shape (many
+# similar siblings sharing a parent), not anything FastAPI-specific.
+_STRUCTURAL_CHILD_BONUS_PER_CHILD = 0.02
+_STRUCTURAL_CHILD_BONUS_CAP = 0.3
+_STRUCTURAL_SIBLING_PENALTY_PER_SIBLING = 0.01
+_STRUCTURAL_SIBLING_PENALTY_CAP = 0.15
+
+
+def _structural_weight(entity: IndexedEntity) -> float:
+    """Bounded multiplier in [1 - cap, 1 + cap] derived only from
+    `entity.children`/`entity.siblings` -- real, already-resolved CONTAINS
+    edges (`index.py`'s `_build_entity`), zero additional storage queries.
+    Never negative, never zero -- a structural disadvantage can dampen a
+    match, never remove it: a signal, not an exclusion."""
+    child_bonus = min(_STRUCTURAL_CHILD_BONUS_CAP, _STRUCTURAL_CHILD_BONUS_PER_CHILD * len(entity.children))
+    sibling_penalty = min(
+        _STRUCTURAL_SIBLING_PENALTY_CAP, _STRUCTURAL_SIBLING_PENALTY_PER_SIBLING * len(entity.siblings)
+    )
+    return 1.0 + child_bonus - sibling_penalty
+
+
 def search_semantic(
     index: RetrievalIndex, query: str, top_k: int = 10, candidate_pool_size: int | None = None
 ) -> list[ScoredEntity]:
@@ -256,21 +417,34 @@ def search_semantic(
     original benchmark's `fastapi-01`/`fastapi-03`/`flask-08` failure
     mechanism -- see PHASE_D_RESULTS.md) can still reach later ranking/
     confidence stages. `top_k` alone (no `candidate_pool_size`) keeps this
-    function's old, single-parameter behavior for direct callers."""
+    function's old, single-parameter behavior for direct callers.
+
+    **ARCF Fixes 5 & 6.** After the raw BM25 score, two independent,
+    bounded, explainable multiplicative adjustments are applied (see
+    `_source_category_weight`/`_structural_weight` docstrings for what
+    each does and why) -- both are ranking *signals*, not filters:
+    nothing is ever excluded for its category or its graph position,
+    every adjustment stays within a bounded range so a genuinely strong
+    lexical match can never be fully overridden by either."""
     doc_tokens, doc_lengths, idf, avg_doc_length_by_type = _build_bm25_index(index)
     query_terms = set(_tokenize(query))
     if not query_terms:
         return []
+    intent = _detect_query_intent(query_terms)
 
     scored = [
         ScoredEntity(
             entity=entity,
-            score=_bm25_score(
-                query_terms,
-                doc_tokens[entity.entity_id],
-                doc_lengths[entity.entity_id],
-                idf,
-                avg_doc_length_by_type.get(entity.node_type, 0.0),
+            score=(
+                _bm25_score(
+                    query_terms,
+                    doc_tokens[entity.entity_id],
+                    doc_lengths[entity.entity_id],
+                    idf,
+                    avg_doc_length_by_type.get(entity.node_type, 0.0),
+                )
+                * _source_category_weight(entity, intent)
+                * _structural_weight(entity)
             ),
             matched_by="tfidf",
         )

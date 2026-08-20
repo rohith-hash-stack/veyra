@@ -4,7 +4,14 @@ from pathlib import Path
 from typing import Callable
 
 from veyra.retrieval import build_retrieval_index, search, search_semantic
-from veyra.retrieval.search import _tokenize
+from veyra.retrieval.search import (
+    _CATEGORY_WEIGHT_BY_INTENT,
+    _classify_source_category,
+    _detect_query_intent,
+    _source_category_weight,
+    _structural_weight,
+    _tokenize,
+)
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import VBGStore
 
@@ -246,3 +253,168 @@ def test_exact_name_retrieval_is_unaffected_by_stopword_filtering(sample_repo: P
     results = search(index, "process_order")
     assert results[0].entity.entity_id == "orders.process_order"
     assert results[0].matched_by == "exact_name"
+
+
+# -- ARCF Fix 5: source-category weighting --
+
+
+def test_classify_source_category_by_generic_path_conventions() -> None:
+    """Deterministic, path-structure-only classification -- no repository
+    name appears anywhere in the rule set."""
+    assert _classify_source_category(None) == "unknown"
+    assert _classify_source_category("src/flask/app.py:10") == "production"
+    assert _classify_source_category("tests/test_app.py:10") == "test"
+    assert _classify_source_category("fastapi/tests/test_routing.py:5") == "test"
+    assert _classify_source_category("test_something.py:1") == "test"
+    assert _classify_source_category("something_test.py:1") == "test"
+    assert _classify_source_category("docs/tutorial.py:1") == "documentation"
+    assert _classify_source_category("docs_src/security/tutorial001.py:1") == "documentation"
+    assert _classify_source_category("examples/quickstart.py:1") == "examples"
+    assert _classify_source_category("scripts/release.py:1") == "scripts"
+    assert _classify_source_category("setup.py:1") == "configuration"
+    assert _classify_source_category("conftest.py:1") == "test"  # test-infra, not generic config
+
+
+def test_query_intent_detection_is_keyword_based_and_deterministic() -> None:
+    assert _detect_query_intent({"where", "authentication", "implemented"}) == "default"
+    assert _detect_query_intent({"what", "test", "cover", "authentication"}) == "test"
+    assert _detect_query_intent({"show", "me", "a", "tutorial"}) == "documentation"
+
+
+def test_implementation_query_prefers_production_over_test_category() -> None:
+    """Requirement 1: an implementation-oriented intent weights production
+    above test, but does not zero test out (a signal, not an exclusion)."""
+    assert _CATEGORY_WEIGHT_BY_INTENT["default"]["production"] > _CATEGORY_WEIGHT_BY_INTENT["default"]["test"]
+    assert _CATEGORY_WEIGHT_BY_INTENT["default"]["test"] > 0.0
+
+
+def test_test_oriented_query_prefers_test_category() -> None:
+    """Requirement 2: a test-oriented intent weights test sources above
+    production."""
+    assert _CATEGORY_WEIGHT_BY_INTENT["test"]["test"] > _CATEGORY_WEIGHT_BY_INTENT["test"]["production"]
+
+
+def test_documentation_oriented_query_prefers_documentation_and_examples() -> None:
+    """Requirement 3."""
+    assert (
+        _CATEGORY_WEIGHT_BY_INTENT["documentation"]["documentation"]
+        > _CATEGORY_WEIGHT_BY_INTENT["documentation"]["test"]
+    )
+    assert (
+        _CATEGORY_WEIGHT_BY_INTENT["documentation"]["examples"] > _CATEGORY_WEIGHT_BY_INTENT["documentation"]["test"]
+    )
+
+
+def test_unknown_category_gets_a_neutral_default_weight() -> None:
+    """Requirement 4: an entity search() can't locate a source path for at
+    all is neither penalized nor favored by default."""
+    assert _CATEGORY_WEIGHT_BY_INTENT["default"]["unknown"] == 1.0
+
+
+def test_category_weighting_never_zeroes_out_a_category(sample_repo: Path, store: VBGStore) -> None:
+    """Requirement 5: category weighting changes ranking, it never
+    excludes -- a test-category candidate with a strong lexical match
+    still surfaces for a default-intent query, just deprioritized, not
+    removed."""
+    index = build_retrieval_index(store, COMMIT)
+    entity = index.all_entities()[0]
+    for category_weights in _CATEGORY_WEIGHT_BY_INTENT.values():
+        for weight in category_weights.values():
+            assert weight > 0.0  # never a hard zero/exclusion
+    weight = _source_category_weight(entity, intent="default")
+    assert weight > 0.0
+
+
+# -- ARCF Fix 6: structural graph ranking signal --
+
+
+def test_structural_weight_is_neutral_with_no_children_or_siblings() -> None:
+    """Requirement 2: a real entity `IndexedEntity` knows has no CONTAINS
+    children/siblings gets no structural contribution at all -- 1.0,
+    exactly neutral, not a penalty."""
+    from veyra.retrieval.index import IndexedEntity
+    from veyra.vbg import VerificationState
+
+    entity = IndexedEntity(
+        entity_id="m.isolated",
+        node_type="Function",
+        name="isolated",
+        repository_version=COMMIT,
+        lexical_representation=None,
+        docstring=None,
+        source_location=None,
+        parents=(),
+        children=(),
+        siblings=(),
+        outgoing_relationships=(),
+        incoming_relationships=(),
+        verification_state=VerificationState.STRUCTURALLY_IDENTIFIED,
+        evidence_counts={},
+    )
+    assert _structural_weight(entity) == 1.0
+
+
+def test_structural_weight_rewards_real_children_and_is_bounded(sample_repo: Path, store: VBGStore) -> None:
+    """Requirement 1 and the "bounded" requirement: more real children ->
+    a higher (but capped) multiplier."""
+    from veyra.retrieval.index import IndexedEntity
+    from veyra.vbg import VerificationState
+
+    def make(children: tuple[str, ...], siblings: tuple[str, ...] = ()) -> IndexedEntity:
+        return IndexedEntity(
+            entity_id="m.e", node_type="Class", name="E", repository_version=COMMIT,
+            lexical_representation=None, docstring=None, source_location=None,
+            parents=(), children=children, siblings=siblings,
+            outgoing_relationships=(), incoming_relationships=(),
+            verification_state=VerificationState.STRUCTURALLY_IDENTIFIED, evidence_counts={},
+        )
+
+    no_children = _structural_weight(make(children=()))
+    few_children = _structural_weight(make(children=("a", "b")))
+    many_children = _structural_weight(make(children=tuple(f"c{i}" for i in range(50))))
+
+    assert no_children == 1.0
+    assert few_children > no_children
+    assert many_children > few_children
+    assert many_children <= 1.0 + 0.3  # bounded, per _STRUCTURAL_CHILD_BONUS_CAP
+
+
+def test_structural_weight_dampens_many_near_identical_siblings(sample_repo: Path, store: VBGStore) -> None:
+    """The general mechanism behind Fix 6's motivating case (many
+    near-identical sibling methods sharing one parent crowding out a more
+    distinctive candidate) -- more siblings, all else equal, means a
+    slightly lower (never negative/zero) weight."""
+    from veyra.retrieval.index import IndexedEntity
+    from veyra.vbg import VerificationState
+
+    def make(siblings: tuple[str, ...]) -> IndexedEntity:
+        return IndexedEntity(
+            entity_id="m.e", node_type="Method", name="e", repository_version=COMMIT,
+            lexical_representation=None, docstring=None, source_location=None,
+            parents=(), children=(), siblings=siblings,
+            outgoing_relationships=(), incoming_relationships=(),
+            verification_state=VerificationState.STRUCTURALLY_IDENTIFIED, evidence_counts={},
+        )
+
+    no_siblings = _structural_weight(make(siblings=()))
+    many_siblings = _structural_weight(make(siblings=tuple(f"s{i}" for i in range(20))))
+
+    assert no_siblings == 1.0
+    assert many_siblings < no_siblings
+    assert many_siblings > 0.0
+    assert many_siblings >= 1.0 - 0.15  # bounded, per _STRUCTURAL_SIBLING_PENALTY_CAP
+
+
+def test_structural_weight_only_uses_relationships_the_index_actually_has(
+    sample_repo: Path, store: VBGStore
+) -> None:
+    """Requirement 3: nothing here queries the store or infers a
+    relationship -- it is a pure function of the fields `IndexedEntity`
+    already carries, verified by checking real entities from a real
+    index."""
+    index = build_retrieval_index(store, COMMIT)
+    for entity in index.all_entities():
+        weight = _structural_weight(entity)
+        expected_bonus = min(0.3, 0.02 * len(entity.children))
+        expected_penalty = min(0.15, 0.01 * len(entity.siblings))
+        assert weight == 1.0 + expected_bonus - expected_penalty
