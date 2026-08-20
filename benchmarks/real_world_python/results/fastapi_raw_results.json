@@ -8,7 +8,7 @@
       "query_id": "fastapi-01",
       "query": "Where is the FastAPI application class defined, and what does it extend?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 5.215623617172241,
+      "elapsed_seconds": 1.3435194492340088,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.security.oauth2.OAuth2.make_not_authenticated_error",
@@ -55,7 +55,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 15.920255495572071,
+          "score": 15.920255495572068,
           "matched_by": "tfidf"
         },
         {
@@ -67,7 +67,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 15.239762876378379,
+          "score": 15.239762876378377,
           "matched_by": "tfidf"
         },
         {
@@ -247,7 +247,7 @@
       "query_id": "fastapi-02",
       "query": "Which class represents a single registered API route (path + handler + metadata)?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 5.398397922515869,
+      "elapsed_seconds": 0.25608301162719727,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.routing.APIRouter.include_router",
@@ -258,7 +258,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 24.0537425495394,
+          "score": 24.053742549539407,
           "matched_by": "tfidf"
         },
         {
@@ -579,7 +579,7 @@
       "query_id": "fastapi-03",
       "query": "Where is the Depends() function used for dependency injection defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 3.7496237754821777,
+      "elapsed_seconds": 0.2690441608428955,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.param_functions.Depends",
@@ -698,7 +698,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 14.261453212143328,
+          "score": 14.261453212143332,
           "matched_by": "tfidf"
         }
       ],
@@ -784,7 +784,7 @@
       "query_id": "fastapi-04",
       "query": "What does FastAPI.add_api_route actually call to register the route?",
       "category": "B_relationship",
-      "elapsed_seconds": 5.522672891616821,
+      "elapsed_seconds": 0.2942469120025635,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI.middleware",
@@ -1008,7 +1008,7 @@
       "query_id": "fastapi-05",
       "query": "What calls get_dependant() to build a route's dependency graph?",
       "category": "B_relationship",
-      "elapsed_seconds": 3.5049514770507812,
+      "elapsed_seconds": 0.2776448726654053,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.routing._EffectiveRouteContext.from_frontend_route_group",
@@ -1067,7 +1067,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 26.806105968479866,
+          "score": 26.806105968479862,
           "matched_by": "tfidf"
         },
         {
@@ -1079,7 +1079,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 26.060792543483867,
+          "score": 26.060792543483863,
           "matched_by": "tfidf"
         },
         {
@@ -1288,7 +1288,7 @@
       "query_id": "fastapi-06",
       "query": "How does FastAPI resolve a path operation function's dependencies (Depends(...) parameters) at request time?",
       "category": "C_architecture",
-      "elapsed_seconds": 4.658027172088623,
+      "elapsed_seconds": 0.29673337936401367,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -1311,7 +1311,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 38.38435916468897,
+          "score": 38.38435916468896,
           "matched_by": "tfidf"
         },
         {
@@ -1359,7 +1359,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 30.541773635840464,
+          "score": 30.54177363584047,
           "matched_by": "tfidf"
         },
         {
@@ -1371,7 +1371,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 30.500309674187367,
+          "score": 30.50030967418738,
           "matched_by": "tfidf"
         },
         {
@@ -1507,7 +1507,7 @@
       "query_id": "fastapi-07",
       "query": "How does FastAPI generate its OpenAPI schema?",
       "category": "C_architecture",
-      "elapsed_seconds": 3.8040103912353516,
+      "elapsed_seconds": 0.24742746353149414,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -1602,7 +1602,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 23.46370388873848,
+          "score": 23.463703888738483,
           "matched_by": "tfidf"
         },
         {
@@ -1614,7 +1614,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 23.433928428056515,
+          "score": 23.433928428056518,
           "matched_by": "tfidf"
         },
         {
@@ -1626,7 +1626,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 23.38740056151772,
+          "score": 23.387400561517715,
           "matched_by": "tfidf"
         }
       ],
@@ -1728,7 +1728,7 @@
       "query_id": "fastapi-08",
       "query": "What happens when a request body fails Pydantic validation?",
       "category": "D_behavioral",
-      "elapsed_seconds": 1.0847978591918945,
+      "elapsed_seconds": 0.26894497871398926,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -1749,7 +1749,7 @@
       "query_id": "fastapi-09",
       "query": "What response does FastAPI send back when a path operation raises HTTPException?",
       "category": "D_behavioral",
-      "elapsed_seconds": 4.349884986877441,
+      "elapsed_seconds": 0.2887425422668457,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -1832,7 +1832,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 20.670866583413975,
+          "score": 20.670866583413982,
           "matched_by": "tfidf"
         },
         {
@@ -1844,7 +1844,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 20.659088661257787,
+          "score": 20.659088661257794,
           "matched_by": "tfidf"
         },
         {
@@ -1967,7 +1967,7 @@
       "query_id": "fastapi-10",
       "query": "Where would I look to debug why a FastAPI endpoint's OpenAPI docs are showing the wrong response schema?",
       "category": "E_debugging",
-      "elapsed_seconds": 3.9211604595184326,
+      "elapsed_seconds": 0.2955782413482666,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.applications.FastAPI",
@@ -1978,7 +1978,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 33.09264557540773,
+          "score": 33.09264557540772,
           "matched_by": "tfidf"
         },
         {
@@ -2002,7 +2002,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 26.398313425237134,
+          "score": 26.39831342523713,
           "matched_by": "tfidf"
         },
         {
@@ -2014,7 +2014,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 24.68385194340969,
+          "score": 24.683851943409692,
           "matched_by": "tfidf"
         },
         {
@@ -2026,7 +2026,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 24.68385194340969,
+          "score": 24.683851943409692,
           "matched_by": "tfidf"
         },
         {
@@ -2050,7 +2050,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 24.620345566151702,
+          "score": 24.6203455661517,
           "matched_by": "tfidf"
         },
         {
@@ -2062,7 +2062,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 24.566937144003592,
+          "score": 24.566937144003596,
           "matched_by": "tfidf"
         },
         {
@@ -2074,7 +2074,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 24.566937144003592,
+          "score": 24.566937144003596,
           "matched_by": "tfidf"
         },
         {
@@ -2086,7 +2086,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 24.564883427677707,
+          "score": 24.56488342767771,
           "matched_by": "tfidf"
         }
       ],
@@ -2185,7 +2185,7 @@
       "query_id": "fastapi-11",
       "query": "If a dependency function isn't being re-run per request when it should be, where should I look?",
       "category": "E_debugging",
-      "elapsed_seconds": 3.844590187072754,
+      "elapsed_seconds": 0.29022789001464844,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.routing.run_endpoint_function",
@@ -2329,7 +2329,7 @@
       "query_id": "fastapi-12",
       "query": "How does a security scheme like OAuth2PasswordBearer connect to a path operation's dependencies?",
       "category": "F_cross_file",
-      "elapsed_seconds": 3.6235899925231934,
+      "elapsed_seconds": 0.26090216636657715,
       "retrieved_entities": [
         {
           "entity_id": "fastapi.security.oauth2.OAuth2PasswordBearer.__init__",
@@ -2340,7 +2340,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 45.1029492259064,
+          "score": 45.10294922590639,
           "matched_by": "tfidf"
         },
         {
@@ -2376,7 +2376,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 31.477786201549968,
+          "score": 31.47778620154996,
           "matched_by": "tfidf"
         },
         {
@@ -2388,7 +2388,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 30.944569726470117,
+          "score": 30.94456972647012,
           "matched_by": "tfidf"
         },
         {
@@ -2485,7 +2485,7 @@
       "query_id": "fastapi-13",
       "query": "Where does FastAPI implement its own SQL query builder or ORM?",
       "category": "G_negative",
-      "elapsed_seconds": 3.2506673336029053,
+      "elapsed_seconds": 0.27008724212646484,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -2503,7 +2503,7 @@
       "query_id": "fastapi-14",
       "query": "Where does FastAPI implement built-in rate limiting for endpoints?",
       "category": "G_negative",
-      "elapsed_seconds": 3.2179861068725586,
+      "elapsed_seconds": 0.27469682693481445,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],

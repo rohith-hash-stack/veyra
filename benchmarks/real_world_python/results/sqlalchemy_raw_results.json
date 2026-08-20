@@ -8,7 +8,7 @@
       "query_id": "sqla-01",
       "query": "Where is the Session class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 18.292018175125122,
+      "elapsed_seconds": 14.266582727432251,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
@@ -346,7 +346,7 @@
       "query_id": "sqla-02",
       "query": "Where is the Engine class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 7.331302642822266,
+      "elapsed_seconds": 2.398589611053467,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
@@ -658,7 +658,7 @@
       "query_id": "sqla-03",
       "query": "Where is the Table class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 7.543453693389893,
+      "elapsed_seconds": 2.2815744876861572,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
@@ -927,7 +927,7 @@
       "query_id": "sqla-04",
       "query": "What is create_engine()'s return type, and what class actually executes queries against it?",
       "category": "B_relationship",
-      "elapsed_seconds": 9.590476751327515,
+      "elapsed_seconds": 2.41156005859375,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.dialects.postgresql.named_types.NamedType",
@@ -962,7 +962,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 39.631985565058635,
+          "score": 39.63198556505863,
           "matched_by": "tfidf"
         },
         {
@@ -986,7 +986,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 33.82810665048193,
+          "score": 33.828106650481914,
           "matched_by": "tfidf"
         },
         {
@@ -1284,7 +1284,7 @@
       "query_id": "sqla-05",
       "query": "What does Session.add() do to an object before it's actually written to the database?",
       "category": "B_relationship",
-      "elapsed_seconds": 9.378752708435059,
+      "elapsed_seconds": 2.4487452507019043,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
@@ -1295,7 +1295,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 39.42585727235083,
+          "score": 39.42585727235084,
           "matched_by": "tfidf"
         },
         {
@@ -1307,7 +1307,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 37.42784642529558,
+          "score": 37.427846425295584,
           "matched_by": "tfidf"
         },
         {
@@ -1355,7 +1355,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 30.947589049658422,
+          "score": 30.94758904965841,
           "matched_by": "tfidf"
         },
         {
@@ -1391,7 +1391,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 26.59339795332469,
+          "score": 26.593397953324693,
           "matched_by": "tfidf"
         },
         {
@@ -1747,7 +1747,7 @@
       "query_id": "sqla-06",
       "query": "How does calling session.add(obj) followed by session.commit() turn into an actual SQL INSERT statement?",
       "category": "C_architecture",
-      "elapsed_seconds": 9.69672179222107,
+      "elapsed_seconds": 2.7203214168548584,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.ext.baked.Result",
@@ -2304,7 +2304,7 @@
       "query_id": "sqla-07",
       "query": "How does relationship() implement lazy loading of related objects?",
       "category": "C_architecture",
-      "elapsed_seconds": 6.9160237312316895,
+      "elapsed_seconds": 2.307002067565918,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
@@ -2605,7 +2605,7 @@
       "query_id": "sqla-08",
       "query": "Does calling Session.flush() commit the current transaction?",
       "category": "D_behavioral",
-      "elapsed_seconds": 8.477309465408325,
+      "elapsed_seconds": 2.2829720973968506,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
@@ -2664,7 +2664,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 34.700507818954726,
+          "score": 34.70050781895473,
           "matched_by": "tfidf"
         },
         {
@@ -2688,7 +2688,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 33.630229373573755,
+          "score": 33.63022937357377,
           "matched_by": "tfidf"
         },
         {
@@ -2712,7 +2712,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 33.17765425787217,
+          "score": 33.17765425787218,
           "matched_by": "tfidf"
         },
         {
@@ -3157,7 +3157,7 @@
       "query_id": "sqla-09",
       "query": "What happens when create_engine() is given a malformed database URL string?",
       "category": "D_behavioral",
-      "elapsed_seconds": 7.660845041275024,
+      "elapsed_seconds": 2.5471110343933105,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.engine.url.URL",
@@ -3264,7 +3264,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 28.04649250968805,
+          "score": 28.046492509688054,
           "matched_by": "tfidf"
         },
         {
@@ -3643,7 +3643,7 @@
       "query_id": "sqla-10",
       "query": "If SQL statements aren't showing up in my logs despite passing echo=True to create_engine, where should I look?",
       "category": "E_debugging",
-      "elapsed_seconds": 8.698546648025513,
+      "elapsed_seconds": 2.4821040630340576,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.engine.interfaces.BindTyping",
@@ -3690,7 +3690,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 36.71047220056257,
+          "score": 36.71047220056258,
           "matched_by": "tfidf"
         },
         {
@@ -3702,7 +3702,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 32.724599750809496,
+          "score": 32.7245997508095,
           "matched_by": "tfidf"
         },
         {
@@ -3714,7 +3714,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 30.42186122667913,
+          "score": 30.421861226679123,
           "matched_by": "tfidf"
         }
       ],
@@ -4087,7 +4087,7 @@
       "query_id": "sqla-11",
       "query": "Where would I investigate if a relationship() isn't lazy-loading the way I expect?",
       "category": "E_debugging",
-      "elapsed_seconds": 7.664493560791016,
+      "elapsed_seconds": 2.5450074672698975,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
@@ -4122,7 +4122,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 29.088896153727365,
+          "score": 29.08889615372736,
           "matched_by": "tfidf"
         },
         {
@@ -4158,7 +4158,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 25.297568834995435,
+          "score": 25.297568834995438,
           "matched_by": "tfidf"
         },
         {
@@ -4206,7 +4206,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 21.615411650153128,
+          "score": 21.615411650153124,
           "matched_by": "tfidf"
         }
       ],
@@ -4512,7 +4512,7 @@
       "query_id": "sqla-12",
       "query": "How does declaring a class with DeclarativeBase and mapped_column attributes end up creating a Table and a Mapper for it?",
       "category": "F_cross_file",
-      "elapsed_seconds": 7.563823223114014,
+      "elapsed_seconds": 2.415825128555298,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig",
@@ -4595,7 +4595,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 39.367566395402,
+          "score": 39.36756639540201,
           "matched_by": "tfidf"
         },
         {
@@ -4607,7 +4607,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 38.94525591080944,
+          "score": 38.945255910809436,
           "matched_by": "tfidf"
         },
         {
@@ -4992,7 +4992,7 @@
       "query_id": "sqla-13",
       "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
       "category": "G_negative",
-      "elapsed_seconds": 7.734574556350708,
+      "elapsed_seconds": 2.2802202701568604,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -5010,7 +5010,7 @@
       "query_id": "sqla-14",
       "query": "Where does SQLAlchemy implement password hashing for user authentication?",
       "category": "G_negative",
-      "elapsed_seconds": 7.2919230461120605,
+      "elapsed_seconds": 2.4687376022338867,
       "retrieved_entities": [
         {
           "entity_id": "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",

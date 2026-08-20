@@ -8,7 +8,7 @@
       "query_id": "django-01",
       "query": "Where is Django's QuerySet class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 17.754143714904785,
+      "elapsed_seconds": 14.741994619369507,
       "retrieved_entities": [
         {
           "entity_id": "django.db.backends.sqlite3.operations.DatabaseOperations",
@@ -79,7 +79,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 24.173107193067477,
+          "score": 24.17310719306748,
           "matched_by": "tfidf"
         },
         {
@@ -127,7 +127,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 22.471109829881176,
+          "score": 22.471109829881172,
           "matched_by": "tfidf"
         }
       ],
@@ -464,7 +464,7 @@
       "query_id": "django-02",
       "query": "Where is Django's base Model class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 4.743020534515381,
+      "elapsed_seconds": 2.7178590297698975,
       "retrieved_entities": [
         {
           "entity_id": "django.contrib.contenttypes.models.ContentType",
@@ -475,7 +475,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 28.74607491636107,
+          "score": 28.746074916361067,
           "matched_by": "tfidf"
         },
         {
@@ -535,7 +535,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 24.950261762947285,
+          "score": 24.95026176294728,
           "matched_by": "tfidf"
         },
         {
@@ -559,7 +559,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 24.594750204438526,
+          "score": 24.59475020443853,
           "matched_by": "tfidf"
         },
         {
@@ -583,7 +583,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 24.540488861652754,
+          "score": 24.54048886165275,
           "matched_by": "tfidf"
         }
       ],
@@ -850,7 +850,7 @@
       "query_id": "django-03",
       "query": "Where is the CSRF protection middleware implemented?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 4.3931615352630615,
+      "elapsed_seconds": 2.4511282444000244,
       "retrieved_entities": [
         {
           "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
@@ -861,7 +861,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 31.117315636410808,
+          "score": 31.117315636410805,
           "matched_by": "tfidf"
         },
         {
@@ -1119,7 +1119,7 @@
       "query_id": "django-04",
       "query": "What does django.contrib.auth.authenticate() actually call to check a user's credentials?",
       "category": "B_relationship",
-      "elapsed_seconds": 4.6162025928497314,
+      "elapsed_seconds": 2.529109001159668,
       "retrieved_entities": [
         {
           "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
@@ -1130,7 +1130,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 47.71985321099399,
+          "score": 47.719853210993996,
           "matched_by": "tfidf"
         },
         {
@@ -1214,7 +1214,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 28.012222231055986,
+          "score": 28.01222223105598,
           "matched_by": "tfidf"
         }
       ],
@@ -1319,7 +1319,7 @@
       "query_id": "django-05",
       "query": "What is Django's default Manager class actually built from?",
       "category": "B_relationship",
-      "elapsed_seconds": 4.7624266147613525,
+      "elapsed_seconds": 2.579319953918457,
       "retrieved_entities": [
         {
           "entity_id": "django.db.models.manager.BaseManager",
@@ -1330,7 +1330,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 36.62991499263309,
+          "score": 36.62991499263308,
           "matched_by": "tfidf"
         },
         {
@@ -1342,7 +1342,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 33.56819125381067,
+          "score": 33.568191253810674,
           "matched_by": "tfidf"
         },
         {
@@ -1402,7 +1402,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 28.169043357551807,
+          "score": 28.169043357551804,
           "matched_by": "tfidf"
         },
         {
@@ -1621,7 +1621,7 @@
       "query_id": "django-06",
       "query": "How does an incoming WSGI request get dispatched to the correct Django view function, end to end?",
       "category": "C_architecture",
-      "elapsed_seconds": 4.56691837310791,
+      "elapsed_seconds": 2.5237810611724854,
       "retrieved_entities": [
         {
           "entity_id": "django.test.client.RequestFactory",
@@ -1632,7 +1632,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 25.953393685303553,
+          "score": 25.95339368530355,
           "matched_by": "tfidf"
         }
       ],
@@ -1678,7 +1678,7 @@
       "query_id": "django-07",
       "query": "How does Django apply configured middleware to every request?",
       "category": "C_architecture",
-      "elapsed_seconds": 4.0052289962768555,
+      "elapsed_seconds": 2.580878973007202,
       "retrieved_entities": [
         {
           "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
@@ -1701,7 +1701,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 35.17648685731136,
+          "score": 35.17648685731137,
           "matched_by": "tfidf"
         },
         {
@@ -1773,7 +1773,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 25.833279543998636,
+          "score": 25.833279543998632,
           "matched_by": "tfidf"
         },
         {
@@ -1785,7 +1785,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 25.25771760792775,
+          "score": 25.257717607927752,
           "matched_by": "tfidf"
         },
         {
@@ -1797,7 +1797,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 23.601882807130746,
+          "score": 23.601882807130742,
           "matched_by": "tfidf"
         }
       ],
@@ -1903,7 +1903,7 @@
       "query_id": "django-08",
       "query": "What happens when CsrfViewMiddleware detects a POST request without a valid CSRF token?",
       "category": "D_behavioral",
-      "elapsed_seconds": 5.133747577667236,
+      "elapsed_seconds": 2.4056944847106934,
       "retrieved_entities": [
         {
           "entity_id": "django.middleware.csrf.CsrfViewMiddleware",
@@ -1926,7 +1926,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 49.867294321872265,
+          "score": 49.86729432187227,
           "matched_by": "tfidf"
         },
         {
@@ -1962,7 +1962,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 38.86606005682202,
+          "score": 38.86606005682203,
           "matched_by": "tfidf"
         },
         {
@@ -2010,7 +2010,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 33.25562553969066,
+          "score": 33.255625539690655,
           "matched_by": "tfidf"
         },
         {
@@ -2233,7 +2233,7 @@
       "query_id": "django-09",
       "query": "What does authenticate() return if the given credentials don't match any configured authentication backend?",
       "category": "D_behavioral",
-      "elapsed_seconds": 4.76922607421875,
+      "elapsed_seconds": 2.707223892211914,
       "retrieved_entities": [
         {
           "entity_id": "django.contrib.auth.middleware.RemoteUserMiddleware",
@@ -2256,7 +2256,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 56.4160910915686,
+          "score": 56.41609109156862,
           "matched_by": "tfidf"
         },
         {
@@ -2280,7 +2280,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 36.83271945879156,
+          "score": 36.83271945879155,
           "matched_by": "tfidf"
         },
         {
@@ -2404,7 +2404,7 @@
       "query_id": "django-10",
       "query": "If a Django app's migrations aren't being applied in the order I expect, where should I look?",
       "category": "E_debugging",
-      "elapsed_seconds": 5.511409044265747,
+      "elapsed_seconds": 2.5229408740997314,
       "retrieved_entities": [
         {
           "entity_id": "django.db.migrations.loader.MigrationLoader",
@@ -2427,7 +2427,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 53.40126310908349,
+          "score": 53.40126310908348,
           "matched_by": "tfidf"
         },
         {
@@ -2439,7 +2439,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 48.67209469200956,
+          "score": 48.67209469200958,
           "matched_by": "tfidf"
         },
         {
@@ -2451,7 +2451,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 39.98507827344924,
+          "score": 39.98507827344923,
           "matched_by": "tfidf"
         },
         {
@@ -2475,7 +2475,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 36.250516623517434,
+          "score": 36.25051662351743,
           "matched_by": "tfidf"
         },
         {
@@ -2487,7 +2487,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 35.63382841295483,
+          "score": 35.63382841295482,
           "matched_by": "tfidf"
         },
         {
@@ -2741,7 +2741,7 @@
       "query_id": "django-11",
       "query": "Where would I investigate if a custom Manager isn't exposing a custom QuerySet method I defined?",
       "category": "E_debugging",
-      "elapsed_seconds": 5.395534992218018,
+      "elapsed_seconds": 2.7377521991729736,
       "retrieved_entities": [
         {
           "entity_id": "django.db.models.options.Options",
@@ -2945,7 +2945,7 @@
       "query_id": "django-12",
       "query": "How does registering a model in the admin (admin.site.register) connect it to Django's admin URLs?",
       "category": "F_cross_file",
-      "elapsed_seconds": 4.567485570907593,
+      "elapsed_seconds": 2.665470838546753,
       "retrieved_entities": [
         {
           "entity_id": "django.contrib.admin.sites.AdminSite",
@@ -2992,7 +2992,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 27.492232438430833,
+          "score": 27.492232438430836,
           "matched_by": "tfidf"
         },
         {
@@ -3004,7 +3004,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 26.280198057347153,
+          "score": 26.28019805734715,
           "matched_by": "tfidf"
         }
       ],
@@ -3155,7 +3155,7 @@
       "query_id": "django-13",
       "query": "Where does Django implement its own production-grade HTTP/2 server?",
       "category": "G_negative",
-      "elapsed_seconds": 4.438593149185181,
+      "elapsed_seconds": 2.5548527240753174,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -3173,7 +3173,7 @@
       "query_id": "django-14",
       "query": "Where does Django implement a built-in GraphQL API layer?",
       "category": "G_negative",
-      "elapsed_seconds": 4.304494619369507,
+      "elapsed_seconds": 2.729642868041992,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],

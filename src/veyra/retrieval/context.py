@@ -256,14 +256,34 @@ def retrieve_context(
     # built) rather than duplicating its computation -- see module
     # docstring for why match evidence needs to be IDF-weighted, not a
     # flat term count.
-    _, _, idf, _ = _build_bm25_index(index)
+    doc_tokens, _, idf, _ = _build_bm25_index(index)
+    # Performance finding, final hardening pass -- see `_matched_idf_coverage`'s
+    # docstring for the full measurement. Structural corroboration calls
+    # `_matched_idf_coverage` again for every candidate's neighbors, and the
+    # same neighbor (e.g. a shared parent class) is revisited by many
+    # candidates in one query -- building each touched entity's tokenized
+    # terms once here (reusing `_build_bm25_index`'s own tokenization,
+    # already computed for the whole index) instead of re-tokenizing raw
+    # text on every visit is what turns that back into a bounded cost.
+    relevant_ids = {s.entity.entity_id for s in scored}
+    for s in scored:
+        relevant_ids.update(s.entity.parents)
+        relevant_ids.update(s.entity.children)
+        relevant_ids.update(s.entity.siblings)
+    doc_terms_by_id = {eid: set(doc_tokens[eid].keys()) for eid in relevant_ids if eid in doc_tokens}
+    # Same finding, second half: `max(idf.values())` is a pure function of
+    # the index's own IDF table, never of the entity or query terms being
+    # judged -- computing it once per query instead of once per
+    # `_matched_idf_coverage` call (now ~pool_size + neighbors calls, not 1)
+    # removes a full corpus-wide table scan from every one of those calls.
+    max_known_idf = max(idf.values(), default=0.0)
     decisions = {
         s.entity.entity_id: _decide_confidence(
             s,
             z_by_entity_id.get(s.entity.entity_id),
             min_confidence_z,
-            _matched_idf_coverage(query_terms, s.entity, idf),
-            _neighbor_matched_idf_coverage(s.entity, index, query_terms, idf),
+            _matched_idf_coverage(query_terms, s.entity, idf, doc_terms_by_id.get(s.entity.entity_id), max_known_idf),
+            _neighbor_matched_idf_coverage(s.entity, index, query_terms, idf, doc_terms_by_id, max_known_idf),
         )
         for s in scored
     }
@@ -339,7 +359,13 @@ def _relative_confidence_scores(scored: list[ScoredEntity]) -> dict[str, float]:
     return {s.entity.entity_id: (s.score - mean) / stdev for s in scored if s.matched_by == "tfidf"}
 
 
-def _matched_idf_coverage(query_terms: set[str], entity: IndexedEntity, idf: dict[str, float]) -> float | None:
+def _matched_idf_coverage(
+    query_terms: set[str],
+    entity: IndexedEntity,
+    idf: dict[str, float],
+    doc_terms: set[str] | None = None,
+    max_known_idf: float | None = None,
+) -> float | None:
     """ARCF Fix 3's second, complementary confidence signal -- real match
     evidence, not a score, and IDF-weighted (not a flat term count -- see
     module docstring for the real case that made a flat count
@@ -363,21 +389,54 @@ def _matched_idf_coverage(query_terms: set[str], entity: IndexedEntity, idf: dic
     direction for "the query asked about something this corpus doesn't
     talk about at all." `None` when the query itself tokenized to nothing
     (see `_decide_confidence`, a distinct "can't judge" case from a
-    genuine zero-overlap match)."""
+    genuine zero-overlap match).
+
+    **Performance finding, final hardening pass.** Structural corroboration
+    (below) makes this function's real per-query call count jump from "once
+    per candidate" to "once per candidate, plus once per candidate's every
+    neighbor" -- profiled directly on the real Django store (92,679
+    entities), that multiplication turned two per-call recomputations that
+    were cheap at the old call volume into a real, measurable cost at the
+    new one: re-tokenizing `entity`'s text from scratch (`search.py`'s
+    `_build_bm25_index` already tokenized *every* entity in the index once;
+    `doc_terms`, when given, reuses that instead) and re-scanning the whole
+    corpus-wide `idf` table for its maximum value on every single call
+    (`max_known_idf`, when given, reuses a value computed once per query
+    instead). Measured directly (5 repeated runs, same query, same
+    persisted store): `retrieve_context()` at the default
+    `candidate_pool_size=200` averaged 4.6s per query before
+    `retrieve_context()` started computing both once per query and passing
+    them through, ~3.1s after -- a real, disclosed ~30% reduction, not a
+    full fix. Profiling the remainder found the now-dominant costs
+    (`reconcile_calls`'s full-repository edge scan, `_source_category_weight`
+    classifying every entity in the index) pre-date this pass entirely --
+    real, but out of this pass's scope (see the final report's Performance
+    section). Both parameters are optional and default to recomputing
+    (`None`), so every pre-existing caller/test keeps working unchanged;
+    the result is identical either way -- `doc_terms` is exactly
+    `set(_tokenize(_entity_text(entity)))` and `max_known_idf` is exactly
+    `max(idf.values(), default=0.0)` when supplied correctly."""
     if not query_terms:
         return None
-    max_known_idf = max(idf.values(), default=0.0)
+    if max_known_idf is None:
+        max_known_idf = max(idf.values(), default=0.0)
     weight = {t: idf.get(t, max_known_idf) for t in query_terms}
     total_weight = sum(weight.values())
     if total_weight <= 0.0:
         return None
-    doc_terms = set(_tokenize(_entity_text(entity)))
+    if doc_terms is None:
+        doc_terms = set(_tokenize(_entity_text(entity)))
     matched_weight = sum(weight[t] for t in query_terms & doc_terms)
     return matched_weight / total_weight
 
 
 def _neighbor_matched_idf_coverage(
-    entity: IndexedEntity, index: RetrievalIndex, query_terms: set[str], idf: dict[str, float]
+    entity: IndexedEntity,
+    index: RetrievalIndex,
+    query_terms: set[str],
+    idf: dict[str, float],
+    doc_terms_by_id: dict[str, set[str]] | None = None,
+    max_known_idf: float | None = None,
 ) -> float:
     """Final hardening pass -- structural corroboration (see the module-
     level comment by `_MIN_MATCHED_IDF_COVERAGE` for the full experiment
@@ -392,14 +451,23 @@ def _neighbor_matched_idf_coverage(
     Returns 0.0 (not `None`) when the entity has no neighbors at all or
     none of them are indexed -- "no corroborating evidence found" is a
     real, valid answer, not a "can't judge" case the way an empty query
-    is for `_matched_idf_coverage`."""
+    is for `_matched_idf_coverage`.
+
+    `doc_terms_by_id`/`max_known_idf`, when given, are passed straight
+    through to `_matched_idf_coverage` -- see that function's docstring for
+    the real, measured performance reason (a shared neighbor, e.g. a
+    common parent class, is otherwise re-tokenized once per sibling
+    candidate that reaches this function in the same query, and the
+    corpus-wide IDF maximum is otherwise rescanned from scratch on every
+    one of those calls)."""
     neighbor_ids = list(entity.parents) + list(entity.children) + list(entity.siblings)
     best = 0.0
     for neighbor_id in neighbor_ids:
         neighbor = index.get(neighbor_id)
         if neighbor is None:
             continue
-        coverage = _matched_idf_coverage(query_terms, neighbor, idf)
+        neighbor_doc_terms = doc_terms_by_id.get(neighbor_id) if doc_terms_by_id is not None else None
+        coverage = _matched_idf_coverage(query_terms, neighbor, idf, neighbor_doc_terms, max_known_idf)
         if coverage is not None and coverage > best:
             best = coverage
     return best

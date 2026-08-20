@@ -8,7 +8,7 @@
       "query_id": "flask-01",
       "query": "Where is the Flask application class defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 2.181711435317993,
+      "elapsed_seconds": 0.42922353744506836,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sansio.app.App",
@@ -343,7 +343,7 @@
       "query_id": "flask-02",
       "query": "Which class implements Flask's default (cookie-based) session storage?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 1.7717695236206055,
+      "elapsed_seconds": 0.07097721099853516,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sessions.SessionInterface",
@@ -366,7 +366,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 41.980158187302976,
+          "score": 41.98015818730297,
           "matched_by": "tfidf"
         },
         {
@@ -390,7 +390,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 25.139226379771536,
+          "score": 25.139226379771532,
           "matched_by": "tfidf"
         },
         {
@@ -414,7 +414,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 24.36880804225697,
+          "score": 24.368808042256966,
           "matched_by": "tfidf"
         },
         {
@@ -438,7 +438,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 22.26088264057871,
+          "score": 22.260882640578707,
           "matched_by": "tfidf"
         },
         {
@@ -450,7 +450,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 21.751826302381993,
+          "score": 21.751826302381986,
           "matched_by": "tfidf"
         },
         {
@@ -462,7 +462,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 20.021229916562827,
+          "score": 20.021229916562824,
           "matched_by": "tfidf"
         }
       ],
@@ -644,7 +644,7 @@
       "query_id": "flask-03",
       "query": "Where is the Request class that Flask uses for incoming HTTP requests defined?",
       "category": "A_symbol_location",
-      "elapsed_seconds": 1.8272972106933594,
+      "elapsed_seconds": 0.07255840301513672,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.views.MethodView",
@@ -667,7 +667,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 26.41724545933372,
+          "score": 26.417245459333717,
           "matched_by": "tfidf"
         },
         {
@@ -679,7 +679,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 24.037598653041677,
+          "score": 24.037598653041673,
           "matched_by": "tfidf"
         },
         {
@@ -715,7 +715,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 19.26982783487572,
+          "score": 19.269827834875716,
           "matched_by": "tfidf"
         },
         {
@@ -727,7 +727,7 @@
           "evidence_counts": {
             "STATIC": 7
           },
-          "score": 13.138730002982276,
+          "score": 13.138730002982275,
           "matched_by": "tfidf"
         },
         {
@@ -932,7 +932,7 @@
       "query_id": "flask-04",
       "query": "What does the @app.route decorator actually call to register a URL rule?",
       "category": "B_relationship",
-      "elapsed_seconds": 1.9378228187561035,
+      "elapsed_seconds": 0.07284379005432129,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sansio.scaffold.Scaffold",
@@ -943,7 +943,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 43.60573960360962,
+          "score": 43.605739603609614,
           "matched_by": "tfidf"
         },
         {
@@ -967,7 +967,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 30.813631964522965,
+          "score": 30.81363196452297,
           "matched_by": "tfidf"
         },
         {
@@ -1003,7 +1003,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 23.807406995979527,
+          "score": 23.80740699597953,
           "matched_by": "tfidf"
         },
         {
@@ -1209,7 +1209,7 @@
       "query_id": "flask-05",
       "query": "What class does Flask's Blueprint inherit from?",
       "category": "B_relationship",
-      "elapsed_seconds": 1.437387228012085,
+      "elapsed_seconds": 0.06581282615661621,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.wrappers.Request",
@@ -1220,7 +1220,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 20.415985455843124,
+          "score": 20.415985455843128,
           "matched_by": "tfidf"
         },
         {
@@ -1232,7 +1232,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 20.170826002972625,
+          "score": 20.17082600297262,
           "matched_by": "tfidf"
         },
         {
@@ -1280,7 +1280,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 14.54602923698306,
+          "score": 14.546029236983054,
           "matched_by": "tfidf"
         },
         {
@@ -1304,7 +1304,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 13.966435138244051,
+          "score": 13.966435138244053,
           "matched_by": "tfidf"
         },
         {
@@ -1328,7 +1328,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 12.47076877201701,
+          "score": 12.470768772017012,
           "matched_by": "tfidf"
         }
       ],
@@ -1546,7 +1546,7 @@
       "query_id": "flask-06",
       "query": "How does Flask dispatch an incoming WSGI request to the correct view function, end to end?",
       "category": "C_architecture",
-      "elapsed_seconds": 2.0500969886779785,
+      "elapsed_seconds": 0.07014894485473633,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.app.Flask",
@@ -1557,7 +1557,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 29.207677171755947,
+          "score": 29.20767717175595,
           "matched_by": "tfidf"
         },
         {
@@ -1569,7 +1569,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 25.462348612681243,
+          "score": 25.462348612681247,
           "matched_by": "tfidf"
         },
         {
@@ -1806,7 +1806,7 @@
       "query_id": "flask-07",
       "query": "How does Flask sign and verify session cookies to prevent tampering?",
       "category": "C_architecture",
-      "elapsed_seconds": 1.27089524269104,
+      "elapsed_seconds": 0.07814216613769531,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -1826,7 +1826,7 @@
       "query_id": "flask-08",
       "query": "What happens when app.run() is called with debug=True?",
       "category": "D_behavioral",
-      "elapsed_seconds": 1.9482061862945557,
+      "elapsed_seconds": 0.07083320617675781,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.cli.FlaskGroup",
@@ -1873,7 +1873,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 20.43220209183709,
+          "score": 20.432202091837087,
           "matched_by": "tfidf"
         },
         {
@@ -2123,7 +2123,7 @@
       "query_id": "flask-09",
       "query": "What does Flask do when a request comes in for a URL that doesn't match any registered rule?",
       "category": "D_behavioral",
-      "elapsed_seconds": 1.7894868850708008,
+      "elapsed_seconds": 0.0721886157989502,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.wrappers.Request",
@@ -2170,7 +2170,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 28.812332619217127,
+          "score": 28.81233261921712,
           "matched_by": "tfidf"
         },
         {
@@ -2194,7 +2194,7 @@
           "evidence_counts": {
             "STATIC": 6
           },
-          "score": 26.8528356595028,
+          "score": 26.852835659502798,
           "matched_by": "tfidf"
         },
         {
@@ -2206,7 +2206,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 20.849719810137557,
+          "score": 20.84971981013755,
           "matched_by": "tfidf"
         },
         {
@@ -2218,7 +2218,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 18.585493890247985,
+          "score": 18.58549389024799,
           "matched_by": "tfidf"
         },
         {
@@ -2242,7 +2242,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 17.43883580657757,
+          "score": 17.438835806577572,
           "matched_by": "tfidf"
         }
       ],
@@ -2441,7 +2441,7 @@
       "query_id": "flask-10",
       "query": "If a Flask view function raises an unhandled exception, where should I look to see how Flask decides what response to send back?",
       "category": "E_debugging",
-      "elapsed_seconds": 2.574169874191284,
+      "elapsed_seconds": 0.07795143127441406,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.app.Flask",
@@ -2464,7 +2464,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 34.931636604621104,
+          "score": 34.93163660462111,
           "matched_by": "tfidf"
         },
         {
@@ -2488,7 +2488,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 20.007202757079764,
+          "score": 20.00720275707976,
           "matched_by": "tfidf"
         },
         {
@@ -2500,7 +2500,7 @@
           "evidence_counts": {
             "STATIC": 3
           },
-          "score": 19.617822695124246,
+          "score": 19.61782269512425,
           "matched_by": "tfidf"
         },
         {
@@ -2536,7 +2536,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 16.579301288012047,
+          "score": 16.579301288012044,
           "matched_by": "tfidf"
         },
         {
@@ -2728,7 +2728,7 @@
       "query_id": "flask-11",
       "query": "Where would I investigate if Flask's test_client() isn't preserving cookies across multiple requests in a test?",
       "category": "E_debugging",
-      "elapsed_seconds": 1.5193061828613281,
+      "elapsed_seconds": 0.08167815208435059,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sansio.app.App",
@@ -2812,7 +2812,7 @@
       "query_id": "flask-12",
       "query": "How does registering a Blueprint on a Flask app connect the blueprint's routes to the app's URL map?",
       "category": "F_cross_file",
-      "elapsed_seconds": 1.8241138458251953,
+      "elapsed_seconds": 0.08376145362854004,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sansio.blueprints.Blueprint",
@@ -2835,7 +2835,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 30.814148028576334,
+          "score": 30.81414802857633,
           "matched_by": "tfidf"
         },
         {
@@ -2859,7 +2859,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 23.44849404539832,
+          "score": 23.448494045398323,
           "matched_by": "tfidf"
         },
         {
@@ -2895,7 +2895,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 20.975435383250343,
+          "score": 20.97543538325035,
           "matched_by": "tfidf"
         },
         {
@@ -2907,7 +2907,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 17.992640409289283,
+          "score": 17.99264040928928,
           "matched_by": "tfidf"
         },
         {
@@ -2931,7 +2931,7 @@
           "evidence_counts": {
             "STATIC": 5
           },
-          "score": 16.440364223784027,
+          "score": 16.440364223784023,
           "matched_by": "tfidf"
         }
       ],
@@ -3114,7 +3114,7 @@
       "query_id": "flask-13",
       "query": "Where does Flask implement CSRF protection for form submissions?",
       "category": "G_negative",
-      "elapsed_seconds": 1.201683521270752,
+      "elapsed_seconds": 0.06434798240661621,
       "retrieved_entities": [],
       "insufficient_evidence": true,
       "retrieved_files": [],
@@ -3132,7 +3132,7 @@
       "query_id": "flask-14",
       "query": "Where is Flask's built-in ORM or database layer implemented?",
       "category": "G_negative",
-      "elapsed_seconds": 1.6715404987335205,
+      "elapsed_seconds": 0.07026839256286621,
       "retrieved_entities": [
         {
           "entity_id": "src.flask.sansio.app.App",
@@ -3143,7 +3143,7 @@
           "evidence_counts": {
             "STATIC": 4
           },
-          "score": 12.391969459389722,
+          "score": 12.39196945938972,
           "matched_by": "tfidf"
         },
         {

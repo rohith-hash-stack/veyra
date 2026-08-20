@@ -14,7 +14,7 @@ from veyra.retrieval.context import (
     _relative_confidence_scores,
 )
 from veyra.retrieval.index import IndexedEntity, RetrievalIndex
-from veyra.retrieval.search import ScoredEntity, _build_bm25_index, _tokenize
+from veyra.retrieval.search import ScoredEntity, _build_bm25_index, _entity_text, _tokenize
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import (
     Evidence,
@@ -472,6 +472,41 @@ def test_relative_confidence_is_computable_and_well_formed_across_corpus_shapes(
     # The top score's z is always >= every other candidate's z (order-preserving).
     top_entity_id = "m.e0"  # scores are constructed in descending order in every case above
     assert z[top_entity_id] == max(z.values())
+
+
+def test_matched_idf_coverage_precomputed_doc_terms_and_max_idf_match_the_recomputed_path(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    """Final hardening pass performance fix: `_matched_idf_coverage`'s
+    optional `doc_terms`/`max_known_idf` parameters exist purely to avoid
+    redundant re-tokenizing/re-scanning at the higher call volume
+    structural corroboration introduces -- they must never change the
+    result. Real entities/idf table from a real extraction, not hand-built,
+    so this exercises the exact values `retrieve_context()` itself computes
+    and passes through."""
+    write_file(
+        "billing.py",
+        "class PaymentProcessor:\n"
+        "    def dispatch(self, payload):\n"
+        '        """Handles gateway payment routing before handing off to validation."""\n'
+        "        return payload\n",
+    )
+    extraction = extract_repository(repo_root, COMMIT)
+    persist_extraction(store, extraction)
+    index = build_retrieval_index(store, COMMIT)
+    query_terms = set(_tokenize("payment gateway transaction fraud authorization compliance"))
+    _, _, idf, _ = _build_bm25_index(index)
+    entity = index.get("billing.PaymentProcessor.dispatch")
+    assert entity is not None
+
+    recomputed = _matched_idf_coverage(query_terms, entity, idf)
+    precomputed = _matched_idf_coverage(
+        query_terms, entity, idf,
+        doc_terms=set(_tokenize(_entity_text(entity))),
+        max_known_idf=max(idf.values(), default=0.0),
+    )
+
+    assert precomputed == recomputed
 
 
 def _write_repo_of_size(write_file: Callable[[str, str], Path], n: int) -> None:
