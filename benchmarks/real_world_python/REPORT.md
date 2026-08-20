@@ -89,12 +89,13 @@ Full machine-readable table: `results/evaluation_table.json`. Raw retrieval outp
 ## 9. Failure Analysis
 
 Per-query scoring and reasoning is in `results/manual_scores/<repo>.json`; this section summarizes the
-patterns behind the failures, established from Flask (12 answerable + 2 negative queries) and FastAPI (12 +
-2), with SQLAlchemy and Django scoring following the same methodology once their query runs complete.
+patterns behind the failures, established from Flask (12 answerable + 2 negative queries), FastAPI (12 + 2),
+and SQLAlchemy (12 + 2), with Django scoring following the same methodology once its query run completes.
 
-**Complete retrieval misses (correct file never in top 10) are common and get worse, not better, as repo
-size grows:** Flask 3/12 (25%), FastAPI 6/12 (50%). This is the opposite of what "more code to search"
-alone would predict, and points at a specific, root-caused mechanism (below) rather than a vague "harder on
+**Complete retrieval misses (correct file never in top 10) are common and get sharply worse, not better, as
+repo/entity count grows:** Flask 3/12 (25%), FastAPI 6/12 (50%), SQLAlchemy 8/12 (67%) -- a clean, monotonic
+trend tracking indexed-entity count (2,607 -> 13,891 -> 87,782), the opposite of what "more code to search"
+alone would predict, and traceable to specific, root-caused mechanisms below rather than a vague "harder on
 bigger repos" story.
 
 **Root cause 1 -- TF-IDF favors short documents over the correct answer.** `search_semantic()`
@@ -135,7 +136,32 @@ confirming the query's false premise. This traces to a structural gap, not a mis
 is computed in `search()` but discarded by `retrieve_context()` before it ever reaches `RetrievedContext`/
 `GroundingContext` -- there is no score left for any caller, however careful, to threshold on.
 
-**One severe, code-structure-dependent performance pathology, orthogonal to retrieval quality.** SQLAlchemy's
+**Root cause 4 -- no stopword filtering, and incidental vocabulary collisions get more likely as a codebase
+grows.** `_tokenize()` (`retrieval/search.py`) has no stopword list -- every word in a natural-language
+query, including "a", "the", "is", "and", becomes a real TF-IDF term. `sqla-12`'s query contains the word
+"a" ("declaring **a** class with...") and SQLAlchemy's large test suite happens to contain many local
+variables named exactly `a` -- each one a perfect single-token match for that one incidental word, burying
+the actual 4-file cross-file answer entirely. Separately, `sqla-01` ("Where is the Session class
+**defined**?") and `sqla-03` ("Where is the Table class **defined**?") -- two queries about two unrelated
+classes -- returned the *same* top 5 results, because SQLAlchemy happens to have several entities with
+"defined"/"is_user_defined" baked into their own names (an unrelated `UserDefinedType` feature), and the
+shared word "defined" dominates both queries' rankings regardless of subject. A larger, more vocabulary-rich
+codebase mechanically increases the odds of this kind of incidental collision -- another reason retrieval
+quality degrades with scale rather than improving.
+
+**A more concerning shape of negative-query failure, confirmed across two repositories.** Beyond root cause 3's
+generic irrelevant noise, SQLAlchemy's negative queries surfaced entities whose *names themselves* plausibly
+confirm the false premise: `sqla-13` (asking about nonexistent HTTP routing) retrieved a real class named
+`RoutingSession` and classes named `RequestA`/`RequestB` -- ordinary ORM test fixtures, but named in a way
+that could easily mislead a downstream reader into believing SQLAlchemy has an HTTP routing layer. `sqla-14`
+(asking about nonexistent password-hashing) retrieved `engine.url.URL.password` -- a real, correctly-identified
+field, but for a database connection string, not user authentication. Combined with `fastapi-13`'s
+`docs_src.sql_databases`/`test_read_with_orm_mode`, this is a 3-for-4 pattern across the negative queries
+reviewed so far: a large, real-world codebase's ordinary vocabulary (test fixture names, module names, field
+names) is likely to contain at least one plausible-sounding false positive for almost any "does X exist"
+question, and nothing in Veyra's retrieval output flags that risk.
+
+**Two severe, compounding performance pathologies, orthogonal to retrieval quality.** (1) SQLAlchemy's
 static-analysis pipeline (`run_static_analysis()`) took 9,926s (2h 45m) for 668 files -- FastAPI, with more
 files (1,138) and more nodes, took 522s (8.7 min), an ~19x difference despite FastAPI being the larger
 repository by file/node count. SQLAlchemy generated 305,981 questions against 90,159 nodes (3.4
@@ -144,9 +170,17 @@ density, so the gap is not question-generation volume alone. SQLAlchemy's extrac
 unresolved (far higher proportionally than any other repo), consistent with its heavy use of `@overload`-based
 type stubs, deep inheritance, and dynamically-constructed classes (`Manager(BaseManager.from_queryset(QuerySet))`-style
 metaprogramming is common there) defeating the extractor's same-file-only resolution and likely making the
-verification stage's own graph lookups far more expensive per question. This needs no ground truth to state
-plainly: Veyra's current static pipeline does not scale predictably by repo size alone -- specific, identifiable
-code patterns can make it 10-20x slower on a smaller repository than a larger one.
+verification stage's own graph lookups far more expensive per question. (2) `build_retrieval_index()` itself
+(Phase 4.1, independent of the static-analysis stage above) also degrades sharply faster than linearly with
+entity count: Flask processed 2,607 entities at ~317/s, FastAPI 13,891 at ~98/s, SQLAlchemy 87,782 at only
+~23/s -- a roughly 14x throughput collapse across a 34x entity-count increase. `_build_entity()` calls
+`get_parents`/`get_children`/`get_siblings`/`get_evidence_for_subject` once per node, each opening its own
+SQLite connection (`VBGStore._connect()`); as the graph grows, both the per-call connection overhead and
+(likely) the underlying table scans get more expensive, compounding rather than merely accumulating. Together,
+these need no ground truth to state plainly: Veyra's current pipeline does not scale predictably by repo size
+alone -- specific, identifiable code patterns and structural per-call storage overhead can make a smaller
+repository take an order of magnitude longer than a larger one, and simply getting *to* a queryable retrieval
+index on an 87K-entity codebase took nearly 4 hours end to end (static analysis + index build combined).
 
 ## 10. Strong Areas
 
@@ -200,7 +234,14 @@ code patterns can make it 10-20x slower on a smaller repository than a larger on
    mechanism) rank below the *first* step or an unrelated same-named entity, leaving the real explanation
    sitting in the `unknowns` list rather than the retrieved facts.
 5. Negative/boundary queries never come back empty or flagged low-confidence -- the same ranking noise from
-   patterns 1-3 fills the top 10 regardless of whether anything is actually relevant.
+   patterns 1-3 fills the top 10 regardless of whether anything is actually relevant, and in a real-world
+   codebase's large surface area, some of that noise's *names* often happen to superficially support the
+   query's false premise (`RoutingSession`, `URL.password`, `docs_src.sql_databases`).
+6. A natural-language query's own stopwords ("a", "the", "is") get real TF-IDF weight with no filtering,
+   and in a large enough codebase there is usually *some* real identifier that collides with one of them.
+7. Retrieval quality (complete-miss rate) degrades monotonically with repo/entity size across all three
+   repositories measured so far (25% -> 50% -> 67%), and getting to a queryable index at all becomes a
+   multi-hour undertaking well before code-search quality would be the limiting factor for practical use.
 
 ## 13. Reproducibility Information
 
