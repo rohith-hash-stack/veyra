@@ -1,0 +1,116 @@
+{
+  "django-01": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss -- db/models/query.py's QuerySet class never retrieved. Every one of the top 6 results is a real variable literally named 'where' (SQL WHERE-clause-building locals in constraint/index code), because the query's own interrogative 'Where is...' collided with that extremely common Django ORM variable name. Same no-stopword-filtering mechanism as SQLAlchemy's 'a'/'defined' collisions, now triggered by the question word itself."
+  },
+  "django-02": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- db/models/base.py's Model class never retrieved."
+  },
+  "django-03": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "Success -- django.middleware.csrf module and django.core.checks.security.csrf._csrf_middleware both retrieved directly. This is the deliberate positive-control counterpart to Flask/FastAPI's CSRF negative queries (Django genuinely does implement CSRF protection, unlike those two): confirms Veyra's exact/substring name-match tier works well when a real, distinctively-named entity exists, and that the CSRF negative-query failures elsewhere are a genuine false-premise-detection gap, not just Veyra being generally bad at anything CSRF-related."
+  },
+  "django-04": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "Success -- contrib.auth.__init__.authenticate (and its async twin aauthenticate) both retrieved directly."
+  },
+  "django-05": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete file-level miss, but a topically-adjacent one: retrieved several real 'default_manager' variables/attributes (Options.default_manager, serializer default_manager handling) which are genuinely part of the same Manager subsystem, just not the Manager class definition (manager.py) itself. Closer to the right neighborhood than most other misses."
+  },
+  "django-06": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": true,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss, and a particularly clean demonstration of the stopword-collision root cause: this benchmark's own query phrasing ('...end to end?') put the word 'end' in the query, and Django's codebase has 'end'/'end_index' as an extremely common variable name (string/slice indexing) across many unrelated files -- all 6 top results share only that one incidental token with the query. None of WSGIHandler, get_response, or the URL resolver chain appear anywhere."
+  },
+  "django-07": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- BaseHandler.load_middleware/get_response never retrieved for the middleware-application architecture question."
+  },
+  "django-08": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "CsrfViewMiddleware._check_token.request_csrf_token retrieved directly (2nd result) -- genuinely relevant, though the specific process_view rejection path isn't confirmed in the reviewed portion."
+  },
+  "django-09": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "Success -- same authenticate()/aauthenticate() hit as django-04, correctly the same underlying function both times."
+  },
+  "django-10": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss, another clean stopword-collision case: this query's first-person 'where I expect' put the single letter 'I' in the token stream, colliding with the extremely common loop-counter variable name 'i' across totally unrelated files (SQL compiler internals, template parsing, HTML testing utilities). MigrationExecutor never appears."
+  },
+  "django-11": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- same Manager/from_queryset gap as django-05."
+  },
+  "django-12": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": true,
+    "failure_category": "retrieval_failure",
+    "notes": "contrib.admin.decorators.register (the @admin.register decorator, a real and relevant entry point) is retrieved directly, but AdminSite.get_urls -- the specific URL-wiring method this cross-file query asks about -- is absent from what was reviewed."
+  },
+  "django-13": {
+    "final_answer_correct": false,
+    "unsupported_claim": "borderline",
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (no built-in production HTTP/2 server). Retrieved LiveServerThreadTest.test_server_class's 'server'/'server_class' variables -- Django's real, but test-only, HTTP server used for browser-based test fixtures. A careless reading could mistake this for evidence of production server functionality, though the surrounding test-class context makes it a weaker false-premise risk than sqla-13/fastapi-13."
+  },
+  "django-14": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (no built-in GraphQL). Retrieved 'graph' variables from the migrations dependency-graph system (test_autodetector, test_executor) -- pure substring/token collision on 'graph', with enough surrounding migration-specific context that this is unlikely to actually mislead a reader, unlike django-13/sqla-13/fastapi-13. Still no confidence signal, but the lowest false-premise risk among the negative queries reviewed."
+  }
+}

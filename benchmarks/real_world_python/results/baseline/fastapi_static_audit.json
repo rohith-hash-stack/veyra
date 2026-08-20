@@ -1,0 +1,26 @@
+{
+  "repo_name": "fastapi",
+  "commit_sha": "c3f316b7e814667e8ee81e03a7330d00ee61e45c",
+  "wall_clock_seconds": 522.1427147388458,
+  "report_analysis_duration_seconds": 503.7218677997589,
+  "files_analyzed": 1138,
+  "files_failed": 0,
+  "unsupported_rate": 0.0,
+  "unresolved_calls": 10471,
+  "node_count": 13989,
+  "edge_count": 19453,
+  "edges_by_relationship_type": {
+    "imports": 4644,
+    "contains": 12851,
+    "references": 503,
+    "calls": 1349,
+    "inherits": 106
+  },
+  "questions_generated": 47647,
+  "questions_answered": 47647,
+  "questions_unanswered": 0,
+  "questions_deduplicated": 0,
+  "static_evidence_created": 47647,
+  "static_precision": null,
+  "static_recall": null
+}

@@ -1,0 +1,116 @@
+{
+  "flask-01": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Both ground-truth files retrieved (recall 1.0), but the top of the ranked list is dominated by unrelated entities literally named 'application' (a test variable, a WSGI callable variable) that outrank the actual Flask class (src.flask.app.Flask lands at rank 7 of 10). A consumer reading only the top 2-3 results would miss the real answer. Root cause: TF-IDF cosine similarity favors very short documents (a 1-token entity whose entire indexed text is just its own name scores a perfect 1.0 term-frequency on that token) over the actual Flask class, whose large lexical_representation dilutes the same token's relative weight."
+  },
+  "flask-02": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "SessionInterface and SecureCookieSessionInterface both retrieved within the top 6; a downstream consumer would land on the correct answer here."
+  },
+  "flask-03": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- src/flask/wrappers.py (the Request class) never appears in the top 10 despite being the unambiguous, single-file answer. Retrieved entities (Flask, Scaffold, App, View, AppContext, SessionInterface) are all real and loosely topically adjacent but none answer the question. No fabrication, but the correct answer is simply absent from what a consumer would see."
+  },
+  "flask-04": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": true,
+    "failure_category": null,
+    "notes": "Best-performing relationship query: Scaffold.route, Scaffold.add_url_rule, and the Scaffold/App classes are all retrieved with recall 1.0 and the best precision (0.4) of any answerable query. Correctly supports the two-hop route()->add_url_rule() chain."
+  },
+  "flask-05": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Recall 0.5: sansio/blueprints.py retrieved (App.register_blueprint, no direct Blueprint(Scaffold) class hit though), but flask/blueprints.py -- the actual flask.blueprints.Blueprint class this query asks about -- never appears. The deliberately tricky same-name-different-module aspect of this query is where it fails."
+  },
+  "flask-06": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": true,
+    "failure_category": "ranking_failure",
+    "notes": "File-level recall shows 1.0 (app.py appears) but this is misleading for a multi-hop query: of the 5 methods the ground truth names (wsgi_app, full_dispatch_request, preprocess_request, dispatch_request, finalize_request), only dispatch_request is actually retrieved -- and even that ranks below several irrelevant test-file 'dispatch_request'/'end_of_request' hits from unrelated test classes. wsgi_app, full_dispatch_request, preprocess_request, and finalize_request are all absent from the top 10. This is exactly the case the benchmark spec calls out: a shallow retrieval that surfaces only one of several needed methods should not be scored as fully correct, and file-level recall alone would have hidden this failure."
+  },
+  "flask-07": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "SessionInterface/SecureCookieSessionInterface classes retrieved, but the one method that actually explains the mechanism (get_signing_serializer, where itsdangerous is invoked) is absent from the top 10 -- it only appears in the 'unknowns' list. A consumer gets the right neighborhood but not the specific evidence needed for a complete, correct answer."
+  },
+  "flask-08": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- Flask.run() (app.py:633) never retrieved. Instead dominated by test-file variables literally named 'called' and 'debug' from entirely unrelated tests, again consistent with the short-document TF-IDF bias: a variable whose entire indexed text is one token ('called') scores higher than the real run() method's diluted term weights."
+  },
+  "flask-09": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "sansio/app.py retrieved via App.url_rule_class (a tangential Variable), but the actual answer method, App.raise_routing_exception, is absent from the top 10 -- it only appears in 'unknowns'. Right file, wrong entity."
+  },
+  "flask-10": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": true,
+    "failure_category": "ranking_failure",
+    "notes": "app.py is retrieved (satisfying file-level recall) but via the wrong methods entirely -- make_response, jsonify, send_from_directory. The two methods that actually answer this question, Flask.handle_user_exception and Flask.handle_exception, are both completely absent from the top 10 and only surface in the 'unknowns' list. A consumer would be led toward response-formatting code, not exception-handling code -- a materially wrong answer despite passing the file-level recall metric."
+  },
+  "flask-11": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- FlaskClient/EnvironBuilder (testing.py) never retrieved. Dominated by unrelated test-file local variables literally named 'test_client', the same short-document TF-IDF pattern as flask-08/flask-03."
+  },
+  "flask-12": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": true,
+    "failure_category": null,
+    "notes": "Strongest cross-file result: App.register_blueprint, Blueprint.register_blueprint, the Blueprint class, and BlueprintSetupState (+ its __init__) are all retrieved, correctly spanning both files. Missing the specific Blueprint.register (sansio/blueprints.py:273) and BlueprintSetupState.add_url_rule (line 87) methods that complete the exact chain, so scored PARTIAL rather than fully correct, but this is the best multi-hop/cross-file result in the Flask set."
+  },
+  "flask-13": {
+    "final_answer_correct": false,
+    "unsupported_claim": "borderline",
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (Flask has no CSRF protection). Veyra's search() has no relevance/confidence threshold -- search_semantic() returns any entity with cosine similarity > 0.0, so it always returns its 10 best-effort matches regardless of whether any of them are actually relevant. Here it retrieved DebugFilesKeyError and Request.max_form_parts/_max_form_parts purely on the shared token 'form' from 'form submissions'. None of these are CSRF-related, and nothing in the retrieved context signals 'no relevant evidence exists for this query' -- that determination is left entirely to a downstream LLM's own discretion, unsupported by anything Veyra's retrieval layer itself computed. Structural root cause: match scores (ScoredEntity.score) are computed by search() but discarded before reaching RetrievedContext/GroundingContext, so even a caller wanting to build a low-confidence threshold has no score to check."
+  },
+  "flask-14": {
+    "final_answer_correct": false,
+    "unsupported_claim": "borderline",
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (Flask has no built-in ORM). Veyra retrieved examples/tutorial/flaskr/db.py's get_db() -- Flask's own tutorial example showing a user how to wire up sqlite3 manually -- which a downstream consumer could easily mistake for 'Flask has database support', when it is actually documentation/example code, not framework functionality. Veyra's grounding context has no field distinguishing example/tutorial code from core library code, and (same as flask-13) no confidence signal indicating this retrieval doesn't actually support the query. Same structural gap as flask-13."
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "sqla-01": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss -- orm/session.py's Session class never retrieved. Top results are dominated by entities whose names literally contain 'is_user_defined'/'_is_user_defined' (a real SQLAlchemy naming convention for a UserDefinedType feature, unrelated to this query), because the query 'Where is the X class defined?' tokenizes to include 'defined', and SQLAlchemy happens to have several short-named entities with 'defined' baked into their identifier. Confirms and sharpens the length-bias finding: a generic phrasing choice ('...class defined?') collided with an incidental naming convention in this specific codebase."
+  },
+  "sqla-02": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Engine.execution_options (real, correct file) is retrieved but ranks 6th of 10, behind the same 'is_user_defined'-collision noise as sqla-01, plus two AsyncEngine methods that are related but not the base Engine class itself."
+  },
+  "sqla-03": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss -- sql/schema.py's Table class never retrieved, dominated by the identical 'is_user_defined' noise as sqla-01, plus TableClause._is_table/ClauseElement._is_table (real but tangential attributes, not the Table class definition itself). Notably: sqla-01 and sqla-03 ask about two entirely different classes (Session vs Table) but share 5 of their top 5 retrieved entities verbatim -- a clean demonstration that the query's incidental shared wording ('...class defined?') is driving the ranking far more than the actual subject."
+  },
+  "sqla-04": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": true,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- create_engine()/Engine/Connection never retrieved for this relationship query."
+  },
+  "sqla-05": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "Best-performing SQLAlchemy query: Session.flush and Session.enable_relationship_loading both retrieved directly from orm/session.py. Session.add itself isn't confirmed in the visible portion reviewed, so marked PARTIAL rather than fully correct, but this is materially better than most other SQLAlchemy queries."
+  },
+  "sqla-06": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": "PARTIAL",
+    "multi_hop": true,
+    "failure_category": "ranking_failure",
+    "notes": "File-level recall shows 1.0 (session.py appears) but only via Query.session, an unrelated Variable -- Session.add/commit/flush, the three methods this multi-hop query actually needs, are absent from what was reviewed. Same 'right file, wrong entity' pattern seen repeatedly in Flask/FastAPI."
+  },
+  "sqla-07": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- relationship()/_LazyLoader never retrieved for the lazy-loading architecture question."
+  },
+  "sqla-08": {
+    "final_answer_correct": "PARTIAL",
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "notes": "Reasonable result: AsyncSession.commit, SessionTransaction machinery, and transaction-lifecycle event hooks are all retrieved and plausibly support answering whether flush() commits. Session.flush itself not confirmed in the reviewed portion."
+  },
+  "sqla-09": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- create_engine() never retrieved for the malformed-URL behavioral question (this query was already marked ambiguous in ground truth for requiring a deeper hop, but the base create_engine() function itself failing to retrieve at all is a retrieval failure independent of that)."
+  },
+  "sqla-10": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- sqlalchemy/log.py and create_engine() both absent for the echo/logging debugging question."
+  },
+  "sqla-11": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": false,
+    "failure_category": "retrieval_failure",
+    "notes": "Complete miss -- _LazyLoader/relationship() never retrieved for the lazy-loading debugging question, same gap as sqla-07."
+  },
+  "sqla-12": {
+    "final_answer_correct": false,
+    "unsupported_claim": false,
+    "localization_correct": false,
+    "multi_hop": true,
+    "failure_category": "ranking_failure",
+    "notes": "Complete miss on the most demanding cross-file query in the set (DeclarativeBase -> decl_base.py -> Table -> Mapper). Top results are entirely test-file local variables named exactly 'a' (test.sql.test_selectable.*). Root cause distinct from pure length bias: the query's own incidental stopword 'a' ('declaring A class with...') is tokenized and weighted like any other term with no stopword filtering, and SQLAlchemy's large test suite happens to contain many variables literally named 'a' -- each a perfect single-token TF-IDF match for that one stray word in the query."
+  },
+  "sqla-13": {
+    "final_answer_correct": false,
+    "unsupported_claim": true,
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (SQLAlchemy has no HTTP routing). Retrieved a class literally named RoutingSession and classes named RequestA/RequestB -- all real, but from ORM test fixtures with no connection to HTTP routing; their names alone could plausibly mislead a downstream reader into thinking SQLAlchemy has an HTTP routing layer. Same false-premise-confirming-by-name risk as fastapi-13."
+  },
+  "sqla-14": {
+    "final_answer_correct": false,
+    "unsupported_claim": true,
+    "localization_correct": false,
+    "multi_hop": false,
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "notes": "Negative query (SQLAlchemy has no password-hashing/authentication). Retrieved several real 'password' fields, including engine/url.py's URL.password -- a genuine attribute for holding a database connection-string password, not an authentication/hashing feature. A downstream reader could easily mistake this for evidence that SQLAlchemy implements password handling for end-user authentication, when it is actually just a connection-URL field. Same class of risk as sqla-13/fastapi-13."
+  }
+}

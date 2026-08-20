@@ -1,0 +1,2357 @@
+{
+  "repo_name": "sqlalchemy",
+  "commit_sha": "16d00eca61cfc690b2709642f4a2656fb6424875",
+  "index_entity_count": 87782,
+  "query_count": 14,
+  "results": [
+    {
+      "query_id": "sqla-01",
+      "query": "Where is the Session class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 18.465601921081543,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+          "node_type": "Method",
+          "name": "test_where_defined",
+          "source_location": "test/dialect/postgresql/test_types.py:4244-4248",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1453-1453",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1299-1299",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+          "node_type": "Variable",
+          "name": "name",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:271-271",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm._typing.is_user_defined_option",
+          "node_type": "Function",
+          "name": "is_user_defined_option",
+          "source_location": "lib/sqlalchemy/orm/_typing.py:127-130",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session",
+          "node_type": "Class",
+          "name": "scoped_session",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:153-2227",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation",
+          "node_type": "Method",
+          "name": "test_execution_option_visibility_and_mutation",
+          "source_location": "test/orm/test_events.py:286-489",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session.is_active",
+          "node_type": "Method",
+          "name": "is_active",
+          "source_location": "lib/sqlalchemy/ext/asyncio/scoping.py:1465-1505",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.compiler.GenericTypeCompiler.visit_user_defined",
+          "node_type": "Method",
+          "name": "visit_user_defined",
+          "source_location": "lib/sqlalchemy/sql/compiler.py:7863-7866",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "node_type": "Class",
+          "name": "UserDefinedType",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1383-1472",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/hstore.py",
+        "lib/sqlalchemy/ext/asyncio/scoping.py",
+        "lib/sqlalchemy/orm/_typing.py",
+        "lib/sqlalchemy/orm/interfaces.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/sql/compiler.py",
+        "lib/sqlalchemy/sql/type_api.py",
+        "test/dialect/postgresql/test_types.py",
+        "test/orm/test_events.py"
+      ],
+      "retrieved_symbols": [
+        "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+        "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+        "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+        "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+        "lib.sqlalchemy.orm._typing.is_user_defined_option",
+        "lib.sqlalchemy.orm.scoping.scoped_session",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation",
+        "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session.is_active",
+        "lib.sqlalchemy.sql.compiler.GenericTypeCompiler.visit_user_defined",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.orm.scoping.scoped_session.__call__",
+        "lib.sqlalchemy.orm.scoping.scoped_session.__contains__",
+        "lib.sqlalchemy.orm.scoping.scoped_session.__init__",
+        "lib.sqlalchemy.orm.scoping.scoped_session.__iter__",
+        "lib.sqlalchemy.orm.scoping.scoped_session._proxied",
+        "lib.sqlalchemy.orm.scoping.scoped_session._support_async",
+        "lib.sqlalchemy.orm.scoping.scoped_session.add",
+        "lib.sqlalchemy.orm.scoping.scoped_session.add_all",
+        "lib.sqlalchemy.orm.scoping.scoped_session.autoflush",
+        "lib.sqlalchemy.orm.scoping.scoped_session.begin",
+        "lib.sqlalchemy.orm.scoping.scoped_session.begin_nested",
+        "lib.sqlalchemy.orm.scoping.scoped_session.bind",
+        "lib.sqlalchemy.orm.scoping.scoped_session.bulk_insert_mappings",
+        "lib.sqlalchemy.orm.scoping.scoped_session.bulk_save_objects",
+        "lib.sqlalchemy.orm.scoping.scoped_session.bulk_update_mappings",
+        "lib.sqlalchemy.orm.scoping.scoped_session.close",
+        "lib.sqlalchemy.orm.scoping.scoped_session.commit",
+        "lib.sqlalchemy.orm.scoping.scoped_session.configure",
+        "lib.sqlalchemy.orm.scoping.scoped_session.connection",
+        "lib.sqlalchemy.orm.scoping.scoped_session.delete",
+        "lib.sqlalchemy.orm.scoping.scoped_session.delete_all",
+        "lib.sqlalchemy.orm.scoping.scoped_session.deleted",
+        "lib.sqlalchemy.orm.scoping.scoped_session.dirty",
+        "lib.sqlalchemy.orm.scoping.scoped_session.execute",
+        "lib.sqlalchemy.orm.scoping.scoped_session.execution_options",
+        "lib.sqlalchemy.orm.scoping.scoped_session.expire",
+        "lib.sqlalchemy.orm.scoping.scoped_session.expire_all",
+        "lib.sqlalchemy.orm.scoping.scoped_session.expunge",
+        "lib.sqlalchemy.orm.scoping.scoped_session.expunge_all",
+        "lib.sqlalchemy.orm.scoping.scoped_session.flush",
+        "lib.sqlalchemy.orm.scoping.scoped_session.get",
+        "lib.sqlalchemy.orm.scoping.scoped_session.get_bind",
+        "lib.sqlalchemy.orm.scoping.scoped_session.get_one",
+        "lib.sqlalchemy.orm.scoping.scoped_session.identity_key",
+        "lib.sqlalchemy.orm.scoping.scoped_session.identity_map",
+        "lib.sqlalchemy.orm.scoping.scoped_session.info",
+        "lib.sqlalchemy.orm.scoping.scoped_session.is_active",
+        "lib.sqlalchemy.orm.scoping.scoped_session.is_modified",
+        "lib.sqlalchemy.orm.scoping.scoped_session.merge",
+        "lib.sqlalchemy.orm.scoping.scoped_session.merge_all",
+        "lib.sqlalchemy.orm.scoping.scoped_session.new",
+        "lib.sqlalchemy.orm.scoping.scoped_session.no_autoflush",
+        "lib.sqlalchemy.orm.scoping.scoped_session.object_session",
+        "lib.sqlalchemy.orm.scoping.scoped_session.query",
+        "lib.sqlalchemy.orm.scoping.scoped_session.query_property",
+        "lib.sqlalchemy.orm.scoping.scoped_session.refresh",
+        "lib.sqlalchemy.orm.scoping.scoped_session.registry",
+        "lib.sqlalchemy.orm.scoping.scoped_session.remove",
+        "lib.sqlalchemy.orm.scoping.scoped_session.reset",
+        "lib.sqlalchemy.orm.scoping.scoped_session.rollback",
+        "lib.sqlalchemy.orm.scoping.scoped_session.scalar",
+        "lib.sqlalchemy.orm.scoping.scoped_session.scalars",
+        "lib.sqlalchemy.orm.scoping.scoped_session.session_factory",
+        "lib.sqlalchemy.sql.type_api.ExternalType",
+        "lib.sqlalchemy.sql.type_api.TypeEngineMixin",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.__visit_name__",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.coerce_compared_value",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.ensure_kwarg",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.operator_classes",
+        "test.dialect.postgresql.test_types.HStoreTest._test_where",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation._before_cursor_execute",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.m1",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.s",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.stmt"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-02",
+      "query": "Where is the Engine class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 16.60794234275818,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+          "node_type": "Method",
+          "name": "test_where_defined",
+          "source_location": "test/dialect/postgresql/test_types.py:4244-4248",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1453-1453",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1299-1299",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.engine",
+          "node_type": "Method",
+          "name": "engine",
+          "source_location": "lib/sqlalchemy/ext/asyncio/engine.py:1277-1291",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.name",
+          "node_type": "Method",
+          "name": "name",
+          "source_location": "lib/sqlalchemy/ext/asyncio/engine.py:1294-1306",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Engine.execution_options",
+          "node_type": "Method",
+          "name": "execution_options",
+          "source_location": "lib/sqlalchemy/engine/base.py:3027-3105",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.base.Engine",
+          "node_type": "Class",
+          "name": "Engine",
+          "source_location": "lib/sqlalchemy/engine/base.py:2893-3284",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.driver",
+          "node_type": "Method",
+          "name": "driver",
+          "source_location": "lib/sqlalchemy/ext/asyncio/engine.py:1309-1321",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+          "node_type": "Variable",
+          "name": "name",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:271-271",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.interfaces.ExecutionContext.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "lib/sqlalchemy/engine/interfaces.py:3136-3136",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/hstore.py",
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/engine/interfaces.py",
+        "lib/sqlalchemy/ext/asyncio/engine.py",
+        "lib/sqlalchemy/orm/interfaces.py",
+        "test/dialect/postgresql/test_types.py"
+      ],
+      "retrieved_symbols": [
+        "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+        "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+        "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+        "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.engine",
+        "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.name",
+        "lib.sqlalchemy.engine.base.Engine.execution_options",
+        "lib.sqlalchemy.engine.base.Engine",
+        "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine.driver",
+        "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+        "lib.sqlalchemy.engine.interfaces.ExecutionContext.engine"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/engine/base.py"
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/engine/base.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.16666666666666666,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.engine.base.Engine.__init__",
+        "lib.sqlalchemy.engine.base.Engine.__repr__",
+        "lib.sqlalchemy.engine.base.Engine._compiled_cache",
+        "lib.sqlalchemy.engine.base.Engine._connection_cls",
+        "lib.sqlalchemy.engine.base.Engine._execution_options",
+        "lib.sqlalchemy.engine.base.Engine._has_events",
+        "lib.sqlalchemy.engine.base.Engine._is_future",
+        "lib.sqlalchemy.engine.base.Engine._lru_size_alert",
+        "lib.sqlalchemy.engine.base.Engine._option_cls",
+        "lib.sqlalchemy.engine.base.Engine._optional_conn_ctx_manager",
+        "lib.sqlalchemy.engine.base.Engine._run_ddl_visitor",
+        "lib.sqlalchemy.engine.base.Engine._schema_translate_map",
+        "lib.sqlalchemy.engine.base.Engine._sqla_logger_namespace",
+        "lib.sqlalchemy.engine.base.Engine.begin",
+        "lib.sqlalchemy.engine.base.Engine.clear_compiled_cache",
+        "lib.sqlalchemy.engine.base.Engine.connect",
+        "lib.sqlalchemy.engine.base.Engine.dialect",
+        "lib.sqlalchemy.engine.base.Engine.dispatch",
+        "lib.sqlalchemy.engine.base.Engine.dispose",
+        "lib.sqlalchemy.engine.base.Engine.driver",
+        "lib.sqlalchemy.engine.base.Engine.echo",
+        "lib.sqlalchemy.engine.base.Engine.engine",
+        "lib.sqlalchemy.engine.base.Engine.get_execution_options",
+        "lib.sqlalchemy.engine.base.Engine.hide_parameters",
+        "lib.sqlalchemy.engine.base.Engine.name",
+        "lib.sqlalchemy.engine.base.Engine.pool",
+        "lib.sqlalchemy.engine.base.Engine.raw_connection",
+        "lib.sqlalchemy.engine.base.Engine.update_execution_options",
+        "lib.sqlalchemy.engine.base.Engine.url",
+        "lib.sqlalchemy.engine.base.OptionEngine",
+        "test.dialect.postgresql.test_types.HStoreTest._test_where"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-03",
+      "query": "Where is the Table class defined?",
+      "category": "A_symbol_location",
+      "elapsed_seconds": 16.73324155807495,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+          "node_type": "Method",
+          "name": "test_where_defined",
+          "source_location": "test/dialect/postgresql/test_types.py:4244-4248",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1453-1453",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+          "node_type": "Variable",
+          "name": "_is_user_defined",
+          "source_location": "lib/sqlalchemy/orm/interfaces.py:1299-1299",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+          "node_type": "Variable",
+          "name": "name",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/hstore.py:271-271",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm._typing.is_user_defined_option",
+          "node_type": "Function",
+          "name": "is_user_defined_option",
+          "source_location": "lib/sqlalchemy/orm/_typing.py:127-130",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.selectable.TableClause._is_table",
+          "node_type": "Variable",
+          "name": "_is_table",
+          "source_location": "lib/sqlalchemy/sql/selectable.py:3199-3199",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.elements.ClauseElement._is_table",
+          "node_type": "Variable",
+          "name": "_is_table",
+          "source_location": "lib/sqlalchemy/sql/elements.py:375-375",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "node_type": "Class",
+          "name": "UserDefinedType",
+          "source_location": "lib/sqlalchemy/sql/type_api.py:1383-1472",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation",
+          "node_type": "Method",
+          "name": "test_execution_option_visibility_and_mutation",
+          "source_location": "test/orm/test_events.py:286-489",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.compiler.GenericTypeCompiler.visit_user_defined",
+          "node_type": "Method",
+          "name": "visit_user_defined",
+          "source_location": "lib/sqlalchemy/sql/compiler.py:7863-7866",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/postgresql/hstore.py",
+        "lib/sqlalchemy/orm/_typing.py",
+        "lib/sqlalchemy/orm/interfaces.py",
+        "lib/sqlalchemy/sql/compiler.py",
+        "lib/sqlalchemy/sql/elements.py",
+        "lib/sqlalchemy/sql/selectable.py",
+        "lib/sqlalchemy/sql/type_api.py",
+        "test/dialect/postgresql/test_types.py",
+        "test/orm/test_events.py"
+      ],
+      "retrieved_symbols": [
+        "test.dialect.postgresql.test_types.HStoreTest.test_where_defined",
+        "lib.sqlalchemy.orm.interfaces.UserDefinedOption._is_user_defined",
+        "lib.sqlalchemy.orm.interfaces.ORMOption._is_user_defined",
+        "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction.name",
+        "lib.sqlalchemy.orm._typing.is_user_defined_option",
+        "lib.sqlalchemy.sql.selectable.TableClause._is_table",
+        "lib.sqlalchemy.sql.elements.ClauseElement._is_table",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation",
+        "lib.sqlalchemy.sql.compiler.GenericTypeCompiler.visit_user_defined"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/sql/schema.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.sql.type_api.ExternalType",
+        "lib.sqlalchemy.sql.type_api.TypeEngineMixin",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.__visit_name__",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.coerce_compared_value",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.ensure_kwarg",
+        "lib.sqlalchemy.sql.type_api.UserDefinedType.operator_classes",
+        "test.dialect.postgresql.test_types.HStoreTest._test_where",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation._before_cursor_execute",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.m1",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.s",
+        "test.orm.test_events.ORMExecuteTest.test_execution_option_visibility_and_mutation.stmt"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-04",
+      "query": "What is create_engine()'s return type, and what class actually executes queries against it?",
+      "category": "B_relationship",
+      "elapsed_seconds": 16.976905822753906,
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.testing.__init__.against",
+          "node_type": "Function",
+          "name": "against",
+          "source_location": "lib/sqlalchemy/testing/__init__.py:93-94",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.exc.HasDescriptionCode._what_are_we",
+          "node_type": "Variable",
+          "name": "_what_are_we",
+          "source_location": "lib/sqlalchemy/exc.py:55-55",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.exc.SADeprecationWarning._what_are_we",
+          "node_type": "Variable",
+          "name": "_what_are_we",
+          "source_location": "lib/sqlalchemy/exc.py:891-891",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.exc.SAWarning._what_are_we",
+          "node_type": "Variable",
+          "name": "_what_are_we",
+          "source_location": "lib/sqlalchemy/exc.py:939-939",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.oracle.base.OracleDialect._comment_query.queries",
+          "node_type": "Variable",
+          "name": "queries",
+          "source_location": "lib/sqlalchemy/dialects/oracle/base.py:3136-3136",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.exclusions.against",
+          "node_type": "Function",
+          "name": "against",
+          "source_location": "lib/sqlalchemy/testing/exclusions.py:497-501",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "test.perf.many_table_reflection._apply_events.queries",
+          "node_type": "Variable",
+          "name": "queries",
+          "source_location": "test/perf/many_table_reflection.py:413-413",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.test_unitofworkv2.TryToFoolInsertManyValuesTest.test_this_really_fails_on_mssql_wo_full_fix.what_we_got_is",
+          "node_type": "Variable",
+          "name": "what_we_got_is",
+          "source_location": "test/orm/test_unitofworkv2.py:4176-4178",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.typing.plain_files.orm.sessionmakers.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "test/typing/plain_files/orm/sessionmakers.py:56-56",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query._set_op.list_of_queries",
+          "node_type": "Variable",
+          "name": "list_of_queries",
+          "source_location": "lib/sqlalchemy/orm/query.py:2155-2155",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/oracle/base.py",
+        "lib/sqlalchemy/exc.py",
+        "lib/sqlalchemy/orm/query.py",
+        "lib/sqlalchemy/testing/__init__.py",
+        "lib/sqlalchemy/testing/exclusions.py",
+        "test/orm/test_unitofworkv2.py",
+        "test/perf/many_table_reflection.py",
+        "test/typing/plain_files/orm/sessionmakers.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.testing.__init__.against",
+        "lib.sqlalchemy.exc.HasDescriptionCode._what_are_we",
+        "lib.sqlalchemy.exc.SADeprecationWarning._what_are_we",
+        "lib.sqlalchemy.exc.SAWarning._what_are_we",
+        "lib.sqlalchemy.dialects.oracle.base.OracleDialect._comment_query.queries",
+        "lib.sqlalchemy.testing.exclusions.against",
+        "test.perf.many_table_reflection._apply_events.queries",
+        "test.orm.test_unitofworkv2.TryToFoolInsertManyValuesTest.test_this_really_fails_on_mssql_wo_full_fix.what_we_got_is",
+        "test.typing.plain_files.orm.sessionmakers.engine",
+        "lib.sqlalchemy.orm.query.Query._set_op.list_of_queries"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/engine/base.py",
+        "lib/sqlalchemy/engine/create.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.testing.exclusions.OrPredicate"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-05",
+      "query": "What does Session.add() do to an object before it's actually written to the database?",
+      "category": "B_relationship",
+      "elapsed_seconds": 16.171836853027344,
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents.before_attach",
+          "node_type": "Method",
+          "name": "before_attach",
+          "source_location": "lib/sqlalchemy/orm/events.py:2045-2057",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session._SessionClassMethods.object_session",
+          "node_type": "Method",
+          "name": "object_session",
+          "source_location": "lib/sqlalchemy/orm/session.py:232-239",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session.enable_relationship_loading",
+          "node_type": "Method",
+          "name": "enable_relationship_loading",
+          "source_location": "lib/sqlalchemy/orm/session.py:4361-4424",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session.flush",
+          "node_type": "Method",
+          "name": "flush",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:932-963",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session.flush",
+          "node_type": "Method",
+          "name": "flush",
+          "source_location": "lib/sqlalchemy/orm/session.py:4479-4513",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents",
+          "node_type": "Class",
+          "name": "SessionEvents",
+          "source_location": "lib/sqlalchemy/orm/events.py:1532-2400",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection.add",
+          "node_type": "Method",
+          "name": "add",
+          "source_location": "lib/sqlalchemy/orm/writeonly.py:685-692",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.session.AsyncSession.object_session",
+          "node_type": "Method",
+          "name": "object_session",
+          "source_location": "lib/sqlalchemy/ext/asyncio/session.py:1619-1632",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.MapperEvents.before_insert",
+          "node_type": "Method",
+          "name": "before_insert",
+          "source_location": "lib/sqlalchemy/orm/events.py:1164-1216",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents.detached_to_persistent",
+          "node_type": "Method",
+          "name": "detached_to_persistent",
+          "source_location": "lib/sqlalchemy/orm/events.py:2235-2267",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/ext/asyncio/session.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/orm/writeonly.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.orm.events.SessionEvents.before_attach",
+        "lib.sqlalchemy.orm.session._SessionClassMethods.object_session",
+        "lib.sqlalchemy.orm.session.Session.enable_relationship_loading",
+        "lib.sqlalchemy.orm.scoping.scoped_session.flush",
+        "lib.sqlalchemy.orm.session.Session.flush",
+        "lib.sqlalchemy.orm.events.SessionEvents",
+        "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection.add",
+        "lib.sqlalchemy.ext.asyncio.session.AsyncSession.object_session",
+        "lib.sqlalchemy.orm.events.MapperEvents.before_insert",
+        "lib.sqlalchemy.orm.events.SessionEvents.detached_to_persistent"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.2,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.orm.events.SessionEvents._accept_with",
+        "lib.sqlalchemy.orm.events.SessionEvents._dispatch_target",
+        "lib.sqlalchemy.orm.events.SessionEvents._lifecycle_event",
+        "lib.sqlalchemy.orm.events.SessionEvents._listen",
+        "lib.sqlalchemy.orm.events.SessionEvents._target_class_doc",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_attach",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_begin",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_bulk_delete",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_bulk_update",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_commit",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_flush",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_flush_postexec",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_rollback",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_soft_rollback",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_create",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_end",
+        "lib.sqlalchemy.orm.events.SessionEvents.before_commit",
+        "lib.sqlalchemy.orm.events.SessionEvents.before_flush",
+        "lib.sqlalchemy.orm.events.SessionEvents.deleted_to_detached",
+        "lib.sqlalchemy.orm.events.SessionEvents.deleted_to_persistent",
+        "lib.sqlalchemy.orm.events.SessionEvents.do_orm_execute",
+        "lib.sqlalchemy.orm.events.SessionEvents.loaded_as_persistent",
+        "lib.sqlalchemy.orm.events.SessionEvents.pending_to_persistent",
+        "lib.sqlalchemy.orm.events.SessionEvents.pending_to_transient",
+        "lib.sqlalchemy.orm.events.SessionEvents.persistent_to_deleted",
+        "lib.sqlalchemy.orm.events.SessionEvents.persistent_to_detached",
+        "lib.sqlalchemy.orm.events.SessionEvents.persistent_to_transient",
+        "lib.sqlalchemy.orm.events.SessionEvents.transient_to_pending",
+        "lib.sqlalchemy.orm.session.Session._after_attach",
+        "lib.sqlalchemy.orm.session.Session._before_attach",
+        "lib.sqlalchemy.orm.session.Session._flush",
+        "lib.sqlalchemy.orm.session.Session._is_clean",
+        "lib.sqlalchemy.orm.session.Session.enable_relationship_loading.to_attach",
+        "lib.sqlalchemy.orm.session.object_session",
+        "lib.sqlalchemy.orm.writeonly._T"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-06",
+      "query": "How does calling session.add(obj) followed by session.commit() turn into an actual SQL INSERT statement?",
+      "category": "C_architecture",
+      "elapsed_seconds": 16.08830976486206,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.dialect.oracle.test_types.LOBFetchTest.test_lobs_without_convert_many_rows.go.actual",
+          "node_type": "Variable",
+          "name": "actual",
+          "source_location": "test/dialect/oracle/test_types.py:1532-1532",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_relationship.SubClassToSubClassFromParentTest.insert_data",
+          "node_type": "Method",
+          "name": "insert_data",
+          "source_location": "test/orm/inheritance/test_relationship.py:1624-1629",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "test.ext.test_associationproxy.ScalarTest.test_scalar_proxy.roundtrip",
+          "node_type": "Function",
+          "name": "roundtrip",
+          "source_location": "test/ext/test_associationproxy.py:1101-1107",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "examples.versioned_rows.versioned_rows.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "examples/versioned_rows/versioned_rows.py:108-108",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.versioned_rows.versioned_rows_w_versionid.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "examples/versioned_rows/versioned_rows_w_versionid.py:151-151",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "lib/sqlalchemy/orm/query.py:234-234",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.ORMExecuteState.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "lib/sqlalchemy/orm/session.py:284-284",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.SessionTransaction.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "lib/sqlalchemy/orm/session.py:902-902",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.unitofwork.UOWTransaction.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "lib/sqlalchemy/orm/unitofwork.py:159-159",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.aaa_profiling.test_threading.SessionThreadingTest.test_scoped_session_thread_local.worker.session",
+          "node_type": "Variable",
+          "name": "session",
+          "source_location": "test/aaa_profiling/test_threading.py:228-228",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "examples/versioned_rows/versioned_rows.py",
+        "examples/versioned_rows/versioned_rows_w_versionid.py",
+        "lib/sqlalchemy/orm/query.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/orm/unitofwork.py",
+        "test/aaa_profiling/test_threading.py",
+        "test/dialect/oracle/test_types.py",
+        "test/ext/test_associationproxy.py",
+        "test/orm/inheritance/test_relationship.py"
+      ],
+      "retrieved_symbols": [
+        "test.dialect.oracle.test_types.LOBFetchTest.test_lobs_without_convert_many_rows.go.actual",
+        "test.orm.inheritance.test_relationship.SubClassToSubClassFromParentTest.insert_data",
+        "test.ext.test_associationproxy.ScalarTest.test_scalar_proxy.roundtrip",
+        "examples.versioned_rows.versioned_rows.session",
+        "examples.versioned_rows.versioned_rows_w_versionid.session",
+        "lib.sqlalchemy.orm.query.Query.session",
+        "lib.sqlalchemy.orm.session.ORMExecuteState.session",
+        "lib.sqlalchemy.orm.session.SessionTransaction.session",
+        "lib.sqlalchemy.orm.unitofwork.UOWTransaction.session",
+        "test.aaa_profiling.test_threading.SessionThreadingTest.test_scoped_session_thread_local.worker.session"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.1111111111111111,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.orm.session.Session",
+        "test.ext.test_associationproxy.MultiOwnerTest.setup_classes.A.type",
+        "test.orm.inheritance.test_relationship.SameNameOnJoined.setup_mappers.B",
+        "test.orm.inheritance.test_relationship.SubClassToSubClassFromParentTest.insert_data.B",
+        "test.orm.inheritance.test_relationship.SubClassToSubClassFromParentTest.insert_data.session"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-07",
+      "query": "How does relationship() implement lazy loading of related objects?",
+      "category": "C_architecture",
+      "elapsed_seconds": 16.032726287841797,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.orm.inheritance.test_poly_persistence.RoundTripTest.test_lazy_load.lazy_relationship",
+          "node_type": "Variable",
+          "name": "lazy_relationship",
+          "source_location": "test/orm/inheritance/test_poly_persistence.py:388-388",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_poly_persistence.RoundTripTest.setup_mappers.lazy_relationship",
+          "node_type": "Variable",
+          "name": "lazy_relationship",
+          "source_location": "test/orm/inheritance/test_poly_persistence.py:230-230",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_assorted_poly.PolyIntoSelfReferentialTest.setup_classes.A.related",
+          "node_type": "Variable",
+          "name": "related",
+          "source_location": "test/orm/inheritance/test_assorted_poly.py:2589-2589",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.test_options.FromSubclassOptionsTest.setup_mappers.BaseCls.related",
+          "node_type": "Variable",
+          "name": "related",
+          "source_location": "test/orm/test_options.py:859-859",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_poly_persistence.RoundTripTest.lazy_relationship",
+          "node_type": "Variable",
+          "name": "lazy_relationship",
+          "source_location": "test/orm/inheritance/test_poly_persistence.py:218-218",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_tm_future_annotations_sync.MixinTest.test_relationship_requires_declared_attr.HasRelated.related",
+          "node_type": "Variable",
+          "name": "related",
+          "source_location": "test/orm/declarative/test_tm_future_annotations_sync.py:3297-3297",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_typed_mapping.MixinTest.test_relationship_requires_declared_attr.HasRelated.related",
+          "node_type": "Variable",
+          "name": "related",
+          "source_location": "test/orm/declarative/test_typed_mapping.py:3288-3288",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_tm_future_annotations_sync.MixinTest.test_relationship_duplication_declared_attr.HasRelated.related",
+          "node_type": "Method",
+          "name": "related",
+          "source_location": "test/orm/declarative/test_tm_future_annotations_sync.py:3319-3320",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_typed_mapping.MixinTest.test_relationship_duplication_declared_attr.HasRelated.related",
+          "node_type": "Method",
+          "name": "related",
+          "source_location": "test/orm/declarative/test_typed_mapping.py:3310-3311",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.test_cycles.PostUpdatePrefetchTest.setup_classes.Parent.related",
+          "node_type": "Variable",
+          "name": "related",
+          "source_location": "test/orm/test_cycles.py:1611-1611",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "test/orm/declarative/test_tm_future_annotations_sync.py",
+        "test/orm/declarative/test_typed_mapping.py",
+        "test/orm/inheritance/test_assorted_poly.py",
+        "test/orm/inheritance/test_poly_persistence.py",
+        "test/orm/test_cycles.py",
+        "test/orm/test_options.py"
+      ],
+      "retrieved_symbols": [
+        "test.orm.inheritance.test_poly_persistence.RoundTripTest.test_lazy_load.lazy_relationship",
+        "test.orm.inheritance.test_poly_persistence.RoundTripTest.setup_mappers.lazy_relationship",
+        "test.orm.inheritance.test_assorted_poly.PolyIntoSelfReferentialTest.setup_classes.A.related",
+        "test.orm.test_options.FromSubclassOptionsTest.setup_mappers.BaseCls.related",
+        "test.orm.inheritance.test_poly_persistence.RoundTripTest.lazy_relationship",
+        "test.orm.declarative.test_tm_future_annotations_sync.MixinTest.test_relationship_requires_declared_attr.HasRelated.related",
+        "test.orm.declarative.test_typed_mapping.MixinTest.test_relationship_requires_declared_attr.HasRelated.related",
+        "test.orm.declarative.test_tm_future_annotations_sync.MixinTest.test_relationship_duplication_declared_attr.HasRelated.related",
+        "test.orm.declarative.test_typed_mapping.MixinTest.test_relationship_duplication_declared_attr.HasRelated.related",
+        "test.orm.test_cycles.PostUpdatePrefetchTest.setup_classes.Parent.related"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/_orm_constructors.py",
+        "lib/sqlalchemy/orm/strategies.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-08",
+      "query": "Does calling Session.flush() commit the current transaction?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 15.478403806686401,
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.ext.asyncio.session.AsyncSession.commit",
+          "node_type": "Method",
+          "name": "commit",
+          "source_location": "lib/sqlalchemy/ext/asyncio/session.py:1038-1046",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.unitofwork.UOWTransaction.transaction",
+          "node_type": "Variable",
+          "name": "transaction",
+          "source_location": "lib/sqlalchemy/orm/unitofwork.py:160-160",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_end",
+          "node_type": "Method",
+          "name": "after_transaction_end",
+          "source_location": "lib/sqlalchemy/orm/events.py:1778-1816",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session._transaction",
+          "node_type": "Variable",
+          "name": "_transaction",
+          "source_location": "lib/sqlalchemy/orm/session.py:1506-1506",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.SessionTransaction._iterate_self_and_parents",
+          "node_type": "Method",
+          "name": "_iterate_self_and_parents",
+          "source_location": "lib/sqlalchemy/orm/session.py:1068-1085",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_create",
+          "node_type": "Method",
+          "name": "after_transaction_create",
+          "source_location": "lib/sqlalchemy/orm/events.py:1735-1776",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session._flush.transaction",
+          "node_type": "Variable",
+          "name": "transaction",
+          "source_location": "lib/sqlalchemy/orm/session.py:4611-4611",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.Session.commit",
+          "node_type": "Method",
+          "name": "commit",
+          "source_location": "lib/sqlalchemy/orm/session.py:2040-2076",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.scoping.scoped_session.commit",
+          "node_type": "Method",
+          "name": "commit",
+          "source_location": "lib/sqlalchemy/orm/scoping.py:567-606",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.session.SessionTransaction",
+          "node_type": "Class",
+          "name": "SessionTransaction",
+          "source_location": "lib/sqlalchemy/orm/session.py:858-1462",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/ext/asyncio/session.py",
+        "lib/sqlalchemy/orm/events.py",
+        "lib/sqlalchemy/orm/scoping.py",
+        "lib/sqlalchemy/orm/session.py",
+        "lib/sqlalchemy/orm/unitofwork.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.ext.asyncio.session.AsyncSession.commit",
+        "lib.sqlalchemy.orm.unitofwork.UOWTransaction.transaction",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_end",
+        "lib.sqlalchemy.orm.session.Session._transaction",
+        "lib.sqlalchemy.orm.session.SessionTransaction._iterate_self_and_parents",
+        "lib.sqlalchemy.orm.events.SessionEvents.after_transaction_create",
+        "lib.sqlalchemy.orm.session.Session._flush.transaction",
+        "lib.sqlalchemy.orm.session.Session.commit",
+        "lib.sqlalchemy.orm.scoping.scoped_session.commit",
+        "lib.sqlalchemy.orm.session.SessionTransaction"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_hits": [
+        "lib/sqlalchemy/orm/session.py"
+      ],
+      "file_level_recall": 1.0,
+      "file_level_precision": 0.2,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.orm.session.Session._autobegin_t",
+        "lib.sqlalchemy.orm.session.Session.commit.trans",
+        "lib.sqlalchemy.orm.session.SessionTransaction.__init__",
+        "lib.sqlalchemy.orm.session.SessionTransaction._begin",
+        "lib.sqlalchemy.orm.session.SessionTransaction._connection_for_bind",
+        "lib.sqlalchemy.orm.session.SessionTransaction._connections",
+        "lib.sqlalchemy.orm.session.SessionTransaction._deleted",
+        "lib.sqlalchemy.orm.session.SessionTransaction._dirty",
+        "lib.sqlalchemy.orm.session.SessionTransaction._get_subject",
+        "lib.sqlalchemy.orm.session.SessionTransaction._is_transaction_boundary",
+        "lib.sqlalchemy.orm.session.SessionTransaction._iterate_self_and_parents.current",
+        "lib.sqlalchemy.orm.session.SessionTransaction._iterate_self_and_parents.result",
+        "lib.sqlalchemy.orm.session.SessionTransaction._key_switches",
+        "lib.sqlalchemy.orm.session.SessionTransaction._new",
+        "lib.sqlalchemy.orm.session.SessionTransaction._parent",
+        "lib.sqlalchemy.orm.session.SessionTransaction._prepare_impl",
+        "lib.sqlalchemy.orm.session.SessionTransaction._raise_for_prerequisite_state",
+        "lib.sqlalchemy.orm.session.SessionTransaction._remove_snapshot",
+        "lib.sqlalchemy.orm.session.SessionTransaction._restore_snapshot",
+        "lib.sqlalchemy.orm.session.SessionTransaction._rollback_can_be_called",
+        "lib.sqlalchemy.orm.session.SessionTransaction._rollback_exception",
+        "lib.sqlalchemy.orm.session.SessionTransaction._state",
+        "lib.sqlalchemy.orm.session.SessionTransaction._take_snapshot",
+        "lib.sqlalchemy.orm.session.SessionTransaction._transaction_is_active",
+        "lib.sqlalchemy.orm.session.SessionTransaction._transaction_is_closed",
+        "lib.sqlalchemy.orm.session.SessionTransaction.close",
+        "lib.sqlalchemy.orm.session.SessionTransaction.commit",
+        "lib.sqlalchemy.orm.session.SessionTransaction.connection",
+        "lib.sqlalchemy.orm.session.SessionTransaction.is_active",
+        "lib.sqlalchemy.orm.session.SessionTransaction.nested",
+        "lib.sqlalchemy.orm.session.SessionTransaction.origin",
+        "lib.sqlalchemy.orm.session.SessionTransaction.parent",
+        "lib.sqlalchemy.orm.session.SessionTransaction.prepare",
+        "lib.sqlalchemy.orm.session.SessionTransaction.rollback",
+        "lib.sqlalchemy.orm.session.SessionTransaction.session"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-09",
+      "query": "What happens when create_engine() is given a malformed database URL string?",
+      "category": "D_behavioral",
+      "elapsed_seconds": 16.02120876312256,
+      "retrieved_entities": [
+        {
+          "entity_id": "lib.sqlalchemy.dialects.oracle.cx_oracle.OracleDialect_cx_oracle.create_connect_args.database",
+          "node_type": "Variable",
+          "name": "database",
+          "source_location": "lib/sqlalchemy/dialects/oracle/cx_oracle.py:1588-1588",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.url.URL.create",
+          "node_type": "Method",
+          "name": "create",
+          "source_location": "lib/sqlalchemy/engine/url.py:153-216",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.engines.testing_engine.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "lib/sqlalchemy/testing/engines.py:356-356",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.provision.follower_url_from_main",
+          "node_type": "Function",
+          "name": "follower_url_from_main",
+          "source_location": "lib/sqlalchemy/testing/provision.py:416-424",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "test.engine.test_reconnect.MockReconnectTest.test_dialect_initialize_once.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "test/engine/test_reconnect.py:775-775",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.engine.test_reconnect.MockReconnectTest.test_dialect_initialize_retry_if_exception.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "test/engine/test_reconnect.py:814-814",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.url.URL",
+          "node_type": "Class",
+          "name": "URL",
+          "source_location": "lib/sqlalchemy/engine/url.py:46-836",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        },
+        {
+          "entity_id": "test.engine.test_parseconnect.URLTest.test_create_engine_url_invalid",
+          "node_type": "Method",
+          "name": "test_create_engine_url_invalid",
+          "source_location": "test/engine/test_parseconnect.py:359-364",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite._is_url_file_db",
+          "node_type": "Method",
+          "name": "_is_url_file_db",
+          "source_location": "lib/sqlalchemy/dialects/sqlite/pysqlite.py:638-644",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 4
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin.__init__",
+          "node_type": "Method",
+          "name": "__init__",
+          "source_location": "lib/sqlalchemy/engine/interfaces.py:3066-3091",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/dialects/oracle/cx_oracle.py",
+        "lib/sqlalchemy/dialects/sqlite/pysqlite.py",
+        "lib/sqlalchemy/engine/interfaces.py",
+        "lib/sqlalchemy/engine/url.py",
+        "lib/sqlalchemy/testing/engines.py",
+        "lib/sqlalchemy/testing/provision.py",
+        "test/engine/test_parseconnect.py",
+        "test/engine/test_reconnect.py"
+      ],
+      "retrieved_symbols": [
+        "lib.sqlalchemy.dialects.oracle.cx_oracle.OracleDialect_cx_oracle.create_connect_args.database",
+        "lib.sqlalchemy.engine.url.URL.create",
+        "lib.sqlalchemy.testing.engines.testing_engine.engine",
+        "lib.sqlalchemy.testing.provision.follower_url_from_main",
+        "test.engine.test_reconnect.MockReconnectTest.test_dialect_initialize_once.engine",
+        "test.engine.test_reconnect.MockReconnectTest.test_dialect_initialize_retry_if_exception.engine",
+        "lib.sqlalchemy.engine.url.URL",
+        "test.engine.test_parseconnect.URLTest.test_create_engine_url_invalid",
+        "lib.sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite._is_url_file_db",
+        "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin.__init__"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/engine/create.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [
+        "lib.sqlalchemy.engine.url.URL.__copy__",
+        "lib.sqlalchemy.engine.url.URL.__deepcopy__",
+        "lib.sqlalchemy.engine.url.URL.__eq__",
+        "lib.sqlalchemy.engine.url.URL.__hash__",
+        "lib.sqlalchemy.engine.url.URL.__ne__",
+        "lib.sqlalchemy.engine.url.URL.__repr__",
+        "lib.sqlalchemy.engine.url.URL.__to_string__",
+        "lib.sqlalchemy.engine.url.URL._assert_none_str",
+        "lib.sqlalchemy.engine.url.URL._assert_port",
+        "lib.sqlalchemy.engine.url.URL._assert_replace",
+        "lib.sqlalchemy.engine.url.URL._assert_str",
+        "lib.sqlalchemy.engine.url.URL._get_entrypoint",
+        "lib.sqlalchemy.engine.url.URL._get_entrypoint.cls",
+        "lib.sqlalchemy.engine.url.URL._instantiate_plugins",
+        "lib.sqlalchemy.engine.url.URL._str_dict",
+        "lib.sqlalchemy.engine.url.URL.database",
+        "lib.sqlalchemy.engine.url.URL.difference_update_query",
+        "lib.sqlalchemy.engine.url.URL.drivername",
+        "lib.sqlalchemy.engine.url.URL.get_backend_name",
+        "lib.sqlalchemy.engine.url.URL.get_dialect",
+        "lib.sqlalchemy.engine.url.URL.get_driver_name",
+        "lib.sqlalchemy.engine.url.URL.host",
+        "lib.sqlalchemy.engine.url.URL.normalized_query",
+        "lib.sqlalchemy.engine.url.URL.password",
+        "lib.sqlalchemy.engine.url.URL.port",
+        "lib.sqlalchemy.engine.url.URL.query",
+        "lib.sqlalchemy.engine.url.URL.render_as_string",
+        "lib.sqlalchemy.engine.url.URL.set",
+        "lib.sqlalchemy.engine.url.URL.translate_connect_args",
+        "lib.sqlalchemy.engine.url.URL.update_query_dict",
+        "lib.sqlalchemy.engine.url.URL.update_query_pairs",
+        "lib.sqlalchemy.engine.url.URL.update_query_string",
+        "lib.sqlalchemy.engine.url.URL.username",
+        "lib.sqlalchemy.testing.provision.follower_url_from_main.url"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-10",
+      "query": "If SQL statements aren't showing up in my logs despite passing echo=True to create_engine, where should I look?",
+      "category": "E_debugging",
+      "elapsed_seconds": 16.467840433120728,
+      "retrieved_entities": [
+        {
+          "entity_id": "examples.sharding.separate_schema_translates.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/sharding/separate_schema_translates.py:26-26",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.sharding.separate_tables.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/sharding/separate_tables.py:27-27",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.performance.bulk_inserts.setup_database.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/performance/bulk_inserts.py:36-36",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.performance.bulk_updates.setup_database.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/performance/bulk_updates.py:33-33",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.performance.large_resultsets.setup_database.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/performance/large_resultsets.py:44-44",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.performance.single_inserts.setup_database.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/performance/single_inserts.py:36-36",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.dynamic_dict.dynamic_dict.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/dynamic_dict/dynamic_dict.py:42-42",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.generic_associations.discriminator_on_association.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/generic_associations/discriminator_on_association.py:139-139",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.generic_associations.generic_fk.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/generic_associations/generic_fk.py:135-135",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "examples.generic_associations.table_per_association.engine",
+          "node_type": "Variable",
+          "name": "engine",
+          "source_location": "examples/generic_associations/table_per_association.py:90-90",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "examples/dynamic_dict/dynamic_dict.py",
+        "examples/generic_associations/discriminator_on_association.py",
+        "examples/generic_associations/generic_fk.py",
+        "examples/generic_associations/table_per_association.py",
+        "examples/performance/bulk_inserts.py",
+        "examples/performance/bulk_updates.py",
+        "examples/performance/large_resultsets.py",
+        "examples/performance/single_inserts.py",
+        "examples/sharding/separate_schema_translates.py",
+        "examples/sharding/separate_tables.py"
+      ],
+      "retrieved_symbols": [
+        "examples.sharding.separate_schema_translates.engine",
+        "examples.sharding.separate_tables.engine",
+        "examples.performance.bulk_inserts.setup_database.engine",
+        "examples.performance.bulk_updates.setup_database.engine",
+        "examples.performance.large_resultsets.setup_database.engine",
+        "examples.performance.single_inserts.setup_database.engine",
+        "examples.dynamic_dict.dynamic_dict.engine",
+        "examples.generic_associations.discriminator_on_association.engine",
+        "examples.generic_associations.generic_fk.engine",
+        "examples.generic_associations.table_per_association.engine"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/engine/create.py",
+        "lib/sqlalchemy/log.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-11",
+      "query": "Where would I investigate if a relationship() isn't lazy-loading the way I expect?",
+      "category": "E_debugging",
+      "elapsed_seconds": 16.030296802520752,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.sql.test_metadata.ConstraintTest.test_index_no_cols_private_table_arg.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/sql/test_metadata.py:3710-3710",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_metadata.ConstraintTest.test_separate_decl_columns.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/sql/test_metadata.py:3698-3698",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_metadata.ConstraintTest.test_index_w_cols_private_table_arg.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/sql/test_metadata.py:3717-3717",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.strategy_options._AbstractLoad._chop_path.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "lib/sqlalchemy/orm/strategy_options.py:942-942",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.aaa_profiling.test_memusage.MemUsageWBackendTest.test_unicode_warnings.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/aaa_profiling/test_memusage.py:698-698",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.ext.test_indexable.IndexPropertyArrayTest.test_modified.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/ext/test_indexable.py:242-242",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_metadata.ConstraintTest.test_inline_decl_columns.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/sql/test_metadata.py:3725-3725",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tools.cython_imports.run.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tools/cython_imports.py:64-64",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "tools.normalize_file_headers.run.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "tools/normalize_file_headers.py:51-51",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_metadata.ConstraintTest.test_inline_decl_string.i",
+          "node_type": "Variable",
+          "name": "i",
+          "source_location": "test/sql/test_metadata.py:3738-3738",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/orm/strategy_options.py",
+        "test/aaa_profiling/test_memusage.py",
+        "test/ext/test_indexable.py",
+        "test/sql/test_metadata.py",
+        "tools/cython_imports.py",
+        "tools/normalize_file_headers.py"
+      ],
+      "retrieved_symbols": [
+        "test.sql.test_metadata.ConstraintTest.test_index_no_cols_private_table_arg.i",
+        "test.sql.test_metadata.ConstraintTest.test_separate_decl_columns.i",
+        "test.sql.test_metadata.ConstraintTest.test_index_w_cols_private_table_arg.i",
+        "lib.sqlalchemy.orm.strategy_options._AbstractLoad._chop_path.i",
+        "test.aaa_profiling.test_memusage.MemUsageWBackendTest.test_unicode_warnings.i",
+        "test.ext.test_indexable.IndexPropertyArrayTest.test_modified.i",
+        "test.sql.test_metadata.ConstraintTest.test_inline_decl_columns.i",
+        "tools.cython_imports.run.i",
+        "tools.normalize_file_headers.run.i",
+        "test.sql.test_metadata.ConstraintTest.test_inline_decl_string.i"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/orm/strategies.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-12",
+      "query": "How does declaring a class with DeclarativeBase and mapped_column attributes end up creating a Table and a Mapper for it?",
+      "category": "F_cross_file",
+      "elapsed_seconds": 16.241350889205933,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.dialect.oracle.test_compiler.CompileTest.test_nonansi_nested_right_join.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/dialect/oracle/test_compiler.py:1273-1273",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2076-2076",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias_flat.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2040-2040",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias_name_flat.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2058-2058",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_flat_ok_on_non_join.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:1990-1990",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:1998-1998",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias_flat.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2014-2014",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias_name_flat.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2030-2030",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_join_standalone_alias.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2006-2006",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.sql.test_selectable.JoinAnonymizingTest.test_join_standalone_alias_flat.a",
+          "node_type": "Variable",
+          "name": "a",
+          "source_location": "test/sql/test_selectable.py:2022-2022",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "test/dialect/oracle/test_compiler.py",
+        "test/sql/test_selectable.py"
+      ],
+      "retrieved_symbols": [
+        "test.dialect.oracle.test_compiler.CompileTest.test_nonansi_nested_right_join.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias_flat.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_composed_join_alias_name_flat.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_flat_ok_on_non_join.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias_flat.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_join_alias_name_flat.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_join_standalone_alias.a",
+        "test.sql.test_selectable.JoinAnonymizingTest.test_join_standalone_alias_flat.a"
+      ],
+      "ground_truth_files": [
+        "lib/sqlalchemy/orm/decl_api.py",
+        "lib/sqlalchemy/orm/decl_base.py",
+        "lib/sqlalchemy/orm/mapper.py",
+        "lib/sqlalchemy/sql/schema.py"
+      ],
+      "file_level_hits": [],
+      "file_level_recall": 0.0,
+      "file_level_precision": 0.0,
+      "conflicts": [],
+      "unknowns": [],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-13",
+      "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
+      "category": "G_negative",
+      "elapsed_seconds": 15.707286834716797,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.RoutingSession",
+          "node_type": "Class",
+          "name": "RoutingSession",
+          "source_location": "test/orm/dml/test_orm_upd_del_basic.py:2163-2166",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA",
+          "node_type": "Class",
+          "name": "RequestA",
+          "source_location": "test/orm/inheritance/test_assorted_poly.py:3363-3368",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        },
+        {
+          "entity_id": "doc.build.conf.autodocmods_convert_modname",
+          "node_type": "Variable",
+          "name": "autodocmods_convert_modname",
+          "source_location": "doc/build/conf.py:143-168",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session",
+          "node_type": "Method",
+          "name": "test_routing_session",
+          "source_location": "test/orm/dml/test_orm_upd_del_basic.py:2149-2187",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "doc.build.conf.zzzeeksphinx_module_prefixes",
+          "node_type": "Variable",
+          "name": "zzzeeksphinx_module_prefixes",
+          "source_location": "doc/build/conf.py:173-220",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestB",
+          "node_type": "Class",
+          "name": "RequestB",
+          "source_location": "test/orm/inheritance/test_assorted_poly.py:3370-3375",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 6
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA.__tablename__",
+          "node_type": "Variable",
+          "name": "__tablename__",
+          "source_location": "test/orm/inheritance/test_assorted_poly.py:3364-3364",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.ext.ExcludeConstraint.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/ext.py:153-153",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.dialects.postgresql.ext.ExcludeConstraint.__init__.where",
+          "node_type": "Variable",
+          "name": "where",
+          "source_location": "lib/sqlalchemy/dialects/postgresql/ext.py:292-292",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.plugin.pytestplugin.setup_test_methods.self",
+          "node_type": "Variable",
+          "name": "self",
+          "source_location": "lib/sqlalchemy/testing/plugin/pytestplugin.py:577-577",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        }
+      ],
+      "retrieved_files": [
+        "doc/build/conf.py",
+        "lib/sqlalchemy/dialects/postgresql/ext.py",
+        "lib/sqlalchemy/testing/plugin/pytestplugin.py",
+        "test/orm/dml/test_orm_upd_del_basic.py",
+        "test/orm/inheritance/test_assorted_poly.py"
+      ],
+      "retrieved_symbols": [
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.RoutingSession",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA",
+        "doc.build.conf.autodocmods_convert_modname",
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session",
+        "doc.build.conf.zzzeeksphinx_module_prefixes",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestB",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA.__tablename__",
+        "lib.sqlalchemy.dialects.postgresql.ext.ExcludeConstraint.where",
+        "lib.sqlalchemy.dialects.postgresql.ext.ExcludeConstraint.__init__.where",
+        "lib.sqlalchemy.testing.plugin.pytestplugin.setup_test_methods.self"
+      ],
+      "ground_truth_files": [],
+      "file_level_hits": [],
+      "file_level_recall": null,
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.RoutingSession.get_bind",
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.User",
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.received",
+        "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.stmt",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.BaseRequest",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA.__mapper_args__",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestA.id",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestB.__mapper_args__",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestB.__tablename__",
+        "test.orm.inheritance.test_assorted_poly.PolymorphicQueryExpressionTest.setup_classes.RequestB.id"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    },
+    {
+      "query_id": "sqla-14",
+      "query": "Where does SQLAlchemy implement password hashing for user authentication?",
+      "category": "G_negative",
+      "elapsed_seconds": 15.91326904296875,
+      "retrieved_entities": [
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_no_anno_doesnt_go_into_dc.User.password",
+          "node_type": "Variable",
+          "name": "password",
+          "source_location": "test/orm/declarative/test_dc_transforms.py:246-246",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_no_anno_doesnt_go_into_dc.User.password",
+          "node_type": "Variable",
+          "name": "password",
+          "source_location": "test/orm/declarative/test_dc_transforms_future_anno_sync.py:257-257",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.url.URL.password",
+          "node_type": "Variable",
+          "name": "password",
+          "source_location": "lib/sqlalchemy/engine/url.py:106-106",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.typing.plain_files.orm.orm_config_constructs.User._password",
+          "node_type": "Variable",
+          "name": "_password",
+          "source_location": "test/typing/plain_files/orm/orm_config_constructs.py:27-27",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.password",
+          "node_type": "Variable",
+          "name": "password",
+          "source_location": "test/orm/declarative/test_dc_transforms.py:622-622",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User.password",
+          "node_type": "Variable",
+          "name": "password",
+          "source_location": "test/orm/declarative/test_dc_transforms_future_anno_sync.py:635-635",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_basic.FlushTest.test_two.User",
+          "node_type": "Class",
+          "name": "User",
+          "source_location": "test/orm/inheritance/test_basic.py:1567-1570",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.__post_init__",
+          "node_type": "Method",
+          "name": "__post_init__",
+          "source_location": "test/orm/declarative/test_dc_transforms.py:629-633",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User.__post_init__",
+          "node_type": "Method",
+          "name": "__post_init__",
+          "source_location": "test/orm/declarative/test_dc_transforms_future_anno_sync.py:642-646",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 3
+          }
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User",
+          "node_type": "Class",
+          "name": "User",
+          "source_location": "test/orm/declarative/test_dc_transforms.py:616-633",
+          "verification_state": "STATICALLY_SUPPORTED",
+          "evidence_counts": {
+            "STATIC": 5
+          }
+        }
+      ],
+      "retrieved_files": [
+        "lib/sqlalchemy/engine/url.py",
+        "test/orm/declarative/test_dc_transforms.py",
+        "test/orm/declarative/test_dc_transforms_future_anno_sync.py",
+        "test/orm/inheritance/test_basic.py",
+        "test/typing/plain_files/orm/orm_config_constructs.py"
+      ],
+      "retrieved_symbols": [
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_no_anno_doesnt_go_into_dc.User.password",
+        "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_no_anno_doesnt_go_into_dc.User.password",
+        "lib.sqlalchemy.engine.url.URL.password",
+        "test.typing.plain_files.orm.orm_config_constructs.User._password",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.password",
+        "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User.password",
+        "test.orm.inheritance.test_basic.FlushTest.test_two.User",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.__post_init__",
+        "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User.__post_init__",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User"
+      ],
+      "ground_truth_files": [],
+      "file_level_hits": [],
+      "file_level_recall": null,
+      "file_level_precision": null,
+      "conflicts": [],
+      "unknowns": [
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.__tablename__",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.id",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.name",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.password_hash",
+        "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.repeat_password",
+        "test.orm.declarative.test_dc_transforms.SynonymDescriptorDefaultTest.dc_decl_base",
+        "test.orm.inheritance.test_basic.FlushTest.test_two.User.__init__"
+      ],
+      "facts_verification_states": [
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED",
+        "STATICALLY_SUPPORTED"
+      ],
+      "any_runtime_state_present": false
+    }
+  ]
+}
