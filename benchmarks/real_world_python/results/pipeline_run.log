@@ -1,3 +1,7 @@
 [flask] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/flask @ d318b683471101618febed18996405ad26462110
 [flask] done in 80.0s -- nodes=2746 edges=3725 files_failed=0 questions=9062
 [sqlalchemy] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/sqlalchemy @ 16d00eca61cfc690b2709642f4a2656fb6424875
+[sqlalchemy] done in 9926.3s -- nodes=90159 edges=131686 files_failed=2 questions=305981
+[fastapi] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/fastapi @ c3f316b7e814667e8ee81e03a7330d00ee61e45c
+[fastapi] done in 522.1s -- nodes=13989 edges=19453 files_failed=0 questions=47647
+[django] starting run_static_analysis against /home/user/veyra/benchmarks/real_world_python/repos/django @ cccc004b46f71b4e54d87b376be691a17de6b903

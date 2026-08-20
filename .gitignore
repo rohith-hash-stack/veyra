@@ -8,5 +8,7 @@ __pycache__/
 # reproducible from the pinned commit SHAs in benchmarks/real_world_python/repos.json
 # -- never commit third-party source trees or throwaway SQLite databases.
 benchmarks/real_world_python/repos/
-benchmarks/real_world_python/*.db
-benchmarks/real_world_python/results/*.db
+benchmarks/real_world_python/**/*.db
+benchmarks/real_world_python/**/*.db-journal
+benchmarks/real_world_python/**/*.db-wal
+benchmarks/real_world_python/**/*.db-shm

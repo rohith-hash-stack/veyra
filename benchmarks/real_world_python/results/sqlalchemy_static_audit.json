@@ -1,0 +1,26 @@
+{
+  "repo_name": "sqlalchemy",
+  "commit_sha": "16d00eca61cfc690b2709642f4a2656fb6424875",
+  "wall_clock_seconds": 9926.306937217712,
+  "report_analysis_duration_seconds": 9795.220754861832,
+  "files_analyzed": 666,
+  "files_failed": 2,
+  "unsupported_rate": 0.0029940119760479044,
+  "unresolved_calls": 159528,
+  "node_count": 90159,
+  "edge_count": 131686,
+  "edges_by_relationship_type": {
+    "imports": 16538,
+    "contains": 89493,
+    "inherits": 3508,
+    "references": 1471,
+    "calls": 20676
+  },
+  "questions_generated": 305981,
+  "questions_answered": 305981,
+  "questions_unanswered": 0,
+  "questions_deduplicated": 0,
+  "static_evidence_created": 305981,
+  "static_precision": null,
+  "static_recall": null
+}
