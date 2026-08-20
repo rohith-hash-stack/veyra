@@ -8,9 +8,9 @@
 
 ## Current Status
 
-**Stage:** M1, M2, AND M3 ALL FULLY cleared. M3's gate closed 2026-08-20 (all 9 phases + security tests).
-Milestone 4 (Retrieval & LLM Grounding) not started.
-**Current milestone:** 314 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+**Stage:** M1, M2, AND M3 ALL FULLY cleared. M4 (Retrieval & LLM Grounding) in progress: Phases 4.1-4.7 done.
+Remaining for the M4 gate: 4.8 (Git Impact Analysis) and 4.9 (Retrieval Audit).
+**Current milestone:** 352 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
@@ -30,6 +30,57 @@ exists. One runtime dependency added: `hypothesis` (Veyra's own trusted tooling 
 a repository dependency).
 
 ---
+
+### 2026-08-20 — M4 Phases 4.1-4.7 (Retrieval & LLM Grounding, minus git invalidation/audit) — 352/352 project-wide
+- **Started Milestone 4**, per "go ahead with milestone 4." Built 4.1 through 4.7 together in one pass since
+  each is a direct, tight consumer of the previous one (index → search → context → cache → grounding).
+  4.8 (Git Impact Analysis) and 4.9 (Retrieval Audit) are separate, larger pieces of work -- see next entry.
+- **`src/veyra/vbg/neighborhood.py`** gained a public `centrality_score()`, promoted out of
+  `exploration/engine.py`'s own private copy (Phase 3.6) since Phase 4.4's eager cache needed the exact same
+  ranking concept for a different purpose -- same reuse-over-duplicate precedent as Phase 3.7's
+  `edge_evidence_key()` promotion. `exploration/engine.py` now imports the shared version; full suite re-run
+  confirms zero behavior change.
+- **`src/veyra/retrieval/index.py` (Phase 4.1)** — `build_retrieval_index()`/`RetrievalIndex`. Deliberately a
+  read API over existing `VBGStore` tables, not a new physical structure (no FTS5, no embeddings, no persisted
+  index table) -- same "don't build infra a measured problem hasn't demanded" discipline as D3/D11. Docstrings
+  come from re-parsing `Node.lexical_representation` via `ast.get_docstring()`, the same technique
+  `veyra.safety.capabilities`/`veyra.scenarios.introspection` already use on that field.
+- **`src/veyra/retrieval/search.py` (Phase 4.2)** — the session's first genuinely new *architectural* decision
+  in M4: "semantic" retrieval means pure-Python TF-IDF/cosine-similarity token-overlap scoring (with
+  camelCase/snake_case-aware tokenization), NOT embedding-based search. A real embedding model would be
+  materially heavier infra than anything else this project carries, unreviewed and unapproved; TF-IDF gives
+  real conceptual-query relevance at zero new-dependency cost. Documented as a real, honest limitation (true
+  paraphrases with no shared vocabulary won't match), not hidden behind the word "semantic." `search()`
+  combines exact/substring name matches (always ranked first) with TF-IDF results.
+- **`src/veyra/retrieval/context.py` (Phase 4.3)** — `retrieve_context()`, the actual
+  "query → nodes → relationships → evidence → verification states → context" pipeline PLAN.md names. Captures
+  *every* outgoing relationship from a retrieved entity, including ones pointing outside the retrieved set --
+  needed so Phase 4.7 can name real "unknowns" instead of silently dropping them (a first-draft bug caught and
+  fixed before it ever reached a test: filtering to internal-only edges made `unknowns` permanently empty).
+- **`src/veyra/retrieval/cache.py` (Phases 4.4/4.5/4.6)** — resolved a real terminology question first: PLAN's
+  own "three distinct purposes for questions" section already says M4's "Q&A" means evidence retrieval, not
+  the M2 Question/Answer entity (Phase 2.5/2.6) -- so this caches `RetrievedContext` objects, not Questions.
+  `RetrievalCache` is in-memory and never persisted to `VBGStore` (unlike Evidence, a cached context isn't
+  canonical -- always cheaply reconstructable). `warm_eager_cache()` reuses the promoted `centrality_score()`
+  for "high-value nodes"; "frequently queried nodes" is stated as NOT implementable this slice (needs real
+  usage data never collected). `retrieve_context_cached()` is the lazy miss-then-cache path; hit/miss counters
+  make latency and dedup directly measurable, closing out 4.6's audit needs too.
+- **`src/veyra/retrieval/grounding.py` (Phase 4.7)** — addresses the calibration gap directly rather than just
+  noting it: `_VERIFICATION_NOTES` is a fixed, human-authored hedge sentence per `VerificationState` (all 11
+  values), attached to every fact as its own natural-language field, not buried in structured metadata a model
+  could skim past. A standing `disclaimer` ties it together. No LLM is called anywhere in this codebase --
+  whether a real model actually respects these hedges is Milestone 5's job (Phase 5.9's dedicated eval), not
+  verifiable here.
+- **Tests**: 38 new across the 5 new modules (11 index, 7 search, 5 context, 7 cache, 8 grounding), built
+  against a real sample repo run through the actual Phase 2.1 extractor. **352/352 project-wide, 0 failures**
+  (26 Docker-gated tests skip cleanly, same as every M3 entry -- none of M4's read-side retrieval work needed
+  Docker). One real test-writing mistake caught and fixed along the way: an eager-cache test assumed a specific
+  node would rank highest by centrality, but degree centrality counts CONTAINS edges too, so a container
+  (module) node tied with it -- not a bug in the code, a wrong assumption in the test, fixed to not depend on
+  the tie-break order.
+- **Not started yet**: 4.8 (Git Impact Analysis & Invalidation -- consumes Phase 1.4/D4's `diff_symbols()`,
+  and is where `VerificationState.STALE` finally gets a real producer) and 4.9 (Retrieval Audit, the M4
+  counterpart to `run_static_analysis()`/`run_runtime_analysis()`).
 
 ### 2026-08-20 — Phase 3.9 (Runtime Audit) implemented — MILESTONE 3 GATE FULLY CLEARED — 314/314 project-wide
 - **`RuntimeAuditReport` + `run_runtime_analysis()` added to `src/veyra/pipeline.py`** -- the Milestone 3

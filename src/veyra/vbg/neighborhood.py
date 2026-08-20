@@ -88,6 +88,19 @@ def get_descendants(
     return result
 
 
+def centrality_score(store: VBGStore, entity_id: str, repository_version: str) -> int:
+    """Plain degree centrality (incoming + outgoing edge count, every
+    relationship type) -- a deliberately simple, stated proxy for
+    "high-value/public-API," not betweenness or eigenvector centrality.
+    First introduced for Phase 3.6's exploration ranking; shared here since
+    Phase 4.4's eager retrieval cache needs the exact same ranking concept
+    for a different purpose. Revisit if Phase 5.7 performance-audit data
+    ever shows this is a poor ranking in practice."""
+    return len(store.get_incoming_edges(entity_id, repository_version)) + len(
+        store.get_outgoing_edges(entity_id, repository_version)
+    )
+
+
 def get_neighborhood(store: VBGStore, entity_id: str, repository_version: str) -> Neighborhood:
     incoming = store.get_incoming_edges(entity_id, repository_version)
     outgoing = store.get_outgoing_edges(entity_id, repository_version)

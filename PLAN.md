@@ -628,36 +628,76 @@ closing Milestone 2's gate.
 User Query → Graph-RAG → Relevant VBG Region → Evidence Retrieval → Grounded Context → LLM → Response
 ```
 
-### Phase 4.1 — VBG Retrieval Index
+### Phase 4.1 — VBG Retrieval Index — IMPLEMENTED 2026-08-20
 Index: symbols, classes, methods, lexical representations, docstrings, relationships, graph paths,
 neighborhoods, evidence summaries, verified questions, repository metadata.
 
+**Implemented as `src/veyra/retrieval/index.py`**: `build_retrieval_index()` / `RetrievalIndex`. "Index" here
+means a single coherent read API assembling everything a retrieval consumer needs per entity from the existing
+`VBGStore` tables plus Phase 3.7/3.8's derivations -- deliberately NOT a new physical structure (no FTS5, no
+embeddings, no persisted index table); same "don't build infra a measured problem hasn't demanded yet"
+discipline as D3/D11's graph-DB deferral. Docstrings are computed on the fly via `ast.get_docstring()` re-parsed
+from `Node.lexical_representation` (module nodes carry none, per Phase 2.1's own scope). "Graph paths" beyond
+one hop delegate to Phase 2.4's `get_descendants()` rather than duplicating it. "Repository metadata" is
+scoped to `repository_version` alone -- no surrounding function carries a repository `source` string to join
+Phase 1.2's `RepositoryRecord` against, and inventing one now would ripple for nothing that consumes it yet.
+
 Acceptance: relevant VBG regions retrievable; retrieval commit-aware; evidence status accompanies retrieved
 info; retrieval returns graph references, not invented entities; raw repo scanning not required per query.
+11 new tests.
 
-### Phase 4.2 — Semantic Repository Retrieval
+### Phase 4.2 — Semantic Repository Retrieval — IMPLEMENTED 2026-08-20
 Conceptual queries ("How does authentication work?") retrieve relevant graph regions and relationships; exact
 symbol queries retrieve exact nodes; lexical + semantic retrieval combinable; retrieval never invents graph
 entities; evidence accompanies retrieved entities.
 
-### Phase 4.3 — Query-Time Evidence Retrieval
+**A real, stated scope decision**: "semantic" in `src/veyra/retrieval/search.py` means lightweight,
+zero-new-dependency TF-IDF/cosine-similarity token-overlap scoring (with camelCase/snake_case-aware
+tokenization) over each entity's name/docstring/lexical text -- NOT embedding-based semantic search. A true
+embedding model is materially heavier infra (a real ML dependency, much bigger than anything else this project
+carries) that nothing has reviewed or approved; TF-IDF gives real conceptual-query relevance without that
+cost, the same "minimum real thing, not the maximum possible thing" discipline Hypothesis's addition in Phase
+3.3b already established (there: a new dependency was justified and added; here: stdlib suffices). Real,
+honest limitation, stated not hidden: true paraphrases with no shared vocabulary won't match. `search()`
+combines exact/substring name matches (Phase 4.1's `find_by_name()`, always ranked first) with TF-IDF results,
+deduplicated. 7 new tests.
+
+### Phase 4.3 — Query-Time Evidence Retrieval — IMPLEMENTED 2026-08-20
 Primarily *retrieve* existing verified knowledge rather than continually generating huge Q&A datasets:
 `Query → relevant nodes → relevant relationships → relevant evidence → verification states → context`. The LLM
 explains that evidence; it does not discover it.
 
-### Phase 4.4 — Eager Q&A Cache
+**Implemented as `src/veyra/retrieval/context.py`**: `retrieve_context()`, built directly on 4.1's index, 4.2's
+search, and 3.7's reconciliation. Captures every outgoing relationship from a retrieved entity -- including
+ones pointing outside the retrieved set -- specifically so Phase 4.7 can name real "unknowns" rather than
+silently dropping them. 5 new tests.
+
+### Phase 4.4 — Eager Q&A Cache — IMPLEMENTED 2026-08-20
 Precompute only for high-value nodes: public APIs, high-centrality nodes, core services, subsystem boundaries,
 frequently queried nodes. Cache is commit-aware.
 
-### Phase 4.5 — Lazy Q&A
+### Phase 4.5 — Lazy Q&A — IMPLEMENTED 2026-08-20
 No permanent question set for less important internal nodes — generate/retrieve only when needed; previously
 answered questions cacheable; duplicates avoided; query latency measurable.
 
-### Phase 4.6 — Q&A Explosion Control
+### Phase 4.6 — Q&A Explosion Control — IMPLEMENTED 2026-08-20
 Measure: potential/eager/cached/lazy question counts, deduplication ratio, index size. Question count stays
 bounded; storage growth measurable; eager strategy has configurable limits.
 
-### Phase 4.7 — LLM Grounding Contract
+**A real terminology resolution for 4.4-4.6**: PLAN.md's own "three distinct purposes for questions across
+milestones" already separates M4's meaning ("Evidence Retrieval: which already-established facts are relevant
+to this query?") from M2's Question/Answer entity (Phase 2.5/2.6) -- so "Q&A" here is about caching *retrieval
+results* (Phase 4.3's `RetrievedContext`), not re-deriving the M2 mechanism. Implemented as
+`src/veyra/retrieval/cache.py`: `RetrievalCache` (in-memory, commit-scoped, never persisted to `VBGStore` --
+unlike Evidence, a cached context isn't canonical, it's always cheaply reconstructable); `warm_eager_cache()`
+(4.4, ranks by `veyra.vbg.neighborhood.centrality_score()`, the same ranking Phase 3.6 already uses -- "public
+APIs/high-centrality/core services" proxy; "frequently queried nodes" is stated as NOT implementable in this
+slice, since it needs real usage data never collected); `retrieve_context_cached()` (4.5, miss-then-compute-
+then-cache, hit/miss counters make latency/dedup directly measurable); `audit_cache_growth()` (4.6, index
+size + eager/lazy counts + hit ratio; "eager strategy has configurable limits" is `warm_eager_cache()`'s own
+`top_n`). 12 new tests total across 4.4-4.6.
+
+### Phase 4.7 — LLM Grounding Contract — IMPLEMENTED 2026-08-20
 LLM receives: relevant nodes, relationships, evidence, provenance, verification state, conflicts, unknowns,
 repository commit.
 
@@ -665,11 +705,15 @@ Acceptance: LLM can distinguish verified/unverified; conflicts exposed; unknowns
 explicit; LLM cannot silently claim unsupported repository behavior; evidence references returnable with
 responses.
 
-**Calibration gap (agreed 2026-08-19):** the contract defines what data the LLM *receives*, not whether its
-prose *respects* it (LLMs are known to flatten hedged context into confident answers). Don't rely on the field
-existing in a JSON payload the model may skim past — surface verification state as prominent inline
-natural-language flags (e.g. "NOTE: this call path was never executed, only inferred") rather than burying it
-in structured metadata. Add a dedicated M5 eval for this — see Phase 5.9 note.
+**Calibration gap (agreed 2026-08-19), addressed directly**: the contract defines what data the LLM *receives*,
+not whether its prose *respects* it. Don't rely on the field existing in a JSON payload the model may skim past
+— surface verification state as prominent inline natural-language flags (e.g. "NOTE: this call path was never
+executed, only inferred") rather than burying it in structured metadata. **Implemented as
+`src/veyra/retrieval/grounding.py`**: `build_grounding_context()` attaches a fixed, human-authored
+`verification_note` hedge sentence per `VerificationState` (one per named state) to every `GroundedFact`, plus
+a standing `GroundingContext.disclaimer` instruction. No LLM is ever called anywhere in this codebase --
+whether a downstream model actually respects these hedges is Milestone 5's job (Phase 5.9's dedicated eval),
+not something this module can verify on its own. 8 new tests.
 
 **Threshold decision (2026-08-20):** deliberately deferred, not defaulted. Build the eval set and run it once
 real Python-pipeline output exists (post-M3/M4), observe the model's actual baseline hedge-compliance rate,

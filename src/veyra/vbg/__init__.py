@@ -6,6 +6,7 @@ from .safety import Capability, ClassificationResult, RiskLevel, SafetyClass
 from .scenarios import Scenario, ScenarioUnexecutableReason
 from .neighborhood import (
     Neighborhood,
+    centrality_score,
     get_children,
     get_descendants,
     get_grandchildren,
@@ -39,6 +40,7 @@ __all__ = [
     "Scenario",
     "ScenarioUnexecutableReason",
     "Neighborhood",
+    "centrality_score",
     "get_children",
     "get_descendants",
     "get_grandchildren",

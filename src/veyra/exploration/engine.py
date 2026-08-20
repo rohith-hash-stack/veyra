@@ -40,12 +40,13 @@ newly-attempted scenarios -- itself the "convergence measurable" signal --
 without ever claiming that convergence means completeness (Phase 3.6 AC
 explicitly forbids that claim; see `ExplorationReport`'s docstring).
 
-**Centrality is plain degree centrality** (in-edges + out-edges via Phase
-2.4's `get_incoming_edges`/`get_outgoing_edges`), a deliberately simple,
-stated proxy for "high-value/public-API" -- not betweenness or eigenvector
+**Centrality** uses `veyra.vbg.neighborhood.centrality_score()` (plain
+degree centrality -- in-edges + out-edges), a deliberately simple, stated
+proxy for "high-value/public-API," not betweenness or eigenvector
 centrality. Revisit once Phase 5.7 performance-audit data exists showing
 this is a poor ranking in practice (same "starting default, not a measured
-optimum" framing D10 itself uses).
+optimum" framing D10 itself uses). Shared with Phase 4.4's eager retrieval
+cache, which ranks nodes the same way for a different purpose.
 
 **Per-node execution cap not implemented**: D10 also specifies "max 5
 scenarios/executions per node" for Tier 2. Phase 3.4 generates exactly one
@@ -65,7 +66,7 @@ from pathlib import Path
 from veyra.execution import ExecutionBoundary
 from veyra.runtime import ScenarioExecutionOutcome, run_scenario
 from veyra.scenarios import generate_scenarios, persist_scenarios
-from veyra.vbg import EvidenceType, RelationshipType, VBGStore
+from veyra.vbg import EvidenceType, RelationshipType, VBGStore, centrality_score
 
 _TIER_1_MAX_FILES = 50
 _TIER_2_MAX_FILES = 500
@@ -113,12 +114,6 @@ class ExplorationReport:
     elapsed_seconds: float
     budget_exhausted: bool
     outcomes: tuple[ScenarioExecutionOutcome, ...]
-
-
-def _centrality_score(store: VBGStore, entity_id: str, repository_version: str) -> int:
-    return len(store.get_incoming_edges(entity_id, repository_version)) + len(
-        store.get_outgoing_edges(entity_id, repository_version)
-    )
 
 
 def _already_has_runtime_evidence(store: VBGStore, entity_id: str, repository_version: str) -> bool:
@@ -180,7 +175,7 @@ def explore(
 
     ranked = sorted(
         candidates,
-        key=lambda s: (-_centrality_score(store, s.target_entity_id, repository_version), s.target_entity_id),
+        key=lambda s: (-centrality_score(store, s.target_entity_id, repository_version), s.target_entity_id),
     )
 
     already_explored_skipped = 0
@@ -237,7 +232,7 @@ def explore_at_ingest(
         all_targets = {n.entity_id for n in store.get_all_nodes(repository_version) if n.type == "Function"}
         top_n = sorted(
             all_targets,
-            key=lambda eid: (-_centrality_score(store, eid, repository_version), eid),
+            key=lambda eid: (-centrality_score(store, eid, repository_version), eid),
         )[:_TIER_2_TOP_N]
         return explore(
             store, repository_root, repository_version, boundary,
