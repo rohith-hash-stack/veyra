@@ -1,0 +1,26 @@
+{
+  "repo_name": "flask",
+  "commit_sha": "d318b683471101618febed18996405ad26462110",
+  "wall_clock_seconds": 80.03994512557983,
+  "report_analysis_duration_seconds": 76.62998533248901,
+  "files_analyzed": 83,
+  "files_failed": 0,
+  "unsupported_rate": 0.0,
+  "unresolved_calls": 3805,
+  "node_count": 2746,
+  "edge_count": 3725,
+  "edges_by_relationship_type": {
+    "imports": 612,
+    "contains": 2663,
+    "calls": 317,
+    "references": 95,
+    "inherits": 38
+  },
+  "questions_generated": 9062,
+  "questions_answered": 9062,
+  "questions_unanswered": 0,
+  "questions_deduplicated": 0,
+  "static_evidence_created": 9062,
+  "static_precision": null,
+  "static_recall": null
+}

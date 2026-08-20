@@ -1,0 +1,76 @@
+{
+  "repository": "fastapi",
+  "commit_sha": "c3f316b7e814667e8ee81e03a7330d00ee61e45c",
+  "queries": [
+    {
+      "query_id": "fastapi-01",
+      "query": "Where is the FastAPI application class defined, and what does it extend?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "fastapi-02",
+      "query": "Which class represents a single registered API route (path + handler + metadata)?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "fastapi-03",
+      "query": "Where is the Depends() function used for dependency injection defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "fastapi-04",
+      "query": "What does FastAPI.add_api_route actually call to register the route?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "fastapi-05",
+      "query": "What calls get_dependant() to build a route's dependency graph?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "fastapi-06",
+      "query": "How does FastAPI resolve a path operation function's dependencies (Depends(...) parameters) at request time?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "fastapi-07",
+      "query": "How does FastAPI generate its OpenAPI schema?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "fastapi-08",
+      "query": "What happens when a request body fails Pydantic validation?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "fastapi-09",
+      "query": "What response does FastAPI send back when a path operation raises HTTPException?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "fastapi-10",
+      "query": "Where would I look to debug why a FastAPI endpoint's OpenAPI docs are showing the wrong response schema?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "fastapi-11",
+      "query": "If a dependency function isn't being re-run per request when it should be, where should I look?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "fastapi-12",
+      "query": "How does a security scheme like OAuth2PasswordBearer connect to a path operation's dependencies?",
+      "category": "F_cross_file"
+    },
+    {
+      "query_id": "fastapi-13",
+      "query": "Where does FastAPI implement its own SQL query builder or ORM?",
+      "category": "G_negative"
+    },
+    {
+      "query_id": "fastapi-14",
+      "query": "Where does FastAPI implement built-in rate limiting for endpoints?",
+      "category": "G_negative"
+    }
+  ]
+}

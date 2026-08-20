@@ -1,0 +1,47 @@
+{
+  "benchmark_name": "real_world_python_benchmark_v1",
+  "benchmark_date_utc": "2026-08-20T03:03:23Z",
+  "veyra_commit_sha": "30b883f702b422525bcd6c37fb844635cea5c542",
+  "veyra_branch": "experiment/real-world-python-benchmark (branched from claude/veyra-progress-plan-h7kthq)",
+  "python_version": "3.11.15",
+  "os": "Linux vm 6.18.5-fc-v20 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux",
+  "model_provider_configuration": "none -- Veyra calls no LLM anywhere in this codebase, by design. This benchmark exercises only Veyra's static analysis (Phase 2.1-2.8) and retrieval (Phase 4.1-4.7) pipelines. Runtime execution (M3) is not exercised because no Docker daemon is reachable in this environment.",
+  "clone_method": "git clone --depth 1 (shallow, single commit -- sufficient since this benchmark evaluates static+retrieval analysis of one snapshot per repo, not git history/regression features)",
+  "repositories": [
+    {
+      "name": "flask",
+      "url": "https://github.com/pallets/flask.git",
+      "commit_sha": "d318b683471101618febed18996405ad26462110",
+      "commit_date": "2026-08-16T11:35:31-07:00",
+      "python_file_count": 83,
+      "local_path": "benchmarks/real_world_python/repos/flask"
+    },
+    {
+      "name": "fastapi",
+      "url": "https://github.com/fastapi/fastapi.git",
+      "commit_sha": "c3f316b7e814667e8ee81e03a7330d00ee61e45c",
+      "commit_date": "2026-08-19T08:58:10+00:00",
+      "python_file_count": 1138,
+      "note": "file count includes docs_src/ example snippets, not just the fastapi/ package itself",
+      "local_path": "benchmarks/real_world_python/repos/fastapi"
+    },
+    {
+      "name": "sqlalchemy",
+      "url": "https://github.com/sqlalchemy/sqlalchemy.git",
+      "commit_sha": "16d00eca61cfc690b2709642f4a2656fb6424875",
+      "commit_date": "2026-08-18T22:24:30+00:00",
+      "python_file_count": 668,
+      "local_path": "benchmarks/real_world_python/repos/sqlalchemy"
+    },
+    {
+      "name": "django",
+      "url": "https://github.com/django/django.git",
+      "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+      "commit_date": "2026-08-19T14:28:46-04:00",
+      "python_file_count": 2929,
+      "note": "file count includes django/ package, tests/, and docs example code",
+      "local_path": "benchmarks/real_world_python/repos/django"
+    }
+  ],
+  "reproduction_instructions": "git clone --depth 1 <url> <local_path> && cd <local_path> && git checkout <commit_sha> (with --depth 1 the shallow clone already lands on the pinned commit above at clone time; re-running later will pick up a different HEAD unless the SHA is fetched explicitly, e.g. `git fetch --depth 1 origin <commit_sha> && git checkout <commit_sha>`)."
+}

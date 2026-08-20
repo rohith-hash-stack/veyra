@@ -73,6 +73,11 @@ def _extract_docstring(lexical_representation: str | None) -> str | None:
     body = tree.body
     if not body:
         return None
+    if not isinstance(body[0], (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+        # e.g. a Variable node whose lexical_representation is a bare assignment
+        # statement -- ast.get_docstring() only accepts def/class statements and
+        # raises TypeError on anything else. No docstring exists to extract here.
+        return None
     return ast.get_docstring(body[0])
 
 

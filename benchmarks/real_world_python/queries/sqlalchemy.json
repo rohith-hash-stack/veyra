@@ -1,0 +1,76 @@
+{
+  "repository": "sqlalchemy",
+  "commit_sha": "16d00eca61cfc690b2709642f4a2656fb6424875",
+  "queries": [
+    {
+      "query_id": "sqla-01",
+      "query": "Where is the Session class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "sqla-02",
+      "query": "Where is the Engine class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "sqla-03",
+      "query": "Where is the Table class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "sqla-04",
+      "query": "What is create_engine()'s return type, and what class actually executes queries against it?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "sqla-05",
+      "query": "What does Session.add() do to an object before it's actually written to the database?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "sqla-06",
+      "query": "How does calling session.add(obj) followed by session.commit() turn into an actual SQL INSERT statement?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "sqla-07",
+      "query": "How does relationship() implement lazy loading of related objects?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "sqla-08",
+      "query": "Does calling Session.flush() commit the current transaction?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "sqla-09",
+      "query": "What happens when create_engine() is given a malformed database URL string?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "sqla-10",
+      "query": "If SQL statements aren't showing up in my logs despite passing echo=True to create_engine, where should I look?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "sqla-11",
+      "query": "Where would I investigate if a relationship() isn't lazy-loading the way I expect?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "sqla-12",
+      "query": "How does declaring a class with DeclarativeBase and mapped_column attributes end up creating a Table and a Mapper for it?",
+      "category": "F_cross_file"
+    },
+    {
+      "query_id": "sqla-13",
+      "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
+      "category": "G_negative"
+    },
+    {
+      "query_id": "sqla-14",
+      "query": "Where does SQLAlchemy implement password hashing for user authentication?",
+      "category": "G_negative"
+    }
+  ]
+}

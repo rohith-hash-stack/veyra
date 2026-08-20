@@ -1,0 +1,76 @@
+{
+  "repository": "flask",
+  "commit_sha": "d318b683471101618febed18996405ad26462110",
+  "queries": [
+    {
+      "query_id": "flask-01",
+      "query": "Where is the Flask application class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "flask-02",
+      "query": "Which class implements Flask's default (cookie-based) session storage?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "flask-03",
+      "query": "Where is the Request class that Flask uses for incoming HTTP requests defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "flask-04",
+      "query": "What does the @app.route decorator actually call to register a URL rule?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "flask-05",
+      "query": "What class does Flask's Blueprint inherit from?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "flask-06",
+      "query": "How does Flask dispatch an incoming WSGI request to the correct view function, end to end?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "flask-07",
+      "query": "How does Flask sign and verify session cookies to prevent tampering?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "flask-08",
+      "query": "What happens when app.run() is called with debug=True?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "flask-09",
+      "query": "What does Flask do when a request comes in for a URL that doesn't match any registered rule?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "flask-10",
+      "query": "If a Flask view function raises an unhandled exception, where should I look to see how Flask decides what response to send back?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "flask-11",
+      "query": "Where would I investigate if Flask's test_client() isn't preserving cookies across multiple requests in a test?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "flask-12",
+      "query": "How does registering a Blueprint on a Flask app connect the blueprint's routes to the app's URL map?",
+      "category": "F_cross_file"
+    },
+    {
+      "query_id": "flask-13",
+      "query": "Where does Flask implement CSRF protection for form submissions?",
+      "category": "G_negative"
+    },
+    {
+      "query_id": "flask-14",
+      "query": "Where is Flask's built-in ORM or database layer implemented?",
+      "category": "G_negative"
+    }
+  ]
+}

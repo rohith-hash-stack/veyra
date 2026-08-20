@@ -1,0 +1,76 @@
+{
+  "repository": "django",
+  "commit_sha": "cccc004b46f71b4e54d87b376be691a17de6b903",
+  "queries": [
+    {
+      "query_id": "django-01",
+      "query": "Where is Django's QuerySet class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "django-02",
+      "query": "Where is Django's base Model class defined?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "django-03",
+      "query": "Where is the CSRF protection middleware implemented?",
+      "category": "A_symbol_location"
+    },
+    {
+      "query_id": "django-04",
+      "query": "What does django.contrib.auth.authenticate() actually call to check a user's credentials?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "django-05",
+      "query": "What is Django's default Manager class actually built from?",
+      "category": "B_relationship"
+    },
+    {
+      "query_id": "django-06",
+      "query": "How does an incoming WSGI request get dispatched to the correct Django view function, end to end?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "django-07",
+      "query": "How does Django apply configured middleware to every request?",
+      "category": "C_architecture"
+    },
+    {
+      "query_id": "django-08",
+      "query": "What happens when CsrfViewMiddleware detects a POST request without a valid CSRF token?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "django-09",
+      "query": "What does authenticate() return if the given credentials don't match any configured authentication backend?",
+      "category": "D_behavioral"
+    },
+    {
+      "query_id": "django-10",
+      "query": "If a Django app's migrations aren't being applied in the order I expect, where should I look?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "django-11",
+      "query": "Where would I investigate if a custom Manager isn't exposing a custom QuerySet method I defined?",
+      "category": "E_debugging"
+    },
+    {
+      "query_id": "django-12",
+      "query": "How does registering a model in the admin (admin.site.register) connect it to Django's admin URLs?",
+      "category": "F_cross_file"
+    },
+    {
+      "query_id": "django-13",
+      "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "category": "G_negative"
+    },
+    {
+      "query_id": "django-14",
+      "query": "Where does Django implement a built-in GraphQL API layer?",
+      "category": "G_negative"
+    }
+  ]
+}

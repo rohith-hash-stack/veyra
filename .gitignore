@@ -3,3 +3,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.egg-info/
+
+# Real-world benchmark: cloned upstream repos and generated VBG databases are
+# reproducible from the pinned commit SHAs in benchmarks/real_world_python/repos.json
+# -- never commit third-party source trees or throwaway SQLite databases.
+benchmarks/real_world_python/repos/
+benchmarks/real_world_python/*.db
+benchmarks/real_world_python/results/*.db
