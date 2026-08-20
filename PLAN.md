@@ -797,16 +797,44 @@ receive.
 
 **Objective:** no major new functionality here. Answers: *does Veyra actually work reliably enough to be trusted?*
 
-### Phase 5.1 — Acceptance-Criteria Traceability
+### Phase 5.1 — Acceptance-Criteria Traceability — IMPLEMENTED 2026-08-20
 `Requirement → Acceptance Criterion → Test Case → Result`. Every acceptance criterion has an automated test;
 critical security requirements have negative tests; no milestone marked complete with untested criteria.
 
-### Phase 5.2 — Full Integration Testing
+**Implementation:** `src/veyra/validation/traceability.py`. `Requirement` dataclass (`requirement_id`, `milestone`,
+`title`, `acceptance_criteria`, `covering_test_modules`, `security_critical`, `assessment_only`) with a hand-built
+`_REQUIREMENTS` tuple of 30 entries, one per M1–M4 phase actually implemented in this codebase (not aspirational
+future phases). `check_traceability(veyra_repo_root)` walks every `covering_test_modules` path and asserts it
+exists on disk relative to the given repo root, reporting per-requirement `TraceabilityResult` plus an overall
+`fully_traceable` flag and a `gaps` tuple naming any requirement whose test module is missing. Phase "2.2" (Emerge
+diagram export) is marked `assessment_only=True` with no covering test module, since it's a manual/visual
+deliverable, not something an automated test can traceability-check. Phases "3.1" (safety classifier) and "3.2"
+(sandbox boundary) are marked `security_critical=True`, feeding directly into the release-gate logic in Phase
+5.12. Tested against both this real repository root (`fully_traceable is True`) and a synthetic broken root
+missing the test tree (`fully_traceable is False`, gaps populated).
+
+### Phase 5.2 — Full Integration Testing — IMPLEMENTED 2026-08-20
 Every subsystem in the full pipeline (Repository → VBG → Question Generator → Static Verification → Safety →
 Harness → Runtime → Evidence → Graph-RAG → LLM) preserves identity, version, evidence, provenance, status,
 failure information end to end.
 
-### Phase 5.3 — End-to-End Repository Benchmark
+**Implementation:** deliberately a *test* file, not a new module — "integration testing" means exercising the
+real pipeline together and asserting on what comes out, not computing a new report. `tests/validation/
+test_full_integration.py` drives the real orchestrators built in M2–M4 (`run_static_analysis` →
+`run_runtime_analysis` → `run_retrieval_analysis` → `retrieve_context`/`build_grounding_context` →
+`analyze_impact`) against real repository fixtures across two commits, using the same `FakeExecutionBoundary`
+pattern established throughout M3/M4 (no Docker daemon required). Six tests confirm: the same `entity_id` is used
+by static extraction, runtime evidence attachment, and retrieval (identity survives); every evidence record
+carries real, non-empty `Provenance` fields (provenance survives); a genuinely raised exception's type and message
+text reach the final `GroundingContext` fact excerpts and force a hedge in `verification_state`/`verification_note`
+rather than being reported as unqualified fact (failure information survives); a source change on one function
+propagates through `analyze_impact` to a real `STALE` verification state visible at the retrieval layer, without
+deleting the entity (git-change propagation survives); a dangerous `subprocess` call is blocked before it ever
+reaches the execution boundary (`boundary.requests == []`) and reports `BLOCKED_BY_SAFETY` (safety survives); and
+novel-scenario synthesis only fires under an explicit `PolicyConfig.explicit_safe_targets` allowlist entry, per
+D13/D14 (safety policy boundaries survive).
+
+### Phase 5.3 — End-to-End Repository Benchmark — IMPLEMENTED (machinery only) 2026-08-20
 - Tier 1: controlled repos, known ground truth.
 - Tier 2: medium real-world repos.
 - Tier 3: large open-source repos.
@@ -819,13 +847,44 @@ repos are chosen — the right approach (semi-automated from tests/types + spot-
 depend on what test/type coverage each candidate repo actually has. This is a scheduled decision point at the
 start of Phase 5.3, not a permanently open item.
 
-### Phase 5.4 — Structural Accuracy Audit
+**Implementation:** `src/veyra/validation/benchmark.py`. `BenchmarkTier` enum (`TIER_1_CONTROLLED`,
+`TIER_2_MEDIUM_REAL_WORLD`, `TIER_3_LARGE_OPEN_SOURCE`) is deliberately its own type, disjoint from
+`veyra.exploration.ExplorationTier` (a real regression test asserts the two enums share no member names, so a
+future edit can't silently conflate execution-budget tiers with benchmark-scale tiers). `run_benchmark(store,
+repository_root, repository_version, tier, boundary, file_count, sample_queries, ground_truth=None, policy=None)`
+drives the real orchestrators end to end — `run_static_analysis` → `run_runtime_analysis` →
+`run_retrieval_analysis` → optional `audit_structural_accuracy` if a `GroundTruthSet` is supplied — and returns a
+`BenchmarkRunResult` bundling every sub-report. Tested against synthetic Tier-1 fixtures with a `FakeExecutionBoundary`,
+proving the orchestration and (when ground truth is supplied) the accuracy computation are both real. **What's
+NOT done:** no actual Tier 1/2/3 repositories have been selected, cloned, or labeled — that requires a user
+decision on which real repos to use and how to produce their ground truth (see the deferred methodology note
+above). The machinery to run the benchmark against real repos, once chosen, is complete and tested.
+
+### Phase 5.4 — Structural Accuracy Audit — IMPLEMENTED (machinery only) 2026-08-20
 Node precision/recall, edge precision/recall, symbol/call/inheritance/import accuracy.
 
-### Phase 5.5 — Question Quality Audit
+**Implementation:** `src/veyra/validation/structural_accuracy.py`. `GroundTruthSet(repository_version,
+expected_node_ids, expected_edges)` is the caller-supplied oracle — the whole point of this audit is comparing
+Veyra's actual extracted graph against an independently correct answer, which by definition cannot come from
+Veyra itself. `AccuracyMetrics(true_positive, false_positive, false_negative, precision, recall, f1)` is
+divide-by-zero-safe throughout (`_precision_recall_f1()` returns `None` fields rather than raising or lying with
+a `0.0`/`1.0` on an empty set). `audit_structural_accuracy()` computes overall node accuracy, overall edge
+accuracy, and a per-relationship-type breakdown (`edge_accuracy_by_relationship_type`), so a low CALLS-edge
+recall can't hide behind a high aggregate score from CONTAINS edges. Tested with hand-built synthetic ground
+truth exercising true/false positive/negative cases directly (same D6 "real machinery, `None` numbers until real
+ground truth exists" discipline as 5.3 and 5.9 — verified correct here with synthetic ground truth precisely
+because no real one exists yet).
+
+### Phase 5.5 — Question Quality Audit — IMPLEMENTED 2026-08-20
 Questions generated/valid/duplicate/answerable/unanswered/unsupported/verified.
 
-### Phase 5.6 — Behavioral Coverage Audit
+**Implementation:** `src/veyra/validation/question_quality.py`. `audit_question_quality(store,
+repository_version)` is fully computable with no external ground truth — every category (generated, duplicate,
+answerable, unanswered, unsupported-by-evidence, and cross-tabulated by `VerificationState`) is derived directly
+from what the question generator and verification engine already produced for the given repository version. Real
+numbers, not `None` placeholders, because nothing here needs an outside oracle.
+
+### Phase 5.6 — Behavioral Coverage Audit — IMPLEMENTED 2026-08-20
 Report separately, never collapsed into one misleading percentage: structural coverage, static evidence
 coverage, runtime observation coverage, runtime verification coverage, unexplored nodes, unobserved edges,
 unexecutable behaviors, blocked behaviors, conflicted behaviors.
@@ -833,17 +892,42 @@ unexecutable behaviors, blocked behaviors, conflicted behaviors.
 **Expectation set in M3.1:** given the conservative safety classifier, runtime observation/verification
 coverage on real-world repos is expected to be low by design. Report against that expectation, not against 100%.
 
-### Phase 5.7 — Performance Audit
+**Implementation:** `src/veyra/validation/behavioral_coverage.py`. `audit_behavioral_coverage(store,
+repository_version)` reports every category above as its own independent count/percentage against
+`total_nodes` — never folded into one aggregate score, exactly as PLAN.md requires, so a reader can't mistake
+"low runtime coverage by design" for "broken coverage." Regression-tested against a node with a real static
+CALLS edge but no runtime confirmation: it correctly reports as `STATICALLY_SUPPORTED`, not `UNEXPLORED`, because
+`run_static_analysis()` already attaches STATIC evidence via question verification — `UNEXPLORED` is reserved for
+nodes with no evidence of any kind (a real bug in the original test assumption, caught and fixed during
+implementation, not a bug in the audit code).
+
+### Phase 5.7 — Performance Audit — IMPLEMENTED 2026-08-20
 Time every stage: clone, analysis, graph construction, question generation, static verification, harness
 generation, runtime, evidence processing, index construction, retrieval latency, incremental update duration.
 Also: CPU, memory, storage, graph size, evidence count, question count, trace size, index size.
 
-### Phase 5.8 — Safety & Security Audit
+**Implementation:** `src/veyra/validation/performance.py`. `audit_performance(store, repository_version)` reports
+real, measured `StageTiming` entries for every stage the current pipeline actually runs, plus real graph/evidence/
+question size counts pulled directly from `VBGStore`. Stages this codebase doesn't implement as separate timed
+steps (e.g. a distinct "clone" stage — repository checkout is the caller's responsibility, not Veyra's) are
+simply absent from the report rather than stubbed with a fake duration.
+
+### Phase 5.8 — Safety & Security Audit — IMPLEMENTED 2026-08-20
 Test: filesystem escape, network escape, credential leakage, process creation, resource exhaustion, timeout
 bypass, production API access, destructive commands, sandbox escape.
 **Release criterion:** no known execution-boundary escape exists in the security benchmark.
 
-### Phase 5.9 — False Verification Audit
+**Implementation:** `src/veyra/validation/security_audit.py`. `_SECURITY_PROPERTIES` maps 7 property IDs to the
+real, already-existing negative tests in `tests/execution/test_docker_boundary.py` that cover them
+(filesystem_escape, network_escape, credential_leakage, sandbox_escape, resource_exhaustion, timeout_bypass,
+destructive_commands). `production_api_access` is documented as covered by the same `network_escape` test rather
+than duplicated, since network egress is network egress regardless of the destination. `audit_security_coverage
+(veyra_repo_root)` confirms every mapped test module and test function actually exists on disk, reporting
+`coverage_complete` and a per-property `SecurityPropertyResult`. This report feeds directly into the release-gate
+FAIL condition in Phase 5.12 — incomplete security coverage is one of only two definitive, no-ground-truth-needed
+release blockers.
+
+### Phase 5.9 — False Verification Audit — IMPLEMENTED (machinery only) 2026-08-20
 ```text
 False Verification Rate = Incorrectly verified claims / All verified claims
 ```
@@ -856,29 +940,82 @@ UNVERIFIED/CONFLICTED cases; score whether the model's *answer text* actually he
 the model states unverified/conflicted claims as fact above an agreed threshold — this is what the user
 actually sees, independent of whether the underlying VBG data was correct.
 
-### Phase 5.10 — Static vs Runtime Conflict Audit
+**Implementation:** `src/veyra/validation/false_verification.py`. `audit_false_verification(store,
+repository_version, ground_truth=None)` always reports the real `verified_count` (RUNTIME_VERIFIED or
+CONDITIONALLY_VERIFIED entities) with no ground truth needed for that part; `false_verification_rate` and
+`release_criterion_met` stay `None` until a `FalseVerificationGroundTruth.known_incorrect_entity_ids` oracle is
+supplied — and stay `None` even *with* ground truth if `verified_count` is zero, since "zero known-incorrect out
+of zero verified claims" would be a vacuous PASS, not a real one. The LLM calibration sub-check,
+`score_calibration(grounding, model_answer)`, is a real, tested keyword-presence hedge detector — but it never
+calls a real LLM anywhere in this codebase; `model_answer` is always caller-supplied text, and the pass threshold
+itself stays deliberately unset per PLAN.md's own "observe the model's actual baseline hedge-compliance rate,
+then set the threshold from that baseline" decision. **What's NOT done:** no real
+`FalseVerificationGroundTruth` from an actual labeled benchmark, and no real LLM was ever called to produce a
+`model_answer` for calibration scoring — both require decisions and resources outside this codebase.
+
+### Phase 5.10 — Static vs Runtime Conflict Audit — IMPLEMENTED 2026-08-20
 Static agreement, runtime agreement, conflicts, unresolved/resolved conflicts. Validate: conflict ≠ failure;
 conflict = evidence requiring interpretation. The LLM may explain a conflict but must not silently resolve it
 as fact.
 
-### Phase 5.11 — Git Regression Audit
+**Implementation:** `src/veyra/validation/conflict_audit.py`. `audit_conflicts(store, repository_version)` walks
+every entity's evidence, classifying agreement/conflict between static and runtime evidence using the same
+`VerificationState.CONFLICTED` semantics already established in the verification engine (M1) — this audit reuses
+that derivation rather than re-implementing conflict detection, keeping "what counts as a conflict" defined in
+exactly one place in the codebase.
+
+### Phase 5.11 — Git Regression Audit — IMPLEMENTED 2026-08-20
 Changed files/symbols, invalidated nodes/edges, stale evidence, reverified nodes/questions. Measure:
 incremental analysis/verification time, unnecessary invalidation, missed invalidation.
 
-### Phase 5.12 — Final Production Report
+**Implementation:** `src/veyra/validation/git_regression.py`. `audit_git_regression(store, old_commit,
+new_commit)` is a thin, honest reporting layer over the real `analyze_impact()` machinery already built in Phase
+4.8 — it does not recompute invalidation, it reports on what invalidation actually did (tier_0/1/2/3 counts,
+stale entity counts) plus real measured incremental timing, so this audit can't drift out of sync with the
+invalidation engine it's describing.
+
+### Phase 5.12 — Final Production Report — IMPLEMENTED 2026-08-20
 Standard report format covering repository, structural analysis, question engine, static verification,
 runtime, evidence, retrieval, git, security, quality, and final status (`PASS / FAIL / PARTIALLY VERIFIED`).
 (Full template preserved from original spec — see git history of this file if the inline copy is ever trimmed.)
 
+**Implementation:** `src/veyra/validation/final_report.py`. `build_final_report(store, repository_version,
+veyra_repo_root, ground_truth=None, false_verification_ground_truth=None)` runs every Phase 5.1–5.11 audit and
+bundles the results into one `FinalProductionReport`, then derives a `ReleaseStatus` with intentionally strict
+semantics: `FAIL` fires only on a *definitive* signal checkable without external ground truth — an
+acceptance-traceability gap (5.1) or incomplete security coverage (5.8) — or on a known false-verification case
+once ground truth *was* supplied (5.9). `PASS` requires the ground-truth-dependent false-verification release
+criterion to have been checked for real and come back clean, never merely "not yet disproven." Everything
+checkable is clean but that criterion was never run (no ground truth supplied) reports `PARTIALLY_VERIFIED` — the
+honest middle state matching this project's D6 discipline of never claiming what isn't proven.
+`structural_accuracy` is carried on the report when ground truth is supplied but deliberately excluded from the
+status decision, since PLAN.md never states a specific accuracy threshold as a release gate the way it does for
+security coverage and false verification. Tested against this real repository (`PARTIALLY_VERIFIED` with no
+ground truth), a synthetic zero-known-false-verification case (`PASS`), a synthetic known-false-verification case
+(`FAIL`), and a broken `veyra_repo_root` (`FAIL` on both traceability and security simultaneously).
+
 ### Milestone 5 Gate
 ```
-☐ Acceptance traceability    ☐ Performance
-☐ Integration testing        ☐ Security
-☐ E2E repositories (Python first) ☐ False verification (+ LLM calibration)
-☐ Structural accuracy        ☐ Conflict audit
-☐ Question quality           ☐ Git regression
-☐ Behavioral coverage        ☐ Final release report
+☑ Acceptance traceability    ☑ Performance
+☑ Integration testing        ☑ Security
+☑ E2E benchmark machinery (Python first) ☑ False verification machinery (+ LLM calibration machinery)
+☑ Structural accuracy machinery ☑ Conflict audit
+☑ Question quality           ☑ Git regression
+☑ Behavioral coverage        ☑ Final release report
 ```
+**Gate status: machinery complete, release NOT declared PASS.** Every phase's *computation* is implemented and
+tested. `build_final_report()` run against this repository currently returns `PARTIALLY_VERIFIED`, not `PASS` —
+by design, per the D6 discipline reused throughout this milestone (`structural_accuracy.py`, `false_verification.py`,
+`benchmark.py`). Three items remain genuinely open, each blocked on a decision or resource outside this
+codebase, not on missing implementation:
+1. **Phase 5.3** — no real Tier 1/2/3 repositories have been selected, cloned, or run through the benchmark.
+2. **Phase 5.4 / 5.9** — no real ground truth (`GroundTruthSet`, `FalseVerificationGroundTruth`) exists yet;
+   producing it requires the Tier 1 repos from (1) plus the deferred labeling-methodology decision.
+3. **Phase 5.9's LLM calibration sub-check** — no real LLM has been called anywhere in this codebase, by design
+   throughout every milestone; `score_calibration()` is tested and ready to score real model output the moment
+   one is supplied, and its pass threshold is deliberately unset pending a real baseline measurement.
+Declaring the release gate fully PASS requires resolving those three externally-scoped items — a project
+decision, not further coding.
 
 ---
 

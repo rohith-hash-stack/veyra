@@ -77,6 +77,9 @@ def audit_false_verification(
             known_incorrect_count=0, false_verification_rate=None, release_criterion_met=None,
         )
 
+    # verified_ids empty -> rate/criterion stay None even with ground truth
+    # supplied: "zero known-incorrect out of zero verified claims" would be
+    # a vacuous PASS, not a real one -- nothing was actually checked yet.
     known_incorrect_verified = verified_ids & ground_truth.known_incorrect_entity_ids
     return FalseVerificationReport(
         repository_version=repository_version,

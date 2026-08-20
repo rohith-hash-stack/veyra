@@ -8,28 +8,93 @@
 
 ## Current Status
 
-**Stage:** M1, M2, M3, AND M4 ALL FULLY cleared. M4's gate closed 2026-08-20. Milestone 5 (Production
-Validation & Auditing) not started.
-**Current milestone:** 368 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+**Stage:** M1, M2, M3, AND M4 ALL FULLY cleared. Milestone 5 (Production Validation & Auditing) gate is
+**machinery-complete** as of 2026-08-20 — all 12 phases implemented and tested, but `build_final_report()`
+honestly reports `PARTIALLY_VERIFIED`, not `PASS`, since no real Tier 1/2/3 benchmark repos, ground truth, or
+LLM calibration run exist yet (see PLAN.md's Milestone 5 Gate closing note for the 3 externally-scoped open
+items).
+**Current milestone:** 421 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
 cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds the rest of M3 and all of M4, pushed commit by commit as
-this session progressed.
-**Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
+covers M1+M2+Phase 3.1+3.2; the working branch adds the rest of M3, all of M4, and all of M5, pushed commit by
+commit as this session progressed.
+**Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates for real.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
 `src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py` (the
 single entry point for `run_static_analysis()`/`run_runtime_analysis()`/`run_retrieval_analysis()`),
 `src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`,
 `src/veyra/runtime/`, `src/veyra/exploration/`, `src/veyra/reconciliation/`, `src/veyra/verification/`,
-`src/veyra/retrieval/`, `src/veyra/invalidation/` all implemented. SQLite event-sourced store (D3) live. Every
+`src/veyra/retrieval/`, `src/veyra/invalidation/`, `src/veyra/validation/` (traceability/benchmark/
+structural_accuracy/question_quality/behavioral_coverage/performance/security_audit/false_verification/
+conflict_audit/git_regression/final_report) all implemented. SQLite event-sourced store (D3) live. Every
 canonical entity Phase 1.2 originally deferred now exists, including `VerificationState.STALE`'s real producer
 (Phase 4.8). One runtime dependency added: `hypothesis` (Veyra's own trusted tooling dependency for Phase
 3.3b, not a repository dependency). No LLM is called anywhere in this codebase, by design -- M4 builds the
-grounding contract a real model consumer would receive.
+grounding contract a real model consumer would receive, and M5's calibration machinery (`score_calibration()`)
+is tested and ready but has never been fed a real model answer.
+
+---
+
+### 2026-08-20 — Milestone 5 (Production Validation & Auditing), all 12 phases — MACHINERY-COMPLETE — 421/421 project-wide
+
+Implemented the entire M5 phase list (5.1–5.12) in one continuous batch, following "go ahead with milestone 4"
+→ "continue" — the user's standing instruction to keep implementing the next logical unit of work. Unlike M1–M4,
+this milestone is explicitly a *validation* layer with no new pipeline functionality: every phase either audits
+what M1–M4 already built (5.1, 5.2, 5.5–5.8, 5.10, 5.11, 5.12) or builds real, tested *machinery* whose actual
+numbers require external ground truth this session deliberately did not fabricate (5.3, 5.4, 5.9).
+
+**New `src/veyra/validation/` package**, one module per phase: `traceability.py` (5.1 — a hand-built 30-entry
+`Requirement` registry checked against the real test tree), `benchmark.py` (5.3 — orchestrates the real M2-M4
+pipeline against a repo+ground-truth pair; `BenchmarkTier` kept deliberately disjoint from
+`veyra.exploration.ExplorationTier`), `structural_accuracy.py` (5.4 — precision/recall/F1 against a
+caller-supplied `GroundTruthSet`, divide-by-zero-safe throughout), `question_quality.py` (5.5),
+`behavioral_coverage.py` (5.6 — every coverage category reported separately, never collapsed into one number,
+per PLAN.md's explicit instruction), `performance.py` (5.7), `security_audit.py` (5.8 — maps 7 security
+properties to real negative tests already in `tests/execution/test_docker_boundary.py`), `false_verification.py`
+(5.9 — VBG-level false-verification rate plus a separate, never-calls-a-real-LLM `score_calibration()` hedge
+detector), `conflict_audit.py` (5.10 — reuses the verification engine's own `CONFLICTED` semantics rather than
+redefining conflict), `git_regression.py` (5.11 — thin reporting layer over Phase 4.8's real `analyze_impact()`),
+and `final_report.py` (5.12 — `build_final_report()` runs every prior audit and derives a `ReleaseStatus`).
+Phase 5.2 (Full Integration Testing) is deliberately a test file, not a module:
+`tests/validation/test_full_integration.py` drives the real cross-milestone pipeline
+(static → runtime → retrieval → invalidation) across two commits with a `FakeExecutionBoundary`, proving identity,
+provenance, failure information, staleness, and safety gating all survive end to end.
+
+**The one substantive design decision this milestone required**: how `build_final_report()`'s `ReleaseStatus`
+should treat the phases that legitimately have no real number yet. Reused the project's existing D6 discipline
+(`None` fields until real ground truth exists, established back in M1) rather than inventing new rules: `FAIL`
+fires only on a definitive signal checkable without ground truth (traceability gaps, incomplete security
+coverage) or on an actual known false-verification case; `PASS` requires the ground-truth-dependent
+false-verification criterion to have been checked for real and come back clean; everything else clean but that
+criterion never run reports `PARTIALLY_VERIFIED`. Verified this is not vacuous: a synthetic
+"zero-known-incorrect-out-of-zero-verified" case is explicitly excluded from counting as `PASS` (a real bug
+caught by `test_zero_known_false_verifications_yields_pass` initially failing — fixed by adding a genuine
+RUNTIME-verified claim to the test fixture, not by loosening the release logic).
+
+**What's real vs. what's honestly still open:** every audit's *computation* is implemented and covered by real
+tests (some using hand-built synthetic ground truth to prove the math, e.g. `structural_accuracy.py`,
+`benchmark.py`). What remains genuinely unbuilt, because it requires resources/decisions outside this codebase
+rather than more code: (1) no real Tier 1/2/3 benchmark repositories have been selected or run (Phase 5.3); (2)
+no real `GroundTruthSet`/`FalseVerificationGroundTruth` exists from an actual labeled repo (Phases 5.4/5.9),
+per the deliberately-deferred labeling-methodology decision already logged in PLAN.md; (3) no real LLM has ever
+been called to produce a `model_answer` for `score_calibration()` (Phase 5.9's sub-check), consistent with this
+whole project never calling an LLM by design. `build_final_report()` run against this real repository currently
+returns `PARTIALLY_VERIFIED` — the honest result, not a fabricated `PASS`.
+
+Six new test-basename collisions were checked for and found to be none this batch (`find tests -name
+"test_*.py" | xargs -n1 basename | sort | uniq -d` stayed empty) — no renames needed this time, since each
+validation-phase test file naturally got a unique name from its module.
+
+**421/421 tests passing project-wide** (368 pre-M5 + 53 new: 5 traceability + 3 benchmark + a handful each
+across structural_accuracy/question_quality/behavioral_coverage/performance/security_audit/false_verification/
+conflict_audit/git_regression/final_report + 6 full-integration), 26 skipped (unchanged Docker-gated set).
+Updated PLAN.md with IMPLEMENTED markers and real implementation summaries for all 12 phases, and closed the
+Milestone 5 Gate checklist with an explicit "machinery complete, release NOT declared PASS" note naming the 3
+externally-scoped open items above.
 
 ---
 
@@ -994,6 +1059,41 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
 - **Phase 4.9 — Retrieval Audit** (2026-08-20). `RetrievalAuditReport` + `run_retrieval_analysis()` in
   `src/veyra/pipeline.py`. 4 new tests. **368/368 project-wide. MILESTONE 4 GATE FULLY CLEARED.** See timeline
   entry above.
+- **Phase 5.1 — Acceptance-Criteria Traceability** (2026-08-20). `src/veyra/validation/traceability.py`. 30-entry
+  hand-built `Requirement` registry checked against the real test tree on disk. 5 new tests.
+- **Phase 5.2 — Full Integration Testing** (2026-08-20). `tests/validation/test_full_integration.py` — a test
+  file, not a module by design. 6 new tests driving the real cross-milestone pipeline end to end.
+- **Phase 5.3 — End-to-End Repository Benchmark** (2026-08-20, machinery only). `src/veyra/validation/
+  benchmark.py`. `run_benchmark()` orchestrates the real M2-M4 pipeline; `BenchmarkTier` kept disjoint from
+  `ExplorationTier`. 3 new tests against synthetic Tier-1 fixtures. No real Tier 1/2/3 repos selected yet.
+- **Phase 5.4 — Structural Accuracy Audit** (2026-08-20, machinery only). `src/veyra/validation/
+  structural_accuracy.py`. Precision/recall/F1 against a caller-supplied `GroundTruthSet`, with a
+  per-relationship-type breakdown. Tested with hand-built synthetic ground truth; no real ground truth yet.
+- **Phase 5.5 — Question Quality Audit** (2026-08-20). `src/veyra/validation/question_quality.py`. Fully real,
+  no ground truth needed.
+- **Phase 5.6 — Behavioral Coverage Audit** (2026-08-20). `src/veyra/validation/behavioral_coverage.py`. Every
+  coverage category reported separately per PLAN.md's explicit instruction, never one collapsed percentage.
+  Caught and fixed a real test-assumption bug (a statically-supported node is not `UNEXPLORED`).
+- **Phase 5.7 — Performance Audit** (2026-08-20). `src/veyra/validation/performance.py`. Real measured
+  `StageTiming` per pipeline stage plus real graph/evidence/question size counts.
+- **Phase 5.8 — Safety & Security Audit** (2026-08-20). `src/veyra/validation/security_audit.py`. Maps 7
+  security properties to the real negative tests already in `tests/execution/test_docker_boundary.py`; feeds
+  the Phase 5.12 release-gate FAIL condition directly.
+- **Phase 5.9 — False Verification Audit** (2026-08-20, machinery only). `src/veyra/validation/
+  false_verification.py`. VBG-level false-verification rate (real `verified_count` always, rate/criterion `None`
+  until ground truth supplied — and still `None` on a vacuous zero/zero case) plus `score_calibration()`, a
+  tested hedge-detection heuristic that never calls a real LLM. No real ground truth or real LLM call yet.
+- **Phase 5.10 — Static vs Runtime Conflict Audit** (2026-08-20). `src/veyra/validation/conflict_audit.py`.
+  Reuses the verification engine's own `CONFLICTED` semantics rather than redefining conflict detection.
+- **Phase 5.11 — Git Regression Audit** (2026-08-20). `src/veyra/validation/git_regression.py`. Thin, honest
+  reporting layer over Phase 4.8's real `analyze_impact()`.
+- **Phase 5.12 — Final Production Report** (2026-08-20). `src/veyra/validation/final_report.py`.
+  `build_final_report()` runs every 5.1-5.11 audit and derives a `ReleaseStatus` (`PASS`/`FAIL`/
+  `PARTIALLY_VERIFIED`) using the project's D6 discipline. 5 new tests, including one that confirms a vacuous
+  zero/zero false-verification case does NOT count as `PASS`. **421/421 project-wide. MILESTONE 5 GATE
+  MACHINERY-COMPLETE** — `build_final_report()` against this real repository returns `PARTIALLY_VERIFIED`, not a
+  fabricated `PASS`, since real benchmark repos/ground truth/LLM calibration remain open per the 3 items logged
+  in PLAN.md's Milestone 5 Gate section.
 
 ---
 
@@ -1115,8 +1215,13 @@ Closed:
 27. ~~Phase 4.8 (Git Impact Analysis & Invalidation) + Phase 4.9 (Retrieval Audit)~~ — done 2026-08-20, 14 new
     tests. **368/368 project-wide. MILESTONE 4 GATE FULLY CLEARED.** `VerificationState.STALE` finally has a
     real producer, closing the one gap Phase 3.8 explicitly left open.
-28. **Next up: Milestone 5 (Production Validation & Auditing)** — not started. First phase is 5.1
-    (Acceptance-Criteria Traceability). M1-M4 are all done; nothing further is planned here until the user
-    gives explicit direction on M5, which per its own PLAN.md text introduces no major new functionality --
-    it's where the whole pipeline gets validated against real repositories and the two deliberately-deferred
-    open decisions (LLM calibration threshold, ground-truth labeling methodology) finally get resolved.
+28. ~~Milestone 5, Phases 5.1-5.12 (Production Validation & Auditing)~~ — done 2026-08-20, 53 new tests.
+    **421/421 project-wide. MILESTONE 5 GATE MACHINERY-COMPLETE**, not fully cleared: `build_final_report()`
+    against this repository honestly returns `PARTIALLY_VERIFIED`. Three items remain, each blocked on a
+    decision/resource outside this codebase rather than on missing code: (a) no real Tier 1/2/3 benchmark
+    repositories selected/run (Phase 5.3); (b) no real structural or false-verification ground truth exists yet
+    (Phases 5.4/5.9), pending the already-logged deferred labeling-methodology decision; (c) no real LLM has
+    been called for the Phase 5.9 calibration sub-check, consistent with this project never calling an LLM
+    anywhere by design. All M1-M5 buildable scope is now complete; nothing further is planned here until the
+    user gives explicit direction on real benchmark repository selection, ground-truth labeling methodology,
+    and/or an actual LLM calibration run — the same two open decisions already logged above.

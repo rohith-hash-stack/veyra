@@ -9,6 +9,7 @@ from .false_verification import (
     audit_false_verification,
     score_calibration,
 )
+from .final_report import FinalProductionReport, ReleaseStatus, build_final_report
 from .git_regression import GitRegressionReport, audit_git_regression
 from .performance import PerformanceAuditReport, StageTiming, audit_performance
 from .question_quality import QuestionQualityReport, audit_question_quality
@@ -48,4 +49,7 @@ __all__ = [
     "CalibrationCheck",
     "CalibrationEvalResult",
     "score_calibration",
+    "FinalProductionReport",
+    "ReleaseStatus",
+    "build_final_report",
 ]
