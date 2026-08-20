@@ -565,19 +565,58 @@ itself has no structured outcome field; adding one was judged out of scope for t
 `_evidence_status()` is the one place that coupling lives, documented as such.
 14 new tests, one per named precedence branch plus bulk-coverage and unknown-entity-default checks.
 
-### Phase 3.9 — Runtime Audit
+### Phase 3.9 — Runtime Audit — IMPLEMENTED 2026-08-20
 Scenario/execution counts+duration; harness generated/successful/failed; safety
 safe/mocked/sandboxed/blocked counts; runtime nodes/edges observed, exceptions, timeouts; evidence
 runtime/conflicts/verified/unverified.
 
-### Milestone 3 Gate
+**Implemented as `RuntimeAuditReport` + `run_runtime_analysis()` in `src/veyra/pipeline.py`** -- the Milestone 3
+equivalent of Phase 2.8's `run_static_analysis()`, and the **first real end-to-end M3 pipeline run**: existing-
+test tracing (3.3a) → tiered eager exploration (3.6, itself generating scenarios per 3.4 and executing them per
+3.5) → novel synthesis for SAFE/zero-coverage targets (3.3b) → reconciliation (3.7) → verification states (3.8),
+all in one call, against real Nodes an earlier `run_static_analysis()` call already extracted.
+- **A real, previously-unnoticed gap found and fixed while building this**: neither `explore()` (3.6) nor
+  `synthesize_novel_scenarios()` (3.3b) had ever actually called `VBGStore.insert_scenario()` -- `Scenario`
+  objects were constructed and used to drive `run_scenario()`, but never persisted, despite Phase 3.4 building
+  full `insert_scenario`/`get_scenarios` storage support for exactly this. Fixed in both modules (`explore()`
+  now calls `persist_scenarios()` on everything `generate_scenarios()` returns; `synthesize_novel_scenarios()`
+  calls `store.insert_scenario()` per trial) -- caught specifically because Phase 3.9's own audit needed real
+  persisted scenario counts to report on, not ephemeral in-memory objects. Both fixes covered by dedicated
+  regression tests.
+- **`VBGStore` gained `get_all_classifications()`** (mirrors `get_all_nodes`/`get_all_edges`/`get_all_evidence`
+  -- current view, latest per target), needed to report safety-class counts across every classified target at
+  once rather than one at a time.
+- **A real behavioral discovery surfaced by testing the orchestration honestly**: Tier 1/2 eager exploration
+  (3.6) runs *before* novel synthesis (3.3b) in this pipeline, and since exploration attempts every executable
+  scenario regardless of `SafetyClass` (only `BLOCKED` is excluded, per D1), it typically leaves nothing
+  "zero-coverage" behind for 3.3b to find in a small (Tier 1/2) repository -- 3.3b's own eligibility check
+  correctly reports 0 in that case. Demonstrating 3.3b actually firing needed a Tier 3 `file_count` (>500,
+  where 3.6 performs no eager execution at all per D10) in the test -- a real, now-documented consequence of
+  this pipeline's ordering, not a bug.
+- 4 new tests: full end-to-end report shape, audit-record persistence, default-policy-means-zero-synthesis
+  (consistent with every other D13-respecting test in this project), and the Tier-3-enables-synthesis case
+  above.
+
+Acceptance: every field in the report is a real count taken directly from what the pipeline just produced (no
+precision/recall-style benchmark claim, per D6 -- Milestone 5's job). `verified_count`/`unverified_count`
+mirror Phase 2.7's verified/unverified split one level deeper: `RUNTIME_VERIFIED`/`CONDITIONALLY_VERIFIED`
+count as verified; `STATICALLY_SUPPORTED`/`UNEXPLORED`/everything else counts as unverified at the runtime
+level, even though it may be perfectly good static knowledge.
+
+### Milestone 3 Gate — FULLY CLEARED 2026-08-20
 ```
-☐ Safety precedes runtime          ☐ Multi-run exploration (bounded)
-☐ Execution isolation              ☐ Conflict reconciliation
-☐ Harness manager (3.3a → 3.3b)    ☐ Verification states
-☐ Scenario generation              ☐ Security tests
-☐ Runtime tracing                  ☐ Runtime audit
+☑ Safety precedes runtime          ☑ Multi-run exploration (bounded)
+☑ Execution isolation              ☑ Conflict reconciliation
+☑ Harness manager (3.3a → 3.3b)    ☑ Verification states
+☑ Scenario generation              ☑ Security tests
+☑ Runtime tracing                  ☑ Runtime audit
 ```
+"Security tests" were already covered by Phase 3.2's own test suite (filesystem escape, network escape,
+credential access, process creation, resource exhaustion, timeout, cleanup -- all genuinely exercised against
+real Docker containers, not string-matched). Every other checkbox is a phase implemented and tested in this
+milestone's own line of work above. `src/veyra/pipeline.py`'s `run_runtime_analysis()` is the single entry
+point proving the whole milestone actually runs together, the same role `run_static_analysis()` played for
+closing Milestone 2's gate.
 
 ---
 

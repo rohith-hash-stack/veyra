@@ -64,7 +64,7 @@ from pathlib import Path
 
 from veyra.execution import ExecutionBoundary
 from veyra.runtime import ScenarioExecutionOutcome, run_scenario
-from veyra.scenarios import generate_scenarios
+from veyra.scenarios import generate_scenarios, persist_scenarios
 from veyra.vbg import EvidenceType, RelationshipType, VBGStore
 
 _TIER_1_MAX_FILES = 50
@@ -170,6 +170,7 @@ def explore(
     start = time.monotonic()
 
     scenarios = generate_scenarios(store, repository_version)
+    persist_scenarios(store, scenarios)  # every candidate, not just executable ones -- Phase 3.9's audit needs the full picture
     scenario_by_target = {s.target_entity_id: s for s in scenarios if s.executable}
 
     if candidate_entity_ids is None:

@@ -217,6 +217,20 @@ def test_default_valued_parameter_is_never_overridden(
         assert "x" not in spec["kwargs_literal_overrides"]
 
 
+def test_each_trial_scenario_is_persisted(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    _build_repo(write_file, repo_root, store, "def foo():\n    return 1\n")
+    boundary = FakeExecutionBoundary()
+    policy = _allowlisting("mod.foo")
+
+    synthesize_novel_scenarios(store, repo_root, COMMIT, boundary, policy=policy, samples_per_parameter=3)
+
+    persisted = [s for s in store.get_scenarios(COMMIT) if s.target_entity_id == "mod.foo"]
+    assert len(persisted) == 3
+    assert all(s.executable for s in persisted)
+
+
 def test_bytes_parameter_round_trips_through_json(
     write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
 ) -> None:

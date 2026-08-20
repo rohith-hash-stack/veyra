@@ -844,6 +844,26 @@ class VBGStore:
         history = self.get_classification_history(target, repository_commit)
         return history[-1] if history else None
 
+    def get_all_classifications(self, repository_commit: str) -> list[ClassificationResult]:
+        """Current view: the latest classification per distinct target at
+        this commit -- mirrors get_all_nodes/get_all_edges/get_all_evidence.
+        Backs Phase 3.9's runtime audit (safety class counts across every
+        classified target, not just one)."""
+        with closing(self._connect()) as conn:
+            rows = conn.execute(
+                """
+                SELECT c.* FROM classifications c
+                INNER JOIN (
+                    SELECT target, MAX(row_id) AS max_row_id
+                    FROM classifications WHERE repository_commit = ?
+                    GROUP BY target
+                ) latest ON c.target = latest.target AND c.row_id = latest.max_row_id
+                WHERE c.repository_commit = ?
+                """,
+                (repository_commit, repository_commit),
+            ).fetchall()
+        return [_row_to_classification_result(row) for row in rows]
+
     # -- Execution environments (Phase 3.2) ----------------------------------
 
     def insert_execution_environment(self, environment: ExecutionEnvironment) -> None:

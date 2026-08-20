@@ -8,26 +8,71 @@
 
 ## Current Status
 
-**Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.3b,
-3.4, 3.5, 3.6, 3.7, and 3.8 done. Remaining for the M3 gate: 3.9 (Runtime Audit) only.
-**Current milestone:** 308 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+**Stage:** M1, M2, AND M3 ALL FULLY cleared. M3's gate closed 2026-08-20 (all 9 phases + security tests).
+Milestone 4 (Retrieval & LLM Grounding) not started.
+**Current milestone:** 314 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
 cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds Phase 3.3a, 3.4, 3.5, 3.6, and now 3.3b (pushed as this
-session progresses).
+covers M1+M2+Phase 3.1+3.2; the working branch adds the rest of M3 (3.3a/3.3b/3.4/3.5/3.6/3.7/3.8/3.9), pushed
+commit by commit as this session progressed.
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
-`src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py`,
-`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/` (now includes `synthesis.py`, Phase 3.3b),
-`src/veyra/scenarios/`, `src/veyra/runtime/`, `src/veyra/exploration/` all implemented. SQLite event-sourced
-store (D3) live. Every canonical entity Phase 1.2 originally deferred now exists. First runtime dependency
-added: `hypothesis` (Veyra's own trusted tooling dependency for Phase 3.3b, not a repository dependency).
+`src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py` (now the
+entry point for BOTH `run_static_analysis()` and `run_runtime_analysis()`), `src/veyra/safety/`,
+`src/veyra/execution/`, `src/veyra/harness/` (existing-test tracing + novel synthesis), `src/veyra/scenarios/`,
+`src/veyra/runtime/`, `src/veyra/exploration/`, `src/veyra/reconciliation/`, `src/veyra/verification/` all
+implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2 originally deferred now
+exists. One runtime dependency added: `hypothesis` (Veyra's own trusted tooling dependency for Phase 3.3b, not
+a repository dependency).
 
 ---
+
+### 2026-08-20 — Phase 3.9 (Runtime Audit) implemented — MILESTONE 3 GATE FULLY CLEARED — 314/314 project-wide
+- **`RuntimeAuditReport` + `run_runtime_analysis()` added to `src/veyra/pipeline.py`** -- the Milestone 3
+  counterpart to Phase 2.8's `run_static_analysis()`, and genuinely the **first time the whole M3 pipeline ran
+  together end to end**: existing-test tracing (3.3a) → tiered eager exploration (3.6, itself running 3.4's
+  scenario generation and 3.5's tracing) → novel synthesis (3.3b) → reconciliation (3.7) → verification states
+  (3.8), all from one call, against real Nodes an earlier `run_static_analysis()` already extracted.
+- **A real, previously-unnoticed gap found and fixed while building this**: writing the audit report's
+  `scenarios_generated`/`scenarios_executable` fields required real persisted `Scenario` rows to count --
+  and there weren't any. Neither `explore()` (Phase 3.6) nor `synthesize_novel_scenarios()` (Phase 3.3b) had
+  ever actually called `VBGStore.insert_scenario()`, despite Phase 3.4 building full storage support for
+  exactly this. `Scenario` objects were being constructed and used to drive `run_scenario()` but simply
+  discarded afterward in both callers -- a genuine, previously-invisible gap (nothing before this needed to
+  query persisted scenarios back out, so nothing caught it). Fixed in both modules, each covered by a new
+  regression test (`test_explore_persists_every_generated_scenario`,
+  `test_each_trial_scenario_is_persisted`) -- confirmed via the full suite that this didn't change either
+  phase's existing behavior otherwise (48/48 in `tests/exploration`+`tests/harness` still passing).
+- **`VBGStore.get_all_classifications()`** (mirrors `get_all_nodes`/`get_all_edges`/`get_all_evidence` --
+  current view, latest per target) -- needed to report safety-class counts across every classified target at
+  once, closing out the last of this session's "current view" bulk-read additions.
+- **A real behavioral discovery, surfaced by testing the orchestration honestly rather than assuming it would
+  just work**: Tier 1/2 eager exploration (3.6) runs *before* novel synthesis (3.3b) in this pipeline, and
+  since exploration attempts every executable scenario regardless of `SafetyClass` (only `BLOCKED` is
+  excluded, per D1), it typically leaves nothing "zero-coverage" behind for 3.3b to find in a small (Tier 1/2)
+  repository -- the first draft of the synthesis-enabled test asserted `synthesis_eligible_targets >= 1` under
+  Tier 1 and failed, because exploration had already covered the target first. Not a bug -- a real,
+  now-documented consequence of pipeline ordering. Fixed the test to use a Tier 3 `file_count` (>500, where
+  3.6 performs zero eager execution per D10), which is also a more honest demonstration of 3.3b actually doing
+  something 3.6 didn't already do.
+- **Tests**: 4 new, all non-Docker, reusing the by-now-standard `FakeExecutionBoundary` pattern -- full
+  end-to-end report shape (existing-test/scenario/exploration/classification/runtime-evidence/verification-
+  state fields all populated with real counts), audit-record persistence, default-policy-means-zero-synthesis
+  (D13, consistent with every other test in this project touching `PolicyConfig`), and the Tier-3-enables-
+  synthesis case above. **314/314 project-wide, 0 failures** (26 Docker-gated tests skip cleanly, same as every
+  prior entry this session).
+- **MILESTONE 3 GATE FULLY CLEARED.** All nine phases (3.1 Execution Classification, 3.2 Execution Boundary,
+  3.3a Harness existing-test tracing, 3.3b Novel Scenario Synthesis, 3.4 Behavioral Scenario Generator, 3.5
+  Runtime Trace Engine, 3.6 Multi-Execution Exploration, 3.7 Evidence Reconciliation, 3.8 Verification State
+  Engine, 3.9 Runtime Audit) are implemented, tested, and now demonstrably run together via
+  `run_runtime_analysis()`. "Security tests" (the gate's remaining checkbox) were already satisfied by Phase
+  3.2's own real-Docker test suite. Every canonical VBG entity Phase 1.2 ever named now has a real, tested
+  implementation. **314 passed, 26 skipped, 0 failures project-wide** is the number to beat going into
+  Milestone 4.
 
 ### 2026-08-20 — Phase 3.7 (Evidence Reconciliation) + Phase 3.8 (Verification State Engine) — 308/308 project-wide
 - **Built together deliberately**: 3.8 directly consumes 3.7's `EdgeReconciliation` output to derive
@@ -807,6 +852,12 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   environment (23 Docker-gated tests skip cleanly).** See timeline entry above for the Dependency
   Inspection/Installation Policy scope boundary, the stdlib-only in-container runner, and the
   never-a-false-success-claim evidence discipline. 3.3b (novel scenario synthesis) not started.
+- **Phase 3.3b — Novel Scenario Synthesis** (2026-08-20). `src/veyra/harness/synthesis.py`. 9 new tests, all
+  non-Docker. **287/287 project-wide.** Completes the Harness & Fixture Manager (3.3a + 3.3b). Hypothesis
+  generates diverse primitive values on the host; the actual invocation always still happens inside the
+  unmodified Phase 3.2 sandbox via a purely additive `argument_overrides` addition to `run_scenario()`. Under
+  the default policy this synthesizes nothing at all (SAFE is only reachable via an explicit allowlist, D13) --
+  proven directly by a test, not just claimed.
 - **Phase 3.4 — Behavioral Scenario Generator** (2026-08-20). `src/veyra/scenarios/` + `vbg/scenarios.py`. 37
   new tests. **253/253 project-wide.** Closes out `Scenario`, the last of Phase 1.2's originally-deferred
   canonical entities. See timeline entry above for scope (one direct-invocation candidate per invokable node,
@@ -822,6 +873,18 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   general lazy/query-driven primitive (`explore_neighborhood`) Tier 3 and future Phase 4.3 will use. See
   timeline entry above for the call-graph-vs-structural-neighborhood distinction and what's deliberately not
   built yet (per-node execution caps, precise nested-observation counts).
+- **Phase 3.7 — Static/Runtime Evidence Reconciliation** (2026-08-20). `src/veyra/reconciliation/`. 7 new
+  tests, all non-Docker. **308/308 project-wide** (built together with 3.8). `reconcile_calls()` classifies
+  every static-vs-runtime CALLS pair as `CONFIRMED`/`STATIC_ONLY`/`RUNTIME_ONLY`; only `RUNTIME_ONLY` counts as
+  a real conflict. Purely read-only, same discipline as Phase 2.7's `summarize_knowledge()`.
+- **Phase 3.8 — Verification State Engine** (2026-08-20). `src/veyra/verification/`. 14 new tests, all
+  non-Docker. **308/308 project-wide.** `derive_verification_states()` computes a `VerificationState` per node
+  fresh from evidence every call (D15 -- never a mutated `Node.status`), an 8-branch precedence chain covering
+  every named state except `STALE` (needs Phase 4.8) and `UNANSWERED` (already served by Phase 2.6/2.7).
+- **Phase 3.9 — Runtime Audit** (2026-08-20). `RuntimeAuditReport` + `run_runtime_analysis()` in
+  `src/veyra/pipeline.py`. 4 new tests, all non-Docker. **314/314 project-wide. MILESTONE 3 GATE FULLY
+  CLEARED.** The first real end-to-end M3 pipeline run, and where a real gap (Scenario objects never actually
+  persisted by 3.6/3.3b) was found and fixed. See timeline entry above.
 
 ---
 
@@ -926,12 +989,14 @@ Closed:
     real RUNTIME evidence and real runtime CALLS-edge observations.
 22. ~~Phase 3.6 (Multi-Execution Exploration)~~ — done 2026-08-20, 13 new tests, all non-Docker. **278/278
     project-wide.** D10's tiered budgets are real code now, not just PLAN.md prose.
-23. **Next up: Phase 3.3b (novel scenario synthesis), 3.7 (Static/Runtime Evidence Reconciliation), 3.8
-    (Verification State Engine), or 3.9 (Runtime Audit)** — 3.7 is the explicit, named next consumer of the
-    runtime CALLS-edge evidence 3.5/3.6 now produce at scale (reconciling it against static CALLS edges); 3.8
-    is the natural sequel to 3.7 (deriving final verification states from the now-much-richer evidence
-    history); 3.9 is straightforward instrumentation, closing Milestone 3's audit story the way 2.8 closed
-    Milestone 2's; 3.3b still has the same open dependency question as before (a real "zero coverage" signal
-    now exists in principle, from RUNTIME evidence presence, but nothing yet formally defines "coverage" as a
-    Milestone 3 concept the way Phase 5.6 will for the final release report). All four are legitimate; on hold
-    pending explicit go-ahead and a steer on which one first.
+23. ~~Phase 3.3b (Novel Scenario Synthesis)~~ — done 2026-08-20, 9 new tests. **287/287 project-wide.**
+    Completes the Harness & Fixture Manager (3.3a + 3.3b).
+24. ~~Phase 3.7 (Evidence Reconciliation) + Phase 3.8 (Verification State Engine)~~ — done 2026-08-20 together,
+    21 new tests. **308/308 project-wide.**
+25. ~~Phase 3.9 (Runtime Audit)~~ — done 2026-08-20, 4 new tests. **314/314 project-wide. MILESTONE 3 GATE
+    FULLY CLEARED** (all 9 phases + security tests, the latter already satisfied by Phase 3.2's own suite).
+    Found and fixed a real gap along the way: `Scenario` objects generated by 3.6/3.3b had never actually been
+    persisted to `VBGStore` until this phase's audit report needed to count them for real.
+26. **Next up: Milestone 4 (Retrieval & LLM Grounding)** — not started. First phase is 4.1 (VBG Retrieval
+    Index). M3 is done; nothing further is planned here until the user gives explicit direction on M4 (or on
+    any M3 follow-up work, e.g. wiring `explore_neighborhood()` to a real caller once M4's Phase 4.3 exists).

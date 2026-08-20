@@ -82,6 +82,18 @@ _CALL_CHAIN = (
 )
 
 
+def test_explore_persists_every_generated_scenario(
+    write_file: Callable[[str, str], Path], repo_root: Path, store: VBGStore
+) -> None:
+    _build_repo(write_file, repo_root, store, _THREE_INDEPENDENT_FUNCS)
+    boundary = FakeExecutionBoundary()
+
+    explore(store, repo_root, COMMIT, boundary)
+
+    persisted = store.get_scenarios(COMMIT)
+    assert {s.target_entity_id for s in persisted} == {"mod.a", "mod.b", "mod.c"}
+
+
 def test_explore_with_no_candidates_returns_empty_report(repo_root: Path, store: VBGStore) -> None:
     boundary = FakeExecutionBoundary()
     report = explore(store, repo_root, COMMIT, boundary, candidate_entity_ids=set())

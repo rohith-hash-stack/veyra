@@ -176,6 +176,7 @@ def synthesize_novel_scenarios(
                 executable=True,
                 repository_version=repository_version,
             )
+            store.insert_scenario(scenario)
             outcomes.append(
                 run_scenario(
                     store, repository_root, repository_version, scenario, boundary,
