@@ -22,6 +22,11 @@ because duplication was never possible in the first place.
 PLAN.md Milestone 3, Phase 3.9 -- Runtime Audit, plus `run_runtime_analysis()`,
 the equivalent entry point for Phases 3.3a/3.3b/3.4/3.5/3.6/3.7/3.8. See
 `RuntimeAuditReport`'s own docstring for what its fields mean.
+
+PLAN.md Milestone 4, Phase 4.9 -- Retrieval Audit, plus `run_retrieval_analysis()`,
+the equivalent entry point for Phases 4.1-4.3 (index build + a batch of
+sample queries through the full retrieve_context() pipeline). See
+`RetrievalAuditReport`'s own docstring for what its fields mean.
 """
 
 from __future__ import annotations
@@ -35,6 +40,7 @@ from veyra.exploration import explore_at_ingest
 from veyra.harness import TestStatus, run_existing_test_harness, synthesize_novel_scenarios
 from veyra.questions import generate_questions, persist_questions, summarize_knowledge, verify_question
 from veyra.reconciliation import ReconciliationStatus, reconcile_calls
+from veyra.retrieval import build_retrieval_index, retrieve_context
 from veyra.safety import PolicyConfig
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import EvidenceType, VBGStore, VerificationState, parse_edge_evidence_key
@@ -257,4 +263,93 @@ def run_runtime_analysis(
         verification_state_counts=verification_state_counts,
         verified_count=verified_count,
         unverified_count=len(states) - verified_count,
+    )
+
+
+@dataclass(frozen=True)
+class RetrievalAuditReport:
+    """PLAN.md Milestone 4, Phase 4.9 -- Retrieval Audit.
+
+    `recall_at_k`/`precision_at_k`/`mrr` are left `None`, per D6 -- exactly
+    like `StaticAuditReport.static_precision`/`static_recall` -- because
+    computing them needs labeled ground truth (which query should retrieve
+    which entities) that doesn't exist until Milestone 5's benchmark repos
+    do. Every other field is a real count/timing taken directly from a real
+    index build plus a real batch of queries through the actual Phase
+    4.1-4.3 pipeline, not a synthetic estimate.
+    """
+
+    repository_version: str
+    index_build_duration_seconds: float
+    index_size: int
+
+    queries_run: int
+    average_query_latency_seconds: float
+
+    total_nodes_retrieved: int
+    total_relationships_retrieved: int
+    total_evidence_retrieved: int
+
+    grounded_answer_count: int
+    unsupported_answer_count: int
+
+    recall_at_k: float | None
+    precision_at_k: float | None
+    mrr: float | None
+
+
+def run_retrieval_analysis(
+    store: VBGStore, repository_version: str, sample_queries: list[str], top_k: int = 10
+) -> RetrievalAuditReport:
+    """Builds the Phase 4.1 index (timed), runs every query in
+    `sample_queries` through Phase 4.3's `retrieve_context()` (each timed
+    individually), and reports the Phase 4.9 audit. "Grounded" here means
+    the query retrieved at least one real entity; "unsupported" means it
+    retrieved none -- not a judgment about answer quality, which needs
+    ground truth (see `RetrievalAuditReport`'s own docstring)."""
+    with AuditTimer("4.x_retrieval_index_build") as build_timer:
+        index = build_retrieval_index(store, repository_version)
+    build_record = build_timer.to_record(repository_commit=repository_version, output_size=len(index))
+    store.insert_audit_record(build_record)
+
+    total_nodes = 0
+    total_relationships = 0
+    total_evidence = 0
+    grounded_answer_count = 0
+    unsupported_answer_count = 0
+    query_durations: list[float] = []
+
+    for query in sample_queries:
+        with AuditTimer("4.x_retrieval_query") as query_timer:
+            context = retrieve_context(store, index, repository_version, query, top_k=top_k)
+        query_record = query_timer.to_record(
+            repository_commit=repository_version, input_size=len(query), output_size=len(context.entities)
+        )
+        store.insert_audit_record(query_record)
+        query_durations.append(query_record.duration_seconds)
+
+        total_nodes += len(context.entities)
+        total_relationships += len(context.relationships)
+        total_evidence += sum(len(v) for v in context.evidence_by_entity.values())
+        if context.entities:
+            grounded_answer_count += 1
+        else:
+            unsupported_answer_count += 1
+
+    average_latency = (sum(query_durations) / len(query_durations)) if query_durations else 0.0
+
+    return RetrievalAuditReport(
+        repository_version=repository_version,
+        index_build_duration_seconds=build_record.duration_seconds,
+        index_size=len(index),
+        queries_run=len(sample_queries),
+        average_query_latency_seconds=average_latency,
+        total_nodes_retrieved=total_nodes,
+        total_relationships_retrieved=total_relationships,
+        total_evidence_retrieved=total_evidence,
+        grounded_answer_count=grounded_answer_count,
+        unsupported_answer_count=unsupported_answer_count,
+        recall_at_k=None,
+        precision_at_k=None,
+        mrr=None,
     )

@@ -179,5 +179,28 @@ def test_derive_verification_states_covers_every_node(
     assert all(isinstance(v, VerificationState) for v in states.values())
 
 
+def test_stale_entity_ids_overrides_every_other_signal(store: VBGStore) -> None:
+    store.insert_node(_node("mod.foo"))
+    store.insert_evidence(_evidence("mod.foo", EvidenceType.RUNTIME, "COMPLETED", scenario_id="s1", environment_id="e1"))
+    store.insert_classification(
+        ClassificationResult(
+            target="mod.foo", classification=SafetyClass.BLOCKED, risk_level=RiskLevel.CRITICAL,
+            capabilities_detected=(), matched_rules=(), reason="blocked for test",
+            evidence=(), repository_commit=COMMIT, policy_version="v1",
+        )
+    )
+
+    state = derive_verification_state(store, "mod.foo", COMMIT, stale_entity_ids=frozenset({"mod.foo"}))
+
+    assert state is VerificationState.STALE
+
+
+def test_omitting_stale_entity_ids_preserves_prior_behavior(store: VBGStore) -> None:
+    store.insert_node(_node("mod.foo"))
+    store.insert_evidence(_evidence("mod.foo", EvidenceType.RUNTIME, "COMPLETED", scenario_id="s1", environment_id="e1"))
+
+    assert derive_verification_state(store, "mod.foo", COMMIT) is VerificationState.RUNTIME_VERIFIED
+
+
 def test_unknown_entity_defaults_to_structurally_identified(store: VBGStore) -> None:
     assert derive_verification_state(store, "does.not.exist", COMMIT) is VerificationState.STRUCTURALLY_IDENTIFIED

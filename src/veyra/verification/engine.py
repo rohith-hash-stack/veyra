@@ -68,14 +68,28 @@ def _evidence_status(evidence: Evidence) -> str | None:
     return evidence.detail[len("status="):].split(";", 1)[0]
 
 
-def derive_verification_states(store: VBGStore, repository_version: str) -> dict[str, VerificationState]:
+def derive_verification_states(
+    store: VBGStore, repository_version: str, stale_entity_ids: frozenset[str] | None = None
+) -> dict[str, VerificationState]:
     """Bulk derivation -- computes reconciliation and scenario lookups once
     and reuses them across every node, rather than once per node. Prefer
     this over the single-entity convenience wrapper below whenever checking
-    more than one entity."""
+    more than one entity.
+
+    `stale_entity_ids` is purely additive (default `None` preserves every
+    prior call site's exact behavior unchanged) -- Phase 4.8's Git Impact
+    Analysis is the one real producer of this set: entities a git change
+    invalidated (per its own "unchanged signatures do not prove unchanged
+    behavior" rule), computed by comparing two commits' symbol diffs and
+    impact tiers. When an entity_id is in this set, STALE overrides every
+    other signal -- even BLOCKED_BY_SAFETY -- because a stale classification
+    is itself exactly the kind of thing that might no longer be accurate;
+    re-classifying/re-verifying fresh is the actual fix, not trusting an
+    old verdict about changed code."""
     nodes = store.get_all_nodes(repository_version)
     reconciliations = reconcile_calls(store, repository_version)
     scenarios = store.get_scenarios(repository_version)
+    stale_entity_ids = stale_entity_ids or frozenset()
 
     conflicted_sources = {r.source_id for r in reconciliations if r.is_conflict}
     static_only_sources = {
@@ -94,6 +108,7 @@ def derive_verification_states(store: VBGStore, repository_version: str) -> dict
         node.entity_id: _derive_one(
             store, node.entity_id, repository_version,
             conflicted_sources, static_only_sources, confirmed_targets_by_source, scenarios_by_target,
+            stale_entity_ids,
         )
         for node in nodes
     }
@@ -107,7 +122,11 @@ def _derive_one(
     static_only_sources: set[str],
     confirmed_targets_by_source: dict[str, set[str]],
     scenarios_by_target: dict[str, list[Scenario]],
+    stale_entity_ids: frozenset[str],
 ) -> VerificationState:
+    if entity_id in stale_entity_ids:
+        return VerificationState.STALE
+
     classification = store.get_latest_classification(entity_id, repository_version)
     if classification is not None and classification.classification is SafetyClass.BLOCKED:
         return VerificationState.BLOCKED_BY_SAFETY
@@ -147,10 +166,12 @@ def _derive_one(
     return VerificationState.STRUCTURALLY_IDENTIFIED
 
 
-def derive_verification_state(store: VBGStore, entity_id: str, repository_version: str) -> VerificationState:
+def derive_verification_state(
+    store: VBGStore, entity_id: str, repository_version: str, stale_entity_ids: frozenset[str] | None = None
+) -> VerificationState:
     """Single-entity convenience wrapper. Recomputes the full bulk map on
     every call (including reconciliation across the whole commit) -- fine
     for occasional lookups, wasteful for checking many entities; use
     derive_verification_states() directly in that case."""
-    states = derive_verification_states(store, repository_version)
+    states = derive_verification_states(store, repository_version, stale_entity_ids)
     return states.get(entity_id, VerificationState.STRUCTURALLY_IDENTIFIED)

@@ -720,7 +720,7 @@ real Python-pipeline output exists (post-M3/M4), observe the model's actual base
 then set the pass threshold from that observed baseline rather than guessing a number now. Do not skip setting
 a threshold once baseline data exists — this is a scheduled decision point, not a permanently open item.
 
-### Phase 4.8 — Git Impact Analysis & Invalidation
+### Phase 4.8 — Git Impact Analysis & Invalidation — IMPLEMENTED 2026-08-20
 ```text
 Git change → Changed symbols → Impact analysis → Tier 0 → Tier 1 → Tier 2 → Tier 3 if required
 ```
@@ -734,21 +734,62 @@ Important rule: unchanged signatures do not prove unchanged behavior.
 **Note:** this phase now *consumes* the symbol-level diff built in M1.4/M2, rather than building diffing from
 scratch here.
 
-Acceptance: changed evidence goes stale where appropriate; unaffected evidence stays valid; historical evidence
-stays accessible; reverification targeted, not a full-repo re-scan by default.
+**Implemented as `src/veyra/invalidation/engine.py`**: `analyze_impact(store, old_commit, new_commit)` /
+`ImpactAnalysisReport`. Tier 0 is `diff_symbols()`'s (Phase 1.4/D4) `ADDED`/`REMOVED`/`MODIFIED_SIGNATURE`/
+`MODIFIED_BODY` output, unfiltered -- "unchanged signatures do not prove unchanged behavior" is therefore
+automatic, not a separate rule this phase enforces: `MODIFIED_BODY` (signature-preserving) lands in Tier 0
+exactly like `MODIFIED_SIGNATURE` does. Tier 1 walks CALLS/INHERITS/REFERENCES edges (not CONTAINS -- structural
+containment isn't a behavioral dependency; not IMPORTS) incoming and outgoing from every Tier 0 entity, in
+*both* the old and new commit's graphs unioned (a REMOVED entity only exists in the old graph, an ADDED one
+only in the new). Tier 2 is Questions (Phase 2.5) whose `entity_ids` intersect Tier 0 ∪ Tier 1, in either
+commit. **Tier 3 is deliberately scoped to what Phase 3.5's RUNTIME evidence actually observed** -- targets of
+a RUNTIME-observed CALLS edge sourced from Tier 0 ∪ Tier 1 in the new commit -- real behavioral reach static
+analysis alone (Tier 1) could miss entirely (dynamic dispatch, anything the extractor's documented resolution
+limits leave unresolved), not a broader static walk that would just be Tier 1 again.
 
-### Phase 4.9 — Retrieval Audit
+**`ImpactAnalysisReport.stale_entity_ids`** (Tier 0 ∪ Tier 1 ∪ Tier 3) feeds directly into Phase 3.8's
+`derive_verification_states(..., stale_entity_ids=...)` -- a purely additive parameter added to that function
+(default `None` preserves every existing call site's behavior unchanged) -- **this is where
+`VerificationState.STALE` finally gets a real producer**, computed on read per D15's discipline, never by
+mutating a stored row. STALE takes the *highest* precedence in Phase 3.8's chain, even over `BLOCKED_BY_SAFETY`
+-- a stale classification is itself exactly the kind of thing that might no longer be accurate for changed
+code. "Unaffected evidence stays valid" / "historical evidence stays accessible" hold for free: this module
+never writes to `VBGStore` at all. "Reverification targeted, not a full-repo re-scan" is what
+`stale_entity_ids` itself is: a precise, bounded set, never "everything."
+
+Acceptance: changed evidence goes stale where appropriate; unaffected evidence stays valid; historical evidence
+stays accessible; reverification targeted, not a full-repo re-scan by default. 10 new tests, including one
+proving `MODIFIED_BODY` alone (unchanged signature) still lands in Tier 0, and one proving `stale_entity_ids`
+fed into Phase 3.8 actually produces `VerificationState.STALE`.
+
+### Phase 4.9 — Retrieval Audit — IMPLEMENTED 2026-08-20
 Index build duration/size; query latency; Recall@K/Precision@K/MRR (computed once M5 ground truth exists);
 relevant nodes/edges/evidence retrieved; grounded vs unsupported answers.
 
-### Milestone 4 Gate
+**Implemented as `RetrievalAuditReport` + `run_retrieval_analysis()` in `src/veyra/pipeline.py`** -- the
+Milestone 4 counterpart to `run_static_analysis()`/`run_runtime_analysis()`: builds the Phase 4.1 index
+(timed), runs every sample query through Phase 4.3's `retrieve_context()` (each timed individually), and
+reports real counts. `recall_at_k`/`precision_at_k`/`mrr` are `None`, per D6 -- exactly like
+`StaticAuditReport`'s own precision/recall fields -- since they need Milestone 5 ground truth. "Grounded" means
+a query retrieved at least one real entity; "unsupported" means it retrieved none -- not a quality judgment.
+4 new tests.
+
+### Milestone 4 Gate — FULLY CLEARED 2026-08-20
 ```
-☐ VBG retrieval          ☐ Q&A explosion control
-☐ Semantic retrieval     ☐ LLM grounding (+ calibration eval)
-☐ Evidence retrieval     ☐ Git impact analysis (consumes M1/M2 diff)
-☐ Eager Q&A              ☐ Tiered invalidation
-☐ Lazy Q&A               ☐ Retrieval benchmark + tests
+☑ VBG retrieval          ☑ Q&A explosion control
+☑ Semantic retrieval     ☑ LLM grounding (+ calibration eval deferred to M5 per Phase 5.9)
+☑ Evidence retrieval     ☑ Git impact analysis (consumes M1/M2 diff)
+☑ Eager Q&A              ☑ Tiered invalidation
+☑ Lazy Q&A               ☑ Retrieval benchmark + tests
 ```
+All nine Milestone 4 phases (4.1 VBG Retrieval Index, 4.2 Semantic Repository Retrieval, 4.3 Query-Time
+Evidence Retrieval, 4.4 Eager Cache, 4.5 Lazy Cache, 4.6 Cache Explosion Control, 4.7 LLM Grounding Contract,
+4.8 Git Impact Analysis & Invalidation, 4.9 Retrieval Audit) are implemented and tested.
+`run_retrieval_analysis()` demonstrates 4.1-4.3 running together end to end, the same role
+`run_static_analysis()`/`run_runtime_analysis()` played for closing M2/M3's gates. The LLM calibration eval
+itself remains a scheduled Milestone 5 decision point (Phase 5.9), not a gap in this milestone -- no LLM is
+called anywhere in this codebase, by design; this milestone builds the contract a real model consumer would
+receive.
 
 ---
 

@@ -8,28 +8,71 @@
 
 ## Current Status
 
-**Stage:** M1, M2, AND M3 ALL FULLY cleared. M4 (Retrieval & LLM Grounding) in progress: Phases 4.1-4.7 done.
-Remaining for the M4 gate: 4.8 (Git Impact Analysis) and 4.9 (Retrieval Audit).
-**Current milestone:** 352 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+**Stage:** M1, M2, M3, AND M4 ALL FULLY cleared. M4's gate closed 2026-08-20. Milestone 5 (Production
+Validation & Auditing) not started.
+**Current milestone:** 368 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
 cleanly rather than fail (same `pytest.mark.skipif` pattern Phase 3.2 established).
 **Git:** `veyra` is now a git repo (`main` branch / `claude/veyra-progress-plan-h7kthq` working branch). `main`
-covers M1+M2+Phase 3.1+3.2; the working branch adds the rest of M3 (3.3a/3.3b/3.4/3.5/3.6/3.7/3.8/3.9), pushed
-commit by commit as this session progressed.
+covers M1+M2+Phase 3.1+3.2; the working branch adds the rest of M3 and all of M4, pushed commit by commit as
+this session progressed.
 **Language scope:** Python-only (flagship language per PLAN.md D5), until the pipeline clears its M5 gates.
 **Repo/storage:** `src/veyra/acquisition/`, `src/veyra/vbg/` (Node/Edge/Evidence/Repository/Audit/Question/
 Answer/Classification/ExecutionEnvironment/Scenario, all append-only), `src/veyra/git_tracking/`,
-`src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py` (now the
-entry point for BOTH `run_static_analysis()` and `run_runtime_analysis()`), `src/veyra/safety/`,
-`src/veyra/execution/`, `src/veyra/harness/` (existing-test tracing + novel synthesis), `src/veyra/scenarios/`,
-`src/veyra/runtime/`, `src/veyra/exploration/`, `src/veyra/reconciliation/`, `src/veyra/verification/` all
-implemented. SQLite event-sourced store (D3) live. Every canonical entity Phase 1.2 originally deferred now
-exists. One runtime dependency added: `hypothesis` (Veyra's own trusted tooling dependency for Phase 3.3b, not
-a repository dependency).
+`src/veyra/audit.py`, `src/veyra/static_analysis/`, `src/veyra/questions/`, `src/veyra/pipeline.py` (the
+single entry point for `run_static_analysis()`/`run_runtime_analysis()`/`run_retrieval_analysis()`),
+`src/veyra/safety/`, `src/veyra/execution/`, `src/veyra/harness/`, `src/veyra/scenarios/`,
+`src/veyra/runtime/`, `src/veyra/exploration/`, `src/veyra/reconciliation/`, `src/veyra/verification/`,
+`src/veyra/retrieval/`, `src/veyra/invalidation/` all implemented. SQLite event-sourced store (D3) live. Every
+canonical entity Phase 1.2 originally deferred now exists, including `VerificationState.STALE`'s real producer
+(Phase 4.8). One runtime dependency added: `hypothesis` (Veyra's own trusted tooling dependency for Phase
+3.3b, not a repository dependency). No LLM is called anywhere in this codebase, by design -- M4 builds the
+grounding contract a real model consumer would receive.
 
 ---
+
+### 2026-08-20 — M4 Phases 4.8 + 4.9 — MILESTONE 4 GATE FULLY CLEARED — 368/368 project-wide
+- **`src/veyra/verification/engine.py` extended first**: `derive_verification_states()`/`derive_verification_state()`
+  gained a purely additive `stale_entity_ids: frozenset[str] | None = None` parameter (default preserves every
+  existing call site's behavior unchanged, verified by re-running the full Phase 3.8 suite plus a new
+  regression test). When an entity_id is in that set, `STALE` overrides *every* other signal, even
+  `BLOCKED_BY_SAFETY` -- a stale classification is itself exactly the kind of thing that might no longer be
+  accurate for changed code, so re-verifying fresh is the real fix, not trusting an old verdict. This closes
+  the one gap Phase 3.8 explicitly left open ("`STALE` is not produced -- that's Phase 4.8's job").
+- **`src/veyra/invalidation/engine.py` (Phase 4.8)** — `analyze_impact(store, old_commit, new_commit)`.
+  Consumes Phase 1.4/D4's `diff_symbols()` directly, per PLAN's own instruction, rather than reinventing
+  diffing. Tier 0 is that function's changed-symbol output unfiltered -- "unchanged signatures do not prove
+  unchanged behavior" is therefore automatic (`MODIFIED_BODY` lands in Tier 0 exactly like
+  `MODIFIED_SIGNATURE`), not a separate rule this phase has to remember to enforce. Tier 1 walks CALLS/
+  INHERITS/REFERENCES edges from both the old and new commit's graphs (unioned, since a REMOVED entity only
+  exists in the old one and an ADDED entity only in the new). Tier 2 finds dependent Questions. **Tier 3 is
+  deliberately scoped to real RUNTIME-observed dependencies** (Phase 3.5's evidence) rather than a broader
+  static walk -- genuine behavioral reach static analysis could miss entirely, which is the actual point of a
+  "wider behavioral dependencies" tier distinct from Tier 1's static one.
+  `ImpactAnalysisReport.stale_entity_ids` (Tier 0 ∪ Tier 1 ∪ Tier 3) is built specifically to feed straight
+  into the newly-extended `derive_verification_states()` -- and a dedicated test proves that hookup actually
+  produces `VerificationState.STALE` for real, not just that the two pieces exist side by side.
+  This module never writes to `VBGStore` -- "unaffected evidence stays valid," "historical evidence stays
+  accessible," and "reverification targeted, not a full-repo re-scan" all hold for free from that alone.
+- **`RetrievalAuditReport` + `run_retrieval_analysis()` added to `src/veyra/pipeline.py` (Phase 4.9)** -- the
+  Milestone 4 counterpart to `run_static_analysis()`/`run_runtime_analysis()`: builds the Phase 4.1 index
+  (timed), runs a batch of sample queries through Phase 4.3's `retrieve_context()` (each timed individually),
+  and reports real counts. `recall_at_k`/`precision_at_k`/`mrr` stay `None` per D6, same discipline as
+  `StaticAuditReport`'s own fields -- Milestone 5's ground truth, not guessed at now.
+- **Tests**: 10 new for invalidation (tier-by-tier correctness including the `MODIFIED_BODY`-still-Tier-0 case
+  and the identical-commits-yield-empty-report case) + 4 new for the retrieval audit orchestrator (end-to-end
+  report shape, precision/recall/MRR deliberately `None`, audit records persisted, zero-queries doesn't
+  error). **368/368 project-wide, 0 failures** (26 Docker-gated tests skip cleanly, same as every entry this
+  session -- none of M4's work needed Docker).
+- **MILESTONE 4 GATE FULLY CLEARED.** All nine phases (4.1 VBG Retrieval Index, 4.2 Semantic Repository
+  Retrieval, 4.3 Query-Time Evidence Retrieval, 4.4 Eager Cache, 4.5 Lazy Cache, 4.6 Cache Explosion Control,
+  4.7 LLM Grounding Contract, 4.8 Git Impact Analysis & Invalidation, 4.9 Retrieval Audit) are implemented,
+  tested, and demonstrated running together via `run_retrieval_analysis()`. The LLM calibration eval itself
+  (PLAN's own Phase 5.9 note) remains a deliberately scheduled Milestone 5 decision point, not a gap here --
+  this milestone builds the grounding contract a real model consumer would receive; no LLM is called anywhere
+  in this codebase, by design. **368 passed, 26 skipped, 0 failures project-wide** going into Milestone 5.
 
 ### 2026-08-20 — M4 Phases 4.1-4.7 (Retrieval & LLM Grounding, minus git invalidation/audit) — 352/352 project-wide
 - **Started Milestone 4**, per "go ahead with milestone 4." Built 4.1 through 4.7 together in one pass since
@@ -936,6 +979,21 @@ Ran continuously through the rest of M1 per the user's go-ahead. **58/58 tests p
   `src/veyra/pipeline.py`. 4 new tests, all non-Docker. **314/314 project-wide. MILESTONE 3 GATE FULLY
   CLEARED.** The first real end-to-end M3 pipeline run, and where a real gap (Scenario objects never actually
   persisted by 3.6/3.3b) was found and fixed. See timeline entry above.
+- **Phases 4.1-4.3 — VBG Retrieval Index, Semantic Retrieval, Query-Time Evidence Retrieval** (2026-08-20).
+  `src/veyra/retrieval/index.py`/`search.py`/`context.py`. 23 new tests. Real read API over `VBGStore` (no new
+  physical index); "semantic" means pure-Python TF-IDF, not embeddings (a stated, deliberate scope decision).
+- **Phases 4.4-4.6 — Eager/Lazy Retrieval Caching + Explosion Control** (2026-08-20). `src/veyra/retrieval/cache.py`.
+  7 new tests. Caches `RetrievedContext`, not M2's Question/Answer entity (a real terminology resolution, see
+  timeline entry). In-memory, commit-scoped, never persisted to `VBGStore`.
+- **Phase 4.7 — LLM Grounding Contract** (2026-08-20). `src/veyra/retrieval/grounding.py`. 8 new tests. A fixed
+  hedge sentence per `VerificationState` attached to every fact -- addresses the calibration gap directly, not
+  just as a note. **352/352 project-wide** after Phases 4.1-4.7.
+- **Phase 4.8 — Git Impact Analysis & Invalidation** (2026-08-20). `src/veyra/invalidation/engine.py` +
+  a purely additive `stale_entity_ids` extension to `veyra/verification/engine.py`. 10 new tests. Consumes
+  Phase 1.4/D4's `diff_symbols()` directly; gives `VerificationState.STALE` its first real producer.
+- **Phase 4.9 — Retrieval Audit** (2026-08-20). `RetrievalAuditReport` + `run_retrieval_analysis()` in
+  `src/veyra/pipeline.py`. 4 new tests. **368/368 project-wide. MILESTONE 4 GATE FULLY CLEARED.** See timeline
+  entry above.
 
 ---
 
@@ -1048,6 +1106,17 @@ Closed:
     FULLY CLEARED** (all 9 phases + security tests, the latter already satisfied by Phase 3.2's own suite).
     Found and fixed a real gap along the way: `Scenario` objects generated by 3.6/3.3b had never actually been
     persisted to `VBGStore` until this phase's audit report needed to count them for real.
-26. **Next up: Milestone 4 (Retrieval & LLM Grounding)** — not started. First phase is 4.1 (VBG Retrieval
-    Index). M3 is done; nothing further is planned here until the user gives explicit direction on M4 (or on
-    any M3 follow-up work, e.g. wiring `explore_neighborhood()` to a real caller once M4's Phase 4.3 exists).
+26. ~~Milestone 4, Phases 4.1-4.7 (VBG Retrieval Index, Semantic Retrieval, Query-Time Evidence Retrieval,
+    Eager/Lazy Caching, Explosion Control, LLM Grounding Contract)~~ — done 2026-08-20, 38 new tests.
+    **352/352 project-wide.** `explore_neighborhood()`'s Phase 3.6-era "no real caller yet" note is now
+    resolved in spirit: Phase 4.3's `retrieve_context()` is the kind of real query-time caller that section
+    anticipated, though it doesn't call `explore_neighborhood()` directly (that stays available for whenever
+    query-time *runtime* exploration, as opposed to *retrieval*, is wired up).
+27. ~~Phase 4.8 (Git Impact Analysis & Invalidation) + Phase 4.9 (Retrieval Audit)~~ — done 2026-08-20, 14 new
+    tests. **368/368 project-wide. MILESTONE 4 GATE FULLY CLEARED.** `VerificationState.STALE` finally has a
+    real producer, closing the one gap Phase 3.8 explicitly left open.
+28. **Next up: Milestone 5 (Production Validation & Auditing)** — not started. First phase is 5.1
+    (Acceptance-Criteria Traceability). M1-M4 are all done; nothing further is planned here until the user
+    gives explicit direction on M5, which per its own PLAN.md text introduces no major new functionality --
+    it's where the whole pipeline gets validated against real repositories and the two deliberately-deferred
+    open decisions (LLM calibration threshold, ground-truth labeling methodology) finally get resolved.
