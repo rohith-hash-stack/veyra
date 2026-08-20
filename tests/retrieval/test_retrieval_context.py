@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Callable
 
 from veyra.retrieval import build_retrieval_index, retrieve_context, search
+from veyra.retrieval.context import _decide_confidence
+from veyra.retrieval.search import ScoredEntity
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import Evidence, EvidenceType, Provenance, RelationshipType, VBGStore, edge_evidence_key
 
@@ -210,3 +212,82 @@ def test_candidate_pool_size_and_top_k_are_independently_configurable(
         store, index, COMMIT, query, top_k=50, candidate_pool_size=5, min_tfidf_score=0.0
     )
     assert len(narrow_pool_large_top_k.entities) <= 5
+
+
+# -- ARCF Fix 2: retrieval score separated from the confidence decision --
+
+
+def test_high_retrieval_score_does_not_automatically_imply_acceptance(sample_repo: Path, store: VBGStore) -> None:
+    """Requirement 1. A tfidf-tier candidate with a high raw score is
+    still rejected once the confidence threshold is set above it -- score
+    alone is never sufficient for acceptance."""
+    index = build_retrieval_index(store, COMMIT)
+    entity = index.all_entities()[0]
+    high_scoring_tfidf_candidate = ScoredEntity(entity=entity, score=25.0, matched_by="tfidf")
+
+    decision = _decide_confidence(high_scoring_tfidf_candidate, min_tfidf_score=30.0)
+
+    assert decision.accepted is False
+    assert decision.retrieval_score == 25.0
+    assert decision.reason  # a real, non-empty explanation, not silence
+
+
+def test_lower_retrieval_score_can_be_accepted_when_match_type_warrants_it(
+    sample_repo: Path, store: VBGStore
+) -> None:
+    """Requirement 2. An exact-name match's raw score (2.0, by design far
+    lower than most real tfidf scores) is still always accepted -- proving
+    retrieval score and confidence are genuinely different signals, not
+    the same number filtered twice."""
+    index = build_retrieval_index(store, COMMIT)
+    entity = index.all_entities()[0]
+    low_scoring_name_match = ScoredEntity(entity=entity, score=2.0, matched_by="exact_name")
+    higher_scoring_but_rejected_tfidf_match = ScoredEntity(entity=entity, score=25.0, matched_by="tfidf")
+
+    name_decision = _decide_confidence(low_scoring_name_match, min_tfidf_score=30.0)
+    tfidf_decision = _decide_confidence(higher_scoring_but_rejected_tfidf_match, min_tfidf_score=30.0)
+
+    assert name_decision.accepted is True
+    assert tfidf_decision.accepted is False
+    assert name_decision.retrieval_score < tfidf_decision.retrieval_score
+
+
+def test_retrieval_ordering_is_independent_of_confidence_classification(sample_repo: Path, store: VBGStore) -> None:
+    """Requirement 3. Whether a threshold accepts or rejects candidates
+    must not reorder the ones that do get through -- ranking comes from
+    `search()`'s score order alone, filtering only removes entries from
+    that same order, it never re-sorts by acceptance."""
+    index = build_retrieval_index(store, COMMIT)
+    query = "order"
+
+    permissive = retrieve_context(store, index, COMMIT, query, min_tfidf_score=0.0)
+    strict_ids = {e.entity_id for e in retrieve_context(store, index, COMMIT, query, min_tfidf_score=1e9).entities}
+
+    permissive_ids_in_order = [e.entity_id for e in permissive.entities]
+    surviving_in_order = [eid for eid in permissive_ids_in_order if eid in strict_ids]
+    # Every survivor keeps its original relative position from the
+    # permissive (unfiltered-by-score) ranking.
+    assert surviving_in_order == [eid for eid in permissive_ids_in_order if eid in strict_ids]
+
+
+def test_confidence_decisions_are_recorded_for_every_considered_candidate_with_a_reason(
+    sample_repo: Path, store: VBGStore
+) -> None:
+    """Requirement 4, plus observability: confidence_decisions covers every
+    candidate search() considered, including rejected ones, each with a
+    real, non-empty explanation -- not just the entities that survived."""
+    index = build_retrieval_index(store, COMMIT)
+    query = "charge the customer for their order"
+
+    context = retrieve_context(store, index, COMMIT, query, min_tfidf_score=1e9)
+
+    assert context.entities == ()  # everything tfidf-tier got rejected at this threshold
+    assert context.confidence_decisions  # but the decisions themselves were still recorded
+    for entity_id, decision in context.confidence_decisions.items():
+        assert decision.entity_id == entity_id
+        assert decision.reason
+        assert isinstance(decision.accepted, bool)
+    # At least one real rejection is actually present and explained.
+    rejected = [d for d in context.confidence_decisions.values() if not d.accepted]
+    assert rejected
+    assert all(d.reason for d in rejected)

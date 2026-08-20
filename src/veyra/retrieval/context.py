@@ -58,7 +58,7 @@ from veyra.reconciliation import EdgeReconciliation, reconcile_calls
 from veyra.vbg import Edge, Evidence, VBGStore
 
 from .index import IndexedEntity, RetrievalIndex
-from .search import search
+from .search import ScoredEntity, search
 
 _PROVISIONAL_MIN_TFIDF_SCORE = 29.0
 
@@ -80,6 +80,27 @@ _DEFAULT_CANDIDATE_POOL_SIZE = 200
 
 
 @dataclass(frozen=True)
+class ConfidenceDecision:
+    """ARCF Fix 2 -- retrieval score and the accept/reject decision made
+    explicit as two separate things, not one number doing both jobs.
+    `retrieval_score`/`matched_by` are exactly what ranked this candidate
+    (unchanged by this decision); `accepted`/`reason` are a *separate*,
+    deterministic judgment about whether that ranking earns enough trust
+    to surface -- always true for a name match regardless of its (lower)
+    raw score, score-threshold-driven for a lexical match. `reason` is
+    always a real, human-readable sentence -- never fabricated, never
+    empty -- so any acceptance or rejection is auditable after the fact,
+    for every candidate this function considered, not just the ones it
+    returned."""
+
+    entity_id: str
+    retrieval_score: float
+    matched_by: str
+    accepted: bool
+    reason: str
+
+
+@dataclass(frozen=True)
 class RetrievedContext:
     query: str
     repository_version: str
@@ -90,6 +111,7 @@ class RetrievedContext:
     scores: dict[str, float] = field(default_factory=dict)
     matched_by: dict[str, str] = field(default_factory=dict)
     insufficient_evidence: bool = False
+    confidence_decisions: dict[str, ConfidenceDecision] = field(default_factory=dict)
 
 
 def retrieve_context(
@@ -121,9 +143,17 @@ def retrieve_context(
     accepted results are cut to `top_k`. This is the fix for the
     mechanism where a correctly-scored, confidence-clearing entity never
     reached this filter at all because a plain `top_k`-sized candidate
-    window had already excluded it before confidence was ever consulted."""
+    window had already excluded it before confidence was ever consulted.
+
+    **ARCF Fix 2**: every candidate `search()` returned gets its own
+    `ConfidenceDecision` (`RetrievedContext.confidence_decisions`,
+    every considered candidate, not just accepted ones) -- ranking
+    (`scored`'s order, driven purely by retrieval score) and acceptance
+    (driven by `_decide_confidence`) are two separate passes over the
+    same list, not one score doing both jobs."""
     scored = search(index, query, top_k=top_k, candidate_pool_size=candidate_pool_size)
-    accepted = [s for s in scored if s.matched_by != "tfidf" or s.score >= min_tfidf_score]
+    decisions = {s.entity.entity_id: _decide_confidence(s, min_tfidf_score) for s in scored}
+    accepted = [s for s in scored if decisions[s.entity.entity_id].accepted]
     accepted = accepted[:top_k]
     entities = tuple(s.entity for s in accepted)
     entity_ids = {e.entity_id for e in entities}
@@ -161,4 +191,46 @@ def retrieve_context(
         scores=scores,
         matched_by=matched_by,
         insufficient_evidence=insufficient_evidence,
+        confidence_decisions=decisions,
+    )
+
+
+def _decide_confidence(scored: ScoredEntity, min_tfidf_score: float) -> ConfidenceDecision:
+    """ARCF Fix 2's actual decision rule -- unchanged in *behavior* from
+    what `retrieve_context` did inline before (`accepted` is identical to
+    before this fix), but now a named, reusable judgment with a real,
+    specific reason attached, made for every candidate `search()`
+    returned, not just the ones that end up accepted.
+
+    Name matches (`exact_name`/`substring_name`) are always accepted
+    regardless of their own (deliberately low, 2.0/1.0) raw score --
+    concrete proof that score and confidence are different things: an
+    exact-name match with score 2.0 is accepted while a `tfidf` match
+    scoring an order of magnitude higher can still be rejected for being
+    below `min_tfidf_score`. `tfidf`-tier acceptance is exactly the
+    existing score-threshold rule, just named and reasoned about
+    explicitly."""
+    entity_id = scored.entity.entity_id
+    if scored.matched_by != "tfidf":
+        return ConfidenceDecision(
+            entity_id=entity_id,
+            retrieval_score=scored.score,
+            matched_by=scored.matched_by,
+            accepted=True,
+            reason=(
+                f"{scored.matched_by}: the query names this entity directly (raw ranking score "
+                f"{scored.score:.2f}) -- name matches are always accepted independent of score."
+            ),
+        )
+    accepted = scored.score >= min_tfidf_score
+    return ConfidenceDecision(
+        entity_id=entity_id,
+        retrieval_score=scored.score,
+        matched_by=scored.matched_by,
+        accepted=accepted,
+        reason=(
+            f"tfidf score {scored.score:.2f} "
+            f"{'>=' if accepted else '<'} confidence threshold {min_tfidf_score:.2f} "
+            f"-- {'accepted' if accepted else 'rejected'}."
+        ),
     )
