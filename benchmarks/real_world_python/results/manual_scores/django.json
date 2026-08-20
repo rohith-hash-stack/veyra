@@ -4,8 +4,9 @@
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "failure_category": "ranking_failure",
-    "notes": "Complete miss -- db/models/query.py's QuerySet class never retrieved. Every one of the top 6 results is a real variable literally named 'where' (SQL WHERE-clause-building locals in constraint/index code), because the query's own interrogative 'Where is...' collided with that extremely common Django ORM variable name. Same no-stopword-filtering mechanism as SQLAlchemy's 'a'/'defined' collisions, now triggered by the question word itself."
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
+    "notes": "CHECKPOINT B: db.models.query.QuerySet never retrieved; dominated by unrelated backend/manager/view/template entities."
   },
   "django-02": {
     "final_answer_correct": false,
@@ -13,7 +14,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- db/models/base.py's Model class never retrieved."
+    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
+    "notes": "CHECKPOINT B: db.models.base.Model never retrieved; dominated by unrelated contenttypes/migrations/checks entities."
   },
   "django-03": {
     "final_answer_correct": true,
@@ -21,63 +23,71 @@
     "localization_correct": true,
     "multi_hop": false,
     "failure_category": null,
-    "notes": "Success -- django.middleware.csrf module and django.core.checks.security.csrf._csrf_middleware both retrieved directly. This is the deliberate positive-control counterpart to Flask/FastAPI's CSRF negative queries (Django genuinely does implement CSRF protection, unlike those two): confirms Veyra's exact/substring name-match tier works well when a real, distinctively-named entity exists, and that the CSRF negative-query failures elsewhere are a genuine false-premise-detection gap, not just Veyra being generally bad at anything CSRF-related."
+    "checkpoint_b_change": "unchanged (TRUE)",
+    "notes": "CHECKPOINT B: django.middleware.csrf.CsrfViewMiddleware retrieved at rank1, score 31.12."
   },
   "django-04": {
-    "final_answer_correct": true,
+    "final_answer_correct": false,
     "unsupported_claim": false,
-    "localization_correct": true,
-    "multi_hop": false,
-    "failure_category": null,
-    "notes": "Success -- contrib.auth.__init__.authenticate (and its async twin aauthenticate) both retrieved directly."
+    "localization_correct": false,
+    "multi_hop": true,
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "REGRESSED (was TRUE at baseline -- authenticate()/aauthenticate() hit directly; now a complete miss)",
+    "notes": "CHECKPOINT B: authenticate()/ModelBackend.authenticate no longer retrieved at all; dominated instead by RemoteUserMiddleware, modwsgi.check_password, and test client entities. Root cause not further isolated within this checkpoint's time budget (candidate flagged for the next investigation pass, not silently accepted) -- likely the same category-weighting or matched_idf_coverage interaction seen in flask-06/flask-11/sqla-08, but not directly confirmed here."
   },
   "django-05": {
-    "final_answer_correct": false,
+    "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
     "localization_correct": "PARTIAL",
     "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "notes": "Complete file-level miss, but a topically-adjacent one: retrieved several real 'default_manager' variables/attributes (Options.default_manager, serializer default_manager handling) which are genuinely part of the same Manager subsystem, just not the Manager class definition (manager.py) itself. Closer to the right neighborhood than most other misses."
+    "failure_category": "ranking_failure",
+    "checkpoint_b_change": "IMPROVED (was FALSE/complete file-level miss at baseline; now PARTIAL)",
+    "notes": "CHECKPOINT B: BaseManager (db/models/manager.py, the real file) retrieved at rank1 -- Django's actual default Manager is dynamically built as `BaseManager.from_queryset(QuerySet)`, so BaseManager is a substantively correct answer even though the ground truth's literal 'Manager' symbol isn't a separately retrieved node."
   },
   "django-06": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": true,
-    "failure_category": "ranking_failure",
-    "notes": "Complete miss, and a particularly clean demonstration of the stopword-collision root cause: this benchmark's own query phrasing ('...end to end?') put the word 'end' in the query, and Django's codebase has 'end'/'end_index' as an extremely common variable name (string/slice indexing) across many unrelated files -- all 6 top results share only that one incidental token with the query. None of WSGIHandler, get_response, or the URL resolver chain appear anywhere."
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
+    "notes": "CHECKPOINT B: none of WSGIHandler/BaseHandler.get_response/_get_response/URLResolver.resolve retrieved; only entity is the unrelated test RequestFactory."
   },
   "django-07": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- BaseHandler.load_middleware/get_response never retrieved for the middleware-application architecture question."
+    "failure_category": "ranking_failure",
+    "checkpoint_b_change": "unchanged (FALSE)",
+    "notes": "CHECKPOINT B: BaseHandler class present (rank2) but neither load_middleware nor get_response, the two specific methods asked about; dominated by unrelated concrete middleware classes."
   },
   "django-08": {
-    "final_answer_correct": "PARTIAL",
-    "unsupported_claim": false,
-    "localization_correct": true,
-    "multi_hop": false,
-    "failure_category": null,
-    "notes": "CsrfViewMiddleware._check_token.request_csrf_token retrieved directly (2nd result) -- genuinely relevant, though the specific process_view rejection path isn't confirmed in the reviewed portion."
-  },
-  "django-09": {
     "final_answer_correct": true,
     "unsupported_claim": false,
     "localization_correct": true,
     "multi_hop": false,
     "failure_category": null,
-    "notes": "Success -- same authenticate()/aauthenticate() hit as django-04, correctly the same underlying function both times."
+    "checkpoint_b_change": "IMPROVED (was PARTIAL at baseline; now TRUE)",
+    "notes": "CHECKPOINT B: CsrfViewMiddleware (rank1), CsrfViewMiddleware._check_token (rank6), and get_token (rank7) all retrieved -- directly answers what happens on an invalid CSRF token."
   },
-  "django-10": {
+  "django-09": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "failure_category": "ranking_failure",
-    "notes": "Complete miss, another clean stopword-collision case: this query's first-person 'where I expect' put the single letter 'I' in the token stream, colliding with the extremely common loop-counter variable name 'i' across totally unrelated files (SQL compiler internals, template parsing, HTML testing utilities). MigrationExecutor never appears."
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "REGRESSED (was TRUE at baseline, same authenticate() hit as django-04; now a complete miss)",
+    "notes": "CHECKPOINT B: same root mechanism as django-04's regression -- authenticate() no longer retrieved."
+  },
+  "django-10": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "checkpoint_b_change": "IMPROVED (was FALSE/complete miss at baseline; now TRUE)",
+    "notes": "CHECKPOINT B: db.migrations.executor.MigrationExecutor retrieved directly at rank2, score 53.40."
   },
   "django-11": {
     "final_answer_correct": false,
@@ -85,32 +95,36 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "notes": "Complete miss -- same Manager/from_queryset gap as django-05."
+    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
+    "notes": "CHECKPOINT B: Manager/BaseManager.from_queryset still not retrieved for this specific query; only 2 weak, unrelated entities survive."
   },
   "django-12": {
     "final_answer_correct": "PARTIAL",
     "unsupported_claim": false,
-    "localization_correct": "PARTIAL",
+    "localization_correct": true,
     "multi_hop": true,
-    "failure_category": "retrieval_failure",
-    "notes": "contrib.admin.decorators.register (the @admin.register decorator, a real and relevant entry point) is retrieved directly, but AdminSite.get_urls -- the specific URL-wiring method this cross-file query asks about -- is absent from what was reviewed."
+    "failure_category": null,
+    "checkpoint_b_change": "unchanged (PARTIAL, different specific entity than baseline)",
+    "notes": "CHECKPOINT B: AdminSite class retrieved at rank1 (score 53.42), but not the specific AdminSite.get_urls method or ModelAdmin (options.py, missing entirely)."
   },
   "django-13": {
     "final_answer_correct": false,
-    "unsupported_claim": "borderline",
+    "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "negative_query_handled_correctly": false,
-    "failure_category": "reasoning_failure",
-    "notes": "Negative query (no built-in production HTTP/2 server). Retrieved LiveServerThreadTest.test_server_class's 'server'/'server_class' variables -- Django's real, but test-only, HTTP server used for browser-based test fixtures. A careless reading could mistake this for evidence of production server functionality, though the surrounding test-class context makes it a weaker false-premise risk than sqla-13/fastapi-13."
+    "negative_query_handled_correctly": true,
+    "failure_category": null,
+    "checkpoint_b_change": "unchanged (correctly handled)",
+    "notes": "CHECKPOINT B: insufficient_evidence=True, zero entities."
   },
   "django-14": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
     "multi_hop": false,
-    "negative_query_handled_correctly": false,
-    "failure_category": "reasoning_failure",
-    "notes": "Negative query (no built-in GraphQL). Retrieved 'graph' variables from the migrations dependency-graph system (test_autodetector, test_executor) -- pure substring/token collision on 'graph', with enough surrounding migration-specific context that this is unlikely to actually mislead a reader, unlike django-13/sqla-13/fastapi-13. Still no confidence signal, but the lowest false-premise risk among the negative queries reviewed."
+    "negative_query_handled_correctly": true,
+    "failure_category": null,
+    "checkpoint_b_change": "IMPROVED (baseline leaked 'graph' variables from migrations; now correctly handled)",
+    "notes": "CHECKPOINT B: insufficient_evidence=True, zero entities."
   }
 }

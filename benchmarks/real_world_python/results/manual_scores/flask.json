@@ -1,13 +1,12 @@
 {
   "flask-01": {
-    "final_answer_correct": false,
+    "final_answer_correct": true,
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": true,
     "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "phase_b_change": "unaffected (was PARTIAL, unaffected by Phase B's cosine-based threshold)",
-    "phase_d_change": "REGRESSED (was PARTIAL through baseline+Phase B, now FALSE)",
-    "notes": "PHASE D RESULT: a genuine new regression, not present at baseline or after Phase B. Under BM25, both target entities score below the recalibrated 29.0 threshold (flask.app.Flask: rank 3 of 1250, score 21.40; flask.sansio.app.App: score 22.25) -- verified by direct re-query. insufficient_evidence is now True (0 entities), where the old cosine score used to let at least one of these two classes clear its (much weaker) threshold. This is the direct, documented cost of BM25's saturating term-frequency + per-type length normalization scoring these two large, general-purpose classes lower relative to this query's short, generic token set ('flask', 'application', 'class', 'defined') than raw cosine did. Recorded honestly rather than omitted -- Phase D measurably helped several other queries (see flask-05/07/08/11, fastapi-12) but this is a real, symmetric cost on this one."
+    "failure_category": null,
+    "checkpoint_b_change": "unchanged (TRUE)",
+    "notes": "CHECKPOINT B: both target classes present -- App (rank1, 18.03) and Flask (rank4, 16.01)."
   },
   "flask-02": {
     "final_answer_correct": true,
@@ -15,8 +14,8 @@
     "localization_correct": true,
     "multi_hop": false,
     "failure_category": null,
-    "phase_d_change": "unchanged (still TRUE)",
-    "notes": "PHASE D RESULT: unchanged. SessionInterface (40.54) and SecureCookieSessionInterface (34.02) are the only two entities that clear the new threshold, both well above it and correctly ranked; SecureCookieSessionInterface is exactly the expected answer."
+    "checkpoint_b_change": "unchanged (TRUE)",
+    "notes": "CHECKPOINT B: SessionInterface (rank1) and SecureCookieSessionInterface (rank2, the exact target) both present and well-ranked."
   },
   "flask-03": {
     "final_answer_correct": false,
@@ -24,8 +23,8 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "phase_d_change": "unchanged (still FALSE, complete miss)",
-    "notes": "PHASE D RESULT: unchanged verdict. flask.wrappers.Request still never appears among the (now different) top-ranked entities -- MethodView, Scaffold, SessionInterface, View, App, Flask, FlaskClient, FormDataRoutingRedirect, BlueprintSetupState, EnvironBuilder now dominate instead of the baseline's short test-variable noise, but the actual answer is still absent from what a consumer would see."
+    "checkpoint_b_change": "unchanged (FALSE, complete miss)",
+    "notes": "CHECKPOINT B: flask.wrappers.Request still never retrieved; MethodView/Scaffold/View/App/FlaskClient/Flask dominate instead."
   },
   "flask-04": {
     "final_answer_correct": true,
@@ -33,27 +32,26 @@
     "localization_correct": true,
     "multi_hop": true,
     "failure_category": null,
-    "phase_d_change": "unchanged (still TRUE)",
-    "notes": "PHASE D RESULT: unchanged. Scaffold.add_url_rule (38.15) and Scaffold.route (36.03) both retrieved and well-ranked; correctly supports the route()->add_url_rule() chain, same as baseline."
+    "checkpoint_b_change": "unchanged (TRUE)",
+    "notes": "CHECKPOINT B: Scaffold.route and Scaffold.add_url_rule both retrieved, correctly supporting the two-hop chain."
   },
   "flask-05": {
+    "final_answer_correct": true,
+    "unsupported_claim": false,
+    "localization_correct": true,
+    "multi_hop": false,
+    "failure_category": null,
+    "checkpoint_b_change": "RECOVERED (was FALSE after Fix D/Phase B due to confidence threshold; now TRUE)",
+    "notes": "CHECKPOINT B: both flask.sansio.blueprints.Blueprint (rank2) and flask.blueprints.Blueprint (rank6) now retrieved and confidence-accepted -- the query-relative z-score plus source/structural weighting together did what a fixed absolute threshold could not."
+  },
+  "flask-06": {
     "final_answer_correct": false,
     "unsupported_claim": false,
     "localization_correct": false,
-    "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "phase_b_change": "REGRESSED (was PARTIAL at baseline)",
-    "phase_d_change": "NOT recovered on the strict verdict, but the underlying raw signal genuinely improved",
-    "notes": "PHASE D RESULT, checked specifically per instruction #9. The target entity (src.flask.sansio.blueprints.Blueprint) is now present, real, and reasonably ranked -- rank 3 of the raw BM25 results, score 18.66 -- compared to being effectively absent/buried under noise pre-Phase-D. That is a measurable ranking-quality improvement from BM25 replacing cosine's document-length bias. However, 18.66 remains well below the 29.0 confidence threshold (calibrated on real relevant/irrelevant separation, not to pass this query), so retrieve_context still reports insufficient_evidence=True and the query still scores FALSE. Honest summary: the mechanism Phase D targeted did improve here, but not enough to cross the deliberately-conservative confidence bar."
-  },
-  "flask-06": {
-    "final_answer_correct": "PARTIAL",
-    "unsupported_claim": false,
-    "localization_correct": "PARTIAL",
     "multi_hop": true,
-    "failure_category": "ranking_failure",
-    "phase_d_change": "unchanged (still PARTIAL)",
-    "notes": "PHASE D RESULT: unchanged. Of the 5 ground-truth methods (wsgi_app, full_dispatch_request, preprocess_request, dispatch_request, finalize_request), only Flask.dispatch_request (31.79) clears the threshold; the other 4 are still absent. Same shallow-retrieval shape as baseline."
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "REGRESSED (was PARTIAL -- dispatch_request present -- now FALSE, no target method survives)",
+    "notes": "CHECKPOINT B: only the Flask class (rank1) and the unrelated Flask.make_response survive; none of the 5 needed methods (wsgi_app, full_dispatch_request, dispatch_request, preprocess_request, finalize_request) clear matched_idf_coverage>=0.5 for this long, generic-sounding query. User-flagged trade-off case, confirmed real."
   },
   "flask-07": {
     "final_answer_correct": false,
@@ -61,18 +59,17 @@
     "localization_correct": false,
     "multi_hop": false,
     "failure_category": "retrieval_failure",
-    "phase_b_change": "REGRESSED (was PARTIAL at baseline)",
-    "phase_d_change": "NOT recovered on the strict verdict, but the underlying raw signal genuinely improved",
-    "notes": "PHASE D RESULT, checked specifically per instruction #9. Same pattern as flask-05: the target entity (src.flask.sessions.SecureCookieSessionInterface) is now present and reasonably ranked -- rank 6 of the raw BM25 results, score 18.52 -- versus being buried/absent before. Still below the 29.0 threshold, so insufficient_evidence=True and the query still scores FALSE. Both flask-05 and flask-07 land in the same place: a real, measured ranking improvement that the confidence threshold (deliberately calibrated against negative-query leakage, not against these two queries) does not yet convert into a correct answer."
+    "checkpoint_b_change": "unchanged (FALSE) -- insufficient_evidence=True",
+    "notes": "CHECKPOINT B: SecureCookieSessionInterface.get_signing_serializer still not retrieved; nothing clears the confidence bar for this query at all."
   },
   "flask-08": {
-    "final_answer_correct": false,
+    "final_answer_correct": true,
     "unsupported_claim": false,
-    "localization_correct": false,
+    "localization_correct": true,
     "multi_hop": false,
-    "failure_category": "retrieval_failure",
-    "phase_d_change": "underlying mechanism fixed, outcome unchanged (top_k=10 window, not score, is now the blocker)",
-    "notes": "PHASE D RESULT. This was the flagship reproduction case for Phase D's root-cause investigation (see tests/retrieval/test_retrieval_search.py's test_a_large_relevant_method_outranks_a_tiny_entity_sharing_one_token, modeled directly on this query). Direct verification: Flask.run() moved from being completely buried under 1-token test variables named 'called'/'debug' (baseline) to rank 13 of 1121 real candidates, score 20.38 -- a genuine, large improvement in relative ranking. But retrieve_context's semantic tier is called with top_k=10, and rank 13 doesn't make that cut, so Flask.run() still never reaches the caller and the query still scores FALSE. This is a distinct, newly-identified limitation from the confidence-threshold one above: Phase D fixed the *scoring* pathology this case was built to catch, but a fixed top_k=10 window on top of a corrected score is its own separate bottleneck, not something Phase D's scope (document-length bias in the score itself) covers. Flagging for a later phase rather than widening top_k here without validation."
+    "failure_category": null,
+    "checkpoint_b_change": "RECOVERED (was FALSE through Phase D/Checkpoint A; now TRUE)",
+    "notes": "CHECKPOINT B: Flask.run() itself (rank5, score 16.67) now clears both the widened candidate pool and the confidence bar -- the flagship case Fix D's own regression test was modeled on, now fully working end to end, not just ranking-improved."
   },
   "flask-09": {
     "final_answer_correct": "PARTIAL",
@@ -80,8 +77,8 @@
     "localization_correct": "PARTIAL",
     "multi_hop": false,
     "failure_category": "ranking_failure",
-    "phase_d_change": "unchanged (still PARTIAL)",
-    "notes": "PHASE D RESULT: unchanged. sansio/app.py is retrieved via the App class (45.92) but the specific answering method, App.raise_routing_exception, is still absent from the top 10. Right file, wrong entity, same as baseline."
+    "checkpoint_b_change": "unchanged (PARTIAL)",
+    "notes": "CHECKPOINT B: App class present (rank3) but the specific answering method, App.raise_routing_exception, is not. Right file, wrong entity, same as every prior phase."
   },
   "flask-10": {
     "final_answer_correct": false,
@@ -89,18 +86,17 @@
     "localization_correct": false,
     "multi_hop": true,
     "failure_category": "retrieval_failure",
-    "phase_b_change": "verdict unchanged (was already FALSE at baseline)",
-    "phase_d_change": "unchanged (still FALSE)",
-    "notes": "PHASE D RESULT: unchanged. Flask.handle_user_exception and Flask.handle_exception are still absent from the retrieved entities; the Flask class itself is retrieved (52.39) but not the specific error-handling methods the question actually needs."
+    "checkpoint_b_change": "unchanged (FALSE)",
+    "notes": "CHECKPOINT B: only the Flask class present; neither handle_user_exception nor handle_exception retrieved."
   },
   "flask-11": {
-    "final_answer_correct": true,
+    "final_answer_correct": false,
     "unsupported_claim": false,
-    "localization_correct": true,
+    "localization_correct": false,
     "multi_hop": false,
-    "failure_category": null,
-    "phase_d_change": "FIXED (was FALSE/complete miss through baseline+Phase B, now TRUE)",
-    "notes": "PHASE D RESULT: a genuine fix. src.flask.testing.FlaskClient -- the primary entity the question needs (\"where would I investigate if test_client() isn't preserving cookies\") -- is now retrieved at rank 1, score 41.26, clear of the noise (unrelated 'test_client' local variables) that buried it at baseline. EnvironBuilder (the secondary supporting class named in ground truth) is not retrieved, but scored TRUE under the same standard already applied to flask-02 (correct primary answering entity present and well-ranked, even though not every named ground-truth symbol is)."
+    "failure_category": "retrieval_failure",
+    "checkpoint_b_change": "REGRESSED (was TRUE after Fix D -- FlaskClient at rank1 -- now FALSE, FlaskClient dropped out entirely)",
+    "notes": "CHECKPOINT B: only App survives (weak, unrelated); FlaskClient and EnvironBuilder both gone. User-flagged trade-off case, confirmed real -- the matched_idf_coverage floor rejected a genuinely correct match here."
   },
   "flask-12": {
     "final_answer_correct": "PARTIAL",
@@ -108,8 +104,8 @@
     "localization_correct": true,
     "multi_hop": true,
     "failure_category": null,
-    "phase_d_change": "unchanged (still PARTIAL)",
-    "notes": "PHASE D RESULT: unchanged. App.register_blueprint (37.85), Blueprint, and BlueprintSetupState are all retrieved, but the specific Blueprint.register and BlueprintSetupState.add_url_rule methods that complete the exact chain are still missing. Same shape as baseline -- best multi-hop/cross-file result in the Flask set, still PARTIAL."
+    "checkpoint_b_change": "unchanged (PARTIAL)",
+    "notes": "CHECKPOINT B: Blueprint, App, and BlueprintSetupState all retrieved (both files represented), but the specific Blueprint.register/BlueprintSetupState.add_url_rule methods are still missing -- same shape as every prior phase, still the strongest multi-hop result in the Flask set."
   },
   "flask-13": {
     "final_answer_correct": false,
@@ -118,19 +114,17 @@
     "multi_hop": false,
     "negative_query_handled_correctly": true,
     "failure_category": null,
-    "phase_b_change": "IMPROVED but not fixed (10 noisy entities -> 1, still not insufficient_evidence)",
-    "phase_d_change": "FIXED (was 'improved but not fixed' after Phase B, now fully correct)",
-    "notes": "PHASE D RESULT, checked specifically per instruction #10 (asked about fastapi-13 by name, but flask's matching negative query is worth reporting too). The one weak entity that survived Phase B's threshold (Request.max_form_parts's local variable, score 0.286 on the old cosine scale) no longer clears the recalibrated BM25 threshold. RetrievedContext.insufficient_evidence and GroundingContext.insufficient_evidence are both True, with the NO_SUFFICIENT_EVIDENCE disclaimer. This negative query is now handled correctly end to end."
+    "checkpoint_b_change": "unchanged (correctly handled)",
+    "notes": "CHECKPOINT B: insufficient_evidence=True, zero entities."
   },
   "flask-14": {
     "final_answer_correct": false,
-    "unsupported_claim": false,
+    "unsupported_claim": true,
     "localization_correct": false,
     "multi_hop": false,
-    "negative_query_handled_correctly": true,
-    "failure_category": null,
-    "phase_b_change": "FIXED (was reasoning_failure/borderline-unsupported at baseline)",
-    "phase_d_change": "unchanged (still correctly handled)",
-    "notes": "PHASE D RESULT: unchanged. Still zero entities survive, insufficient_evidence is True on both RetrievedContext and GroundingContext, disclaimer present."
+    "negative_query_handled_correctly": false,
+    "failure_category": "reasoning_failure",
+    "checkpoint_b_change": "REGRESSED (was correctly handled after Phase B/D; now leaks one weak entity)",
+    "notes": "CHECKPOINT B: one weak App match (score 12.39) clears both the z-score and matched_idf_coverage bars for this negative query, so insufficient_evidence=False. Real, measured regression: the same fundamental risk Phase B/D fixed for other reasons -- a lone, coincidentally-scoring entity slipping past a relative (not absolute) confidence check when the whole candidate pool for a genuinely unanswerable query is weak but not perfectly uniform."
   }
 }
