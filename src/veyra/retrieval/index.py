@@ -108,6 +108,17 @@ class RetrievalIndex:
     def __init__(self, repository_version: str, entities: dict[str, IndexedEntity]) -> None:
         self.repository_version = repository_version
         self._entities = entities
+        # Performance finding: retrieve_context() and search_semantic()
+        # each independently called search.py's _build_bm25_index(index)
+        # -- a full O(corpus size) tokenize-every-entity pass -- on every
+        # single query, even though it's a pure function of this index
+        # alone (never the query). Measured on real large repos: this
+        # doubled per-query cost outright. _bm25_cache is a generic,
+        # BM25-agnostic slot (search.py owns what goes in it) that makes
+        # "build once, query many times" -- this class's own documented
+        # contract -- actually true for the BM25 tables, not just for the
+        # entities dict itself.
+        self._bm25_cache: object | None = None
 
     def get(self, entity_id: str) -> IndexedEntity | None:
         return self._entities.get(entity_id)

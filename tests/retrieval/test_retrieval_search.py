@@ -418,3 +418,30 @@ def test_structural_weight_only_uses_relationships_the_index_actually_has(
         expected_bonus = min(0.3, 0.02 * len(entity.children))
         expected_penalty = min(0.15, 0.01 * len(entity.siblings))
         assert weight == 1.0 + expected_bonus - expected_penalty
+
+
+# -- Performance: BM25 tables are built once per index, not once per call --
+
+
+def test_bm25_index_is_computed_once_and_cached_on_the_retrieval_index(sample_repo: Path, store: VBGStore) -> None:
+    """search_semantic() and retrieve_context() each used to call
+    _build_bm25_index(index) independently on every single query -- a
+    full O(corpus size) tokenize-every-entity pass repeated for no
+    reason, since it depends only on `index`, never the query text.
+    Confirms the actual mechanism (a real cache slot gets populated, and
+    a second call reuses the exact same object) rather than a timing
+    threshold."""
+    from veyra.retrieval.search import _build_bm25_index
+
+    index = build_retrieval_index(store, COMMIT)
+    assert index._bm25_cache is None
+
+    first = _build_bm25_index(index)
+    assert index._bm25_cache is not None
+
+    second = _build_bm25_index(index)
+    assert second is first  # the cached tuple, not a freshly recomputed one
+
+    # And a real search still works correctly off the cached tables.
+    results = search_semantic(index, "process order")
+    assert any(r.entity.entity_id == "orders.process_order" for r in results)
