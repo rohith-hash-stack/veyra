@@ -713,6 +713,18 @@ class VBGStore:
                 ).fetchall()
         return [_row_to_audit_record(row) for row in rows]
 
+    def get_all_audit_records(self, repository_commit: str) -> list[AuditRecord]:
+        """Every audit record for this commit, across every phase --
+        unlike get_audit_history(), not scoped to one named phase. Backs
+        Phase 5.7's performance audit, which needs to group timings by
+        phase without having to know every phase name in advance."""
+        with closing(self._connect()) as conn:
+            rows = conn.execute(
+                "SELECT * FROM audit_events WHERE repository_commit = ? ORDER BY row_id ASC",
+                (repository_commit,),
+            ).fetchall()
+        return [_row_to_audit_record(row) for row in rows]
+
     # -- Questions & Answers (Phase 2.5/2.6) --------------------------------
 
     def insert_question(self, question: Question) -> None:
