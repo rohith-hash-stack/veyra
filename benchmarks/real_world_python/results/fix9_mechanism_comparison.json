@@ -1,0 +1,2436 @@
+{
+  "positive": [
+    {
+      "repo": "flask",
+      "qid": "flask-03",
+      "eid": "src.flask.wrappers.Request",
+      "z": 1.657645352996814,
+      "cov": 0.1748273540488022,
+      "pct": 0.5,
+      "cz": -0.09116483123357583,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-06",
+      "eid": "src.flask.app.Flask.full_dispatch_request",
+      "z": 0.4943486751514761,
+      "cov": 0.2053959018740652,
+      "pct": 0.665,
+      "cz": 0.2050982613775907,
+      "margin": 0.03707354597037058
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-06",
+      "eid": "src.flask.app.Flask.wsgi_app",
+      "z": 1.4479460445100303,
+      "cov": 0.29837776099703356,
+      "pct": 0.91,
+      "cz": 1.072615382843797,
+      "margin": 0.00709585011551749
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-06",
+      "eid": "src.flask.app.Flask.finalize_request",
+      "z": 0.42631708227285653,
+      "cov": 0.2344163085368633,
+      "pct": 0.755,
+      "cz": 0.4758575244139911,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-06",
+      "eid": "src.flask.app.Flask.preprocess_request",
+      "z": -0.09346203239534381,
+      "cov": 0.14099684620465844,
+      "pct": 0.435,
+      "cz": -0.39574241793794473,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-06",
+      "eid": "src.flask.app.Flask.dispatch_request",
+      "z": 1.7431399627919177,
+      "cov": 0.26159774830459187,
+      "pct": 0.785,
+      "cz": 0.7294592979967496,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-10",
+      "eid": "src.flask.app.Flask.handle_exception",
+      "z": 1.2741914377010095,
+      "cov": 0.2882766739238129,
+      "pct": 0.905,
+      "cz": 1.1342326596368884,
+      "margin": 0.01591085780051256
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-10",
+      "eid": "src.flask.app.Flask.handle_user_exception",
+      "z": 1.0515241294529627,
+      "cov": 0.2397528190341054,
+      "pct": 0.855,
+      "cz": 0.6969794329249411,
+      "margin": 0.004264537388086636
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-11",
+      "eid": "src.flask.testing.FlaskClient",
+      "z": 7.573685920117235,
+      "cov": 0.48827713283804863,
+      "pct": 0.99,
+      "cz": 5.483232111238808,
+      "margin": 0.059008646271616436
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-11",
+      "eid": "src.flask.testing.EnvironBuilder",
+      "z": 0.008418246150295077,
+      "cov": 0.13028586466565145,
+      "pct": 0.77,
+      "cz": 0.29618109687061983,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-12",
+      "eid": "src.flask.sansio.app.App.register_blueprint",
+      "z": 2.911489809239335,
+      "cov": 0.4418145310686135,
+      "pct": 0.955,
+      "cz": 1.9797820767037135,
+      "margin": 0.016139527829901936
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-12",
+      "eid": "src.flask.sansio.blueprints.Blueprint.register",
+      "z": 1.6986416921285266,
+      "cov": 0.4177834148284511,
+      "pct": 0.94,
+      "cz": 1.7567176805852498,
+      "margin": 0.006908420926545096
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-12",
+      "eid": "src.flask.sansio.app.App.add_url_rule",
+      "z": -0.5314954074517619,
+      "cov": 0.25917180465358813,
+      "pct": 0.74,
+      "cz": 0.2844347168042103,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-02",
+      "eid": "fastapi.routing.APIRoute",
+      "z": 2.0431439265804365,
+      "cov": 0.3473627554179136,
+      "pct": 0.87,
+      "cz": 1.6291834763488737,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-04",
+      "eid": "fastapi.applications.FastAPI.add_api_route",
+      "z": 1.1452449726236684,
+      "cov": 0.32325240811675526,
+      "pct": 0.77,
+      "cz": 0.8537535727185647,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-05",
+      "eid": "fastapi.dependencies.utils.get_dependant",
+      "z": 1.0319916834182348,
+      "cov": 0.2696498871495875,
+      "pct": 0.695,
+      "cz": 0.4727023463490224,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-05",
+      "eid": "fastapi.routing.APIRoute",
+      "z": 1.7888290444920194,
+      "cov": 0.36850157016129365,
+      "pct": 0.885,
+      "cz": 1.3822990261367616,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-08",
+      "eid": "fastapi.exception_handlers.request_validation_exception_handler",
+      "z": 2.4480117856566035,
+      "cov": 0.19144100318023763,
+      "pct": 0.645,
+      "cz": -0.28553287249734005,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-08",
+      "eid": "fastapi.exceptions.RequestValidationError",
+      "z": 4.3225893937228985,
+      "cov": 0.28449367688136323,
+      "pct": 0.795,
+      "cz": 0.9368243663818826,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-09",
+      "eid": "fastapi.exceptions.HTTPException",
+      "z": 2.3792860138040584,
+      "cov": 0.4625623212745081,
+      "pct": 0.92,
+      "cz": 1.5093888122851609,
+      "margin": 0.01857147317908528
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-11",
+      "eid": "fastapi.dependencies.utils.solve_dependencies",
+      "z": 1.6076864919211027,
+      "cov": 0.29866535890730744,
+      "pct": 0.94,
+      "cz": 1.3761257902105393,
+      "margin": 0.005865150511980013
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-12",
+      "eid": "fastapi.security.base.SecurityBase",
+      "z": 0.18721385825584974,
+      "cov": 0.1765475632819017,
+      "pct": 0.105,
+      "cz": -1.1601035325533344,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-12",
+      "eid": "fastapi.security.oauth2.OAuth2PasswordBearer",
+      "z": 4.358496163281442,
+      "cov": 0.5725482478041529,
+      "pct": 0.985,
+      "cz": 2.3102539442054155,
+      "margin": 0.03774908288528214
+    },
+    {
+      "repo": "django",
+      "qid": "django-04",
+      "eid": "django.contrib.auth.__init__.authenticate",
+      "z": 2.480314747098218,
+      "cov": 0.4045717395251527,
+      "pct": 0.795,
+      "cz": 0.6134318815705023,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-06",
+      "eid": "django.core.handlers.wsgi.WSGIHandler",
+      "z": 1.2069983755131877,
+      "cov": 0.20968682813027997,
+      "pct": 0.265,
+      "cz": -0.4318707452511567,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-09",
+      "eid": "django.contrib.auth.__init__.authenticate",
+      "z": 3.6326862587266096,
+      "cov": 0.48625048633295326,
+      "pct": 0.925,
+      "cz": 1.569527123792219,
+      "margin": 0.006671691084318828
+    },
+    {
+      "repo": "django",
+      "qid": "django-12",
+      "eid": "django.contrib.admin.options.ModelAdmin.get_urls",
+      "z": 0.9111011694579119,
+      "cov": 0.49359030350396654,
+      "pct": 0.925,
+      "cz": 1.9473462251032094,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-12",
+      "eid": "django.contrib.admin.options.ModelAdmin",
+      "z": 1.0474612081214965,
+      "cov": 0.49359030350396654,
+      "pct": 0.925,
+      "cz": 1.9473462251032094,
+      "margin": 0.0
+    }
+  ],
+  "negative": [
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.wrappers.Request",
+      "z": 5.588656029323603,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.json.provider.JSONProvider",
+      "z": 5.309566044471554,
+      "cov": 0.21554563009561462,
+      "pct": 0.985,
+      "cz": 3.0669311028312367,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.sessions.SessionInterface",
+      "z": 4.394463869000769,
+      "cov": 0.21554563009561462,
+      "pct": 0.985,
+      "cz": 3.0669311028312367,
+      "margin": 0.08005023209360279
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.DebugFilesKeyError",
+      "z": 3.0784781815330544,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.DebugFilesKeyError.__init__",
+      "z": 3.0341128764049303,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.views.MethodView",
+      "z": 3.022525270263113,
+      "cov": 0.18359437967558703,
+      "pct": 0.975,
+      "cz": 2.4371215243258852,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.FormDataRoutingRedirect",
+      "z": 2.969662115845197,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.wrappers.Request.max_form_parts",
+      "z": 2.34195469633546,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.wrappers.Request.max_form_memory_size",
+      "z": 2.300175310779106,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.wrappers.Request._load_form_data",
+      "z": 2.1548876131754837,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.DebugFilesKeyError.__init__.form_matches",
+      "z": 2.0557199953095084,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.attach_enctype_error_multidict.newcls",
+      "z": 1.9692816449468318,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_basic.test_routing_redirect_debugging.user",
+      "z": 1.531763804913249,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_basic.test_trap_bad_request_key_error.fail",
+      "z": 1.531763804913249,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_request.test_limit_config",
+      "z": 1.5174893398557698,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "examples.javascript.js_example.views.add",
+      "z": 1.5158364116887284,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.attach_enctype_error_multidict.newcls.__getitem__",
+      "z": 1.5079530556111465,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_basic.test_session_accessed.do_set",
+      "z": 1.4323253702967043,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.FormDataRoutingRedirect.__init__",
+      "z": 1.3568786337580903,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "examples.celery.src.task_app.views.add",
+      "z": 1.3254217167398945,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_reqctx.test_session_dynamic_cookie_name.set",
+      "z": 1.2986800887159506,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.app.Flask",
+      "z": 1.224879666271354,
+      "cov": 0.33307426401513085,
+      "pct": 0.995,
+      "cz": 5.3836059877917,
+      "margin": 0.21422597900868628
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.debughelpers.attach_enctype_error_multidict",
+      "z": 1.1796171857660003,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "tests.test_reqctx.test_session_dynamic_cookie_name.set_dynamic_cookie",
+      "z": 1.1633815259643265,
+      "cov": 0.1494798843395438,
+      "pct": 0.88,
+      "cz": 1.7646709740009865,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-13",
+      "eid": "src.flask.wrappers.Request._max_form_parts",
+      "z": 1.1270105637916732,
+      "cov": 0.11752863391951622,
+      "pct": 0.74,
+      "cz": 1.1348613954956346,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.json.provider.DefaultJSONProvider",
+      "z": 4.321705311146117,
+      "cov": 0.2729537224317851,
+      "pct": 0.95,
+      "cz": 2.2189979834900204,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.json.provider.JSONProvider",
+      "z": 3.76436581474781,
+      "cov": 0.2531575051658975,
+      "pct": 0.935,
+      "cz": 1.943021543152287,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sansio.app.App",
+      "z": 3.3309856196409022,
+      "cov": 0.5610423001997527,
+      "pct": 0.995,
+      "cz": 6.235202651609437,
+      "margin": 0.1394331296372407
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sessions.SessionInterface",
+      "z": 3.294205576553061,
+      "cov": 0.2531575051658975,
+      "pct": 0.935,
+      "cz": 1.943021543152287,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.json.provider.JSONProvider.loads",
+      "z": 3.106606701127866,
+      "cov": 0.22161295687506236,
+      "pct": 0.92,
+      "cz": 1.5032631775797072,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.testing.EnvironBuilder",
+      "z": 3.0051171562508063,
+      "cov": 0.2729537224317851,
+      "pct": 0.95,
+      "cz": 2.2189979834900204,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.json.tag.JSONTag",
+      "z": 2.466103770415797,
+      "cov": 0.1373101794936103,
+      "pct": 0.775,
+      "cz": 0.3280093348969307,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "examples.tutorial.flaskr.db.get_db",
+      "z": 2.2905909338627812,
+      "cov": 0.23508117565580927,
+      "pct": 0.93,
+      "cz": 1.6910218299968658,
+      "margin": 0.029490676190889072
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sansio.blueprints.Blueprint",
+      "z": 2.1298873783117633,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.wrappers.Request",
+      "z": 2.086867398267231,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.cli.FlaskGroup",
+      "z": 1.7288104771193669,
+      "cov": 0.2729537224317851,
+      "pct": 0.95,
+      "cz": 2.2189979834900204,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.testing.FlaskCliRunner",
+      "z": 1.681438460850927,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "examples.tutorial.flaskr.db.init_app",
+      "z": 1.4790915024831814,
+      "cov": 0.18232294656519238,
+      "pct": 0.905,
+      "cz": 0.9555263528866694,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sansio.scaffold.Scaffold",
+      "z": 1.4647946130445177,
+      "cov": 0.4039359034402547,
+      "pct": 0.98,
+      "cz": 4.045003203420574,
+      "margin": 0.1935059661162995
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "tests.test_helpers.TestNoImports.test_name_with_import_error",
+      "z": 1.4537041415169911,
+      "cov": 0.16885472778444546,
+      "pct": 0.875,
+      "cz": 0.7677677004695108,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.wrappers.Response",
+      "z": 1.4241468260394232,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.templating.Environment",
+      "z": 1.3477114463490585,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.cli.ScriptInfo",
+      "z": 1.2144637688828377,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.json.tag.JSONTag.check",
+      "z": 1.1802024829967679,
+      "cov": 0.1373101794936103,
+      "pct": 0.775,
+      "cz": 0.3280093348969307,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sansio.app.App.create_jinja_environment",
+      "z": 1.1711105190575282,
+      "cov": 0.1373101794936103,
+      "pct": 0.775,
+      "cz": 0.3280093348969307,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "examples.tutorial.flaskr.db.close_db",
+      "z": 1.1471692956689357,
+      "cov": 0.1507783982743572,
+      "pct": 0.82,
+      "cz": 0.5157679873140892,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sansio.scaffold.Scaffold._check_setup_finished",
+      "z": 1.0848468428313138,
+      "cov": 0.1373101794936103,
+      "pct": 0.775,
+      "cz": 0.3280093348969307,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.app.Flask",
+      "z": 1.0834305082908418,
+      "cov": 0.41026390192539547,
+      "pct": 0.985,
+      "cz": 4.13322099134115,
+      "margin": 0.007772046177656493
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "tests.test_helpers.TestNoImports",
+      "z": 1.0455074030709353,
+      "cov": 0.16885472778444546,
+      "pct": 0.875,
+      "cz": 0.7677677004695108,
+      "margin": 0.0
+    },
+    {
+      "repo": "flask",
+      "qid": "flask-14",
+      "eid": "src.flask.sessions.SecureCookieSessionInterface",
+      "z": 1.005351951915373,
+      "cov": 0.1158473256722872,
+      "pct": 0.47,
+      "cz": 0.028798535301158095,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.security.open_id_connect_url.OpenIdConnect",
+      "z": 5.5389543450425185,
+      "cov": 0.2840660587001069,
+      "pct": 0.98,
+      "cz": 3.440835455326441,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.security.http.HTTPDigest",
+      "z": 5.065343657358752,
+      "cov": 0.2840660587001069,
+      "pct": 0.98,
+      "cz": 3.440835455326441,
+      "margin": 0.022898477847357723
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.security.api_key.APIKeyQuery",
+      "z": 3.7987490301336564,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.exceptions.HTTPException",
+      "z": 2.9024345383997416,
+      "cov": 0.2314091603767251,
+      "pct": 0.945,
+      "cz": 2.3251054384905014,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI",
+      "z": 2.3591467405900333,
+      "cov": 0.29620079438436014,
+      "pct": 0.99,
+      "cz": 3.6979544517045393,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.exceptions.WebSocketException",
+      "z": 1.955442261925072,
+      "cov": 0.2314091603767251,
+      "pct": 0.945,
+      "cz": 2.3251054384905014,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.dependencies.utils.get_parameterless_sub_dependant",
+      "z": 1.7563530289415232,
+      "cov": 0.13391699874127733,
+      "pct": 0.605,
+      "cz": 0.2593755036418756,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.param_functions.Security",
+      "z": 1.7274242461963796,
+      "cov": 0.2314091603767251,
+      "pct": 0.945,
+      "cz": 2.3251054384905014,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.security.api_key.APIKeyQuery.__call__",
+      "z": 1.6774755457321435,
+      "cov": 0.1120420879998598,
+      "pct": 0.59,
+      "cz": -0.20412491713716133,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.security.api_key.APIKeyQuery.__init__",
+      "z": 1.5947999219608775,
+      "cov": 0.1120420879998598,
+      "pct": 0.59,
+      "cz": -0.20412491713716133,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.dependencies.utils.get_dependant",
+      "z": 1.520176727041045,
+      "cov": 0.2314091603767251,
+      "pct": 0.945,
+      "cz": 2.3251054384905014,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.dependencies.utils.get_parameterless_sub_dependant.own_oauth_scopes",
+      "z": 1.3947752632649397,
+      "cov": 0.13391699874127733,
+      "pct": 0.605,
+      "cz": 0.2593755036418756,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.__init__",
+      "z": 1.3813444684554241,
+      "cov": 0.29620079438436014,
+      "pct": 0.99,
+      "cz": 3.6979544517045393,
+      "margin": 0.020912336487513988
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter",
+      "z": 1.3533887857506226,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.param_functions.Query",
+      "z": 1.325862512486109,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "tests.test_read_with_orm_mode.test_read_with_orm_mode",
+      "z": 1.2407834722667872,
+      "cov": 0.27134792392290125,
+      "pct": 0.975,
+      "cz": 3.1713550039343295,
+      "margin": 0.07943948438203208
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.dependencies.models.Dependant",
+      "z": 1.1129185053696646,
+      "cov": 0.19870863274891234,
+      "pct": 0.94,
+      "cz": 1.6322245168559129,
+      "margin": 0.014591284280167736
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.__init__",
+      "z": 1.1085848632659046,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.responses.UJSONResponse",
+      "z": 1.0875304175588898,
+      "cov": 0.09749216163544779,
+      "pct": 0.13,
+      "cz": -0.5124186090259338,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.responses.ORJSONResponse",
+      "z": 1.0657114244173544,
+      "cov": 0.09749216163544779,
+      "pct": 0.13,
+      "cz": -0.5124186090259338,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.get",
+      "z": 1.0470024647792724,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.options",
+      "z": 1.0470024647792724,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.trace",
+      "z": 1.0425027489560676,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.delete",
+      "z": 1.0380161681879174,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.get",
+      "z": 1.0371123428252866,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.options",
+      "z": 1.0371123428252866,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.delete",
+      "z": 1.0282714419256975,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.head",
+      "z": 1.026856667840133,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.exceptions.FastAPIError",
+      "z": 1.0264933652956973,
+      "cov": 0.09749216163544779,
+      "pct": 0.13,
+      "cz": -0.5124186090259338,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.post",
+      "z": 1.013571285963085,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.patch",
+      "z": 1.011368167577821,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.post",
+      "z": 1.0042186580136825,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.applications.FastAPI.include_router",
+      "z": 1.0040339706284258,
+      "cov": 0.09749216163544779,
+      "pct": 0.13,
+      "cz": -0.5124186090259338,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.patch",
+      "z": 1.0020506347885632,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-13",
+      "eid": "fastapi.routing.APIRouter.trace",
+      "z": 1.0020506347885632,
+      "cov": 0.16228379564308282,
+      "pct": 0.73,
+      "cz": 0.8604304041881038,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.security.open_id_connect_url.OpenIdConnect",
+      "z": 6.857564208159432,
+      "cov": 0.27726952427474033,
+      "pct": 0.99,
+      "cz": 6.368393834973132,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.security.http.HTTPDigest",
+      "z": 6.307641592151577,
+      "cov": 0.27726952427474033,
+      "pct": 0.99,
+      "cz": 6.368393834973132,
+      "margin": 0.03776497982496439
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "scripts.docs.serve",
+      "z": 2.723108598742301,
+      "cov": 0.17500377767894393,
+      "pct": 0.965,
+      "cz": 2.703312089136372,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI",
+      "z": 2.6391933860898478,
+      "cov": 0.25708946772266983,
+      "pct": 0.98,
+      "cz": 5.64516480315196,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.__init__",
+      "z": 1.813401951483925,
+      "cov": 0.25708946772266983,
+      "pct": 0.98,
+      "cz": 5.64516480315196,
+      "margin": 0.14265065698077775
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.responses.UJSONResponse",
+      "z": 1.6888913829459467,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.responses.ORJSONResponse",
+      "z": 1.6635567397483206,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.exceptions.FastAPIError",
+      "z": 1.6180195544022569,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.include_router",
+      "z": 1.5919413230815447,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter",
+      "z": 1.53260346366809,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.exceptions.HTTPException.__init__",
+      "z": 1.506053664328841,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.websocket",
+      "z": 1.3703673823364588,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter.websocket",
+      "z": 1.2995034767975389,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.background.BackgroundTasks",
+      "z": 1.2128803634307561,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter.include_router",
+      "z": 1.188556164208987,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.middleware",
+      "z": 1.1493729119580969,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.background.BackgroundTasks.add_task",
+      "z": 1.132394375172331,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.exception_handler",
+      "z": 1.130340175584099,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.openapi",
+      "z": 1.0840913965173,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.security.api_key.APIKeyQuery",
+      "z": 1.0730572536930991,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.get",
+      "z": 1.027549310483625,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.options",
+      "z": 1.027549310483625,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.trace",
+      "z": 1.0240079806510507,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter.get",
+      "z": 1.0231569725453924,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter.options",
+      "z": 1.0231569725453924,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.delete",
+      "z": 1.02047270087016,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.routing.APIRouter.delete",
+      "z": 1.0161723187150102,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.head",
+      "z": 1.0116608649588679,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "fastapi",
+      "qid": "fastapi-14",
+      "eid": "fastapi.applications.FastAPI.post",
+      "z": 1.0011360907476667,
+      "cov": 0.09515957450486683,
+      "pct": 0.02,
+      "cz": -0.15820842291570666,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.engine.base.ExceptionContextImpl",
+      "z": 3.5031176938876656,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators",
+      "z": 3.0733907215017515,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.Operators.__invert__",
+      "z": 2.9935955326744756,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.visitors.Visitable",
+      "z": 2.6188070636073353,
+      "cov": 0.2828995078544587,
+      "pct": 0.945,
+      "cz": 2.164251134312691,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.exc.InvalidRequestError",
+      "z": 2.6073439325585084,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.testing.fixtures.sql.DistinctOnFixture",
+      "z": 2.4107984247787644,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__lshift__",
+      "z": 2.3764260682156686,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__matmul__",
+      "z": 2.3764260682156686,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rshift__",
+      "z": 2.3764260682156686,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.Operators",
+      "z": 2.286650224372981,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rlshift__",
+      "z": 2.2705877740277827,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rmatmul__",
+      "z": 2.2705877740277827,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rrshift__",
+      "z": 2.2705877740277827,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.exc.DisconnectionError",
+      "z": 2.0496332655659533,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.functions.grouping_sets",
+      "z": 1.9342387848702056,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "test.orm.dml.test_orm_upd_del_basic.UpdateDeleteTest.test_routing_session.RoutingSession",
+      "z": 1.8724456488215828,
+      "cov": 0.1828126198312364,
+      "pct": 0.76,
+      "cz": 0.5440532752330675,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.exc.NoInspectionAvailable",
+      "z": 1.8552726059858609,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.exc.NoResultFound",
+      "z": 1.8488160364341024,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.exc.MultipleResultsFound",
+      "z": 1.7796210612409504,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin",
+      "z": 1.7771504746917652,
+      "cov": 0.3413133578497581,
+      "pct": 0.98,
+      "cz": 3.1098494696413237,
+      "margin": 0.04902019002007131
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.engine.cursor.CursorResult",
+      "z": 1.708843525622065,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.orm.session.Session.prepare",
+      "z": 1.6750823243661193,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.elements.BinaryExpression",
+      "z": 1.6378133351510202,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.testing.fixtures.sql.DistinctOnFixture.distinct_on_fixture",
+      "z": 1.5932540209066426,
+      "cov": 0.1638187273684192,
+      "pct": 0.54,
+      "cz": 0.23658179208829427,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.Operators.__and__",
+      "z": 1.5267103104074053,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.operators.Operators.__or__",
+      "z": 1.5267103104074053,
+      "cov": 0.1957175331633079,
+      "pct": 0.77,
+      "cz": 0.7529568925318599,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.dialects.oracle.base.OracleDDLCompiler.define_constraint_cascades",
+      "z": 1.5124881813149775,
+      "cov": 0.17447097862147623,
+      "pct": 0.745,
+      "cz": 0.40901951110875995,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.orm.interfaces.PropComparator",
+      "z": 1.149953429035175,
+      "cov": 0.2222325773637186,
+      "pct": 0.89,
+      "cz": 1.1821801274169275,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.type_api.TypeEngine",
+      "z": 1.0863828456498414,
+      "cov": 0.42849533254090894,
+      "pct": 0.995,
+      "cz": 4.521143711422155,
+      "margin": 0.061912765385857986
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-13",
+      "eid": "lib.sqlalchemy.sql.type_api.ExternalType",
+      "z": 1.0447336295503147,
+      "cov": 0.2222325773637186,
+      "pct": 0.89,
+      "cz": 1.1821801274169275,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",
+      "z": 6.371503365388081,
+      "cov": 0.6544357005583281,
+      "pct": 0.995,
+      "cz": 5.137884458730361,
+      "margin": 0.12354973609075649
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.dialects.mssql.mssqlpython.MSDialect_mssqlpython",
+      "z": 5.804930451659391,
+      "cov": 0.4894926997520602,
+      "pct": 0.965,
+      "cz": 3.2233504905534915,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.dialects.mssql.mssqlpython.MSDialect_mssqlpython.create_connect_args",
+      "z": 4.192742226749122,
+      "cov": 0.4894926997520602,
+      "pct": 0.965,
+      "cz": 3.2233504905534915,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.engine.url.URL",
+      "z": 3.6058819011773897,
+      "cov": 0.3424247508345075,
+      "pct": 0.915,
+      "cz": 1.516296644943719,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.elements.BinaryExpression",
+      "z": 2.612861220060675,
+      "cov": 0.5105073002479398,
+      "pct": 0.985,
+      "cz": 3.4672721257872494,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector.create_connect_args",
+      "z": 2.134050017531862,
+      "cov": 0.4894926997520602,
+      "pct": 0.965,
+      "cz": 3.2233504905534915,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.engine.base.ExceptionContextImpl",
+      "z": 2.0582084154000917,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators",
+      "z": 1.7748459980865505,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.Operators.__invert__",
+      "z": 1.722228966694391,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User",
+      "z": 1.7092943761937702,
+      "cov": 0.23627247414432925,
+      "pct": 0.625,
+      "cz": 0.28416106762776944,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User",
+      "z": 1.7092943761937702,
+      "cov": 0.23627247414432925,
+      "pct": 0.625,
+      "cz": 0.28416106762776944,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.typing.plain_files.orm.orm_config_constructs.User",
+      "z": 1.5282809506556552,
+      "cov": 0.23627247414432925,
+      "pct": 0.625,
+      "cz": 0.28416106762776944,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.dialect.mssql.test_engine.ParseConnectTest",
+      "z": 1.5233679727775975,
+      "cov": 0.4894926997520602,
+      "pct": 0.965,
+      "cz": 3.2233504905534915,
+      "margin": 0.09524852385263467
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.engine.test_parseconnect.URLTest",
+      "z": 1.5131705065634917,
+      "cov": 0.23627247414432925,
+      "pct": 0.625,
+      "cz": 0.28416106762776944,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "test.engine.test_parseconnect.CreateEngineTest",
+      "z": 1.3716086095952296,
+      "cov": 0.3424247508345075,
+      "pct": 0.915,
+      "cz": 1.516296644943719,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__lshift__",
+      "z": 1.3152667730713694,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__matmul__",
+      "z": 1.3152667730713694,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rshift__",
+      "z": 1.3152667730713694,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.Operators",
+      "z": 1.2560684872705388,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rlshift__",
+      "z": 1.2454768906283187,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rmatmul__",
+      "z": 1.2454768906283187,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.operators.ColumnOperators.__rrshift__",
+      "z": 1.2454768906283187,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.orm.interfaces.CompileStateOption",
+      "z": 1.1652425091305827,
+      "cov": 0.22942013673199108,
+      "pct": 0.605,
+      "cz": 0.20462430236217652,
+      "margin": 0.0
+    },
+    {
+      "repo": "sqlalchemy",
+      "qid": "sqla-14",
+      "eid": "lib.sqlalchemy.sql.functions.grouping_sets",
+      "z": 1.0236880136130178,
+      "cov": 0.27109527749644635,
+      "pct": 0.77,
+      "cz": 0.6883579087115415,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.management.commands.runserver.Command",
+      "z": 5.976658140514279,
+      "cov": 0.4220640234679019,
+      "pct": 0.99,
+      "cz": 3.1503766170971423,
+      "margin": 0.017550198376831458
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.admin_scripts.tests.ManageRunserver",
+      "z": 4.295976337585677,
+      "cov": 0.4806351590049333,
+      "pct": 0.995,
+      "cz": 3.9914364865356906,
+      "margin": 0.0648844450889862
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.management.commands.testserver.Command",
+      "z": 3.450177912271441,
+      "cov": 0.30977037157189363,
+      "pct": 0.855,
+      "cz": 1.5378812584793895,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.utils.log.ServerFormatter",
+      "z": 3.2295987248306957,
+      "cov": 0.2458112540846637,
+      "pct": 0.77,
+      "cz": 0.6194519586205259,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.management.commands.runserver.Command.on_bind",
+      "z": 3.1070012148324686,
+      "cov": 0.34266747523025787,
+      "pct": 0.945,
+      "cz": 2.0102715144326297,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.handlers.asgi.ASGIRequest",
+      "z": 2.8590906911947056,
+      "cov": 0.2458112540846637,
+      "pct": 0.77,
+      "cz": 0.6194519586205259,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.cache.backends.memcached.PyLibMCCache",
+      "z": 2.4929711268398367,
+      "cov": 0.24513666911761625,
+      "pct": 0.76,
+      "cz": 0.6097651676934247,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.servers.test_basehttp.WSGIRequestHandlerTestCase",
+      "z": 2.319493472827834,
+      "cov": 0.3104449565389411,
+      "pct": 0.865,
+      "cz": 1.5475680494064912,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.check_framework.test_mail.MailersProductionBackendTests",
+      "z": 2.0580631404736964,
+      "cov": 0.23482390492026967,
+      "pct": 0.735,
+      "cz": 0.4616776834771257,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.servers.basehttp.WSGIRequestHandler",
+      "z": 1.9046061098138984,
+      "cov": 0.2458112540846637,
+      "pct": 0.77,
+      "cz": 0.6194519586205259,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.servers.basehttp.ServerHandler",
+      "z": 1.844074262470487,
+      "cov": 0.2458112540846637,
+      "pct": 0.77,
+      "cz": 0.6194519586205259,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.http.request.HttpRequest._get_scheme",
+      "z": 1.7815958559894125,
+      "cov": 0.2264035353134857,
+      "pct": 0.685,
+      "cz": 0.3407642865082646,
+      "margin": 0.033701724497423535
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.forms.renderers.BaseRenderer",
+      "z": 1.7746948121677584,
+      "cov": 0.21164068953011908,
+      "pct": 0.65,
+      "cz": 0.1287752746297175,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.contrib.gis.feeds.Feed",
+      "z": 1.7721604126819097,
+      "cov": 0.20192680126190538,
+      "pct": 0.57,
+      "cz": -0.010712572476115555,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.mail.backends.base.BaseEmailBackend",
+      "z": 1.7548473989649556,
+      "cov": 0.3489337883377471,
+      "pct": 0.96,
+      "cz": 2.1002534558056767,
+      "margin": 0.008763404184315534
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.contrib.staticfiles.testing.StaticLiveServerTestCase",
+      "z": 1.7177744916790156,
+      "cov": 0.1724772727642656,
+      "pct": 0.34,
+      "cz": -0.4335969226965701,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.utils.log.ServerFormatter.format",
+      "z": 1.6263134051373382,
+      "cov": 0.2458112540846637,
+      "pct": 0.77,
+      "cz": 0.6194519586205259,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.template_tests.filter_tests.test_urlize.FunctionTests",
+      "z": 1.6069968202685012,
+      "cov": 0.3104449565389411,
+      "pct": 0.865,
+      "cz": 1.5475680494064912,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.core.handlers.asgi.ASGIHandler",
+      "z": 1.5608614966526864,
+      "cov": 0.3104449565389411,
+      "pct": 0.865,
+      "cz": 1.5475680494064912,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "django.http.response.HttpResponseServerError",
+      "z": 1.5598566106632896,
+      "cov": 0.18724011854763223,
+      "pct": 0.44,
+      "cz": -0.22160791081802292,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.admin_scripts.tests.ManageRunserver.test_hide_production_warning_with_environment_variable",
+      "z": 1.404457437120614,
+      "cov": 0.3574303210136245,
+      "pct": 0.965,
+      "cz": 2.222260526311177,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.logging_tests.tests.LogFormattersTests",
+      "z": 1.192056083529995,
+      "cov": 0.2518738210019096,
+      "pct": 0.815,
+      "cz": 0.7065081799679415,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.admin_scripts.tests.ManageRunserver.test_on_bind",
+      "z": 1.0528212104290608,
+      "cov": 0.3574303210136245,
+      "pct": 0.965,
+      "cz": 2.222260526311177,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-13",
+      "eid": "tests.admin_scripts.tests.ManageRunserver.test_zero_ip_addr",
+      "z": 1.0320293787533064,
+      "cov": 0.3574303210136245,
+      "pct": 0.965,
+      "cz": 2.222260526311177,
+      "margin": 0.012028545283365923
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.gdal.layer.Layer",
+      "z": 5.0866746780056875,
+      "cov": 0.3312863437230077,
+      "pct": 0.97,
+      "cz": 3.023490912948268,
+      "margin": 0.0030546159522391913
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.gdal.feature.Feature",
+      "z": 4.3721466073629545,
+      "cov": 0.26653185832753407,
+      "pct": 0.95,
+      "cz": 1.8263064981956343,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.forms.renderers.DjangoTemplates",
+      "z": 3.543270016963121,
+      "cov": 0.21836887474777122,
+      "pct": 0.9,
+      "cz": 0.9358666629080306,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.forms.renderers.Jinja2",
+      "z": 3.1597564906521645,
+      "cov": 0.21836887474777122,
+      "pct": 0.9,
+      "cz": 0.9358666629080306,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.utils.layermapping.LayerMapping",
+      "z": 2.6515773668375906,
+      "cov": 0.199085762866396,
+      "pct": 0.8,
+      "cz": 0.5793594515337985,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.db.backends.oracle.features.DatabaseFeatures",
+      "z": 2.6356688390465295,
+      "cov": 0.199085762866396,
+      "pct": 0.8,
+      "cz": 0.5793594515337985,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.files.storage.base.Storage.path",
+      "z": 2.4057719062444134,
+      "cov": 0.3008960928005764,
+      "pct": 0.96,
+      "cz": 2.4616343165664554,
+      "margin": 0.06056140591016422
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.db.migrations.loader.MigrationLoader",
+      "z": 2.3759681676744213,
+      "cov": 0.1970680211917125,
+      "pct": 0.74,
+      "cz": 0.542055334742889,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.mail.backends.base.BaseEmailBackend",
+      "z": 2.373725969453579,
+      "cov": 0.36565057819605,
+      "pct": 0.98,
+      "cz": 3.6588187313190885,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.checks.registry.Tags",
+      "z": 2.292347443081449,
+      "cov": 0.1536143893522976,
+      "pct": 0.605,
+      "cz": -0.261317751844603,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.management.commands.ogrinspect.Command",
+      "z": 2.204771217082056,
+      "cov": 0.199085762866396,
+      "pct": 0.8,
+      "cz": 0.5793594515337985,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.forms.renderers.BaseRenderer",
+      "z": 2.1959432267968513,
+      "cov": 0.2120361888437524,
+      "pct": 0.865,
+      "cz": 0.8187876247300052,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.gdal.layer.Layer.srs",
+      "z": 2.184449097092435,
+      "cov": 0.26653185832753407,
+      "pct": 0.95,
+      "cz": 1.8263064981956343,
+      "margin": 0.09932545012730082
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.utils.tree.Node",
+      "z": 1.737865532850247,
+      "cov": 0.34434972463999125,
+      "pct": 0.975,
+      "cz": 3.265007403153947,
+      "margin": 0.019334937148389474
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.gdal.datasource.DataSource",
+      "z": 1.5383634518505338,
+      "cov": 0.1343312774709224,
+      "pct": 0.265,
+      "cz": -0.6178249632188345,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.files.storage.base.Storage",
+      "z": 1.468107734383186,
+      "cov": 0.433096673657188,
+      "pct": 0.99,
+      "cz": 4.905765777980923,
+      "margin": 0.08443984665318205
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.management.base.BaseCommand.get_version",
+      "z": 1.4532859345670934,
+      "cov": 0.21836887474777122,
+      "pct": 0.9,
+      "cz": 0.9358666629080306,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.db.migrations.executor.MigrationExecutor",
+      "z": 1.3487215410252764,
+      "cov": 0.1970680211917125,
+      "pct": 0.74,
+      "cz": 0.542055334742889,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.asgi.get_asgi_application",
+      "z": 1.300163186540575,
+      "cov": 0.19695506625208523,
+      "pct": 0.645,
+      "cz": 0.5399670177334153,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.core.wsgi.get_wsgi_application",
+      "z": 1.300163186540575,
+      "cov": 0.19695506625208523,
+      "pct": 0.645,
+      "cz": 0.5399670177334153,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.contrib.gis.gdal.driver.Driver",
+      "z": 1.1865750433863316,
+      "cov": 0.13220058085661163,
+      "pct": 0.0,
+      "cz": -0.6572173970192177,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.db.models.fields.__init__.Field.db_returning",
+      "z": 1.1738755647750263,
+      "cov": 0.19695506625208523,
+      "pct": 0.645,
+      "cz": 0.5399670177334153,
+      "margin": 0.0
+    },
+    {
+      "repo": "django",
+      "qid": "django-14",
+      "eid": "django.db.backends.sqlite3.operations.DatabaseOperations._references_graph",
+      "z": 1.134218763560828,
+      "cov": 0.1970680211917125,
+      "pct": 0.74,
+      "cz": 0.542055334742889,
+      "margin": 0.0
+    }
+  ]
+}

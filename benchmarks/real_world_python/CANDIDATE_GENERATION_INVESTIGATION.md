@@ -1,5 +1,22 @@
 # Candidate Generation & Lexical Ranking Investigation
 
+**Erratum, found and corrected during the Fix 9 follow-up investigation.** This
+report's `matched_idf_coverage` figures below were computed with a hand-rolled
+`query.lower().split()` in the diagnostic script, not the real `_tokenize()` production
+function (which does camelCase/snake_case splitting, punctuation stripping, and stopword
+removal). Recomputed with the correct tokenizer against all four repositories: the
+dominant category shrinks from 19/35 (54%) to **16/35 (46%)** of all failures — three
+cases (`sqla-02`, `sqla-03`, `sqla-11`) turned out to already clear both `z >= 1.0` and
+`matched_idf_coverage >= 0.5`, but still fail because they get crowded out of the final
+`top_k=10` by other, higher-scoring accepted candidates (a distinct mechanism from
+either candidate-pool truncation or the coverage floor, not previously named). The
+z-scores, raw ranks, and pool-membership figures throughout (unaffected by this bug,
+computed via the real `search_semantic`/`_relative_confidence_scores` functions) are
+unchanged and still accurate. The core conclusion — `matched_idf_coverage` is the single
+largest failure mechanism, confirmed across all four repositories — **still holds** at
+the corrected 46%; only the precise count and three specific examples were wrong. See
+`FIX_9_COVERAGE_REDESIGN_RESULTS.md` for the corrected data and what was built on it.
+
 Diagnosis-only pass, no production code changed. Every failed/partial query in the
 56-query benchmark was traced entity-by-entity through the actual retrieval pipeline
 (not inferred from aggregate numbers) to find the exact stage at which the ground-truth
