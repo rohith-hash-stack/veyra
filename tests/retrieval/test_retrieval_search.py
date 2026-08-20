@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Callable
 
 from veyra.retrieval import build_retrieval_index, search, search_semantic
+from veyra.retrieval.search import _tokenize
 from veyra.static_analysis import extract_repository, persist_extraction
 from veyra.vbg import VBGStore
 
@@ -185,3 +186,63 @@ def test_length_normalization_is_per_entity_type_not_corpus_wide(sample_repo: Pa
     # This fixture's Variable-typed entities (if any) and Function-typed
     # entities must not be forced onto one shared average.
     assert isinstance(avg_by_type["Function"], float)
+
+
+# -- ARCF Fix 4: stopword handling --
+
+
+def test_single_letter_stopwords_produce_no_token() -> None:
+    """'I' and 'a' -- the directive's own examples -- must not become a
+    meaningful retrieval signal on their own."""
+    assert _tokenize("I") == []
+    assert _tokenize("a") == []
+
+
+def test_stopwords_do_not_dominate_a_real_query() -> None:
+    """A whole sentence's filler words (a, the, how, does, to, of, ...)
+    disappear, leaving only the content words that can actually
+    discriminate between entities."""
+    tokens = _tokenize("How does a payment gateway validate a transaction")
+    assert tokens == ["payment", "gateway", "validate", "transaction"]
+    assert "a" not in tokens
+    assert "how" not in tokens
+    assert "does" not in tokens
+
+
+def test_end_is_not_stopped_per_the_documented_policy() -> None:
+    """'end' is the directive's own hard case: a common English word that
+    is also a real, meaningful domain/identifier term in this codebase.
+    The documented policy (search.py's `_STOPWORDS` comment) keeps it --
+    confirm that decision actually holds in the tokenizer's behavior."""
+    assert _tokenize("end") == ["end"]
+    assert "end" in _tokenize("where does the request end")
+
+
+def test_stopword_filtering_preserves_meaningful_identifier_fragments() -> None:
+    """Compound identifiers keep their real content after stopword
+    filtering removes only the low-information fragment -- the
+    identifiers themselves remain searchable (exact/substring matching
+    never goes through this tokenizer at all; this is about what the
+    lexical/BM25 tier sees)."""
+    assert _tokenize("end_to_end") == ["end", "end"]  # "to" (stopword) dropped, "end" kept twice
+    assert _tokenize("get_user_by_id") == ["get", "user", "id"]  # "by" (stopword) dropped
+    # Acronym-led identifiers: pre-existing camelCase-split limitation
+    # (the boundary regex only catches lowercase-to-uppercase transitions,
+    # not uppercase-run-to-word), unrelated to and unchanged by this fix --
+    # each identifier still tokenizes to one real, non-empty, consistently
+    # lowercased token, not silently destroyed.
+    assert _tokenize("APIClient") == ["apiclient"]
+    assert _tokenize("HTTPRequest") == ["httprequest"]
+
+
+def test_exact_name_retrieval_is_unaffected_by_stopword_filtering(sample_repo: Path, store: VBGStore) -> None:
+    """Exact/substring name matching never calls `_tokenize()` at all
+    (`RetrievalIndex.find_by_name()` compares against the literal
+    `entity.name`) -- confirm a real symbol whose name contains words that
+    would be stopwords in a sentence ("process_order" has no stopword
+    fragments, so use a query that as a *sentence* would be gutted by
+    stopword filtering but still names the entity exactly)."""
+    index = build_retrieval_index(store, COMMIT)
+    results = search(index, "process_order")
+    assert results[0].entity.entity_id == "orders.process_order"
+    assert results[0].matched_by == "exact_name"

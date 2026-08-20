@@ -87,17 +87,70 @@ _BM25_K1 = 1.5  # term-frequency saturation: higher = repeated terms keep matter
 _BM25_B = 0.75  # length normalization: 0 = ignore document length, 1 = fully normalize by it
 
 
+# ARCF Fix 4 -- stopword policy.
+#
+# A small, fixed set of closed-class English function words: articles,
+# pronouns, prepositions, conjunctions, and a handful of common auxiliary/
+# question verbs ("does", "is", "how", "where", ...). These are the words
+# the directive's own examples ("I", "a") point at -- terms that carry
+# almost no discriminative signal on their own and mostly show up as
+# natural-language query filler ("how does X work") or as single-letter
+# loop/parameter names in code (`for i in range(...)`, `def f(a, b)`).
+#
+# Deliberately excluded from this list: short but domain-meaningful words
+# that happen to also be common English words -- "end" (the directive's own
+# example of the hard case) is a real, frequent, meaningful token in this
+# codebase's domain (request/session/range boundaries, "end_to_end", etc.),
+# not a closed-class function word, so it is NOT stopped. The same
+# reasoning keeps "start"/"before"/"after"/"between" out of the list. When
+# in doubt, a word stays -- BM25's own IDF term already suppresses truly
+# uninformative high-document-frequency tokens mathematically; this list
+# only removes words informative enough to slightly skew scores but never
+# informative enough to be a real answer signal.
+#
+# Applied identically to query tokens and to indexed-entity document
+# tokens (the same _tokenize() call both go through) -- filtering only one
+# side would silently break BM25's IDF math, which assumes both operate on
+# the same vocabulary.
+#
+# This never touches exact_name/substring_name matching (search.py's
+# `search()` calls `RetrievalIndex.find_by_name()` directly against the
+# untokenized `entity.name`) -- a real identifier is always findable by
+# its literal name regardless of this policy.
+_STOPWORDS = frozenset(
+    {
+        "a", "an", "the",
+        "i", "you", "he", "she", "it", "we", "they",
+        "this", "that", "these", "those",
+        "is", "are", "was", "were", "be", "been", "being",
+        "do", "does", "did", "doing",
+        "have", "has", "had", "having",
+        "to", "of", "in", "on", "at", "by", "for", "with", "as", "from",
+        "and", "or", "but", "not", "no",
+        "how", "what", "where", "when", "why", "which", "who", "whom",
+        "so", "if", "than", "then", "there", "here",
+        "its", "their", "his", "her", "my", "your", "our",
+    }
+)
+
+
 def _tokenize(text: str) -> list[str]:
     """Splits on non-alphanumeric boundaries AND camelCase/snake_case word
     boundaries (lowercased), so `processOrder`/`process_order`/"process
     order" all tokenize to the same {"process", "order"} -- a small,
     deliberate concession that materially improves symbol-name matching
-    without needing any real NLP dependency."""
+    without needing any real NLP dependency. ARCF Fix 4: closed-class
+    English function words (`_STOPWORDS`) are dropped *after* that
+    camelCase/snake_case split, so a compound identifier like `is_valid`
+    keeps its meaningful part (`valid`) and only loses the low-information
+    fragment (`is`) -- the identifier itself remains fully searchable via
+    exact/substring name matching either way, since those never call this
+    function at all."""
     tokens: list[str] = []
     for raw in _TOKEN_RE.findall(text):
         # split camelCase: "processOrder" -> "process", "Order"
         parts = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", raw).split()
-        tokens.extend(p.lower() for p in parts)
+        tokens.extend(p.lower() for p in parts if p.lower() not in _STOPWORDS)
     return tokens
 
 
