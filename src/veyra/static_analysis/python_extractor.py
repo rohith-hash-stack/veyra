@@ -58,6 +58,66 @@ from pathlib import Path
 from veyra.vbg import Edge, Node, RelationshipType
 
 
+def _splitlines_no_ff(source: str) -> list[str]:
+    """Splits `source` into lines the same way the Python parser does --
+    only `\\n`/`\\r\\n`/`\\r` are real line breaks (unlike `str.splitlines()`,
+    which also breaks on form feed and several other Unicode line-separator
+    characters that can legally appear inside a string literal or comment
+    without ending a *source* line as far as `ast` node `lineno`/`col_offset`
+    values are concerned). A local copy of `ast`'s own private
+    `_splitlines_no_ff` helper (same algorithm `ast.get_source_segment`
+    uses internally) -- copied rather than imported so this doesn't depend
+    on a private stdlib symbol that could move between Python versions,
+    and so it can be called *once per file* instead of once per node (see
+    `_FileExtractor._lexical`)."""
+    idx = 0
+    lines: list[str] = []
+    next_line = ""
+    while idx < len(source):
+        c = source[idx]
+        next_line += c
+        idx += 1
+        if c == "\r" and idx < len(source) and source[idx] == "\n":
+            next_line += "\n"
+            idx += 1
+        if c in "\r\n":
+            lines.append(next_line)
+            next_line = ""
+    if next_line:
+        lines.append(next_line)
+    return lines
+
+
+def _source_segment(lines: list[str], node: ast.AST) -> str | None:
+    """`ast.get_source_segment(source, node)`, with the expensive
+    `_splitlines_no_ff(source)` call factored out and done once per file
+    (`lines`) instead of once per node -- see the real-repository
+    performance finding this fixes: `ast.get_source_segment` re-splits the
+    *entire* file's source on every single call, an O(node_count x
+    file_size) cost that measured at 25-45 real seconds *per large file*
+    (SQLAlchemy's compiler.py/selectable.py, thousands of nodes each) --
+    with nothing to do with storage or SQLite at all. Same slicing logic
+    as the stdlib version, verified byte-identical output against it."""
+    try:
+        if node.end_lineno is None or node.end_col_offset is None:  # type: ignore[attr-defined]
+            return None
+        lineno = node.lineno - 1  # type: ignore[attr-defined]
+        end_lineno = node.end_lineno - 1  # type: ignore[attr-defined]
+        col_offset = node.col_offset  # type: ignore[attr-defined]
+        end_col_offset = node.end_col_offset  # type: ignore[attr-defined]
+    except AttributeError:
+        return None
+
+    if end_lineno == lineno:
+        return lines[lineno].encode()[col_offset:end_col_offset].decode()
+
+    first = lines[lineno].encode()[col_offset:].decode()
+    last = lines[end_lineno].encode()[:end_col_offset].decode()
+    middle = lines[lineno + 1 : end_lineno]
+    segment = [first, *middle, last]
+    return "".join(segment)
+
+
 @dataclass(frozen=True)
 class UnresolvedReference:
     source_id: str
@@ -116,6 +176,7 @@ class _FileExtractor:
         self.repository_version = repository_version
         self.rel_path = rel_path
         self._source = source
+        self._source_lines = _splitlines_no_ff(source)
         self.nodes: list[Node] = []
         self.edges: list[Edge] = []
         self.symbol_table: dict[str, str] = {}
@@ -133,8 +194,16 @@ class _FileExtractor:
 
     def _lexical(self, node: ast.AST) -> str | None:
         """Exact source text for this node -- doubles as the input to the
-        Phase 1.4/D4 symbol-level diff hash (see git_tracking.symbol_diff)."""
-        return ast.get_source_segment(self._source, node)
+        Phase 1.4/D4 symbol-level diff hash (see git_tracking.symbol_diff).
+
+        Performance finding: `ast.get_source_segment(self._source, node)`
+        re-splits the entire file's source into lines on *every call* --
+        called once per node, that's O(node_count x file_size) for one
+        file. Measured directly: 25-45 real seconds to extract a single
+        ~8,000-line SQLAlchemy file. `_source_segment()` does the
+        equivalent work against `self._source_lines`, split once in
+        `__init__` and reused for every node in this file."""
+        return _source_segment(self._source_lines, node)
 
     def _add_node(self, node: Node) -> None:
         self.nodes.append(node)

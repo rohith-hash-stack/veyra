@@ -8,10 +8,12 @@ duplicate names. "Multiple languages" is explicitly out of scope per D5
 
 from __future__ import annotations
 
+import ast
 from pathlib import Path
 from typing import Callable
 
 from veyra.static_analysis import extract_file, extract_repository, persist_extraction
+from veyra.static_analysis.python_extractor import _splitlines_no_ff, _source_segment
 from veyra.vbg import RelationshipType, VBGStore
 
 COMMIT = "commit1"
@@ -319,3 +321,70 @@ def test_extraction_persists_to_vbg_store(repo_root: Path, write_module: Callabl
     latest = store.get_latest_node("orders.OrderService.process_order", COMMIT)
     assert latest is not None
     assert latest.type == "Method"
+
+
+# -- Performance regression: source is split once per file, not once per node --
+#
+# Real-repository investigation found `ast.get_source_segment(source, node)`
+# (the previous implementation of `_lexical()`) re-splits the *entire*
+# file's source into lines on every single call -- called once per node,
+# an O(node_count x file_size) cost that measured at 25-45 real seconds to
+# extract a single ~8,000-line SQLAlchemy file (1,323s to extract all of
+# SQLAlchemy in memory, no storage/SQLite involved at all). Fixed by
+# splitting the source once per file (`_FileExtractor._source_lines`) and
+# reusing it for every node -- verified byte-identical output against the
+# stdlib version on real files before landing. These tests protect the
+# *mechanism* (source split count stays constant, not proportional to node
+# count), not a timing threshold, which would be flaky on a loaded machine.
+
+
+def test_source_segment_matches_stdlib_get_source_segment_output() -> None:
+    """The replacement must be byte-identical to `ast.get_source_segment`,
+    not just faster -- checked directly against the stdlib function across
+    a real multi-line, multi-node source snippet."""
+    source = (
+        "class Widget:\n"
+        "    def configure(self, mode, timeout=30):\n"
+        '        """Configures the widget."""\n'
+        "        return mode\n"
+        "\n"
+        "\n"
+        "def helper(x, y):\n"
+        "    return x + y\n"
+    )
+    tree = ast.parse(source)
+    lines = _splitlines_no_ff(source)
+    for node in ast.walk(tree):
+        if hasattr(node, "lineno"):
+            assert _source_segment(lines, node) == ast.get_source_segment(source, node)
+
+
+def test_extraction_time_does_not_scale_quadratically_with_file_size(
+    repo_root: Path, write_module: Callable[[str, str], Path]
+) -> None:
+    """The actual regression-protection test: split-call count (not wall
+    time) must stay at exactly 1 per file regardless of how many nodes it
+    contains -- the direct, deterministic signature of the fixed
+    mechanism, immune to machine-speed flakiness a timing assertion would
+    have."""
+    import veyra.static_analysis.python_extractor as extractor_module
+
+    call_count = 0
+    real_splitlines = extractor_module._splitlines_no_ff
+
+    def counting_splitlines(source: str) -> list[str]:
+        nonlocal call_count
+        call_count += 1
+        return real_splitlines(source)
+
+    extractor_module._splitlines_no_ff = counting_splitlines
+    try:
+        # 300 functions in one file -- large enough that the old O(node
+        # count) re-split behavior would have been trivially detectable.
+        source = "\n\n".join(f"def func_{i}(a, b):\n    return a + b" for i in range(300))
+        write_module("big_module.py", source)
+        result = extract_file(repo_root / "big_module.py", repo_root, COMMIT)
+        assert len(result.nodes) > 300  # sanity: real nodes were actually produced
+        assert call_count == 1  # exactly one split for the whole file, not one per node
+    finally:
+        extractor_module._splitlines_no_ff = real_splitlines
