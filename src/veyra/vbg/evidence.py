@@ -20,7 +20,36 @@ Evidence answers "what claim, about what, backed by what observation".
 from __future__ import annotations
 
 import enum
+import re
 from dataclasses import dataclass
+
+from .models import RelationshipType
+
+_EDGE_KEY_RE = re.compile(r"^(.*)--([A-Z_]+)-->(.*)$")
+
+
+def edge_evidence_key(source_id: str, target_id: str, relationship_type: RelationshipType) -> str:
+    """The stable "edge key" Evidence.subject_id's own WHAT contract allows
+    ("entity_id of the node, or a stable edge key") -- lets Evidence attach
+    to a relationship, not just a node. Assumes entity_ids never themselves
+    contain the literal `--TYPE-->` separator (true for every entity_id this
+    project produces: dotted Python identifiers via compute_module_id)."""
+    return f"{source_id}--{relationship_type.value.upper()}-->{target_id}"
+
+
+def parse_edge_evidence_key(key: str) -> tuple[str, str, RelationshipType] | None:
+    """Inverse of edge_evidence_key(). Returns None for a subject_id that
+    isn't edge-shaped at all (e.g. a plain node entity_id) -- callers use
+    that to tell node-level and edge-level Evidence rows apart."""
+    match = _EDGE_KEY_RE.match(key)
+    if not match:
+        return None
+    source_id, rel_name, target_id = match.groups()
+    try:
+        relationship_type = RelationshipType(rel_name.lower())
+    except ValueError:
+        return None
+    return source_id, target_id, relationship_type
 
 
 class EvidenceType(enum.Enum):

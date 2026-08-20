@@ -641,6 +641,30 @@ class VBGStore:
                 ).fetchone()
         return int(row["c"])
 
+    def get_all_evidence(
+        self, repository_version: str, evidence_type: EvidenceType | None = None
+    ) -> list[Evidence]:
+        """Every evidence row at this commit (optionally filtered to one
+        EvidenceType), not scoped to a single subject -- unlike Node/Edge's
+        get_all_*, this is NOT a "latest per key" current view, since
+        multiple evidence rows for the same subject are independent
+        coexisting observations, not competing versions (see
+        get_evidence_for_subject). Backs Phase 3.7's reconciliation (which
+        needs every RUNTIME edge/node observation at once) and Phase 3.9's
+        runtime audit."""
+        with closing(self._connect()) as conn:
+            if evidence_type is None:
+                rows = conn.execute(
+                    "SELECT * FROM evidence WHERE repository_version = ? ORDER BY row_id ASC",
+                    (repository_version,),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    "SELECT * FROM evidence WHERE repository_version = ? AND evidence_type = ? ORDER BY row_id ASC",
+                    (repository_version, evidence_type.value),
+                ).fetchall()
+        return [_row_to_evidence(row) for row in rows]
+
     # -- Audit (Phase 1.5) --------------------------------------------------
 
     def insert_audit_record(self, record: AuditRecord) -> None:

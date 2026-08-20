@@ -56,7 +56,17 @@ from veyra.execution import (
     ExecutionStatus,
 )
 from veyra.scenarios import extract_signature
-from veyra.vbg import Evidence, EvidenceType, Node, Provenance, SafetyClass, Scenario, VBGStore
+from veyra.vbg import (
+    Evidence,
+    EvidenceType,
+    Node,
+    Provenance,
+    RelationshipType,
+    SafetyClass,
+    Scenario,
+    VBGStore,
+    edge_evidence_key,
+)
 
 from .tracer_script import TRACER_SOURCE
 
@@ -331,10 +341,6 @@ def run_scenario(
     return result
 
 
-def _edge_key(source_id: str, target_id: str) -> str:
-    return f"{source_id}--CALLS-->{target_id}"
-
-
 def _persist_runtime_evidence(
     store: VBGStore,
     repository_version: str,
@@ -369,7 +375,7 @@ def _persist_runtime_evidence(
     for source_id, target_id in sorted(edges):
         store.insert_evidence(
             Evidence(
-                subject_id=_edge_key(source_id, target_id),
+                subject_id=edge_evidence_key(source_id, target_id, RelationshipType.CALLS),
                 evidence_type=EvidenceType.RUNTIME,
                 repository_version=repository_version,
                 provenance=provenance,

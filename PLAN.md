@@ -511,17 +511,59 @@ Acceptance: new evidence updates VBG; previously observed paths not redundantly 
 siblings/children/grandchildren stay visible; additional executions bounded; convergence measurable; **no
 completeness claim just because executions stop finding new paths**.
 
-### Phase 3.7 — Static/Runtime Evidence Reconciliation
+### Phase 3.7 — Static/Runtime Evidence Reconciliation — IMPLEMENTED 2026-08-20
 Conflicting evidence (e.g. static says `A→B`, runtime observed `A→C`) — both are retained, tagged by source.
 Interpretation (e.g. "B = possible path, C = observed path") is left explicit, not auto-resolved.
 
-Acceptance: conflicting evidence preserved; sources identifiable; nothing silently deleted; conditional
-behavior representable; unresolved conflicts stay `CONFLICTED`.
+**Preservation/sources/nothing-silently-deleted were already true** by construction of Phase 1.2's append-only
+storage and Phase 1.3's "multiple evidence records for the same subject coexist" discipline -- this phase's
+real, new contribution is `src/veyra/reconciliation/engine.py`'s `reconcile_calls(store, repository_version)`:
+comparing the STATIC CALLS edges Phase 2.3 extracted against the RUNTIME CALLS-edge evidence Phase 3.5/3.6/
+3.3b produce, per (source, target) pair, as `CONFIRMED` / `STATIC_ONLY` / `RUNTIME_ONLY`. **Only
+`RUNTIME_ONLY` is a genuine conflict** (`EdgeReconciliation.is_conflict`) -- matching PLAN's own example
+exactly (runtime exercised a path static analysis never predicted at all); `STATIC_ONLY` is deliberately not
+treated as a conflict, since it just means "not yet runtime-confirmed" (could be genuinely unexplored, or a
+conditional branch legitimately not taken this trial). "Conditional behavior representable" needs no special
+handling: two different trials confirming two different static edges from the same source both come back
+`CONFIRMED` independently, which is exactly what conditional branching looks like at this level.
+Purely a read-only derivation (same discipline as Phase 2.7's `summarize_knowledge()`) -- never writes to
+`VBGStore`; per D15, "unresolved conflicts stay `CONFLICTED`" is Phase 3.8's job to surface as an actual
+`VerificationState`, computed fresh from this function's output, never stored.
+A new `VBGStore.get_all_evidence()` bulk query (mirroring `get_all_nodes`/`get_all_edges`) backs this, and
+`vbg/evidence.py` gained the stable `edge_evidence_key()`/`parse_edge_evidence_key()` pair the edge-shaped
+`Evidence.subject_id` convention was already implicitly using since Phase 3.5 -- `runtime/engine.py` now
+reuses these instead of its own private, duplicate helper (format-compatible, verified via the full Phase 3.5
+suite passing unchanged).
 
-### Phase 3.8 — Verification State Engine
+Acceptance: conflicting evidence preserved; sources identifiable; nothing silently deleted; conditional
+behavior representable; unresolved conflicts stay `CONFLICTED`. 7 new tests.
+
+### Phase 3.8 — Verification State Engine — IMPLEMENTED 2026-08-20
 States: `STRUCTURALLY_IDENTIFIED, STATICALLY_SUPPORTED, RUNTIME_OBSERVED, RUNTIME_VERIFIED,
 CONDITIONALLY_VERIFIED, UNEXPLORED, UNANSWERED, UNEXECUTABLE, BLOCKED_BY_SAFETY, CONFLICTED, STALE`.
 Every state transition must have a valid evidence basis.
+
+**Implemented as `src/veyra/verification/engine.py`**: `derive_verification_states(store, repository_version)`
+(bulk) / `derive_verification_state(store, entity_id, repository_version)` (single-entity convenience). Per
+D15, this is a pure, read-only derivation computed fresh from evidence every call -- exactly Phase 2.7's
+`summarize_knowledge()`/Phase 3.7's `reconcile_calls()` discipline, never a mutated `Node.status`. Precedence
+(most specific/severe fact wins): `BLOCKED_BY_SAFETY` (latest classification is BLOCKED) →
+`CONFLICTED` (source of a Phase 3.7 `RUNTIME_ONLY` edge) → `UNEXECUTABLE` (every Scenario ever generated for
+this node is currently non-executable) → `RUNTIME_VERIFIED`/`RUNTIME_OBSERVED`/`CONDITIONALLY_VERIFIED` (has
+RUNTIME evidence -- VERIFIED if every observed run completed cleanly, OBSERVED if any raised, CONDITIONALLY_
+VERIFIED if clean AND reconciliation confirms more than one distinct outgoing call target) →
+`RUNTIME_VERIFIED`/`RUNTIME_OBSERVED` again (via TEST evidence when no RUNTIME evidence exists -- an existing
+test passing is itself real behavioral verification) → `STATICALLY_SUPPORTED` (has STATIC evidence) →
+`UNEXPLORED` (known only via an unconfirmed static CALLS edge, Phase 3.7's `STATIC_ONLY`) →
+`STRUCTURALLY_IDENTIFIED` (the honest default -- nothing beyond bare extraction is known).
+**`STALE` is not produced** -- that's Phase 4.8's job (Git Impact Analysis, Milestone 4, not built); this
+module has no inputs for cross-commit invalidation yet. **`UNANSWERED` is not re-derived here either** --
+Phase 2.6/2.7's own `AnswerStatus`/`summarize_knowledge()` already serve Questions directly.
+**A stated, accepted coupling**: distinguishing a clean completion from an exception reads the leading
+`status=<VALUE>` token every RUNTIME/TEST `Evidence.detail` this project writes already begins with (Evidence
+itself has no structured outcome field; adding one was judged out of scope for this slice) --
+`_evidence_status()` is the one place that coupling lives, documented as such.
+14 new tests, one per named precedence branch plus bulk-coverage and unknown-entity-default checks.
 
 ### Phase 3.9 — Runtime Audit
 Scenario/execution counts+duration; harness generated/successful/failed; safety

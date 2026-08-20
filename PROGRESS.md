@@ -9,9 +9,8 @@
 ## Current Status
 
 **Stage:** M1 and M2 BOTH FULLY cleared. M3 (Safe Controlled Execution) in progress: Phase 3.1, 3.2, 3.3a, 3.3b,
-3.4, 3.5, and 3.6 done. Remaining for the M3 gate: 3.7 (Conflict Reconciliation), 3.8 (Verification States),
-3.9 (Runtime Audit).
-**Current milestone:** 287 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
+3.4, 3.5, 3.6, 3.7, and 3.8 done. Remaining for the M3 gate: 3.9 (Runtime Audit) only.
+**Current milestone:** 308 passed, 26 skipped, 0 failures project-wide (non-Docker environment) — the 26 skips
 are all Docker-gated tests (21 in `tests/execution/` from Phase 3.2, 2 in `tests/harness/` from Phase 3.3a, 3
 in `tests/runtime/` from Phase 3.5) that were last proven against REAL disposable Docker containers in the
 sessions that built them — this session's sandbox has the `docker` CLI but no reachable daemon, so they skip
@@ -29,6 +28,56 @@ store (D3) live. Every canonical entity Phase 1.2 originally deferred now exists
 added: `hypothesis` (Veyra's own trusted tooling dependency for Phase 3.3b, not a repository dependency).
 
 ---
+
+### 2026-08-20 — Phase 3.7 (Evidence Reconciliation) + Phase 3.8 (Verification State Engine) — 308/308 project-wide
+- **Built together deliberately**: 3.8 directly consumes 3.7's `EdgeReconciliation` output to derive
+  `CONFLICTED`/`CONDITIONALLY_VERIFIED`, so implementing them in the same pass kept the interface between them
+  honest (built against 3.7's real shape, not a guessed one) rather than integrating two independently-designed
+  pieces afterward.
+- **`src/veyra/vbg/evidence.py`** gained `edge_evidence_key()`/`parse_edge_evidence_key()` -- formalizes the
+  "stable edge key" half of Evidence's own WHAT contract (Phase 1.3: "entity_id of the node, or a stable edge
+  key"), which Phase 3.5 had already been using ad hoc via a private, duplicate helper in `runtime/engine.py`.
+  That private helper is now deleted in favor of the shared one -- format-compatible (verified: the full Phase
+  3.5 suite passes unchanged after the swap, 0 regressions). `VBGStore` also gained `get_all_evidence()`
+  (mirrors `get_all_nodes`/`get_all_edges`), needed by both 3.7 (all RUNTIME evidence at once) and useful again
+  for 3.9's audit below.
+- **`src/veyra/reconciliation/engine.py`** — `reconcile_calls(store, repository_version)`. "Preservation/
+  sources-identifiable/nothing-silently-deleted" were already true by construction of Phase 1.2/1.3's
+  append-only + coexisting-evidence discipline; this function's real contribution is classifying every
+  (source, target) CALLS pair as `CONFIRMED` / `STATIC_ONLY` / `RUNTIME_ONLY`. **Only `RUNTIME_ONLY` counts as
+  a real conflict** (`.is_conflict`) -- matches PLAN's own example precisely (runtime exercised a path static
+  analysis never predicted at all); `STATIC_ONLY` is deliberately NOT a conflict, just "not yet confirmed."
+  "Conditional behavior representable" needed zero special-case code: two trials confirming two different
+  static edges from the same source just come back as two independent `CONFIRMED` results, directly tested
+  (`test_conditional_branching_both_paths_confirmed_independently`). Purely read-only, same discipline as
+  Phase 2.7's `summarize_knowledge()` -- never writes to `VBGStore`.
+- **`src/veyra/verification/engine.py`** — `derive_verification_states()` (bulk) / `derive_verification_state()`
+  (single-entity convenience, recomputes the bulk map each call -- documented as fine for occasional lookups,
+  wasteful for many). Per D15, this is a pure derivation from evidence, computed fresh every call, never a
+  mutated `Node.status` -- the same discipline every prior "summary" function in this project already
+  established. An 8-branch precedence chain (most specific/severe fact wins): `BLOCKED_BY_SAFETY` →
+  `CONFLICTED` → `UNEXECUTABLE` → `RUNTIME_VERIFIED`/`RUNTIME_OBSERVED`/`CONDITIONALLY_VERIFIED` (via RUNTIME
+  evidence) → `RUNTIME_VERIFIED`/`RUNTIME_OBSERVED` again (via TEST evidence, when no RUNTIME evidence exists
+  -- a passing existing test IS real behavioral verification) → `STATICALLY_SUPPORTED` → `UNEXPLORED` (known
+  only via an unconfirmed static CALLS edge) → `STRUCTURALLY_IDENTIFIED` (the honest default).
+  - **Two states deliberately NOT produced, stated not hidden**: `STALE` needs Phase 4.8 (Git Impact Analysis,
+    Milestone 4, not built) -- no cross-commit invalidation signal exists yet to derive it from. `UNANSWERED`
+    is Question-specific and already correctly served by Phase 2.6/2.7's own `AnswerStatus` --
+    re-deriving it here would duplicate a mechanism that already works, not improve on it.
+  - **A stated, accepted coupling**: telling a clean completion from an exception reads the leading
+    `status=<VALUE>` token every RUNTIME/TEST `Evidence.detail` this project's own writers (`harness/manager.py`,
+    `runtime/engine.py`) already begin with -- `Evidence` itself (Phase 1.3's schema) has no structured outcome
+    field, and adding one now was judged out of scope for this slice. `_evidence_status()` is the one place
+    this coupling lives, documented plainly rather than silently relied upon.
+- **Tests**: 7 new for reconciliation (confirmed/static-only/runtime-only classification, multiple runtime
+  observations of the same edge counted correctly, conditional branching, node-level evidence never mistaken
+  for an edge, deterministic ordering) + 14 new for verification state (one per named precedence branch, plus
+  bulk-coverage-of-every-node and unknown-entity-defaults-to-STRUCTURALLY_IDENTIFIED checks). **308/308
+  project-wide, 0 failures** (26 Docker-gated tests skip cleanly, same as prior entries -- neither phase needed
+  Docker, both are pure read-side derivations over already-persisted data).
+- **M3 gate progress**: "Conflict reconciliation" and "Verification states" line items are now done. Only
+  "Multi-run exploration" (already done, Phase 3.6) and "Runtime audit" (3.9, next) remain before the M3 gate
+  can close.
 
 ### 2026-08-20 — Phase 3.3b (Novel Scenario Synthesis) implemented — 287/287 project-wide
 - **Closes out Phase 3.3 fully** (3.3a existing-test tracing + 3.3b novel synthesis, per D2's split) and the

@@ -1,4 +1,4 @@
-from .evidence import Evidence, EvidenceType, Provenance
+from .evidence import Evidence, EvidenceType, Provenance, edge_evidence_key, parse_edge_evidence_key
 from .execution import ExecutionEnvironment
 from .models import Edge, Node, RelationshipType, RepositoryRecord, VerificationState
 from .questions import Answer, AnswerStatus, Question, QuestionCategory
@@ -25,6 +25,8 @@ __all__ = [
     "Evidence",
     "EvidenceType",
     "Provenance",
+    "edge_evidence_key",
+    "parse_edge_evidence_key",
     "Question",
     "QuestionCategory",
     "Answer",
