@@ -1,0 +1,1618 @@
+{
+  "flask": [
+    {
+      "query_id": "flask-01",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.app.Flask",
+        "flask.sansio.app.App"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.app.Flask": 2,
+          "flask.sansio.app.App": 1
+        },
+        "0.6": {
+          "flask.app.Flask": 3,
+          "flask.sansio.app.App": 1
+        },
+        "0.75": {
+          "flask.app.Flask": 4,
+          "flask.sansio.app.App": 1
+        },
+        "0.9": {
+          "flask.app.Flask": 4,
+          "flask.sansio.app.App": 2
+        },
+        "1.0": {
+          "flask.app.Flask": 4,
+          "flask.sansio.app.App": 2
+        }
+      }
+    },
+    {
+      "query_id": "flask-02",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.sessions.SecureCookieSessionInterface",
+        "flask.sessions.SecureCookieSession"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.sessions.SecureCookieSessionInterface": 2,
+          "flask.sessions.SecureCookieSession": 7
+        },
+        "0.6": {
+          "flask.sessions.SecureCookieSessionInterface": 2,
+          "flask.sessions.SecureCookieSession": 4
+        },
+        "0.75": {
+          "flask.sessions.SecureCookieSessionInterface": 2,
+          "flask.sessions.SecureCookieSession": 4
+        },
+        "0.9": {
+          "flask.sessions.SecureCookieSessionInterface": 2,
+          "flask.sessions.SecureCookieSession": 3
+        },
+        "1.0": {
+          "flask.sessions.SecureCookieSessionInterface": 2,
+          "flask.sessions.SecureCookieSession": 3
+        }
+      }
+    },
+    {
+      "query_id": "flask-03",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.wrappers.Request"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.wrappers.Request": 11
+        },
+        "0.6": {
+          "flask.wrappers.Request": 11
+        },
+        "0.75": {
+          "flask.wrappers.Request": 11
+        },
+        "0.9": {
+          "flask.wrappers.Request": 11
+        },
+        "1.0": {
+          "flask.wrappers.Request": 11
+        }
+      }
+    },
+    {
+      "query_id": "flask-04",
+      "is_negative": false,
+      "gt_symbols": [
+        "Scaffold.route",
+        "Scaffold.add_url_rule",
+        "App.add_url_rule"
+      ],
+      "per_b": {
+        "0.5": {
+          "Scaffold.route": 6,
+          "Scaffold.add_url_rule": 5,
+          "App.add_url_rule": 5
+        },
+        "0.6": {
+          "Scaffold.route": 5,
+          "Scaffold.add_url_rule": 6,
+          "App.add_url_rule": 6
+        },
+        "0.75": {
+          "Scaffold.route": 5,
+          "Scaffold.add_url_rule": 6,
+          "App.add_url_rule": 6
+        },
+        "0.9": {
+          "Scaffold.route": 4,
+          "Scaffold.add_url_rule": 8,
+          "App.add_url_rule": 8
+        },
+        "1.0": {
+          "Scaffold.route": 5,
+          "Scaffold.add_url_rule": 8,
+          "App.add_url_rule": 8
+        }
+      }
+    },
+    {
+      "query_id": "flask-05",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.blueprints.Blueprint",
+        "flask.sansio.blueprints.Blueprint"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.blueprints.Blueprint": 2,
+          "flask.sansio.blueprints.Blueprint": 2
+        },
+        "0.6": {
+          "flask.blueprints.Blueprint": 2,
+          "flask.sansio.blueprints.Blueprint": 2
+        },
+        "0.75": {
+          "flask.blueprints.Blueprint": 2,
+          "flask.sansio.blueprints.Blueprint": 2
+        },
+        "0.9": {
+          "flask.blueprints.Blueprint": 2,
+          "flask.sansio.blueprints.Blueprint": 2
+        },
+        "1.0": {
+          "flask.blueprints.Blueprint": 3,
+          "flask.sansio.blueprints.Blueprint": 3
+        }
+      }
+    },
+    {
+      "query_id": "flask-06",
+      "is_negative": false,
+      "gt_symbols": [
+        "Flask.wsgi_app",
+        "Flask.full_dispatch_request",
+        "Flask.dispatch_request",
+        "Flask.preprocess_request",
+        "Flask.finalize_request"
+      ],
+      "per_b": {
+        "0.5": {
+          "Flask.wsgi_app": 15,
+          "Flask.full_dispatch_request": 47,
+          "Flask.dispatch_request": 8,
+          "Flask.preprocess_request": null,
+          "Flask.finalize_request": 46
+        },
+        "0.6": {
+          "Flask.wsgi_app": 15,
+          "Flask.full_dispatch_request": 44,
+          "Flask.dispatch_request": 5,
+          "Flask.preprocess_request": null,
+          "Flask.finalize_request": 47
+        },
+        "0.75": {
+          "Flask.wsgi_app": 16,
+          "Flask.full_dispatch_request": 47,
+          "Flask.dispatch_request": 4,
+          "Flask.preprocess_request": null,
+          "Flask.finalize_request": null
+        },
+        "0.9": {
+          "Flask.wsgi_app": 22,
+          "Flask.full_dispatch_request": null,
+          "Flask.dispatch_request": 4,
+          "Flask.preprocess_request": null,
+          "Flask.finalize_request": null
+        },
+        "1.0": {
+          "Flask.wsgi_app": 22,
+          "Flask.full_dispatch_request": null,
+          "Flask.dispatch_request": 3,
+          "Flask.preprocess_request": null,
+          "Flask.finalize_request": null
+        }
+      }
+    },
+    {
+      "query_id": "flask-07",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.sessions.SecureCookieSessionInterface.get_signing_serializer"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": null
+        },
+        "0.6": {
+          "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": null
+        },
+        "0.75": {
+          "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": null
+        },
+        "0.9": {
+          "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": null
+        },
+        "1.0": {
+          "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": null
+        }
+      }
+    },
+    {
+      "query_id": "flask-08",
+      "is_negative": false,
+      "gt_symbols": [
+        "Flask.run"
+      ],
+      "per_b": {
+        "0.5": {
+          "Flask.run": 5
+        },
+        "0.6": {
+          "Flask.run": 6
+        },
+        "0.75": {
+          "Flask.run": 6
+        },
+        "0.9": {
+          "Flask.run": 7
+        },
+        "1.0": {
+          "Flask.run": 8
+        }
+      }
+    },
+    {
+      "query_id": "flask-09",
+      "is_negative": false,
+      "gt_symbols": [
+        "App.raise_routing_exception"
+      ],
+      "per_b": {
+        "0.5": {
+          "App.raise_routing_exception": null
+        },
+        "0.6": {
+          "App.raise_routing_exception": null
+        },
+        "0.75": {
+          "App.raise_routing_exception": null
+        },
+        "0.9": {
+          "App.raise_routing_exception": null
+        },
+        "1.0": {
+          "App.raise_routing_exception": null
+        }
+      }
+    },
+    {
+      "query_id": "flask-10",
+      "is_negative": false,
+      "gt_symbols": [
+        "Flask.handle_user_exception",
+        "Flask.handle_exception"
+      ],
+      "per_b": {
+        "0.5": {
+          "Flask.handle_user_exception": 25,
+          "Flask.handle_exception": 15
+        },
+        "0.6": {
+          "Flask.handle_user_exception": 25,
+          "Flask.handle_exception": 16
+        },
+        "0.75": {
+          "Flask.handle_user_exception": 23,
+          "Flask.handle_exception": 16
+        },
+        "0.9": {
+          "Flask.handle_user_exception": 23,
+          "Flask.handle_exception": 17
+        },
+        "1.0": {
+          "Flask.handle_user_exception": 21,
+          "Flask.handle_exception": 18
+        }
+      }
+    },
+    {
+      "query_id": "flask-11",
+      "is_negative": false,
+      "gt_symbols": [
+        "flask.testing.FlaskClient",
+        "flask.testing.EnvironBuilder"
+      ],
+      "per_b": {
+        "0.5": {
+          "flask.testing.FlaskClient": 1,
+          "flask.testing.EnvironBuilder": null
+        },
+        "0.6": {
+          "flask.testing.FlaskClient": 1,
+          "flask.testing.EnvironBuilder": null
+        },
+        "0.75": {
+          "flask.testing.FlaskClient": 1,
+          "flask.testing.EnvironBuilder": null
+        },
+        "0.9": {
+          "flask.testing.FlaskClient": 1,
+          "flask.testing.EnvironBuilder": null
+        },
+        "1.0": {
+          "flask.testing.FlaskClient": 1,
+          "flask.testing.EnvironBuilder": null
+        }
+      }
+    },
+    {
+      "query_id": "flask-12",
+      "is_negative": false,
+      "gt_symbols": [
+        "App.register_blueprint",
+        "Blueprint.register",
+        "BlueprintSetupState.add_url_rule"
+      ],
+      "per_b": {
+        "0.5": {
+          "App.register_blueprint": 7,
+          "Blueprint.register": 10,
+          "BlueprintSetupState.add_url_rule": 14
+        },
+        "0.6": {
+          "App.register_blueprint": 8,
+          "Blueprint.register": 11,
+          "BlueprintSetupState.add_url_rule": 14
+        },
+        "0.75": {
+          "App.register_blueprint": 7,
+          "Blueprint.register": 12,
+          "BlueprintSetupState.add_url_rule": 15
+        },
+        "0.9": {
+          "App.register_blueprint": 7,
+          "Blueprint.register": 14,
+          "BlueprintSetupState.add_url_rule": 15
+        },
+        "1.0": {
+          "App.register_blueprint": 7,
+          "Blueprint.register": 17,
+          "BlueprintSetupState.add_url_rule": 14
+        }
+      }
+    },
+    {
+      "query_id": "flask-13",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 16.11285034802605
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 15.867707042317347
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 15.514098388179043
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 15.176366365341226
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 14.95949441374149
+        }
+      }
+    },
+    {
+      "query_id": "flask-14",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 15.795697066049728
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 15.335827049624342
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 14.697275564946539
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 14.112882866035717
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 13.749908403574215
+        }
+      }
+    }
+  ],
+  "fastapi": [
+    {
+      "query_id": "fastapi-01",
+      "is_negative": false,
+      "gt_symbols": [
+        "fastapi.applications.FastAPI"
+      ],
+      "per_b": {
+        "0.5": {
+          "fastapi.applications.FastAPI": 3
+        },
+        "0.6": {
+          "fastapi.applications.FastAPI": 3
+        },
+        "0.75": {
+          "fastapi.applications.FastAPI": 5
+        },
+        "0.9": {
+          "fastapi.applications.FastAPI": 7
+        },
+        "1.0": {
+          "fastapi.applications.FastAPI": 10
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-02",
+      "is_negative": false,
+      "gt_symbols": [
+        "fastapi.routing.APIRoute"
+      ],
+      "per_b": {
+        "0.5": {
+          "fastapi.routing.APIRoute": 7
+        },
+        "0.6": {
+          "fastapi.routing.APIRoute": 8
+        },
+        "0.75": {
+          "fastapi.routing.APIRoute": 13
+        },
+        "0.9": {
+          "fastapi.routing.APIRoute": 23
+        },
+        "1.0": {
+          "fastapi.routing.APIRoute": 26
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-03",
+      "is_negative": false,
+      "gt_symbols": [
+        "fastapi.param_functions.Depends"
+      ],
+      "per_b": {
+        "0.5": {
+          "fastapi.param_functions.Depends": 1
+        },
+        "0.6": {
+          "fastapi.param_functions.Depends": 1
+        },
+        "0.75": {
+          "fastapi.param_functions.Depends": 1
+        },
+        "0.9": {
+          "fastapi.param_functions.Depends": 1
+        },
+        "1.0": {
+          "fastapi.param_functions.Depends": 1
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-04",
+      "is_negative": false,
+      "gt_symbols": [
+        "FastAPI.add_api_route",
+        "APIRouter.add_api_route"
+      ],
+      "per_b": {
+        "0.5": {
+          "FastAPI.add_api_route": 10,
+          "APIRouter.add_api_route": 10
+        },
+        "0.6": {
+          "FastAPI.add_api_route": 12,
+          "APIRouter.add_api_route": 12
+        },
+        "0.75": {
+          "FastAPI.add_api_route": 19,
+          "APIRouter.add_api_route": 19
+        },
+        "0.9": {
+          "FastAPI.add_api_route": 30,
+          "APIRouter.add_api_route": 30
+        },
+        "1.0": {
+          "FastAPI.add_api_route": 32,
+          "APIRouter.add_api_route": 32
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-05",
+      "is_negative": false,
+      "gt_symbols": [
+        "get_dependant",
+        "APIRoute"
+      ],
+      "per_b": {
+        "0.5": {
+          "get_dependant": 22,
+          "APIRoute": 9
+        },
+        "0.6": {
+          "get_dependant": 24,
+          "APIRoute": 9
+        },
+        "0.75": {
+          "get_dependant": 25,
+          "APIRoute": 13
+        },
+        "0.9": {
+          "get_dependant": 28,
+          "APIRoute": 18
+        },
+        "1.0": {
+          "get_dependant": 32,
+          "APIRoute": 20
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-06",
+      "is_negative": false,
+      "gt_symbols": [
+        "get_dependant",
+        "solve_dependencies",
+        "get_request_handler"
+      ],
+      "per_b": {
+        "0.5": {
+          "get_dependant": 42,
+          "solve_dependencies": null,
+          "get_request_handler": null
+        },
+        "0.6": {
+          "get_dependant": 42,
+          "solve_dependencies": null,
+          "get_request_handler": null
+        },
+        "0.75": {
+          "get_dependant": 47,
+          "solve_dependencies": null,
+          "get_request_handler": null
+        },
+        "0.9": {
+          "get_dependant": null,
+          "solve_dependencies": null,
+          "get_request_handler": null
+        },
+        "1.0": {
+          "get_dependant": null,
+          "solve_dependencies": null,
+          "get_request_handler": null
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-07",
+      "is_negative": false,
+      "gt_symbols": [
+        "get_openapi",
+        "get_openapi_path"
+      ],
+      "per_b": {
+        "0.5": {
+          "get_openapi": null,
+          "get_openapi_path": null
+        },
+        "0.6": {
+          "get_openapi": null,
+          "get_openapi_path": null
+        },
+        "0.75": {
+          "get_openapi": null,
+          "get_openapi_path": null
+        },
+        "0.9": {
+          "get_openapi": null,
+          "get_openapi_path": null
+        },
+        "1.0": {
+          "get_openapi": null,
+          "get_openapi_path": null
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-08",
+      "is_negative": false,
+      "gt_symbols": [
+        "RequestValidationError",
+        "request_validation_exception_handler"
+      ],
+      "per_b": {
+        "0.5": {
+          "RequestValidationError": 1,
+          "request_validation_exception_handler": 13
+        },
+        "0.6": {
+          "RequestValidationError": 1,
+          "request_validation_exception_handler": 9
+        },
+        "0.75": {
+          "RequestValidationError": 1,
+          "request_validation_exception_handler": 9
+        },
+        "0.9": {
+          "RequestValidationError": 1,
+          "request_validation_exception_handler": 9
+        },
+        "1.0": {
+          "RequestValidationError": 1,
+          "request_validation_exception_handler": 8
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-09",
+      "is_negative": false,
+      "gt_symbols": [
+        "HTTPException",
+        "http_exception_handler"
+      ],
+      "per_b": {
+        "0.5": {
+          "HTTPException": 4,
+          "http_exception_handler": null
+        },
+        "0.6": {
+          "HTTPException": 4,
+          "http_exception_handler": null
+        },
+        "0.75": {
+          "HTTPException": 4,
+          "http_exception_handler": null
+        },
+        "0.9": {
+          "HTTPException": 4,
+          "http_exception_handler": null
+        },
+        "1.0": {
+          "HTTPException": 4,
+          "http_exception_handler": null
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-10",
+      "is_negative": false,
+      "gt_symbols": [
+        "get_openapi_path",
+        "APIRoute"
+      ],
+      "per_b": {
+        "0.5": {
+          "get_openapi_path": null,
+          "APIRoute": null
+        },
+        "0.6": {
+          "get_openapi_path": null,
+          "APIRoute": null
+        },
+        "0.75": {
+          "get_openapi_path": null,
+          "APIRoute": null
+        },
+        "0.9": {
+          "get_openapi_path": null,
+          "APIRoute": null
+        },
+        "1.0": {
+          "get_openapi_path": null,
+          "APIRoute": null
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-11",
+      "is_negative": false,
+      "gt_symbols": [
+        "solve_dependencies"
+      ],
+      "per_b": {
+        "0.5": {
+          "solve_dependencies": 15
+        },
+        "0.6": {
+          "solve_dependencies": 15
+        },
+        "0.75": {
+          "solve_dependencies": 16
+        },
+        "0.9": {
+          "solve_dependencies": 18
+        },
+        "1.0": {
+          "solve_dependencies": 21
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-12",
+      "is_negative": false,
+      "gt_symbols": [
+        "OAuth2PasswordBearer",
+        "SecurityBase",
+        "get_dependant"
+      ],
+      "per_b": {
+        "0.5": {
+          "OAuth2PasswordBearer": 2,
+          "SecurityBase": null,
+          "get_dependant": null
+        },
+        "0.6": {
+          "OAuth2PasswordBearer": 2,
+          "SecurityBase": null,
+          "get_dependant": null
+        },
+        "0.75": {
+          "OAuth2PasswordBearer": 2,
+          "SecurityBase": 47,
+          "get_dependant": null
+        },
+        "0.9": {
+          "OAuth2PasswordBearer": 2,
+          "SecurityBase": 34,
+          "get_dependant": null
+        },
+        "1.0": {
+          "OAuth2PasswordBearer": 3,
+          "SecurityBase": 27,
+          "get_dependant": null
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-13",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 21.586932097274694
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 20.600227274235273
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 19.281848549008203
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 18.125024444612098
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 17.42921710571893
+        }
+      }
+    },
+    {
+      "query_id": "fastapi-14",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 21.586932097274694
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 20.600227274235273
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 19.281848549008203
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 18.125024444612098
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 17.42921710571893
+        }
+      }
+    }
+  ],
+  "sqlalchemy": [
+    {
+      "query_id": "sqla-01",
+      "is_negative": false,
+      "gt_symbols": [
+        "sqlalchemy.orm.session.Session"
+      ],
+      "per_b": {
+        "0.5": {
+          "sqlalchemy.orm.session.Session": 34
+        },
+        "0.6": {
+          "sqlalchemy.orm.session.Session": 45
+        },
+        "0.75": {
+          "sqlalchemy.orm.session.Session": null
+        },
+        "0.9": {
+          "sqlalchemy.orm.session.Session": null
+        },
+        "1.0": {
+          "sqlalchemy.orm.session.Session": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-02",
+      "is_negative": false,
+      "gt_symbols": [
+        "sqlalchemy.engine.base.Engine"
+      ],
+      "per_b": {
+        "0.5": {
+          "sqlalchemy.engine.base.Engine": 21
+        },
+        "0.6": {
+          "sqlalchemy.engine.base.Engine": 18
+        },
+        "0.75": {
+          "sqlalchemy.engine.base.Engine": 18
+        },
+        "0.9": {
+          "sqlalchemy.engine.base.Engine": 17
+        },
+        "1.0": {
+          "sqlalchemy.engine.base.Engine": 18
+        }
+      }
+    },
+    {
+      "query_id": "sqla-03",
+      "is_negative": false,
+      "gt_symbols": [
+        "sqlalchemy.sql.schema.Table"
+      ],
+      "per_b": {
+        "0.5": {
+          "sqlalchemy.sql.schema.Table": 8
+        },
+        "0.6": {
+          "sqlalchemy.sql.schema.Table": 10
+        },
+        "0.75": {
+          "sqlalchemy.sql.schema.Table": 15
+        },
+        "0.9": {
+          "sqlalchemy.sql.schema.Table": 21
+        },
+        "1.0": {
+          "sqlalchemy.sql.schema.Table": 30
+        }
+      }
+    },
+    {
+      "query_id": "sqla-04",
+      "is_negative": false,
+      "gt_symbols": [
+        "create_engine",
+        "Engine",
+        "Connection"
+      ],
+      "per_b": {
+        "0.5": {
+          "create_engine": null,
+          "Engine": 41,
+          "Connection": 21
+        },
+        "0.6": {
+          "create_engine": null,
+          "Engine": 36,
+          "Connection": 28
+        },
+        "0.75": {
+          "create_engine": null,
+          "Engine": 31,
+          "Connection": 38
+        },
+        "0.9": {
+          "create_engine": null,
+          "Engine": 33,
+          "Connection": null
+        },
+        "1.0": {
+          "create_engine": null,
+          "Engine": 33,
+          "Connection": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-05",
+      "is_negative": false,
+      "gt_symbols": [
+        "Session.add"
+      ],
+      "per_b": {
+        "0.5": {
+          "Session.add": null
+        },
+        "0.6": {
+          "Session.add": null
+        },
+        "0.75": {
+          "Session.add": null
+        },
+        "0.9": {
+          "Session.add": null
+        },
+        "1.0": {
+          "Session.add": 46
+        }
+      }
+    },
+    {
+      "query_id": "sqla-06",
+      "is_negative": false,
+      "gt_symbols": [
+        "Session.add",
+        "Session.commit",
+        "Session.flush"
+      ],
+      "per_b": {
+        "0.5": {
+          "Session.add": null,
+          "Session.commit": null,
+          "Session.flush": null
+        },
+        "0.6": {
+          "Session.add": null,
+          "Session.commit": null,
+          "Session.flush": null
+        },
+        "0.75": {
+          "Session.add": null,
+          "Session.commit": null,
+          "Session.flush": null
+        },
+        "0.9": {
+          "Session.add": null,
+          "Session.commit": null,
+          "Session.flush": null
+        },
+        "1.0": {
+          "Session.add": null,
+          "Session.commit": null,
+          "Session.flush": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-07",
+      "is_negative": false,
+      "gt_symbols": [
+        "relationship",
+        "_LazyLoader"
+      ],
+      "per_b": {
+        "0.5": {
+          "relationship": 30,
+          "_LazyLoader": 2
+        },
+        "0.6": {
+          "relationship": 39,
+          "_LazyLoader": 2
+        },
+        "0.75": {
+          "relationship": null,
+          "_LazyLoader": 4
+        },
+        "0.9": {
+          "relationship": null,
+          "_LazyLoader": 5
+        },
+        "1.0": {
+          "relationship": null,
+          "_LazyLoader": 5
+        }
+      }
+    },
+    {
+      "query_id": "sqla-08",
+      "is_negative": false,
+      "gt_symbols": [
+        "Session.flush",
+        "Session.commit"
+      ],
+      "per_b": {
+        "0.5": {
+          "Session.flush": 44,
+          "Session.commit": 10
+        },
+        "0.6": {
+          "Session.flush": 47,
+          "Session.commit": 10
+        },
+        "0.75": {
+          "Session.flush": 50,
+          "Session.commit": 11
+        },
+        "0.9": {
+          "Session.flush": null,
+          "Session.commit": 11
+        },
+        "1.0": {
+          "Session.flush": null,
+          "Session.commit": 7
+        }
+      }
+    },
+    {
+      "query_id": "sqla-09",
+      "is_negative": false,
+      "gt_symbols": [
+        "create_engine"
+      ],
+      "per_b": {
+        "0.5": {
+          "create_engine": 25
+        },
+        "0.6": {
+          "create_engine": 31
+        },
+        "0.75": {
+          "create_engine": 49
+        },
+        "0.9": {
+          "create_engine": null
+        },
+        "1.0": {
+          "create_engine": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-10",
+      "is_negative": false,
+      "gt_symbols": [
+        "sqlalchemy.log"
+      ],
+      "per_b": {
+        "0.5": {
+          "sqlalchemy.log": null
+        },
+        "0.6": {
+          "sqlalchemy.log": null
+        },
+        "0.75": {
+          "sqlalchemy.log": null
+        },
+        "0.9": {
+          "sqlalchemy.log": null
+        },
+        "1.0": {
+          "sqlalchemy.log": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-11",
+      "is_negative": false,
+      "gt_symbols": [
+        "_LazyLoader",
+        "relationship"
+      ],
+      "per_b": {
+        "0.5": {
+          "_LazyLoader": 4,
+          "relationship": null
+        },
+        "0.6": {
+          "_LazyLoader": 6,
+          "relationship": null
+        },
+        "0.75": {
+          "_LazyLoader": 7,
+          "relationship": null
+        },
+        "0.9": {
+          "_LazyLoader": 8,
+          "relationship": null
+        },
+        "1.0": {
+          "_LazyLoader": 8,
+          "relationship": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-12",
+      "is_negative": false,
+      "gt_symbols": [
+        "DeclarativeBase",
+        "Mapper",
+        "Table"
+      ],
+      "per_b": {
+        "0.5": {
+          "DeclarativeBase": 22,
+          "Mapper": 5,
+          "Table": null
+        },
+        "0.6": {
+          "DeclarativeBase": 22,
+          "Mapper": 5,
+          "Table": null
+        },
+        "0.75": {
+          "DeclarativeBase": 23,
+          "Mapper": 7,
+          "Table": null
+        },
+        "0.9": {
+          "DeclarativeBase": 25,
+          "Mapper": 8,
+          "Table": null
+        },
+        "1.0": {
+          "DeclarativeBase": 25,
+          "Mapper": 13,
+          "Table": null
+        }
+      }
+    },
+    {
+      "query_id": "sqla-13",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 20.60121418997566
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 19.434642244143866
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 19.01236259504439
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 19.537447209663856
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 19.904944150702633
+        }
+      }
+    },
+    {
+      "query_id": "sqla-14",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 39.41559737589582
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 37.637200328638244
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 35.2789871345921
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 33.22233646504269
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 31.989265059283515
+        }
+      }
+    }
+  ],
+  "django": [
+    {
+      "query_id": "django-01",
+      "is_negative": false,
+      "gt_symbols": [
+        "django.db.models.query.QuerySet"
+      ],
+      "per_b": {
+        "0.5": {
+          "django.db.models.query.QuerySet": 10
+        },
+        "0.6": {
+          "django.db.models.query.QuerySet": 10
+        },
+        "0.75": {
+          "django.db.models.query.QuerySet": 9
+        },
+        "0.9": {
+          "django.db.models.query.QuerySet": 10
+        },
+        "1.0": {
+          "django.db.models.query.QuerySet": 15
+        }
+      }
+    },
+    {
+      "query_id": "django-02",
+      "is_negative": false,
+      "gt_symbols": [
+        "django.db.models.base.Model"
+      ],
+      "per_b": {
+        "0.5": {
+          "django.db.models.base.Model": 25
+        },
+        "0.6": {
+          "django.db.models.base.Model": 29
+        },
+        "0.75": {
+          "django.db.models.base.Model": 36
+        },
+        "0.9": {
+          "django.db.models.base.Model": null
+        },
+        "1.0": {
+          "django.db.models.base.Model": null
+        }
+      }
+    },
+    {
+      "query_id": "django-03",
+      "is_negative": false,
+      "gt_symbols": [
+        "django.middleware.csrf.CsrfViewMiddleware"
+      ],
+      "per_b": {
+        "0.5": {
+          "django.middleware.csrf.CsrfViewMiddleware": 1
+        },
+        "0.6": {
+          "django.middleware.csrf.CsrfViewMiddleware": 1
+        },
+        "0.75": {
+          "django.middleware.csrf.CsrfViewMiddleware": 1
+        },
+        "0.9": {
+          "django.middleware.csrf.CsrfViewMiddleware": 1
+        },
+        "1.0": {
+          "django.middleware.csrf.CsrfViewMiddleware": 1
+        }
+      }
+    },
+    {
+      "query_id": "django-04",
+      "is_negative": false,
+      "gt_symbols": [
+        "authenticate",
+        "ModelBackend.authenticate"
+      ],
+      "per_b": {
+        "0.5": {
+          "authenticate": 10,
+          "ModelBackend.authenticate": 10
+        },
+        "0.6": {
+          "authenticate": 10,
+          "ModelBackend.authenticate": 10
+        },
+        "0.75": {
+          "authenticate": 8,
+          "ModelBackend.authenticate": 8
+        },
+        "0.9": {
+          "authenticate": 7,
+          "ModelBackend.authenticate": 7
+        },
+        "1.0": {
+          "authenticate": 5,
+          "ModelBackend.authenticate": 5
+        }
+      }
+    },
+    {
+      "query_id": "django-05",
+      "is_negative": false,
+      "gt_symbols": [
+        "django.db.models.manager.Manager",
+        "django.db.models.query.QuerySet"
+      ],
+      "per_b": {
+        "0.5": {
+          "django.db.models.manager.Manager": null,
+          "django.db.models.query.QuerySet": 49
+        },
+        "0.6": {
+          "django.db.models.manager.Manager": null,
+          "django.db.models.query.QuerySet": null
+        },
+        "0.75": {
+          "django.db.models.manager.Manager": null,
+          "django.db.models.query.QuerySet": null
+        },
+        "0.9": {
+          "django.db.models.manager.Manager": null,
+          "django.db.models.query.QuerySet": null
+        },
+        "1.0": {
+          "django.db.models.manager.Manager": null,
+          "django.db.models.query.QuerySet": null
+        }
+      }
+    },
+    {
+      "query_id": "django-06",
+      "is_negative": false,
+      "gt_symbols": [
+        "WSGIHandler",
+        "BaseHandler.get_response",
+        "BaseHandler._get_response",
+        "URLResolver.resolve"
+      ],
+      "per_b": {
+        "0.5": {
+          "WSGIHandler": 39,
+          "BaseHandler.get_response": null,
+          "BaseHandler._get_response": null,
+          "URLResolver.resolve": null
+        },
+        "0.6": {
+          "WSGIHandler": 33,
+          "BaseHandler.get_response": null,
+          "BaseHandler._get_response": null,
+          "URLResolver.resolve": null
+        },
+        "0.75": {
+          "WSGIHandler": 24,
+          "BaseHandler.get_response": null,
+          "BaseHandler._get_response": null,
+          "URLResolver.resolve": null
+        },
+        "0.9": {
+          "WSGIHandler": 19,
+          "BaseHandler.get_response": null,
+          "BaseHandler._get_response": null,
+          "URLResolver.resolve": null
+        },
+        "1.0": {
+          "WSGIHandler": 14,
+          "BaseHandler.get_response": null,
+          "BaseHandler._get_response": null,
+          "URLResolver.resolve": null
+        }
+      }
+    },
+    {
+      "query_id": "django-07",
+      "is_negative": false,
+      "gt_symbols": [
+        "BaseHandler.load_middleware",
+        "BaseHandler.get_response"
+      ],
+      "per_b": {
+        "0.5": {
+          "BaseHandler.load_middleware": null,
+          "BaseHandler.get_response": null
+        },
+        "0.6": {
+          "BaseHandler.load_middleware": null,
+          "BaseHandler.get_response": null
+        },
+        "0.75": {
+          "BaseHandler.load_middleware": null,
+          "BaseHandler.get_response": null
+        },
+        "0.9": {
+          "BaseHandler.load_middleware": null,
+          "BaseHandler.get_response": null
+        },
+        "1.0": {
+          "BaseHandler.load_middleware": null,
+          "BaseHandler.get_response": null
+        }
+      }
+    },
+    {
+      "query_id": "django-08",
+      "is_negative": false,
+      "gt_symbols": [
+        "CsrfViewMiddleware"
+      ],
+      "per_b": {
+        "0.5": {
+          "CsrfViewMiddleware": 1
+        },
+        "0.6": {
+          "CsrfViewMiddleware": 1
+        },
+        "0.75": {
+          "CsrfViewMiddleware": 1
+        },
+        "0.9": {
+          "CsrfViewMiddleware": 1
+        },
+        "1.0": {
+          "CsrfViewMiddleware": 1
+        }
+      }
+    },
+    {
+      "query_id": "django-09",
+      "is_negative": false,
+      "gt_symbols": [
+        "authenticate"
+      ],
+      "per_b": {
+        "0.5": {
+          "authenticate": 3
+        },
+        "0.6": {
+          "authenticate": 3
+        },
+        "0.75": {
+          "authenticate": 3
+        },
+        "0.9": {
+          "authenticate": 3
+        },
+        "1.0": {
+          "authenticate": 3
+        }
+      }
+    },
+    {
+      "query_id": "django-10",
+      "is_negative": false,
+      "gt_symbols": [
+        "MigrationExecutor"
+      ],
+      "per_b": {
+        "0.5": {
+          "MigrationExecutor": 2
+        },
+        "0.6": {
+          "MigrationExecutor": 2
+        },
+        "0.75": {
+          "MigrationExecutor": 3
+        },
+        "0.9": {
+          "MigrationExecutor": 3
+        },
+        "1.0": {
+          "MigrationExecutor": 3
+        }
+      }
+    },
+    {
+      "query_id": "django-11",
+      "is_negative": false,
+      "gt_symbols": [
+        "Manager",
+        "BaseManager.from_queryset"
+      ],
+      "per_b": {
+        "0.5": {
+          "Manager": null,
+          "BaseManager.from_queryset": null
+        },
+        "0.6": {
+          "Manager": null,
+          "BaseManager.from_queryset": null
+        },
+        "0.75": {
+          "Manager": 32,
+          "BaseManager.from_queryset": null
+        },
+        "0.9": {
+          "Manager": 12,
+          "BaseManager.from_queryset": null
+        },
+        "1.0": {
+          "Manager": 6,
+          "BaseManager.from_queryset": null
+        }
+      }
+    },
+    {
+      "query_id": "django-12",
+      "is_negative": false,
+      "gt_symbols": [
+        "ModelAdmin",
+        "AdminSite.get_urls"
+      ],
+      "per_b": {
+        "0.5": {
+          "ModelAdmin": 15,
+          "AdminSite.get_urls": 27
+        },
+        "0.6": {
+          "ModelAdmin": 19,
+          "AdminSite.get_urls": 25
+        },
+        "0.75": {
+          "ModelAdmin": 24,
+          "AdminSite.get_urls": 27
+        },
+        "0.9": {
+          "ModelAdmin": 34,
+          "AdminSite.get_urls": 31
+        },
+        "1.0": {
+          "ModelAdmin": 42,
+          "AdminSite.get_urls": 35
+        }
+      }
+    },
+    {
+      "query_id": "django-13",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 37.52462700758706
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 35.76370714632843
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 33.450859156437645
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 31.45271277052971
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 30.26249344826451
+        }
+      }
+    },
+    {
+      "query_id": "django-14",
+      "is_negative": true,
+      "gt_symbols": [],
+      "per_b": {
+        "0.5": {
+          "top10_count": 10,
+          "top1_score": 30.319412195312136
+        },
+        "0.6": {
+          "top10_count": 10,
+          "top1_score": 29.21595476857761
+        },
+        "0.75": {
+          "top10_count": 10,
+          "top1_score": 27.80602030604687
+        },
+        "0.9": {
+          "top10_count": 10,
+          "top1_score": 26.613867208197124
+        },
+        "1.0": {
+          "top10_count": 10,
+          "top1_score": 25.911097528618104
+        }
+      }
+    }
+  ]
+}
