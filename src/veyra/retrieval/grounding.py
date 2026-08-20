@@ -32,15 +32,27 @@ evidence references returnable with responses (`GroundedFact.entity_id`
 is always the real, citable VBG identity).
 
 **Retrieval-quality remediation, Phase B.** `GroundedFact.confidence`/
-`matched_by` now carry `context.py`'s `RetrievedContext.scores`/
-`matched_by` through to this final payload -- the real-world benchmark
-found this information was computed by `search()` and then discarded
-before ever reaching an LLM-facing consumer. When `RetrievedContext.insufficient_evidence`
-is set (nothing cleared `retrieve_context()`'s confidence bar),
-`GroundingContext.insufficient_evidence` is set here too and the
-disclaimer is prefixed with an explicit `NO_SUFFICIENT_EVIDENCE`
-instruction, rather than leaving a caller to infer "nothing found" from
-an empty `facts` tuple with no explanation.
+`matched_by` now carry retrieval information through to this final
+payload -- the real-world benchmark found this information was computed
+by `search()` and then discarded before ever reaching an LLM-facing
+consumer. When `RetrievedContext.insufficient_evidence` is set (nothing
+cleared `retrieve_context()`'s confidence bar), `GroundingContext.insufficient_evidence`
+is set here too and the disclaimer is prefixed with an explicit
+`NO_SUFFICIENT_EVIDENCE` instruction, rather than leaving a caller to
+infer "nothing found" from an empty `facts` tuple with no explanation.
+
+**ARCF Fix 3 correction.** `GroundedFact.confidence` used to alias
+`context.py`'s `RetrievedContext.scores` -- the raw retrieval score, not
+an actual confidence judgment (Fix 2 separated the two concepts in
+`ConfidenceDecision`, but that separation never reached this module).
+Now sourced from `RetrievedContext.confidence_decisions[...].confidence`
+instead: for a name match, that tier's fixed score (2.0/1.0), same
+number as before; for a `tfidf` match, the z-score `retrieve_context()`
+actually accepted or rejected it on (see `context.py`'s module docstring)
+-- `None` when the query's candidate pool was too small to compute one.
+`GroundedFact.retrieval_score` is the new field carrying what
+`confidence` used to mean, so no information is lost, just correctly
+named.
 """
 
 from __future__ import annotations
@@ -109,8 +121,9 @@ class GroundedFact:
     verification_state: VerificationState
     verification_note: str
     evidence_excerpts: tuple[str, ...]
-    confidence: float = 0.0
+    confidence: float | None = 0.0
     matched_by: str = "tfidf"
+    retrieval_score: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -149,8 +162,13 @@ def build_grounding_context(retrieved: RetrievedContext) -> GroundingContext:
             evidence_excerpts=tuple(
                 ev.detail for ev in retrieved.evidence_by_entity.get(entity.entity_id, ()) if ev.detail
             ),
-            confidence=retrieved.scores.get(entity.entity_id, 0.0),
+            confidence=(
+                retrieved.confidence_decisions[entity.entity_id].confidence
+                if entity.entity_id in retrieved.confidence_decisions
+                else None
+            ),
             matched_by=retrieved.matched_by.get(entity.entity_id, "tfidf"),
+            retrieval_score=retrieved.scores.get(entity.entity_id, 0.0),
         )
         for entity in retrieved.entities
     )

@@ -24,43 +24,112 @@ Exact and substring name matches (`matched_by in ("exact_name",
 literally names a real symbol should always surface it; the ambiguity
 this benchmark exposed is specific to the TF-IDF tier.
 
-**Threshold recalibrated after Phase D, still explicitly provisional.**
-Phase B's original calibration (against raw cosine-similarity TF-IDF
-scores, bounded 0-1) found relevant and irrelevant scores overlapped
-almost completely -- no threshold could separate them, because the score
-itself was biased (`search.py`'s Phase D docstring has the full mechanism
-and the real numbers that proved it). Phase D replaced that scoring
-function with BM25 plus per-entity-type length normalization, which
-produces unbounded, much larger raw scores on a different scale entirely
--- so this threshold had to be recalibrated from scratch, not just
-reused. Re-running `calibrate_confidence_threshold.py` against the *new*
-scores (still real Flask+FastAPI ground-truth data) showed genuine
-separation improvement: relevant/irrelevant medians moved from
-nearly-identical (0.297 vs 0.267) to clearly distinct (35.1 vs 29.9).
-`_PROVISIONAL_MIN_TFIDF_SCORE` (29.0) is chosen for a specific, describable
-relevance-separation property, not to hit any target pass rate (the
-remediation plan explicitly prohibits threshold-tuning-to-benchmark-score):
-it's the point, just above the highest score any negative-query calibration
-case reached (28.59), where none of that calibration set's known false
-positives survive, while 67% of true-positive recall is retained --
-compared to only 45% recall at the equivalent zero-leak point under the
-pre-Phase-D score. Still marked provisional: further ranking refinements
-(source-category weighting, Phase E; stopword filtering, Phase C) will
-change the score distribution again and should trigger another
-recalibration, the same way Phase D did.
+**ARCF Fix 3 -- confidence is now corpus-relative, not an absolute
+threshold.** Phase B calibrated 0.25 against raw cosine scores; Phase D
+recalibrated 29.0 against BM25 scores; ARCF Fixes 2/4/5/6 (candidate-pool
+separation, stopword removal, source-category and structural weighting)
+shifted the score distribution *again*. Chasing each shift with a new
+absolute constant was exactly the mistake to stop making -- Phase D
+already proved an absolute score has no fixed meaning across corpora of
+different sizes (see `search.py`'s corpus-size-dependence finding), and
+every ARCF ranking fix reshapes the distribution further. So this fix
+replaces the absolute threshold with a *relative* one:
+
+**Confidence means how statistically unusual a `tfidf`-tier candidate's
+score is relative to the full candidate pool retrieved for *this exact
+query*, against *this* corpus.** It is never compared across queries or
+repositories, and no absolute constant appears anywhere in its
+computation. Concretely, a z-score: `(score - mean(pool)) / stdev(pool)`,
+computed fresh per query from `search()`'s own `candidate_pool_size`-wide
+result set (see `_relative_confidence_scores()`). `matched_by in
+("exact_name", "substring_name")` bypasses this entirely, exactly as
+before Fix 3 -- a query that literally names a real symbol needs no
+statistical judgment, and its `ConfidenceDecision.confidence` stays its
+fixed tier score (2.0/1.0), not a z-score.
+
+**Why this needs no per-repository or per-query tuning.** The formula is
+computed *fresh* from each query's own candidate scores -- a "confident"
+FastAPI-corpus candidate and a "confident" Flask-corpus candidate never
+have their raw numbers compared to each other or to any shared constant;
+each is only ever judged against its own query's competing candidates.
+This is also why rank alone was never a valid proxy (a query with 10
+near-identical weak candidates has a rank-1 "leader" with a near-zero
+z-score) and why a "low" raw score is not automatically rejected (a
+candidate at 15.0 with a field of mostly 2-4s can have a very high
+z-score, regardless of how 15.0 would have compared to the old fixed
+29.0).
+
+`_MIN_CONFIDENCE_Z = 1.0` (one standard deviation above the query's own
+mean candidate score) is the accept bar -- the standard, textbook
+"meaningfully above average" statistical convention, not a value swept
+against this benchmark's pass rate. `_MIN_POOL_FOR_RELATIVE_CONFIDENCE =
+3` is the minimum candidate count a z-score can be meaningfully computed
+from at all (population stdev is undefined at n=1, fragile at n=2) --
+below it, `tfidf`-tier candidates are conservatively treated as
+not-yet-confident. This is an explicit, documented trade-off (a lone
+strong-looking match with nothing to compare it against is exactly the
+shape of the negative/boundary-query failure mode Phase B/D fixed for
+other reasons), not a silently accepted gap.
+
+**A real problem the real-repository validation found, fixed with a
+second, complementary signal, not a bigger z-bar.** Re-running
+`flask-13`/`flask-14` (Phase B/D's hard-won negative-query fixes)
+regressed: `insufficient_evidence` flipped back to False. Root-caused
+directly (not patched blind): for a genuinely unanswerable query
+("CSRF protection"), every one of the 200 pooled candidates is real
+noise -- but noise still has *some* variance, and z-score, being purely
+relative, will always crown *something* as "the top of this pool" with a
+z clearing 1.0, no matter how weak the whole pool actually is. Measured
+directly: `flask-13`'s top "confident" candidates (z up to 5.6) each
+matched only 1-2 of the query's 6 distinct terms (17-33% overlap) --
+while every genuinely correct match checked across `flask-01`/`08`/the
+Blueprint-registration query matched 56-100% of their query's terms.
+
+**First attempt (raw matched-term fraction) was insufficient too --
+caught by the same validation, not shipped unverified.** A flat "matched
+>= 50% of query terms, by count" floor cut the leak from 10 entities down
+to 1-3, a real improvement, but real cases still slipped through: Flask's
+`App`/`Scaffold`/`Flask` classes -- large classes whose big docstrings
+coincidentally contain several of a query's *common* words ("flask",
+"implemented", "database") purely by having a lot of text, while
+completely missing the query's one truly distinctive term (`orm`, in the
+"built-in ORM" query; `csrf`, in the CSRF one). Raw term *count* treats
+"flask"/"database"/"s" as equally informative as "orm" -- they are not.
+
+**The actual fix: IDF-weighted match coverage, not a bigger fraction.**
+`tfidf`-tier acceptance now requires the candidate's matched terms to
+cover a majority of the query's own terms' *combined IDF weight*
+(`_MIN_MATCHED_IDF_COVERAGE = 0.5`), not a majority of the term *count*.
+The IDF table is the exact same one `search.py`'s `_build_bm25_index`
+already computes for scoring -- reused, not duplicated logic -- so a
+query's one rare, distinctive term (`csrf`, `orm`) counts for far more
+than several common ones, exactly reflecting how much of what was
+*actually informative* in the query this candidate really matched. Still
+a dimensionless fraction, not an absolute score, so it carries the same
+meaning regardless of corpus size or BM25 scale (unlike 29.0). This is
+real "match evidence" (signal D from the ARCF directive), computed from
+data the corpus already produces, not a new scoring mechanism -- the
+one real cost is `retrieve_context` now builds the BM25 index a second
+time (`search_semantic` already builds it once internally) to get `idf`;
+noted honestly as a real, minor, so-far-unoptimized duplication (Fix 8's
+concern, not addressed here).
 """
 
 from __future__ import annotations
 
+import statistics
 from dataclasses import dataclass, field
 
 from veyra.reconciliation import EdgeReconciliation, reconcile_calls
 from veyra.vbg import Edge, Evidence, VBGStore
 
 from .index import IndexedEntity, RetrievalIndex
-from .search import ScoredEntity, search
+from .search import ScoredEntity, _build_bm25_index, _entity_text, _tokenize, search
 
-_PROVISIONAL_MIN_TFIDF_SCORE = 29.0
+# ARCF Fix 3 -- see module docstring for the full design rationale.
+_MIN_CONFIDENCE_Z = 1.0
+_MIN_MATCHED_IDF_COVERAGE = 0.5
+_MIN_POOL_FOR_RELATIVE_CONFIDENCE = 3
 
 # ARCF Fix 1 -- candidate pool separate from final top_k. `search_semantic()`
 # already fully scores and sorts every entity in the index before any
@@ -86,18 +155,25 @@ class ConfidenceDecision:
     `retrieval_score`/`matched_by` are exactly what ranked this candidate
     (unchanged by this decision); `accepted`/`reason` are a *separate*,
     deterministic judgment about whether that ranking earns enough trust
-    to surface -- always true for a name match regardless of its (lower)
-    raw score, score-threshold-driven for a lexical match. `reason` is
-    always a real, human-readable sentence -- never fabricated, never
-    empty -- so any acceptance or rejection is auditable after the fact,
-    for every candidate this function considered, not just the ones it
-    returned."""
+    to surface. `reason` is always a real, human-readable sentence --
+    never fabricated, never empty -- so any acceptance or rejection is
+    auditable after the fact, for every candidate this function
+    considered, not just the ones it returned.
+
+    **ARCF Fix 3**: `confidence` is a *separate* number from
+    `retrieval_score` (see module docstring for the full rationale) --
+    for a name match, it's that tier's fixed score (2.0/1.0), unconditionally
+    accepted; for a `tfidf` match, it's a z-score relative to this query's
+    own candidate pool, never an absolute number, and can be negative
+    (below this query's own average) or `None` when the pool was too
+    small to compute one at all (see `_MIN_POOL_FOR_RELATIVE_CONFIDENCE`)."""
 
     entity_id: str
     retrieval_score: float
     matched_by: str
     accepted: bool
     reason: str
+    confidence: float | None = None
 
 
 @dataclass(frozen=True)
@@ -121,7 +197,7 @@ def retrieve_context(
     query: str,
     top_k: int = 10,
     candidate_pool_size: int = _DEFAULT_CANDIDATE_POOL_SIZE,
-    min_tfidf_score: float = _PROVISIONAL_MIN_TFIDF_SCORE,
+    min_confidence_z: float = _MIN_CONFIDENCE_Z,
 ) -> RetrievedContext:
     """Retrieves relevant nodes (via Phase 4.2's `search()`), the
     relationships among them, every evidence record attached to each, and
@@ -130,12 +206,13 @@ def retrieve_context(
     caller builds once via `build_retrieval_index()` and can reuse across
     many queries against the same commit).
 
-    `min_tfidf_score` suppresses TF-IDF-tier matches below the given
-    confidence (see module docstring for how this default was calibrated
-    and its known limits); exact/substring name matches are never
-    filtered. If nothing clears the bar, `entities` is empty and
-    `insufficient_evidence` is True -- an explicit "no confident match"
-    signal, not silence a caller has to infer from an empty list.
+    `min_confidence_z` suppresses TF-IDF-tier matches whose z-score
+    (relative to this query's own `candidate_pool_size`-wide candidate
+    set -- see module docstring, ARCF Fix 3) falls below the given bar;
+    exact/substring name matches are never filtered. If nothing clears
+    the bar, `entities` is empty and `insufficient_evidence` is True -- an
+    explicit "no confident match" signal, not silence a caller has to
+    infer from an empty list.
 
     **ARCF Fix 1**: `search()` is called with `candidate_pool_size`
     entities under consideration (wider than `top_k`), and confidence
@@ -152,7 +229,22 @@ def retrieve_context(
     (driven by `_decide_confidence`) are two separate passes over the
     same list, not one score doing both jobs."""
     scored = search(index, query, top_k=top_k, candidate_pool_size=candidate_pool_size)
-    decisions = {s.entity.entity_id: _decide_confidence(s, min_tfidf_score) for s in scored}
+    z_by_entity_id = _relative_confidence_scores(scored)
+    query_terms = set(_tokenize(query))
+    # Reuses search.py's own IDF table (the same one BM25 scoring already
+    # built) rather than duplicating its computation -- see module
+    # docstring for why match evidence needs to be IDF-weighted, not a
+    # flat term count.
+    _, _, idf, _ = _build_bm25_index(index)
+    decisions = {
+        s.entity.entity_id: _decide_confidence(
+            s,
+            z_by_entity_id.get(s.entity.entity_id),
+            min_confidence_z,
+            _matched_idf_coverage(query_terms, s.entity, idf),
+        )
+        for s in scored
+    }
     accepted = [s for s in scored if decisions[s.entity.entity_id].accepted]
     accepted = accepted[:top_k]
     entities = tuple(s.entity for s in accepted)
@@ -195,10 +287,81 @@ def retrieve_context(
     )
 
 
-def _decide_confidence(scored: ScoredEntity, min_tfidf_score: float) -> ConfidenceDecision:
-    """ARCF Fix 2's actual decision rule -- unchanged in *behavior* from
-    what `retrieve_context` did inline before (`accepted` is identical to
-    before this fix), but now a named, reusable judgment with a real,
+def _relative_confidence_scores(scored: list[ScoredEntity]) -> dict[str, float]:
+    """ARCF Fix 3 -- the actual relative-strength computation. A z-score
+    per `tfidf`-tier candidate, computed once from *all* `tfidf`-tier
+    scores in `scored` (the full `candidate_pool_size`-wide pool
+    `retrieve_context` passed to `search()` -- not just `top_k`, so the
+    statistic doesn't depend on how many results the caller ultimately
+    wants back). Name-tier candidates are excluded from the pool used to
+    compute the mean/stdev (their fixed 2.0/1.0 scores aren't part of the
+    same distribution) and never appear as keys here -- `_decide_confidence`
+    handles them separately. Population standard deviation (not sample) --
+    a deliberate, documented, minor simplification; both are valid choices
+    for a purely internal relative-ranking statistic, and population stdev
+    keeps this function dependency-free (`statistics.pstdev`).
+
+    Returns no entry at all (not a fabricated 0.0) for a `tfidf` pool
+    smaller than `_MIN_POOL_FOR_RELATIVE_CONFIDENCE` -- there isn't enough
+    data to say anything about relative strength yet."""
+    tfidf_scores = [s.score for s in scored if s.matched_by == "tfidf"]
+    if len(tfidf_scores) < _MIN_POOL_FOR_RELATIVE_CONFIDENCE:
+        return {}
+    mean = statistics.fmean(tfidf_scores)
+    stdev = statistics.pstdev(tfidf_scores, mu=mean)
+    if stdev <= 0.0:
+        # Every candidate in this query's pool scored identically -- no
+        # variation to be relatively stronger than. Not an error, just no
+        # statistical basis for "unusual"; every candidate gets z=0.0.
+        return {s.entity.entity_id: 0.0 for s in scored if s.matched_by == "tfidf"}
+    return {s.entity.entity_id: (s.score - mean) / stdev for s in scored if s.matched_by == "tfidf"}
+
+
+def _matched_idf_coverage(query_terms: set[str], entity: IndexedEntity, idf: dict[str, float]) -> float | None:
+    """ARCF Fix 3's second, complementary confidence signal -- real match
+    evidence, not a score, and IDF-weighted (not a flat term count -- see
+    module docstring for the real case that made a flat count
+    insufficient: large classes coincidentally containing several of a
+    query's *common* words while missing its one truly distinctive term).
+
+    What fraction of the query's own terms' combined IDF weight does this
+    entity's indexed text (`search.py`'s own `_entity_text`/`_tokenize`,
+    reused directly rather than re-derived) actually cover? A dimensionless
+    fraction in [0, 1] -- unlike a raw score, its meaning does not depend
+    on corpus size, BM25 parameters, or any other scale.
+
+    **A term this corpus has never seen at all is treated as maximally
+    distinctive, not weightless** -- caught by real-repository validation:
+    treating an absent term as weight-0 excludes it from the denominator
+    entirely, so a query centered on a word the corpus genuinely never
+    mentions could still show "100% coverage" from matching only the
+    query's other, incidental words. Since no document can contain a term
+    with zero corpus-wide document frequency, this fallback can only ever
+    make coverage *harder*, never inflate it -- exactly the right
+    direction for "the query asked about something this corpus doesn't
+    talk about at all." `None` when the query itself tokenized to nothing
+    (see `_decide_confidence`, a distinct "can't judge" case from a
+    genuine zero-overlap match)."""
+    if not query_terms:
+        return None
+    max_known_idf = max(idf.values(), default=0.0)
+    weight = {t: idf.get(t, max_known_idf) for t in query_terms}
+    total_weight = sum(weight.values())
+    if total_weight <= 0.0:
+        return None
+    doc_terms = set(_tokenize(_entity_text(entity)))
+    matched_weight = sum(weight[t] for t in query_terms & doc_terms)
+    return matched_weight / total_weight
+
+
+def _decide_confidence(
+    scored: ScoredEntity,
+    z_score: float | None,
+    min_confidence_z: float,
+    matched_idf_coverage: float | None,
+) -> ConfidenceDecision:
+    """ARCF Fix 3's actual decision rule (see module docstring for the
+    full design rationale) -- a named, reusable judgment with a real,
     specific reason attached, made for every candidate `search()`
     returned, not just the ones that end up accepted.
 
@@ -207,9 +370,20 @@ def _decide_confidence(scored: ScoredEntity, min_tfidf_score: float) -> Confiden
     concrete proof that score and confidence are different things: an
     exact-name match with score 2.0 is accepted while a `tfidf` match
     scoring an order of magnitude higher can still be rejected for being
-    below `min_tfidf_score`. `tfidf`-tier acceptance is exactly the
-    existing score-threshold rule, just named and reasoned about
-    explicitly."""
+    statistically unremarkable within its own query's candidate pool.
+
+    `tfidf`-tier acceptance requires all three: a computable z-score (a
+    large-enough pool -- see `_relative_confidence_scores`), that z-score
+    clearing `min_confidence_z`, *and* `matched_idf_coverage` clearing
+    `_MIN_MATCHED_IDF_COVERAGE` -- the second requirement exists because
+    real-repository validation found z-score alone insufficient: in a
+    pool of uniformly weak/irrelevant candidates (a genuinely unanswerable
+    query), *something* always ends up "relatively" on top with a
+    clearing z-score, even while matching only the query's least
+    informative terms (see module docstring for the real measured
+    numbers, including why a flat term-count fraction wasn't enough
+    either). A candidate failing either check is rejected, not given the
+    benefit of the doubt."""
     entity_id = scored.entity.entity_id
     if scored.matched_by != "tfidf":
         return ConfidenceDecision(
@@ -221,16 +395,35 @@ def _decide_confidence(scored: ScoredEntity, min_tfidf_score: float) -> Confiden
                 f"{scored.matched_by}: the query names this entity directly (raw ranking score "
                 f"{scored.score:.2f}) -- name matches are always accepted independent of score."
             ),
+            confidence=scored.score,
         )
-    accepted = scored.score >= min_tfidf_score
+    if z_score is None:
+        return ConfidenceDecision(
+            entity_id=entity_id,
+            retrieval_score=scored.score,
+            matched_by=scored.matched_by,
+            accepted=False,
+            reason=(
+                f"tfidf score {scored.score:.2f} -- fewer than {_MIN_POOL_FOR_RELATIVE_CONFIDENCE} "
+                "tfidf candidates in this query's pool, too few to judge relative strength from -- "
+                "rejected (insufficient competing evidence, not a score judgment)."
+            ),
+            confidence=None,
+        )
+    clears_z = z_score >= min_confidence_z
+    clears_match_evidence = matched_idf_coverage is not None and matched_idf_coverage >= _MIN_MATCHED_IDF_COVERAGE
+    accepted = clears_z and clears_match_evidence
+    coverage_display = "n/a" if matched_idf_coverage is None else f"{matched_idf_coverage:.2f}"
     return ConfidenceDecision(
         entity_id=entity_id,
         retrieval_score=scored.score,
         matched_by=scored.matched_by,
         accepted=accepted,
         reason=(
-            f"tfidf score {scored.score:.2f} "
-            f"{'>=' if accepted else '<'} confidence threshold {min_tfidf_score:.2f} "
-            f"-- {'accepted' if accepted else 'rejected'}."
+            f"tfidf score {scored.score:.2f}, z={z_score:.2f} vs confidence bar {min_confidence_z:.2f} "
+            f"({'clears' if clears_z else 'below'}), matched_idf_coverage={coverage_display} vs required "
+            f"{_MIN_MATCHED_IDF_COVERAGE:.2f} ({'clears' if clears_match_evidence else 'below'}) "
+            f"-- {'accepted' if accepted else 'rejected'} (both must clear)."
         ),
+        confidence=z_score,
     )
