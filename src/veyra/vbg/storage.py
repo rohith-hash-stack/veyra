@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -62,6 +61,17 @@ CREATE TABLE IF NOT EXISTS edges (
 );
 CREATE INDEX IF NOT EXISTS idx_edges_key_version
     ON edges (source_id, target_id, relationship_type, repository_version);
+-- get_incoming_edges() filters by target_id first -- idx_edges_key_version's
+-- leading column is source_id, which SQLite cannot use for a target_id-led
+-- WHERE clause, forcing a full index scan (confirmed via EXPLAIN QUERY
+-- PLAN: "SCAN edges USING COVERING INDEX idx_edges_key_version") on every
+-- call. get_parents()/get_siblings() -- called once per entity while
+-- building a retrieval index -- go through get_incoming_edges, so this
+-- scan repeats once per entity. This index gives that query path its own
+-- leading column, the same way idx_edges_key_version already does for
+-- get_outgoing_edges()'s source_id-led lookups.
+CREATE INDEX IF NOT EXISTS idx_edges_target_version
+    ON edges (target_id, repository_version, relationship_type);
 
 CREATE TABLE IF NOT EXISTS repositories (
     row_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -336,23 +346,64 @@ class VBGStore:
     class ever issues SQL UPDATE or DELETE -- that omission is the actual
     enforcement mechanism for "historical records cannot be silently
     overwritten" (PLAN.md Phase 1.2), not just a documented convention.
+
+    **Performance finding: one connection per instance, not per call.**
+    Every method used to call `sqlite3.connect()` fresh and tear it back
+    down -- measured directly at 96,105 separate SQLite connections (6.9
+    per entity) to build one retrieval index over FastAPI's real,
+    persisted store. Confirmed before changing anything: nothing in this
+    codebase touches `VBGStore` from more than one thread or process (no
+    `threading`/`multiprocessing`/`asyncio`/`subprocess` reaches a store
+    anywhere in `src/veyra`) -- every real usage is synchronous, single-
+    threaded, single-process. That makes one connection, opened lazily on
+    first use and reused for the life of this `VBGStore` instance, safe:
+    each instance still gets its *own* connection (two `VBGStore` objects
+    on the same or different db paths never share one), and
+    `sqlite3.connect()`'s default `check_same_thread=True` is kept
+    deliberately, not relaxed -- it's the actual enforcement mechanism for
+    "this connection is only ever touched by the thread that created it",
+    the same "make the invariant structural, not just documented"
+    discipline this class's own append-only design already uses. Every
+    call site's `with self._connect() as conn:` became `with
+    self._connect() as conn:` -- `sqlite3.Connection`'s own context-
+    manager protocol commits (or rolls back, on an exception) without
+    closing the connection, which is exactly the "still usable next call"
+    behavior this needs; `closing()` was actively wrong once `_connect()`
+    stopped creating a fresh, disposable connection every time.
     """
 
     def __init__(self, db_path: Path | str) -> None:
         self._db_path = str(db_path)
-        with closing(self._connect()) as conn:
+        self._conn: sqlite3.Connection | None = None
+        with self._connect() as conn:
             conn.executescript(_SCHEMA)
             conn.commit()
 
     def _connect(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(self._db_path)
-        conn.row_factory = sqlite3.Row
-        return conn
+        """Returns this instance's single, lazily-created connection,
+        reused for every subsequent call -- see class docstring for why
+        this is safe. Not a bare module-level global: each `VBGStore`
+        instance gets its own `self._conn`."""
+        if self._conn is None:
+            conn = sqlite3.connect(self._db_path)
+            conn.row_factory = sqlite3.Row
+            self._conn = conn
+        return self._conn
+
+    def close(self) -> None:
+        """Closes this instance's connection, if one was ever opened.
+        Not required for correctness -- a `VBGStore` that's simply
+        garbage-collected or outlives the process closes its connection
+        cleanly either way -- provided for callers (tests, long-running
+        tools) that want to release the file handle explicitly."""
+        if self._conn is not None:
+            self._conn.close()
+            self._conn = None
 
     # -- Nodes ---------------------------------------------------------
 
     def insert_node(self, node: Node) -> None:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO nodes (
@@ -380,7 +431,7 @@ class VBGStore:
         """All rows ever recorded for this (entity_id, repository_version),
         oldest first. Never empty-then-overwritten -- every write ever made
         is present."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM nodes
@@ -398,7 +449,7 @@ class VBGStore:
     # -- Edges -----------------------------------------------------------
 
     def insert_edge(self, edge: Edge) -> None:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO edges (
@@ -424,7 +475,7 @@ class VBGStore:
         relationship_type: RelationshipType,
         repository_version: str,
     ) -> list[Edge]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM edges
@@ -453,7 +504,7 @@ class VBGStore:
         Model is built on. Superseded/conflicting historical rows are not
         included here; use get_edge_history() for the full audit trail of a
         specific edge."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT e.* FROM edges e
@@ -478,7 +529,7 @@ class VBGStore:
         queryable via get_node_history() for anyone who needs it; bulk
         graph consumers like the Phase 2.5 question generator only need the
         current view."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT n.* FROM nodes n
@@ -496,7 +547,7 @@ class VBGStore:
     def get_all_edges(self, repository_version: str) -> list[Edge]:
         """Current view: the latest row per distinct
         (source_id, target_id, relationship_type) at this commit."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT e.* FROM edges e
@@ -515,7 +566,7 @@ class VBGStore:
     def get_incoming_edges(self, target_id: str, repository_version: str) -> list[Edge]:
         """The current edge for every distinct (source_id, relationship_type)
         pair into `target_id` at this commit -- see get_outgoing_edges()."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT e.* FROM edges e
@@ -541,7 +592,7 @@ class VBGStore:
         a failed acquisition -- reuses RepositoryInfo.require_commit()'s
         guard, since a repository version is required to record anything."""
         commit_sha = info.require_commit()
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO repositories (
@@ -562,7 +613,7 @@ class VBGStore:
             conn.commit()
 
     def get_repository_history(self, source: str, commit_sha: str) -> list[RepositoryRecord]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM repositories
@@ -576,7 +627,7 @@ class VBGStore:
     # -- Evidence ----------------------------------------------------------
 
     def insert_evidence(self, evidence: Evidence) -> None:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO evidence (
@@ -607,7 +658,7 @@ class VBGStore:
         subject are not competing versions of one fact -- they are
         independent supporting observations (e.g. STATIC and RUNTIME
         evidence for the same edge) and are all expected to coexist."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM evidence
@@ -628,7 +679,7 @@ class VBGStore:
         """Aggregate count for audit reporting (Phase 2.8's "static evidence
         created") -- unlike get_evidence_for_subject, this isn't scoped to
         one subject."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             if evidence_type is None:
                 row = conn.execute(
                     "SELECT COUNT(*) AS c FROM evidence WHERE repository_version = ?",
@@ -652,7 +703,7 @@ class VBGStore:
         get_evidence_for_subject). Backs Phase 3.7's reconciliation (which
         needs every RUNTIME edge/node observation at once) and Phase 3.9's
         runtime audit."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             if evidence_type is None:
                 rows = conn.execute(
                     "SELECT * FROM evidence WHERE repository_version = ? ORDER BY row_id ASC",
@@ -668,7 +719,7 @@ class VBGStore:
     # -- Audit (Phase 1.5) --------------------------------------------------
 
     def insert_audit_record(self, record: AuditRecord) -> None:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO audit_events (
@@ -696,7 +747,7 @@ class VBGStore:
     def get_audit_history(
         self, phase: str, repository_commit: str | None = None
     ) -> list[AuditRecord]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             if repository_commit is None:
                 rows = conn.execute(
                     "SELECT * FROM audit_events WHERE phase = ? ORDER BY row_id ASC",
@@ -718,7 +769,7 @@ class VBGStore:
         unlike get_audit_history(), not scoped to one named phase. Backs
         Phase 5.7's performance audit, which needs to group timings by
         phase without having to know every phase name in advance."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 "SELECT * FROM audit_events WHERE repository_commit = ? ORDER BY row_id ASC",
                 (repository_commit,),
@@ -731,7 +782,7 @@ class VBGStore:
         """Makes "unanswered questions remain queryable" (Phase 2.7) true in
         practice: a Question exists here the moment it's generated, whether
         or not it's ever answered."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO questions (
@@ -754,7 +805,7 @@ class VBGStore:
 
     def get_questions(self, repository_version: str) -> list[Question]:
         """Current view: latest row per distinct question_id at this commit."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT q.* FROM questions q
@@ -771,7 +822,7 @@ class VBGStore:
         return [_row_to_question(row) for row in rows]
 
     def insert_answer(self, answer: Answer) -> None:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO answers (
@@ -791,7 +842,7 @@ class VBGStore:
             conn.commit()
 
     def get_answer_history(self, question_id: str, repository_version: str) -> list[Answer]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM answers
@@ -813,7 +864,7 @@ class VBGStore:
         this is what makes "classification is auditable" (Phase 3.1
         acceptance criterion) a real, queryable guarantee rather than
         something only true if a caller remembers to log it."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO classifications (
@@ -841,7 +892,7 @@ class VBGStore:
         """Every classification ever recorded for this target at this
         commit, oldest first -- e.g. if re-run under a newer policy_version,
         both decisions remain visible, not just the latest."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM classifications
@@ -861,7 +912,7 @@ class VBGStore:
         this commit -- mirrors get_all_nodes/get_all_edges/get_all_evidence.
         Backs Phase 3.9's runtime audit (safety class counts across every
         classified target, not just one)."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT c.* FROM classifications c
@@ -882,7 +933,7 @@ class VBGStore:
         """Makes "container configuration is auditable" (Phase 3.2) real --
         this is also what future RUNTIME Evidence's environment_id (Phase
         1.3) will point at."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO execution_environments (
@@ -907,7 +958,7 @@ class VBGStore:
             conn.commit()
 
     def get_execution_environment_history(self, environment_id: str) -> list[ExecutionEnvironment]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 "SELECT * FROM execution_environments WHERE environment_id = ? ORDER BY row_id ASC",
                 (environment_id,),
@@ -926,7 +977,7 @@ class VBGStore:
         a conflicting write for the same natural key (scenario_id), kept
         side by side as history, same as Node/Edge (Phase 1.2's "conflicts
         are representable")."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             conn.execute(
                 """
                 INSERT INTO scenarios (
@@ -954,7 +1005,7 @@ class VBGStore:
             conn.commit()
 
     def get_scenario_history(self, scenario_id: str, repository_version: str) -> list[Scenario]:
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT * FROM scenarios
@@ -971,7 +1022,7 @@ class VBGStore:
 
     def get_scenarios(self, repository_version: str) -> list[Scenario]:
         """Current view: the latest row per distinct scenario_id at this commit."""
-        with closing(self._connect()) as conn:
+        with self._connect() as conn:
             rows = conn.execute(
                 """
                 SELECT s.* FROM scenarios s

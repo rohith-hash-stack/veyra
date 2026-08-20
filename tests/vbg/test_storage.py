@@ -178,3 +178,90 @@ def test_repository_history_preserves_multiple_acquisitions(store: VBGStore) -> 
     history = store.get_repository_history(info.source, info.commit_sha)
 
     assert len(history) == 2
+
+
+# -- Connection lifecycle (performance finding: one connection per instance,
+# not one per call -- measured at 96,105 separate sqlite3.connect() calls
+# to build one real retrieval index) --
+
+
+def test_connection_is_reused_across_calls_not_recreated_per_call(store: VBGStore) -> None:
+    """The actual regression-protection test: the intended lifecycle
+    behavior (one lazily-created connection, reused for the life of the
+    instance) rather than an arbitrary exact connection-count assertion,
+    which the architecture doesn't establish any particular number for."""
+    first = store._connect()
+    second = store._connect()
+    assert first is second  # the same live object, not a new connect() each time
+
+    # And it's still a real, working connection after multiple operations --
+    # reuse doesn't mean stale or broken.
+    node = Node(
+        entity_id="m.f", type="Function", name="f", repository_version="c1", language="Python",
+    )
+    store.insert_node(node)
+    store.insert_node(node)
+    assert store._connect() is first
+    assert len(store.get_node_history("m.f", "c1")) == 2
+
+
+def test_each_store_instance_gets_its_own_connection(tmp_path: Path) -> None:
+    """Reuse is per-instance, not a shared global -- two VBGStore objects
+    (even on the same db path) never end up sharing one connection."""
+    path = tmp_path / "shared.sqlite3"
+    store_a = VBGStore(path)
+    store_b = VBGStore(path)
+    try:
+        assert store_a._connect() is not store_b._connect()
+    finally:
+        store_a.close()
+        store_b.close()
+
+
+def test_close_releases_the_connection_and_a_later_call_reopens_one(tmp_path: Path) -> None:
+    store = VBGStore(tmp_path / "v.sqlite3")
+    first = store._connect()
+
+    store.close()
+
+    # A later call transparently opens a fresh connection rather than
+    # raising on a closed one -- close() is a clean release, not a
+    # permanent shutdown of the instance.
+    second = store._connect()
+    assert second is not first
+    node = Node(entity_id="m.f", type="Function", name="f", repository_version="c1", language="Python")
+    store.insert_node(node)  # proves the reopened connection actually works
+    store.close()
+
+
+def test_get_incoming_edges_uses_an_index_not_a_full_table_scan(store: VBGStore) -> None:
+    """Regression protection for the other real Fix 8 finding: the
+    original schema's only edges index led with source_id, so
+    get_incoming_edges()'s target_id-first WHERE clause (get_parents/
+    get_siblings' actual query, called once per entity while building a
+    retrieval index) could only ever do "SCAN edges USING COVERING INDEX
+    idx_edges_key_version" -- a full index scan, confirmed directly via
+    EXPLAIN QUERY PLAN before this was fixed. idx_edges_target_version
+    gives that query path its own leading column. Tests the query plan
+    itself (the actual mechanism), not a timing threshold."""
+    conn = store._connect()
+    plan_rows = conn.execute(
+        """
+        EXPLAIN QUERY PLAN
+        SELECT e.* FROM edges e
+        INNER JOIN (
+            SELECT source_id, relationship_type, MAX(row_id) AS max_row_id
+            FROM edges
+            WHERE target_id = ? AND repository_version = ?
+            GROUP BY source_id, relationship_type
+        ) latest
+        ON e.source_id = latest.source_id
+           AND e.relationship_type = latest.relationship_type
+           AND e.row_id = latest.max_row_id
+        WHERE e.target_id = ? AND e.repository_version = ?
+        """,
+        ("x", "c1", "x", "c1"),
+    ).fetchall()
+    plan_text = " ".join(str(tuple(row)) for row in plan_rows)
+    assert "idx_edges_target_version" in plan_text
+    assert "SCAN edges USING COVERING INDEX idx_edges_key_version" not in plan_text
