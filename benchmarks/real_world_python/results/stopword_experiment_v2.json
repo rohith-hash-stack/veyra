@@ -1,0 +1,1526 @@
+{
+  "before": {
+    "flask": [
+      {
+        "query_id": "flask-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.json.provider.JSONProvider",
+          "src.flask.app.Flask",
+          "src.flask.wrappers.Request",
+          "src.flask.sessions.SessionInterface",
+          "src.flask.views.MethodView",
+          "src.flask.testing.EnvironBuilder",
+          "src.flask.testing.FlaskClient",
+          "src.flask.sansio.blueprints.Blueprint"
+        ]
+      },
+      {
+        "query_id": "flask-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sessions.SessionInterface",
+          "src.flask.sessions.SecureCookieSessionInterface",
+          "src.flask.sessions.SecureCookieSession",
+          "src.flask.app.Flask",
+          "src.flask.sansio.app.App",
+          "src.flask.sessions.SecureCookieSessionInterface.open_session",
+          "src.flask.sessions.SessionInterface.get_cookie_path",
+          "src.flask.sessions.SessionMixin",
+          "src.flask.config.Config",
+          "src.flask.sessions.NullSession"
+        ]
+      },
+      {
+        "query_id": "flask-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.views.MethodView",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.views.View",
+          "src.flask.sansio.app.App",
+          "src.flask.testing.FlaskClient",
+          "src.flask.app.Flask",
+          "src.flask.testing.EnvironBuilder",
+          "src.flask.testing.FlaskClient.session_transaction",
+          "src.flask.views.MethodView.__init_subclass__"
+        ]
+      },
+      {
+        "query_id": "flask-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.views.View",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.scaffold.Scaffold.route",
+          "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.sansio.scaffold.Scaffold.route.decorator",
+          "src.flask.sansio.scaffold.Scaffold.endpoint",
+          "src.flask.sansio.scaffold.Scaffold.__init__"
+        ]
+      },
+      {
+        "query_id": "flask-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.wrappers.Request",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.templating.Environment",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.blueprints.Blueprint",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.sansio.app.App.register_blueprint",
+          "src.flask.app.Flask",
+          "src.flask.wrappers.Response"
+        ]
+      },
+      {
+        "query_id": "flask-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.app.Flask",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.sansio.app.App",
+          "src.flask.app.Flask.dispatch_request",
+          "src.flask.app.Flask.make_response",
+          "src.flask.app.Flask.wsgi_app",
+          "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor"
+        ]
+      },
+      {
+        "query_id": "flask-07",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "flask-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.cli.FlaskGroup",
+          "src.flask.app.Flask",
+          "src.flask.cli.FlaskGroup.make_context",
+          "src.flask.sansio.app.App",
+          "src.flask.app.Flask.run",
+          "src.flask.cli.FlaskGroup.__init__",
+          "src.flask.sansio.app.App.trap_http_exception",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.cli.ScriptInfo",
+          "tests.test_templating.test_templates_auto_reload_debug_run"
+        ]
+      },
+      {
+        "query_id": "flask-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.wrappers.Request",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.ctx.AppContext",
+          "src.flask.app.Flask",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.ctx.AppContext.match_request",
+          "src.flask.config.Config",
+          "src.flask.app.Flask.preprocess_request",
+          "src.flask.wrappers.Request.blueprint"
+        ]
+      },
+      {
+        "query_id": "flask-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.app.Flask",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.sansio.app.App",
+          "src.flask.app.Flask.send_static_file",
+          "src.flask.sansio.scaffold.Scaffold.after_request",
+          "src.flask.app.Flask.finalize_request",
+          "src.flask.app.Flask.handle_exception",
+          "src.flask.app.Flask.do_teardown_request",
+          "src.flask.app.Flask.wsgi_app",
+          "src.flask.app.Flask.do_teardown_appcontext"
+        ]
+      },
+      {
+        "query_id": "flask-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App"
+        ]
+      },
+      {
+        "query_id": "flask-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.blueprints.Blueprint",
+          "tests.test_cli.TestRoutes",
+          "src.flask.sansio.app.App.register_blueprint",
+          "src.flask.app.Flask",
+          "tests.test_cli.TestRoutes.test_sort",
+          "src.flask.sansio.blueprints.Blueprint.app_url_defaults",
+          "src.flask.sansio.blueprints.Blueprint.register"
+        ]
+      },
+      {
+        "query_id": "flask-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "flask-14",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.app.App.create_jinja_environment"
+        ]
+      }
+    ],
+    "fastapi": [
+      {
+        "query_id": "fastapi-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.security.oauth2.OAuth2.make_not_authenticated_error",
+          "fastapi.security.oauth2.SecurityScopes.__init__",
+          "fastapi.routing.APIRouter.add_api_route",
+          "fastapi.security.oauth2.SecurityScopes",
+          "fastapi.applications.FastAPI",
+          "fastapi.security.oauth2.OAuth2",
+          "fastapi.exceptions.WebSocketException.__init__",
+          "fastapi.exceptions.FastAPIError",
+          "fastapi.applications.FastAPI.exception_handler",
+          "fastapi.routing.APIRouter"
+        ]
+      },
+      {
+        "query_id": "fastapi-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing.APIRouter.include_router",
+          "fastapi.routing.APIRouter.__init__",
+          "fastapi.applications.FastAPI.__init__",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.exception_handler",
+          "fastapi.routing.APIRoute",
+          "fastapi.routing._EffectiveRouteContext",
+          "fastapi.routing.APIRouter.add_api_route",
+          "fastapi.routing.RouteContext"
+        ]
+      },
+      {
+        "query_id": "fastapi-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.param_functions.Depends",
+          "fastapi.routing._RouterIncludeContext",
+          "fastapi.applications.FastAPI.websocket",
+          "fastapi.routing.APIRouter.websocket",
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.include_router",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete"
+        ]
+      },
+      {
+        "query_id": "fastapi-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI.middleware",
+          "fastapi.applications.FastAPI.add_api_websocket_route",
+          "fastapi.routing._FrontendRouteGroup.add_frontend_route",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.websocket",
+          "fastapi.applications.FastAPI.exception_handler",
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.on_event",
+          "fastapi.applications.FastAPI.websocket_route",
+          "fastapi.applications.FastAPI.add_api_route"
+        ]
+      },
+      {
+        "query_id": "fastapi-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing._EffectiveRouteContext.from_frontend_route_group",
+          "fastapi.routing._FrontendRouteGroup.__init__",
+          "fastapi.routing._FrontendRouteGroup.handle",
+          "fastapi.routing.APIWebSocketRoute.__init__",
+          "fastapi.routing._FrontendRouteGroup",
+          "fastapi.routing.APIWebSocketRoute",
+          "fastapi.routing._EffectiveRouteContext",
+          "fastapi.routing._build_dependant_with_parameterless_dependencies",
+          "fastapi.routing.APIRoute",
+          "fastapi.routing._FrontendRouteGroup._solve_dependencies"
+        ]
+      },
+      {
+        "query_id": "fastapi-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.param_functions.Depends",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get",
+          "fastapi.routing.APIRouter.options",
+          "fastapi.applications.FastAPI.head"
+        ]
+      },
+      {
+        "query_id": "fastapi-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.openapi",
+          "fastapi.applications.FastAPI.include_router",
+          "fastapi.routing.APIRouter.include_router",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get"
+        ]
+      },
+      {
+        "query_id": "fastapi-08",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "fastapi-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.routing.APIRouter",
+          "docs_src.openapi_callbacks.tutorial001_py310.create_invoice",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.applications.FastAPI.head",
+          "fastapi.applications.FastAPI.post",
+          "fastapi.applications.FastAPI.patch"
+        ]
+      },
+      {
+        "query_id": "fastapi-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.__init__",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get",
+          "fastapi.routing.APIRouter.options",
+          "fastapi.applications.FastAPI.head"
+        ]
+      },
+      {
+        "query_id": "fastapi-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing.run_endpoint_function",
+          "fastapi.routing.APIRouter.__init__",
+          "fastapi.routing._FrontendRouteGroup",
+          "fastapi.routing.request_response",
+          "fastapi.routing.APIRouter.frontend",
+          "fastapi.routing._RouterIncludeContext"
+        ]
+      },
+      {
+        "query_id": "fastapi-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.security.oauth2.OAuth2PasswordBearer.__init__",
+          "fastapi.security.oauth2.OAuth2PasswordBearer",
+          "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+          "fastapi.security.oauth2.OAuth2",
+          "fastapi.security.oauth2.SecurityScopes",
+          "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict",
+          "fastapi.security.oauth2.OAuth2AuthorizationCodeBearer",
+          "tests.test_security_oauth2_password_bearer_optional_description.test_openapi_schema"
+        ]
+      },
+      {
+        "query_id": "fastapi-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "fastapi-14",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      }
+    ],
+    "sqlalchemy": [
+      {
+        "query_id": "sqla-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction",
+          "lib.sqlalchemy.ext.instrumentation._ClassInstrumentationAdapter",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "lib.sqlalchemy.orm.scoping.scoped_session"
+        ]
+      },
+      {
+        "query_id": "sqla-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "lib.sqlalchemy.sql.type_api.TypeDecorator.Comparator",
+          "lib.sqlalchemy.sql.type_api.TypeEngine.Comparator",
+          "lib.sqlalchemy.sql.type_api.TypeEngine",
+          "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "lib.sqlalchemy.sql.base.Executable",
+          "lib.sqlalchemy.orm.events.RegistryEvents",
+          "lib.sqlalchemy.engine.events.DialectEvents",
+          "lib.sqlalchemy.dialects.postgresql.types.BIT.comparator_factory"
+        ]
+      },
+      {
+        "query_id": "sqla-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "lib.sqlalchemy.sql.schema.MetaData",
+          "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "lib.sqlalchemy.sql.schema.PrimaryKeyConstraint",
+          "lib.sqlalchemy.dialects.postgresql.ext.aggregate_order_by"
+        ]
+      },
+      {
+        "query_id": "sqla-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.dialects.postgresql.named_types.NamedType",
+          "lib.sqlalchemy.dialects.postgresql.named_types.ENUM",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncConnection",
+          "lib.sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite",
+          "lib.sqlalchemy.sql.elements.UnaryExpression",
+          "lib.sqlalchemy.ext.baked.BakedQuery",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty.Comparator",
+          "lib.sqlalchemy.sql.elements.FunctionFilter",
+          "lib.sqlalchemy.sql.elements.AbstractTextClause"
+        ]
+      },
+      {
+        "query_id": "sqla-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.ext.baked.BakedQuery",
+          "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.orm.events.MapperEvents",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.orm.session.sessionmaker",
+          "lib.sqlalchemy.orm.collections.collection",
+          "lib.sqlalchemy.orm.dependency._ManyToOneDP",
+          "lib.sqlalchemy.sql.schema.MetaData"
+        ]
+      },
+      {
+        "query_id": "sqla-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.ext.baked.Result",
+          "lib.sqlalchemy.engine.base.Transaction",
+          "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.ext.baked.BakedQuery",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.sql.compiler.Compiled",
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.engine.base.Connection",
+          "lib.sqlalchemy.orm.bulk_persistence._BulkORMUpdate"
+        ]
+      },
+      {
+        "query_id": "sqla-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "lib.sqlalchemy.orm.strategies._NoLoader",
+          "lib.sqlalchemy.orm.strategies._AbstractRelationshipLoader",
+          "lib.sqlalchemy.orm.strategies._LazyLoader",
+          "lib.sqlalchemy.orm.state._InstallLoaderCallableProto",
+          "lib.sqlalchemy.ext.horizontal_shard.set_shard_id",
+          "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "lib.sqlalchemy.orm._orm_constructors.dynamic_loader",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.lazyload"
+        ]
+      },
+      {
+        "query_id": "sqla-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.orm.session.SessionTransaction",
+          "lib.sqlalchemy.engine.base.RootTransaction",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.engine.base.Transaction",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session",
+          "lib.sqlalchemy.engine.base.NestedTransaction",
+          "lib.sqlalchemy.ext.asyncio.session.AsyncSession",
+          "lib.sqlalchemy.ext.asyncio.session.AsyncSessionTransaction"
+        ]
+      },
+      {
+        "query_id": "sqla-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.engine.url.URL",
+          "lib.sqlalchemy.engine.interfaces.Dialect",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+          "lib.sqlalchemy.engine.base.Engine",
+          "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin",
+          "lib.sqlalchemy.engine.url.URL.create",
+          "lib.sqlalchemy.engine.create.create_pool_from_url",
+          "test.engine.test_parseconnect.URLTest",
+          "lib.sqlalchemy.engine.create.engine_from_config",
+          "test.engine.test_parseconnect.CreateEngineTest"
+        ]
+      },
+      {
+        "query_id": "sqla-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.engine.interfaces.BindTyping",
+          "lib.sqlalchemy.engine.interfaces.Dialect",
+          "lib.sqlalchemy.engine.base.Connection",
+          "lib.sqlalchemy.engine.cursor.CursorResult",
+          "lib.sqlalchemy.engine.base.Engine",
+          "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin"
+        ]
+      },
+      {
+        "query_id": "sqla-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "lib.sqlalchemy.orm.strategies._LoadLazyAttribute",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload",
+          "lib.sqlalchemy.orm.state._InstallLoaderCallableProto",
+          "lib.sqlalchemy.orm.strategies._LazyLoader",
+          "lib.sqlalchemy.orm.strategies._NoLoader",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "lib.sqlalchemy.orm._orm_constructors.dynamic_loader",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.lazyload",
+          "lib.sqlalchemy.orm.query.Query"
+        ]
+      },
+      {
+        "query_id": "sqla-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.orm.decl_base._DeferredDeclarativeConfig",
+          "lib.sqlalchemy.orm.decl_base._ClassScanAbstractConfig",
+          "lib.sqlalchemy.orm.mapper.Mapper",
+          "lib.sqlalchemy.orm.events.MapperEvents",
+          "lib.sqlalchemy.ext.declarative.extensions.ConcreteBase",
+          "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig._scan_attributes",
+          "lib.sqlalchemy.orm.decl_base._ORMClassConfigurator",
+          "lib.sqlalchemy.orm.descriptor_props.CompositeProperty"
+        ]
+      },
+      {
+        "query_id": "sqla-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "sqla-14",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",
+          "lib.sqlalchemy.sql.elements.BinaryExpression",
+          "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector.create_connect_args"
+        ]
+      }
+    ],
+    "django": [
+      {
+        "query_id": "django-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.backends.sqlite3.operations.DatabaseOperations",
+          "django.db.models.manager.BaseManager",
+          "django.views.generic.detail.SingleObjectMixin",
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.template.engine.Engine",
+          "django.db.models.fields.related.RelatedField",
+          "django.apps.config.AppConfig",
+          "django.core.serializers.xml_serializer.Serializer",
+          "django.db.models.query.QuerySet",
+          "django.db.models.query_utils.Q"
+        ]
+      },
+      {
+        "query_id": "django-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.contenttypes.models.ContentType",
+          "django.db.models.options.Options",
+          "django.core.management.base.BaseCommand",
+          "django.contrib.postgres.fields.array.ArrayField",
+          "django.db.migrations.state.ModelState",
+          "django.db.models.constraints.BaseConstraint",
+          "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "django.core.checks.messages.CheckMessage",
+          "django.db.models.base.ModelBase",
+          "django.contrib.admin.sites.AdminSite"
+        ]
+      },
+      {
+        "query_id": "django-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.middleware.csrf.CsrfViewMiddleware",
+          "django.core.checks.security.csrf._csrf_middleware",
+          "django.views.decorators.csrf._EnsureCsrfToken",
+          "django.utils.csp.CSP",
+          "django.core.checks.security.csrf.check_csrf_middleware",
+          "django.views.decorators.csrf.csrf_exempt",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "django.template.library.InclusionNode",
+          "django.views.csrf.csrf_failure",
+          "django.views.decorators.csrf._EnsureCsrfCookie"
+        ]
+      },
+      {
+        "query_id": "django-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.contrib.auth.handlers.modwsgi.check_password",
+          "django.test.client.ClientMixin",
+          "tests.migrations.test_commands.AppLabelErrorTests",
+          "django.test.client.ClientMixin.login",
+          "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "tests.test_client.tests.ClientTest.test_view_with_inactive_login",
+          "tests.auth_tests.test_context_processors.AuthContextProcessorTests"
+        ]
+      },
+      {
+        "query_id": "django-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.models.manager.BaseManager",
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "django.db.models.options.Options",
+          "django.contrib.auth.backends.RemoteUserBackend",
+          "django.db.migrations.state.ModelState",
+          "django.db.migrations.recorder.MigrationRecorder",
+          "django.core.mail.backends.base.BaseEmailBackend",
+          "django.db.models.manager.BaseManager.deconstruct",
+          "django.contrib.auth.management.commands.createsuperuser.Command"
+        ]
+      },
+      {
+        "query_id": "django-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.test.client.RequestFactory"
+        ]
+      },
+      {
+        "query_id": "django-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.core.handlers.base.BaseHandler",
+          "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "django.contrib.messages.storage.session.SessionStorage",
+          "django.contrib.admindocs.middleware.XViewMiddleware",
+          "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+          "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+          "django.contrib.auth.middleware.LoginRequiredMiddleware",
+          "django.contrib.sessions.middleware.SessionMiddleware",
+          "django.contrib.auth.middleware.PersistentRemoteUserMiddleware"
+        ]
+      },
+      {
+        "query_id": "django-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.middleware.csrf.CsrfViewMiddleware",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
+          "tests.auth_tests.test_views.LoginTest",
+          "django.middleware.csrf.CsrfViewMiddleware._check_token",
+          "django.middleware.csrf.get_token",
+          "tests.auth_tests.test_remote_user.RemoteUserTest",
+          "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view"
+        ]
+      },
+      {
+        "query_id": "django-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.contrib.auth.backends.RemoteUserBackend",
+          "django.contrib.auth.backends.ModelBackend",
+          "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+          "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request"
+        ]
+      },
+      {
+        "query_id": "django-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.migrations.loader.MigrationLoader",
+          "django.db.migrations.executor.MigrationExecutor",
+          "django.db.migrations.migration.Migration",
+          "django.core.management.commands.migrate.Command",
+          "django.apps.registry.Apps",
+          "django.core.management.base.BaseCommand",
+          "tests.migrations.test_executor.ExecutorTests",
+          "django.core.management.commands.squashmigrations.Command",
+          "tests.migrations.test_loader.LoaderTests",
+          "tests.migrations.test_commands.SquashMigrationsTests"
+        ]
+      },
+      {
+        "query_id": "django-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.models.options.Options",
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
+          "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor"
+        ]
+      },
+      {
+        "query_id": "django-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.admin.sites.AdminSite",
+          "django.contrib.admin.decorators.register",
+          "django.contrib.admin.decorators.register._model_admin_wrapper",
+          "tests.admin_checks.tests.SystemChecksTestCase",
+          "django.contrib.admin.sites.AdminSite.admin_view"
+        ]
+      },
+      {
+        "query_id": "django-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "django-14",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      }
+    ]
+  },
+  "after": {
+    "flask": [
+      {
+        "query_id": "flask-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.json.provider.JSONProvider",
+          "src.flask.app.Flask",
+          "src.flask.sessions.SessionInterface",
+          "src.flask.wrappers.Request",
+          "src.flask.views.MethodView",
+          "src.flask.testing.EnvironBuilder",
+          "src.flask.testing.FlaskClient",
+          "src.flask.sansio.blueprints.Blueprint"
+        ]
+      },
+      {
+        "query_id": "flask-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sessions.SessionInterface",
+          "src.flask.sessions.SecureCookieSessionInterface",
+          "src.flask.sessions.SecureCookieSession",
+          "src.flask.app.Flask",
+          "src.flask.sansio.app.App",
+          "src.flask.sessions.SecureCookieSessionInterface.open_session",
+          "src.flask.sessions.SessionInterface.get_cookie_path",
+          "src.flask.sessions.SessionMixin",
+          "src.flask.config.Config",
+          "src.flask.sessions.NullSession"
+        ]
+      },
+      {
+        "query_id": "flask-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.views.MethodView",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.debughelpers.FormDataRoutingRedirect",
+          "src.flask.views.View",
+          "src.flask.sansio.app.App",
+          "src.flask.app.Flask",
+          "src.flask.testing.FlaskClient",
+          "src.flask.debughelpers.FormDataRoutingRedirect.__init__",
+          "src.flask.testing.EnvironBuilder",
+          "src.flask.views.MethodView.__init_subclass__"
+        ]
+      },
+      {
+        "query_id": "flask-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.scaffold.Scaffold.route",
+          "src.flask.views.View",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.sansio.scaffold.Scaffold.route.decorator",
+          "src.flask.sansio.scaffold.Scaffold.endpoint",
+          "src.flask.sansio.blueprints.BlueprintSetupState.add_url_rule",
+          "src.flask.sansio.scaffold.Scaffold.add_url_rule"
+        ]
+      },
+      {
+        "query_id": "flask-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.wrappers.Request",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.templating.Environment",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.blueprints.Blueprint",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.sansio.app.App.register_blueprint",
+          "src.flask.app.Flask",
+          "src.flask.wrappers.Response"
+        ]
+      },
+      {
+        "query_id": "flask-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.app.Flask",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.sansio.app.App",
+          "src.flask.app.Flask.dispatch_request",
+          "src.flask.app.Flask.make_response",
+          "src.flask.app.Flask.wsgi_app",
+          "src.flask.sansio.scaffold.Scaffold.add_url_rule",
+          "src.flask.sansio.scaffold.Scaffold.url_value_preprocessor"
+        ]
+      },
+      {
+        "query_id": "flask-07",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "flask-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.cli.FlaskGroup",
+          "src.flask.debughelpers.FormDataRoutingRedirect",
+          "src.flask.cli.FlaskGroup.make_context",
+          "src.flask.app.Flask",
+          "src.flask.app.Flask.run",
+          "src.flask.cli.FlaskGroup.__init__",
+          "src.flask.sessions.SessionMixin",
+          "src.flask.sansio.app.App",
+          "src.flask.cli.ScriptInfo",
+          "tests.test_templating.test_templates_auto_reload_debug_run"
+        ]
+      },
+      {
+        "query_id": "flask-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.wrappers.Request",
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.ctx.AppContext",
+          "src.flask.app.Flask",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.ctx.AppContext.match_request",
+          "src.flask.config.Config",
+          "src.flask.app.Flask.preprocess_request",
+          "src.flask.wrappers.Request.blueprint"
+        ]
+      },
+      {
+        "query_id": "flask-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.app.Flask",
+          "src.flask.sansio.scaffold.Scaffold",
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.scaffold.Scaffold.after_request",
+          "src.flask.app.Flask.send_static_file",
+          "src.flask.app.Flask.finalize_request",
+          "src.flask.app.Flask.handle_exception",
+          "src.flask.app.Flask.do_teardown_request",
+          "src.flask.app.Flask.wsgi_app",
+          "src.flask.app.Flask.do_teardown_appcontext"
+        ]
+      },
+      {
+        "query_id": "flask-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App"
+        ]
+      },
+      {
+        "query_id": "flask-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.blueprints.Blueprint",
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.blueprints.BlueprintSetupState",
+          "src.flask.blueprints.Blueprint",
+          "tests.test_cli.TestRoutes",
+          "src.flask.sansio.app.App.register_blueprint",
+          "src.flask.app.Flask",
+          "tests.test_cli.TestRoutes.test_sort",
+          "src.flask.sansio.blueprints.Blueprint.app_url_defaults",
+          "src.flask.sansio.blueprints.Blueprint.register"
+        ]
+      },
+      {
+        "query_id": "flask-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "flask-14",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "src.flask.sansio.app.App",
+          "src.flask.sansio.app.App.create_jinja_environment"
+        ]
+      }
+    ],
+    "fastapi": [
+      {
+        "query_id": "fastapi-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.security.oauth2.OAuth2.make_not_authenticated_error",
+          "fastapi.security.oauth2.SecurityScopes.__init__",
+          "fastapi.routing.APIRouter.add_api_route",
+          "fastapi.security.oauth2.SecurityScopes",
+          "fastapi.applications.FastAPI",
+          "fastapi.security.oauth2.OAuth2",
+          "fastapi.exceptions.WebSocketException.__init__",
+          "fastapi.exceptions.FastAPIError",
+          "fastapi.applications.FastAPI.exception_handler",
+          "fastapi.routing.APIRouter"
+        ]
+      },
+      {
+        "query_id": "fastapi-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing.APIRouter.include_router",
+          "fastapi.routing.APIRouter.__init__",
+          "fastapi.applications.FastAPI.__init__",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.exception_handler",
+          "fastapi.routing.APIRoute",
+          "fastapi.routing._EffectiveRouteContext",
+          "fastapi.routing.APIRouter.add_api_route",
+          "fastapi.routing.RouteContext"
+        ]
+      },
+      {
+        "query_id": "fastapi-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing._RouterIncludeContext",
+          "fastapi.routing._FrontendRouteGroup",
+          "fastapi.dependencies.utils.get_parameterless_sub_dependant",
+          "fastapi.dependencies.utils.get_dependant",
+          "fastapi.routing.APIRouter.add_api_route"
+        ]
+      },
+      {
+        "query_id": "fastapi-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI.add_api_websocket_route",
+          "fastapi.routing.APIRouter.add_api_websocket_route",
+          "fastapi.routing.APIRouter.include_router",
+          "fastapi.routing._FrontendRouteGroup.add_frontend_route",
+          "fastapi.applications.FastAPI.middleware",
+          "fastapi.routing.APIRouter.add_websocket_route",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.websocket.decorator",
+          "fastapi.routing.APIRouter.websocket.decorator",
+          "fastapi.routing.APIRouter.frontend"
+        ]
+      },
+      {
+        "query_id": "fastapi-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing._EffectiveRouteContext.from_frontend_route_group",
+          "fastapi.routing._FrontendRouteGroup.__init__",
+          "fastapi.routing._FrontendRouteGroup.handle",
+          "fastapi.routing.APIWebSocketRoute.__init__",
+          "fastapi.routing._FrontendRouteGroup",
+          "fastapi.routing.APIWebSocketRoute",
+          "fastapi.routing._EffectiveRouteContext",
+          "fastapi.routing._build_dependant_with_parameterless_dependencies",
+          "tests.memory_benchmarks.test_dependency_graph.test_dependency_graph",
+          "fastapi.routing.APIRoute"
+        ]
+      },
+      {
+        "query_id": "fastapi-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.param_functions.Depends",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get",
+          "fastapi.routing.APIRouter.options",
+          "fastapi.routing.APIRouter.__init__"
+        ]
+      },
+      {
+        "query_id": "fastapi-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.openapi",
+          "fastapi.applications.FastAPI.include_router",
+          "fastapi.routing.APIRouter.include_router",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get"
+        ]
+      },
+      {
+        "query_id": "fastapi-08",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "fastapi-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.routing.APIRouter",
+          "docs_src.openapi_callbacks.tutorial001_py310.create_invoice",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.applications.FastAPI.head",
+          "fastapi.applications.FastAPI.post",
+          "fastapi.applications.FastAPI.patch"
+        ]
+      },
+      {
+        "query_id": "fastapi-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.applications.FastAPI",
+          "fastapi.applications.FastAPI.__init__",
+          "fastapi.routing.APIRouter",
+          "fastapi.applications.FastAPI.get",
+          "fastapi.applications.FastAPI.options",
+          "fastapi.applications.FastAPI.trace",
+          "fastapi.applications.FastAPI.delete",
+          "fastapi.routing.APIRouter.get",
+          "fastapi.routing.APIRouter.options",
+          "fastapi.applications.FastAPI.head"
+        ]
+      },
+      {
+        "query_id": "fastapi-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.routing.run_endpoint_function",
+          "fastapi.routing.APIRouter.__init__",
+          "fastapi.routing._FrontendRouteGroup",
+          "fastapi.routing.request_response",
+          "fastapi.routing.APIRouter.frontend",
+          "fastapi.routing._RouterIncludeContext"
+        ]
+      },
+      {
+        "query_id": "fastapi-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "fastapi.security.oauth2.OAuth2PasswordBearer.__init__",
+          "fastapi.security.oauth2.OAuth2PasswordBearer",
+          "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+          "fastapi.security.oauth2.OAuth2",
+          "fastapi.security.oauth2.SecurityScopes",
+          "fastapi.security.oauth2.OAuth2AuthorizationCodeBearer",
+          "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict",
+          "tests.test_security_oauth2_password_bearer_optional_description.test_openapi_schema"
+        ]
+      },
+      {
+        "query_id": "fastapi-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "fastapi-14",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      }
+    ],
+    "sqlalchemy": [
+      {
+        "query_id": "sqla-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "lib.sqlalchemy.dialects.postgresql.hstore._HStoreDefinedFunction",
+          "lib.sqlalchemy.ext.instrumentation._ClassInstrumentationAdapter",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "lib.sqlalchemy.orm.scoping.scoped_session"
+        ]
+      },
+      {
+        "query_id": "sqla-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "lib.sqlalchemy.sql.type_api.TypeDecorator.Comparator",
+          "lib.sqlalchemy.sql.type_api.TypeEngine.Comparator",
+          "lib.sqlalchemy.sql.type_api.TypeEngine",
+          "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "lib.sqlalchemy.sql.base.Executable",
+          "lib.sqlalchemy.engine.events.DialectEvents",
+          "lib.sqlalchemy.orm.events.RegistryEvents",
+          "lib.sqlalchemy.dialects.postgresql.types.BIT.comparator_factory"
+        ]
+      },
+      {
+        "query_id": "sqla-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.sql.type_api.UserDefinedType",
+          "lib.sqlalchemy.orm.interfaces.UserDefinedOption",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE",
+          "lib.sqlalchemy.dialects.postgresql.hstore.HSTORE.Comparator",
+          "lib.sqlalchemy.sql.schema.MetaData",
+          "lib.sqlalchemy.ext.declarative.extensions.DeferredReflection",
+          "lib.sqlalchemy.ext.instrumentation.InstrumentationManager",
+          "lib.sqlalchemy.sql.schema.PrimaryKeyConstraint",
+          "lib.sqlalchemy.orm.util._TraceAdaptRole"
+        ]
+      },
+      {
+        "query_id": "sqla-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.dialects.postgresql.named_types.ENUM",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncConnection",
+          "lib.sqlalchemy.dialects.postgresql.named_types.NamedType",
+          "lib.sqlalchemy.sql.elements.UnaryExpression",
+          "lib.sqlalchemy.sql.sqltypes.Enum",
+          "lib.sqlalchemy.dialects.postgresql.json.JSON",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty.Comparator",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+          "lib.sqlalchemy.sql.sqltypes.SchemaType",
+          "lib.sqlalchemy.sql.elements.AbstractTextClause"
+        ]
+      },
+      {
+        "query_id": "sqla-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.orm.dynamic._AppenderMixin",
+          "lib.sqlalchemy.ext.baked.BakedQuery",
+          "lib.sqlalchemy.engine.events.ConnectionEvents",
+          "lib.sqlalchemy.orm.events.MapperEvents",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.orm.session.sessionmaker",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.orm.collections.collection",
+          "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session"
+        ]
+      },
+      {
+        "query_id": "sqla-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.ext.baked.Result",
+          "lib.sqlalchemy.orm.session.ORMExecuteState",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.sql.compiler.Compiled",
+          "lib.sqlalchemy.orm.bulk_persistence._BulkORMUpdate",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.orm.context._ORMSelectCompileState",
+          "lib.sqlalchemy.ext.baked.BakedQuery",
+          "lib.sqlalchemy.sql.selectable.SelectState"
+        ]
+      },
+      {
+        "query_id": "sqla-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "lib.sqlalchemy.orm.strategies._NoLoader",
+          "lib.sqlalchemy.orm.strategies._AbstractRelationshipLoader",
+          "lib.sqlalchemy.orm.strategies._LazyLoader",
+          "lib.sqlalchemy.orm.state._InstallLoaderCallableProto",
+          "lib.sqlalchemy.ext.horizontal_shard.set_shard_id",
+          "lib.sqlalchemy.orm.writeonly.WriteOnlyCollection",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "lib.sqlalchemy.orm._orm_constructors.dynamic_loader",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.lazyload"
+        ]
+      },
+      {
+        "query_id": "sqla-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.events.SessionEvents",
+          "lib.sqlalchemy.orm.session.SessionTransaction",
+          "lib.sqlalchemy.engine.base.RootTransaction",
+          "lib.sqlalchemy.orm.session.Session",
+          "lib.sqlalchemy.ext.asyncio.scoping.async_scoped_session",
+          "lib.sqlalchemy.orm.scoping.scoped_session",
+          "lib.sqlalchemy.ext.asyncio.session.AsyncSession",
+          "lib.sqlalchemy.ext.asyncio.session.AsyncSessionTransaction",
+          "lib.sqlalchemy.orm.session.Session.commit",
+          "test.orm.test_events.SessionEventsTest"
+        ]
+      },
+      {
+        "query_id": "sqla-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.engine.url.URL",
+          "lib.sqlalchemy.engine.interfaces.Dialect",
+          "lib.sqlalchemy.ext.asyncio.engine.AsyncEngine",
+          "lib.sqlalchemy.engine.base.Engine",
+          "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin",
+          "lib.sqlalchemy.engine.url.URL.create",
+          "lib.sqlalchemy.engine.create.create_pool_from_url",
+          "test.engine.test_parseconnect.URLTest",
+          "lib.sqlalchemy.engine.create.engine_from_config",
+          "test.engine.test_parseconnect.CreateEngineTest"
+        ]
+      },
+      {
+        "query_id": "sqla-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.engine.interfaces.BindTyping",
+          "lib.sqlalchemy.engine.interfaces.Dialect",
+          "lib.sqlalchemy.engine.base.Connection",
+          "lib.sqlalchemy.engine.cursor.CursorResult",
+          "lib.sqlalchemy.engine.base.Engine",
+          "lib.sqlalchemy.engine.interfaces.CreateEnginePlugin"
+        ]
+      },
+      {
+        "query_id": "sqla-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad",
+          "lib.sqlalchemy.orm.strategies._LoadLazyAttribute",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.raiseload",
+          "lib.sqlalchemy.orm.state._InstallLoaderCallableProto",
+          "lib.sqlalchemy.orm.strategies._LazyLoader",
+          "lib.sqlalchemy.orm.strategies._NoLoader",
+          "lib.sqlalchemy.orm.relationships.RelationshipProperty",
+          "lib.sqlalchemy.orm._orm_constructors.dynamic_loader",
+          "lib.sqlalchemy.orm.strategy_options._AbstractLoad.lazyload",
+          "lib.sqlalchemy.orm.query.Query"
+        ]
+      },
+      {
+        "query_id": "sqla-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig",
+          "lib.sqlalchemy.ext.declarative.extensions.AbstractConcreteBase",
+          "lib.sqlalchemy.orm.decl_base._DeferredDeclarativeConfig",
+          "lib.sqlalchemy.orm.decl_base._ClassScanAbstractConfig",
+          "lib.sqlalchemy.orm.mapper.Mapper",
+          "lib.sqlalchemy.orm.events.MapperEvents",
+          "lib.sqlalchemy.ext.declarative.extensions.ConcreteBase",
+          "lib.sqlalchemy.orm.decl_base._DeclarativeMapperConfig._scan_attributes",
+          "lib.sqlalchemy.orm.decl_base._ORMClassConfigurator",
+          "lib.sqlalchemy.orm.descriptor_props.CompositeProperty"
+        ]
+      },
+      {
+        "query_id": "sqla-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "sqla-14",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector",
+          "lib.sqlalchemy.sql.elements.BinaryExpression",
+          "lib.sqlalchemy.connectors.pyodbc.PyODBCConnector.create_connect_args"
+        ]
+      }
+    ],
+    "django": [
+      {
+        "query_id": "django-01",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.backends.sqlite3.operations.DatabaseOperations",
+          "django.views.generic.detail.SingleObjectMixin",
+          "django.db.models.manager.BaseManager",
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.template.engine.Engine",
+          "django.db.models.fields.related.RelatedField",
+          "django.core.serializers.xml_serializer.Serializer",
+          "django.apps.config.AppConfig",
+          "django.db.models.query.QuerySet",
+          "django.db.models.query_utils.Q"
+        ]
+      },
+      {
+        "query_id": "django-02",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.contenttypes.models.ContentType",
+          "django.db.models.options.Options",
+          "django.core.management.base.BaseCommand",
+          "django.contrib.postgres.fields.array.ArrayField",
+          "django.db.migrations.state.ModelState",
+          "django.db.models.constraints.BaseConstraint",
+          "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "django.core.checks.messages.CheckMessage",
+          "django.contrib.admin.sites.AdminSite",
+          "django.db.models.base.ModelBase"
+        ]
+      },
+      {
+        "query_id": "django-03",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.middleware.csrf.CsrfViewMiddleware",
+          "django.core.checks.security.csrf._csrf_middleware",
+          "django.views.decorators.csrf._EnsureCsrfToken",
+          "django.utils.csp.CSP",
+          "django.core.checks.security.csrf.check_csrf_middleware",
+          "django.views.decorators.csrf.csrf_exempt",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "django.template.library.InclusionNode",
+          "django.views.csrf.csrf_failure",
+          "django.views.decorators.csrf._EnsureCsrfCookie"
+        ]
+      },
+      {
+        "query_id": "django-04",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.contrib.auth.apps.AuthConfig",
+          "django.test.client.ClientMixin",
+          "django.contrib.auth.backends.ModelBackend",
+          "django.contrib.auth.tokens.PasswordResetTokenGenerator",
+          "django.contrib.auth.handlers.modwsgi.check_password",
+          "django.contrib.auth.__init__.authenticate",
+          "django.contrib.auth.base_user.AbstractBaseUser",
+          "django.contrib.admin.sites.AdminSite",
+          "django.contrib.auth.__init__.aauthenticate"
+        ]
+      },
+      {
+        "query_id": "django-05",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.db.models.manager.BaseManager",
+          "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "django.db.models.options.Options",
+          "django.contrib.auth.backends.RemoteUserBackend",
+          "django.db.migrations.state.ModelState",
+          "django.core.mail.backends.base.BaseEmailBackend",
+          "django.forms.renderers.DjangoTemplates",
+          "django.contrib.contenttypes.models.ContentType",
+          "django.forms.renderers.Jinja2"
+        ]
+      },
+      {
+        "query_id": "django-06",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.test.client.RequestFactory"
+        ]
+      },
+      {
+        "query_id": "django-07",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.core.handlers.base.BaseHandler",
+          "django.contrib.auth.middleware.AuthenticationMiddleware",
+          "django.contrib.messages.storage.session.SessionStorage",
+          "django.contrib.admindocs.middleware.XViewMiddleware",
+          "django.contrib.auth.middleware.AuthenticationMiddleware.process_request",
+          "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+          "django.contrib.auth.middleware.LoginRequiredMiddleware",
+          "django.contrib.sessions.middleware.SessionMiddleware",
+          "django.contrib.auth.middleware.PersistentRemoteUserMiddleware"
+        ]
+      },
+      {
+        "query_id": "django-08",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.middleware.csrf.CsrfViewMiddleware",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTests",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareUseSessionsTests",
+          "tests.auth_tests.test_views.LoginTest",
+          "django.middleware.csrf.CsrfViewMiddleware._check_token",
+          "django.middleware.csrf.get_token",
+          "tests.auth_tests.test_remote_user.RemoteUserTest",
+          "tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate",
+          "tests.csrf_tests.tests.CsrfViewMiddlewareTestMixin.test_process_request_csrf_cookie_no_token_exempt_view"
+        ]
+      },
+      {
+        "query_id": "django-09",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.auth.middleware.RemoteUserMiddleware",
+          "django.contrib.auth.backends.RemoteUserBackend",
+          "django.contrib.auth.backends.ModelBackend",
+          "django.db.backends.base.introspection.BaseDatabaseIntrospection",
+          "django.contrib.auth.middleware.RemoteUserMiddleware.process_request",
+          "django.contrib.auth.middleware.RemoteUserMiddleware.aprocess_request"
+        ]
+      },
+      {
+        "query_id": "django-10",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.migrations.loader.MigrationLoader",
+          "django.db.migrations.executor.MigrationExecutor",
+          "django.db.migrations.migration.Migration",
+          "django.core.management.commands.migrate.Command",
+          "django.apps.registry.Apps",
+          "django.core.management.base.BaseCommand",
+          "tests.migrations.test_executor.ExecutorTests",
+          "django.core.management.commands.squashmigrations.Command",
+          "tests.migrations.test_loader.LoaderTests",
+          "tests.migrations.test_commands.SquashMigrationsTests"
+        ]
+      },
+      {
+        "query_id": "django-11",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.db.models.options.Options",
+          "django.db.models.fields.related_descriptors.ReverseManyToOneDescriptor",
+          "django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.ManyRelatedManager",
+          "django.db.models.fields.related_descriptors.ManyToManyDescriptor",
+          "django.db.models.fields.related_descriptors.ReverseOneToOneDescriptor"
+        ]
+      },
+      {
+        "query_id": "django-12",
+        "insufficient_evidence": false,
+        "accepted_entities": [
+          "django.contrib.admin.sites.AdminSite",
+          "django.contrib.admin.decorators.register",
+          "django.contrib.admin.decorators.register._model_admin_wrapper",
+          "tests.admin_checks.tests.SystemChecksTestCase",
+          "django.contrib.admin.sites.AdminSite.admin_view"
+        ]
+      },
+      {
+        "query_id": "django-13",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      },
+      {
+        "query_id": "django-14",
+        "insufficient_evidence": true,
+        "accepted_entities": []
+      }
+    ]
+  },
+  "candidate_verbs_v2": [
+    "actually",
+    "call",
+    "called",
+    "calling",
+    "calls",
+    "handle",
+    "handles",
+    "use",
+    "used",
+    "uses",
+    "work",
+    "works"
+  ]
+}
