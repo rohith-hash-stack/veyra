@@ -1,0 +1,146 @@
+{
+  "A": {
+    "avg_text_length_chars": 388.4234752589183,
+    "fit_time_s": 2.168613910675049,
+    "total_symbols": 25,
+    "recall_at": {
+      "1": 0.08,
+      "5": 0.2,
+      "10": 0.32,
+      "20": 0.36,
+      "50": 0.6,
+      "100": 0.92
+    },
+    "recall_at_counts": {
+      "1": 2,
+      "5": 5,
+      "10": 8,
+      "20": 9,
+      "50": 15,
+      "100": 23
+    },
+    "per_query_ranks": {
+      "flask-01": {
+        "flask.app.Flask": 9,
+        "flask.sansio.app.App": 7
+      },
+      "flask-02": {
+        "flask.sessions.SecureCookieSessionInterface": 6,
+        "flask.sessions.SecureCookieSession": 90
+      },
+      "flask-03": {
+        "flask.wrappers.Request": 25
+      },
+      "flask-04": {
+        "Scaffold.route": 1,
+        "Scaffold.add_url_rule": 2,
+        "App.add_url_rule": 2
+      },
+      "flask-05": {
+        "flask.blueprints.Blueprint": 73,
+        "flask.sansio.blueprints.Blueprint": 73
+      },
+      "flask-06": {
+        "Flask.wsgi_app": 28,
+        "Flask.full_dispatch_request": 33,
+        "Flask.dispatch_request": 2,
+        "Flask.preprocess_request": 89,
+        "Flask.finalize_request": 86
+      },
+      "flask-07": {
+        "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 1128
+      },
+      "flask-08": {
+        "Flask.run": 25
+      },
+      "flask-09": {
+        "App.raise_routing_exception": 16
+      },
+      "flask-10": {
+        "Flask.handle_user_exception": 31,
+        "Flask.handle_exception": 64
+      },
+      "flask-11": {
+        "flask.testing.FlaskClient": 74,
+        "flask.testing.EnvironBuilder": 913
+      },
+      "flask-12": {
+        "App.register_blueprint": 1,
+        "Blueprint.register": 58,
+        "BlueprintSetupState.add_url_rule": 21
+      }
+    }
+  },
+  "C": {
+    "avg_text_length_chars": 347.7967011891063,
+    "fit_time_s": 0.7606735229492188,
+    "total_symbols": 25,
+    "recall_at": {
+      "1": 0.08,
+      "5": 0.4,
+      "10": 0.52,
+      "20": 0.64,
+      "50": 0.84,
+      "100": 0.92
+    },
+    "recall_at_counts": {
+      "1": 2,
+      "5": 10,
+      "10": 13,
+      "20": 16,
+      "50": 21,
+      "100": 23
+    },
+    "per_query_ranks": {
+      "flask-01": {
+        "flask.app.Flask": 2,
+        "flask.sansio.app.App": 3
+      },
+      "flask-02": {
+        "flask.sessions.SecureCookieSessionInterface": 40,
+        "flask.sessions.SecureCookieSession": 71
+      },
+      "flask-03": {
+        "flask.wrappers.Request": 1
+      },
+      "flask-04": {
+        "Scaffold.route": 1,
+        "Scaffold.add_url_rule": 2,
+        "App.add_url_rule": 2
+      },
+      "flask-05": {
+        "flask.blueprints.Blueprint": 9,
+        "flask.sansio.blueprints.Blueprint": 9
+      },
+      "flask-06": {
+        "Flask.wsgi_app": 5,
+        "Flask.full_dispatch_request": 26,
+        "Flask.dispatch_request": 2,
+        "Flask.preprocess_request": 60,
+        "Flask.finalize_request": 35
+      },
+      "flask-07": {
+        "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 1122
+      },
+      "flask-08": {
+        "Flask.run": 20
+      },
+      "flask-09": {
+        "App.raise_routing_exception": 38
+      },
+      "flask-10": {
+        "Flask.handle_user_exception": 12,
+        "Flask.handle_exception": 21
+      },
+      "flask-11": {
+        "flask.testing.FlaskClient": 6,
+        "flask.testing.EnvironBuilder": 2023
+      },
+      "flask-12": {
+        "App.register_blueprint": 2,
+        "Blueprint.register": 5,
+        "BlueprintSetupState.add_url_rule": 19
+      }
+    }
+  }
+}

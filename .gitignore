@@ -12,3 +12,9 @@ benchmarks/real_world_python/**/*.db
 benchmarks/real_world_python/**/*.db-journal
 benchmarks/real_world_python/**/*.db-wal
 benchmarks/real_world_python/**/*.db-shm
+
+# Phase E semantic retrieval experiment: pickled embedding indices are large
+# and fully reproducible from build_index.py/build_all.py against the (also
+# gitignored) VBGStore databases -- same "regenerate from pinned source,
+# don't commit the derived binary" convention as the .db files above.
+benchmarks/real_world_python/results/semantic_index/*.pkl
