@@ -1,0 +1,1398 @@
+{
+  "tfidf-lsa": {
+    "flask-13": {
+      "repo": "flask",
+      "query": "Where does Flask implement CSRF protection for form submissions?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "src.flask.debughelpers.DebugFilesKeyError.__init__.form_matches",
+          "semantic_score": 0.6857622265815735,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:29-29"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request._max_form_parts",
+          "semantic_score": 0.5580648183822632,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:57-57"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request.max_form_parts",
+          "semantic_score": 0.5508847236633301,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:143-144"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request._max_form_memory_size",
+          "semantic_score": 0.536389172077179,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:56-56"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request._load_form_data",
+          "semantic_score": 0.535018265247345,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:197-210"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request.max_form_memory_size",
+          "semantic_score": 0.5291585326194763,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:116-117"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.DebugFilesKeyError.__init__.buf",
+          "semantic_score": 0.5290156006813049,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:30-37"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.DebugFilesKeyError.__init__",
+          "semantic_score": 0.524907112121582,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:28-44"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.DebugFilesKeyError",
+          "semantic_score": 0.4515625834465027,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:23-47"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.UnexpectedUnicodeError",
+          "semantic_score": 0.41024279594421387,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:17-20"
+        }
+      ]
+    },
+    "flask-14": {
+      "repo": "flask",
+      "query": "Where is Flask's built-in ORM or database layer implemented?",
+      "deterministic_grade_negative_correct": false,
+      "top_candidates": [
+        {
+          "entity_id": "tests.test_json_tag.test_dump_load_unchanged.s",
+          "semantic_score": 0.4563845098018646,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_json_tag.py:28-28"
+        },
+        {
+          "entity_id": "tests.test_blueprints.test_template_filter_with_template.super_reverse",
+          "semantic_score": 0.4399683177471161,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_blueprints.py:430-431"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.FormDataRoutingRedirect",
+          "semantic_score": 0.4390779733657837,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:50-78"
+        },
+        {
+          "entity_id": "tests.test_templating.test_template_filter_with_template.super_reverse",
+          "semantic_score": 0.4332229197025299,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_templating.py:189-190"
+        },
+        {
+          "entity_id": "docs.conf.extlinks",
+          "semantic_score": 0.42864587903022766,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "docs/conf.py:26-30"
+        },
+        {
+          "entity_id": "tests.test_blueprints.test_add_template_filter_with_template.super_reverse",
+          "semantic_score": 0.4183903932571411,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_blueprints.py:462-463"
+        },
+        {
+          "entity_id": "tests.test_blueprints.test_template_filter_after_route_with_template.super_reverse",
+          "semantic_score": 0.4133910834789276,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_blueprints.py:451-452"
+        },
+        {
+          "entity_id": "tests.test_templating.test_add_template_filter_with_template.super_reverse",
+          "semantic_score": 0.411839097738266,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_templating.py:201-202"
+        },
+        {
+          "entity_id": "tests.test_json_tag.test_dump_load_unchanged",
+          "semantic_score": 0.4029410183429718,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_json_tag.py:27-29"
+        },
+        {
+          "entity_id": "src.flask.cli._app_option",
+          "semantic_score": 0.395193874835968,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "src/flask/cli.py:453-465"
+        }
+      ]
+    },
+    "fastapi-13": {
+      "repo": "fastapi",
+      "query": "Where does FastAPI implement its own SQL query builder or ORM?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "fastapi.params.ParamTypes.query",
+          "semantic_score": 0.6141024827957153,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:20-20"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_query_baz.response",
+          "semantic_score": 0.5917220711708069,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:24-24"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_frozenset_query_1_query_1_query_2.response",
+          "semantic_score": 0.5877602100372314,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:252-252"
+        },
+        {
+          "entity_id": "fastapi.openapi.models.APIKeyIn.query",
+          "semantic_score": 0.5746468305587769,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/openapi/models.py:334-334"
+        },
+        {
+          "entity_id": "fastapi.openapi.models.ParameterInType.query",
+          "semantic_score": 0.5734702944755554,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/openapi/models.py:222-222"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_param_query_50.response",
+          "semantic_score": 0.5675663948059082,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:189-189"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_frozenset_query_1_query_1_query_2",
+          "semantic_score": 0.5647595524787903,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:251-254"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_int_query_baz.response",
+          "semantic_score": 0.5549726486206055,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:99-99"
+        },
+        {
+          "entity_id": "tests.test_query.test_query_optional_query_baz.response",
+          "semantic_score": 0.5544324517250061,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:51-51"
+        },
+        {
+          "entity_id": "tests.test_query.test_query.response",
+          "semantic_score": 0.5520809292793274,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_query.py:9-9"
+        }
+      ]
+    },
+    "fastapi-14": {
+      "repo": "fastapi",
+      "query": "Where does FastAPI implement built-in rate limiting for endpoints?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "fastapi.params.Param.in_",
+          "semantic_score": 0.7102917432785034,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:27-27"
+        },
+        {
+          "entity_id": "fastapi.openapi.models.APIKey.in_",
+          "semantic_score": 0.7089571356773376,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/openapi/models.py:341-341"
+        },
+        {
+          "entity_id": "fastapi.openapi.models.Parameter.in_",
+          "semantic_score": 0.7077155113220215,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/openapi/models.py:260-260"
+        },
+        {
+          "entity_id": "fastapi.params.Path.in_",
+          "semantic_score": 0.6510788202285767,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:138-138"
+        },
+        {
+          "entity_id": "fastapi.params.Query.in_",
+          "semantic_score": 0.5782594680786133,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:222-222"
+        },
+        {
+          "entity_id": "fastapi.params.Body.__init__.use_kwargs",
+          "semantic_score": 0.5684415102005005,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:573-573"
+        },
+        {
+          "entity_id": "fastapi.params.Param.__init__.use_kwargs",
+          "semantic_score": 0.5684415102005005,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "fastapi/params.py:129-129"
+        },
+        {
+          "entity_id": "scripts.docs.add_permalinks_page.in_code_block4",
+          "semantic_score": 0.5625850558280945,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "scripts/docs.py:853-853"
+        },
+        {
+          "entity_id": "scripts.docs.add_permalinks_page.in_code_block3",
+          "semantic_score": 0.5625846982002258,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "scripts/docs.py:852-852"
+        },
+        {
+          "entity_id": "tests.test_allow_inf_nan_in_enforcing",
+          "semantic_score": 0.5599377155303955,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_allow_inf_nan_in_enforcing.py:1"
+        }
+      ]
+    },
+    "sqla-13": {
+      "repo": "sqlalchemy",
+      "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "test.ext.test_associationproxy.SetTest.test_bulk_replace",
+          "semantic_score": 0.7655627727508545,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/ext/test_associationproxy.py:939-953"
+        },
+        {
+          "entity_id": "test.ext.test_associationproxy.SetTest.test_bulk_replace.keep_assocs",
+          "semantic_score": 0.7652872204780579,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/ext/test_associationproxy.py:945-945"
+        },
+        {
+          "entity_id": "test.ext.test_associationproxy.CustomDictTest.test_bulk_replace.keep_assocs",
+          "semantic_score": 0.7575383186340332,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/ext/test_associationproxy.py:616-616"
+        },
+        {
+          "entity_id": "test.ext.test_associationproxy.CustomDictTest.test_bulk_replace",
+          "semantic_score": 0.7434148788452148,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/ext/test_associationproxy.py:610-627"
+        },
+        {
+          "entity_id": "test.sql.test_operators.InTest.test_in_self_plus_negated",
+          "semantic_score": 0.7343785166740417,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/sql/test_operators.py:2689-2702"
+        },
+        {
+          "entity_id": "test.dialect.mysql.test_for_update.MySQLForUpdateLockingTest._assert_a_is_locked.A",
+          "semantic_score": 0.7238966822624207,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/dialect/mysql/test_for_update.py:87-87"
+        },
+        {
+          "entity_id": "test.sql.test_external_traversal.TraversalTest.test_change_in_place",
+          "semantic_score": 0.7027338147163391,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/sql/test_external_traversal.py:305-347"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.collections._instrument_class",
+          "semantic_score": 0.6990929841995239,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/orm/collections.py:826-844"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql.coercions.InElementImpl._warn_for_implicit_coercion",
+          "semantic_score": 0.6908627152442932,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/sql/coercions.py:852-857"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.exc.NoSuchModuleError",
+          "semantic_score": 0.6878271698951721,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/exc.py:188-190"
+        }
+      ]
+    },
+    "sqla-14": {
+      "repo": "sqlalchemy",
+      "query": "Where does SQLAlchemy implement password hashing for user authentication?",
+      "deterministic_grade_negative_correct": false,
+      "top_candidates": [
+        {
+          "entity_id": "test.orm.test_query.OperatorTest.test_in_instrumented_attribute.User",
+          "semantic_score": 0.7210415601730347,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_query.py:1977-1977"
+        },
+        {
+          "entity_id": "test.orm.test_lockmode.CompileTest.test_for_update_on_inner_w_joinedload.User",
+          "semantic_score": 0.7198013067245483,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_lockmode.py:314-314"
+        },
+        {
+          "entity_id": "test.orm.test_query.OperatorTest.test_in.User",
+          "semantic_score": 0.7190954685211182,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_query.py:1964-1964"
+        },
+        {
+          "entity_id": "test.orm._fixtures.CannedResults.user_result.User",
+          "semantic_score": 0.710401177406311,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/_fixtures.py:410-410"
+        },
+        {
+          "entity_id": "test.orm.dml.test_evaluator.EvaluateTest.test_in_tuples.User",
+          "semantic_score": 0.7100095152854919,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/dml/test_evaluator.py:264-264"
+        },
+        {
+          "entity_id": "test.orm.dml.test_evaluator.EvaluateTest.test_in.User",
+          "semantic_score": 0.7085344791412354,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/dml/test_evaluator.py:230-230"
+        },
+        {
+          "entity_id": "test.orm.test_lockmode.ForUpdateTest._assert.User",
+          "semantic_score": 0.7080428004264832,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_lockmode.py:28-28"
+        },
+        {
+          "entity_id": "test.orm.test_lockmode.CompileTest.test_postgres_for_no_key_nowait_update.User",
+          "semantic_score": 0.7034226059913635,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_lockmode.py:258-258"
+        },
+        {
+          "entity_id": "test.orm.test_lockmode.CompileTest.test_postgres_for_no_key_update.User",
+          "semantic_score": 0.7022567987442017,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_lockmode.py:249-249"
+        },
+        {
+          "entity_id": "test.orm.test_lockmode.CompileTest.test_postgres_read_nowait.User",
+          "semantic_score": 0.6994670629501343,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "test/orm/test_lockmode.py:199-199"
+        }
+      ]
+    },
+    "django-13": {
+      "repo": "django",
+      "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "tests.template_tests.filter_tests.test_urlize.FunctionTests.test_ipv6",
+          "semantic_score": 0.6740758419036865,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/template_tests/filter_tests/test_urlize.py:402-407"
+        },
+        {
+          "entity_id": "tests.test_utils.tests.AssertURLEqualTests.test_equal.valid_tests",
+          "semantic_score": 0.6653070449829102,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_utils/tests.py:1394-1406"
+        },
+        {
+          "entity_id": "tests.test_utils.tests.AssertURLEqualTests.test_equal",
+          "semantic_score": 0.6595520377159119,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_utils/tests.py:1393-1409"
+        },
+        {
+          "entity_id": "tests.test_utils.tests.AssertURLEqualTests",
+          "semantic_score": 0.6582954525947571,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_utils/tests.py:1392-1444"
+        },
+        {
+          "entity_id": "tests.test_utils.tests.AssertURLEqualTests.test_not_equal",
+          "semantic_score": 0.6200050711631775,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_utils/tests.py:1411-1422"
+        },
+        {
+          "entity_id": "tests.test_utils.tests.AssertURLEqualTests.test_not_equal.invalid_tests",
+          "semantic_score": 0.6186894774436951,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/test_utils/tests.py:1412-1419"
+        },
+        {
+          "entity_id": "tests.logging_tests.tests.LogFormattersTests.test_server_formatter_styles.status_code_styles",
+          "semantic_score": 0.6112918257713318,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/logging_tests/tests.py:765-773"
+        },
+        {
+          "entity_id": "tests.expressions_case.tests.CaseExpressionTests.test_update_url",
+          "semantic_score": 0.609067976474762,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/expressions_case/tests.py:1195-1215"
+        },
+        {
+          "entity_id": "django.http.multipartparser",
+          "semantic_score": 0.6035268902778625,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "django/http/multipartparser.py:1"
+        },
+        {
+          "entity_id": "tests.forms_tests.tests.test_media.FormsMediaTestCase.test_merge",
+          "semantic_score": 0.6031529307365417,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/forms_tests/tests/test_media.py:731-749"
+        }
+      ]
+    },
+    "django-14": {
+      "repo": "django",
+      "query": "Where does Django implement a built-in GraphQL API layer?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "tests.template_tests.filter_tests.test_truncatewords.FunctionTests",
+          "semantic_score": 0.7378507256507874,
+          "rank": 1,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/template_tests/filter_tests/test_truncatewords.py:33-56"
+        },
+        {
+          "entity_id": "django.contrib.gis.feeds.GeoFeedMixin.georss_coords",
+          "semantic_score": 0.7224035263061523,
+          "rank": 2,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/feeds.py:11-17"
+        },
+        {
+          "entity_id": "tests.template_tests.filter_tests.test_truncatewords.FunctionTests.test_overtruncate",
+          "semantic_score": 0.7205938100814819,
+          "rank": 3,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/template_tests/filter_tests/test_truncatewords.py:43-47"
+        },
+        {
+          "entity_id": "django.db.models.sql.query.Query.join.reuse_aliases",
+          "semantic_score": 0.7047123908996582,
+          "rank": 4,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "django/db/models/sql/query.py:1148-1152"
+        },
+        {
+          "entity_id": "tests.gis_tests.test_measure.AreaTest.test_access",
+          "semantic_score": 0.7042655944824219,
+          "rank": 5,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/gis_tests/test_measure.py:200-204"
+        },
+        {
+          "entity_id": "tests.staticfiles_tests.cases.TestDefaults.test_staticfiles_dirs_subdir",
+          "semantic_score": 0.6933018565177917,
+          "rank": 6,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/staticfiles_tests/cases.py:113-118"
+        },
+        {
+          "entity_id": "tests.template_tests.filter_tests.test_truncatewords.FunctionTests.test_invalid_number",
+          "semantic_score": 0.6826159954071045,
+          "rank": 7,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/template_tests/filter_tests/test_truncatewords.py:49-53"
+        },
+        {
+          "entity_id": "tests.migrations.test_writer.WriterTests.test_serialize_choices.TextChoices.A",
+          "semantic_score": 0.6787248849868774,
+          "rank": 8,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/migrations/test_writer.py:488-488"
+        },
+        {
+          "entity_id": "tests.i18n.test_extraction.CopyPluralFormsExtractorTests.test_translate_and_plural_blocktranslate_collision",
+          "semantic_score": 0.6669520735740662,
+          "rank": 9,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/i18n/test_extraction.py:840-861"
+        },
+        {
+          "entity_id": "tests.signals.tests.BaseSignalSetup.setUp",
+          "semantic_score": 0.6654649972915649,
+          "rank": 10,
+          "retrieval_source": "tfidf-lsa",
+          "representation_version": "C",
+          "source_location": "tests/signals/tests.py:32-41"
+        }
+      ]
+    }
+  },
+  "glove": {
+    "flask-13": {
+      "repo": "flask",
+      "query": "Where does Flask implement CSRF protection for form submissions?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "src.flask.templating.Environment",
+          "semantic_score": 0.8501616716384888,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/templating.py:36-46"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Request",
+          "semantic_score": 0.8359436988830566,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:18-219"
+        },
+        {
+          "entity_id": "src.flask.helpers.abort",
+          "semantic_score": 0.8358005881309509,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/helpers.py:281-301"
+        },
+        {
+          "entity_id": "src.flask.wrappers.Response",
+          "semantic_score": 0.8353976607322693,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/wrappers.py:222-257"
+        },
+        {
+          "entity_id": "src.flask.ctx.has_request_context",
+          "semantic_score": 0.8346425294876099,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/ctx.py:209-232"
+        },
+        {
+          "entity_id": "src.flask.debughelpers.DebugFilesKeyError.__init__.buf",
+          "semantic_score": 0.8333544135093689,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/debughelpers.py:30-37"
+        },
+        {
+          "entity_id": "src.flask.app.Flask.__call__",
+          "semantic_score": 0.831802248954773,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/app.py:1621-1628"
+        },
+        {
+          "entity_id": "src.flask.json.provider.JSONProvider.response",
+          "semantic_score": 0.8313170671463013,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/json/provider.py:89-105"
+        },
+        {
+          "entity_id": "src.flask.views.MethodView",
+          "semantic_score": 0.8309042453765869,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/views.py:138-191"
+        },
+        {
+          "entity_id": "src.flask.sansio.blueprints.BlueprintSetupState",
+          "semantic_score": 0.8305937647819519,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/sansio/blueprints.py:34-116"
+        }
+      ]
+    },
+    "flask-14": {
+      "repo": "flask",
+      "query": "Where is Flask's built-in ORM or database layer implemented?",
+      "deterministic_grade_negative_correct": false,
+      "top_candidates": [
+        {
+          "entity_id": "src.flask.logging.create_logger",
+          "semantic_score": 0.8202002644538879,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/logging.py:58-79"
+        },
+        {
+          "entity_id": "src.flask.app.Flask.open_resource",
+          "semantic_score": 0.817932665348053,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/app.py:415-446"
+        },
+        {
+          "entity_id": "src.flask.cli.ScriptInfo",
+          "semantic_score": 0.8144867420196533,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/cli.py:293-372"
+        },
+        {
+          "entity_id": "examples.tutorial.flaskr.__init__.create_app",
+          "semantic_score": 0.813849151134491,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "examples/tutorial/flaskr/__init__.py:6-48"
+        },
+        {
+          "entity_id": "src.flask.json.provider.JSONProvider",
+          "semantic_score": 0.812536895275116,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/json/provider.py:19-105"
+        },
+        {
+          "entity_id": "examples.tutorial.flaskr.db.get_db",
+          "semantic_score": 0.8100814819335938,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "examples/tutorial/flaskr/db.py:9-20"
+        },
+        {
+          "entity_id": "src.flask.templating.Environment",
+          "semantic_score": 0.8091917037963867,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/templating.py:36-46"
+        },
+        {
+          "entity_id": "src.flask.json.__init__.loads",
+          "semantic_score": 0.8090879917144775,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/json/__init__.py:77-105"
+        },
+        {
+          "entity_id": "src.flask.cli.shell_command",
+          "semantic_score": 0.8076993823051453,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/cli.py:1001-1045"
+        },
+        {
+          "entity_id": "src.flask.app.Flask.log_exception",
+          "semantic_score": 0.807420015335083,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "src/flask/app.py:953-967"
+        }
+      ]
+    },
+    "fastapi-13": {
+      "repo": "fastapi",
+      "query": "Where does FastAPI implement its own SQL query builder or ORM?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "fastapi.applications.FastAPI",
+          "semantic_score": 0.8300434350967407,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/applications.py:42-4774"
+        },
+        {
+          "entity_id": "fastapi.responses.UJSONResponse",
+          "semantic_score": 0.8251394629478455,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/responses.py:48-66"
+        },
+        {
+          "entity_id": "fastapi.responses.ORJSONResponse",
+          "semantic_score": 0.8218668103218079,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/responses.py:78-98"
+        },
+        {
+          "entity_id": "fastapi.security.api_key.APIKeyQuery",
+          "semantic_score": 0.8179944753646851,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/api_key.py:55-144"
+        },
+        {
+          "entity_id": "fastapi.routing.APIRouter",
+          "semantic_score": 0.8150760531425476,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/routing.py:2255-6447"
+        },
+        {
+          "entity_id": "fastapi.applications.FastAPI.frontend",
+          "semantic_score": 0.8121155500411987,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/applications.py:1222-1299"
+        },
+        {
+          "entity_id": "fastapi.applications.FastAPI.include_router",
+          "semantic_score": 0.8111463189125061,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/applications.py:1441-1644"
+        },
+        {
+          "entity_id": "fastapi.routing.APIRouter.frontend",
+          "semantic_score": 0.8095638751983643,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/routing.py:2630-2717"
+        },
+        {
+          "entity_id": "fastapi.openapi.docs.get_redoc_html",
+          "semantic_score": 0.8092209696769714,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/openapi/docs.py:197-298"
+        },
+        {
+          "entity_id": "fastapi.security.http.HTTPDigest",
+          "semantic_score": 0.8082664012908936,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/http.py:319-417"
+        }
+      ]
+    },
+    "fastapi-14": {
+      "repo": "fastapi",
+      "query": "Where does FastAPI implement built-in rate limiting for endpoints?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "fastapi.applications.FastAPI.openapi",
+          "semantic_score": 0.860151469707489,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/applications.py:1070-1103"
+        },
+        {
+          "entity_id": "fastapi.responses.UJSONResponse",
+          "semantic_score": 0.8524214029312134,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/responses.py:48-66"
+        },
+        {
+          "entity_id": "fastapi.responses.ORJSONResponse",
+          "semantic_score": 0.8510211706161499,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/responses.py:78-98"
+        },
+        {
+          "entity_id": "fastapi.routing.APIRouter",
+          "semantic_score": 0.8498134016990662,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/routing.py:2255-6447"
+        },
+        {
+          "entity_id": "fastapi.security.api_key.APIKeyQuery",
+          "semantic_score": 0.8441746234893799,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/api_key.py:55-144"
+        },
+        {
+          "entity_id": "fastapi.param_functions.Security",
+          "semantic_score": 0.8434351086616516,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/param_functions.py:2372-2460"
+        },
+        {
+          "entity_id": "fastapi.applications.FastAPI",
+          "semantic_score": 0.8423701524734497,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/applications.py:42-4774"
+        },
+        {
+          "entity_id": "fastapi.security.oauth2.SecurityScopes",
+          "semantic_score": 0.8378356695175171,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/oauth2.py:653-693"
+        },
+        {
+          "entity_id": "fastapi.security.http.HTTPDigest",
+          "semantic_score": 0.8371077179908752,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/http.py:319-417"
+        },
+        {
+          "entity_id": "fastapi.security.api_key.APIKeyCookie",
+          "semantic_score": 0.8369271159172058,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "fastapi/security/api_key.py:235-320"
+        }
+      ]
+    },
+    "sqla-13": {
+      "repo": "sqlalchemy",
+      "query": "Where does SQLAlchemy implement HTTP request routing for a web application?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query.join",
+          "semantic_score": 0.849309504032135,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/orm/query.py:2272-2505"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.testing.asyncio._assume_async",
+          "semantic_score": 0.8456252813339233,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/testing/asyncio.py:37-51"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.interfaces.Dialect._get_server_version_info",
+          "semantic_score": 0.8414111137390137,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/engine/interfaces.py:2126-2135"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query.with_for_update",
+          "semantic_score": 0.8401446342468262,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/orm/query.py:1795-1864"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.engine.url.make_url",
+          "semantic_score": 0.8388213515281677,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/engine/url.py:839-864"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.associationproxy.AssociationProxyInstance.attr",
+          "semantic_score": 0.8379354476928711,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/ext/associationproxy.py:775-803"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.orm.query.Query.with_entities",
+          "semantic_score": 0.8372874855995178,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/orm/query.py:1576-1616"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.sql._elements_constructors.text",
+          "semantic_score": 0.8363842964172363,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/sql/_elements_constructors.py:1787-1863"
+        },
+        {
+          "entity_id": "lib.sqlalchemy.ext.baked.Result.with_post_criteria",
+          "semantic_score": 0.8332698345184326,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "lib/sqlalchemy/ext/baked.py:337-356"
+        },
+        {
+          "entity_id": "test.orm.test_loading.MultiPathLoadPathTest.test_refresh_ignores_cyclic_raiseload",
+          "semantic_score": 0.8329951167106628,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/test_loading.py:244-274"
+        }
+      ]
+    },
+    "sqla-14": {
+      "repo": "sqlalchemy",
+      "query": "Where does SQLAlchemy implement password hashing for user authentication?",
+      "deterministic_grade_negative_correct": false,
+      "top_candidates": [
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms.DCTransformsTest.test_init_var.User.__post_init__",
+          "semantic_score": 0.8295862674713135,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/declarative/test_dc_transforms.py:629-633"
+        },
+        {
+          "entity_id": "test.orm.declarative.test_dc_transforms_future_anno_sync.DCTransformsTest.test_init_var.User.__post_init__",
+          "semantic_score": 0.8286610245704651,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/declarative/test_dc_transforms_future_anno_sync.py:642-646"
+        },
+        {
+          "entity_id": "test.orm.inheritance.test_basic.FlushTest.test_two.User.__init__",
+          "semantic_score": 0.7874823212623596,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/inheritance/test_basic.py:1568-1570"
+        },
+        {
+          "entity_id": "test.ext.test_associationproxy.ComparatorTest.test_filter_any_chained.q2",
+          "semantic_score": 0.7852469086647034,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/ext/test_associationproxy.py:2176-2184"
+        },
+        {
+          "entity_id": "test.typing.plain_files.orm.traditional_relationship.Address.user_fk_style_one",
+          "semantic_score": 0.7836318612098694,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/typing/plain_files/orm/traditional_relationship.py:65-67"
+        },
+        {
+          "entity_id": "test.orm.test_core_compilation.RawSelectTest.test_where_relationship",
+          "semantic_score": 0.7826724052429199,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/test_core_compilation.py:2828-2845"
+        },
+        {
+          "entity_id": "test.dialect.sqlite.test_dialect.SavepointTest.test_nested_subtransaction_rollback",
+          "semantic_score": 0.7824629545211792,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/dialect/sqlite/test_dialect.py:1037-1053"
+        },
+        {
+          "entity_id": "test.orm.test_cache_key.RoundTripTest.test_subqueryload.query.stmt",
+          "semantic_score": 0.782390832901001,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/test_cache_key.py:882-887"
+        },
+        {
+          "entity_id": "test.orm.test_query.FilterTest.test_clause_element_ok",
+          "semantic_score": 0.7823004126548767,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/orm/test_query.py:3122-3129"
+        },
+        {
+          "entity_id": "test.typing.plain_files.orm.traditional_relationship.Address.user_pj_style_three",
+          "semantic_score": 0.7817034125328064,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "test/typing/plain_files/orm/traditional_relationship.py:80-82"
+        }
+      ]
+    },
+    "django-13": {
+      "repo": "django",
+      "query": "Where does Django implement its own production-grade HTTP/2 server?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "django.core.servers.basehttp.ServerHandler",
+          "semantic_score": 0.8747914433479309,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/servers/basehttp.py:115-175"
+        },
+        {
+          "entity_id": "tests.servers.tests.LiveServerViews",
+          "semantic_score": 0.8640763163566589,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "tests/servers/tests.py:187-306"
+        },
+        {
+          "entity_id": "tests.servers.tests.LiveServerViews.test_protocol",
+          "semantic_score": 0.8526762127876282,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "tests/servers/tests.py:188-191"
+        },
+        {
+          "entity_id": "tests.admin_scripts.tests.ManageRunserver.test_on_bind",
+          "semantic_score": 0.8436337113380432,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "tests/admin_scripts/tests.py:1667-1683"
+        },
+        {
+          "entity_id": "django.core.servers.basehttp.ServerHandler.finish_response",
+          "semantic_score": 0.8360490202903748,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/servers/basehttp.py:161-175"
+        },
+        {
+          "entity_id": "django.core.management.base.BaseCommand.get_version",
+          "semantic_score": 0.8355244398117065,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/management/base.py:301-307"
+        },
+        {
+          "entity_id": "django.core.servers.basehttp.WSGIRequestHandler",
+          "semantic_score": 0.8352972865104675,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/servers/basehttp.py:178-248"
+        },
+        {
+          "entity_id": "django.core.asgi.get_asgi_application",
+          "semantic_score": 0.8337963223457336,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/asgi.py:5-13"
+        },
+        {
+          "entity_id": "django.core.cache.backends.redis.RedisCacheClient._get_connection_pool_index",
+          "semantic_score": 0.8328835964202881,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/cache/backends/redis.py:77-82"
+        },
+        {
+          "entity_id": "django.utils.http._url_has_allowed_host_and_scheme",
+          "semantic_score": 0.8324419260025024,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/utils/http.py:304-334"
+        }
+      ]
+    },
+    "django-14": {
+      "repo": "django",
+      "query": "Where does Django implement a built-in GraphQL API layer?",
+      "deterministic_grade_negative_correct": true,
+      "top_candidates": [
+        {
+          "entity_id": "django.contrib.gis.gdal.layer.Layer",
+          "semantic_score": 0.7830947041511536,
+          "rank": 1,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/gdal/layer.py:21-234"
+        },
+        {
+          "entity_id": "django.core.exceptions.MiddlewareNotUsed",
+          "semantic_score": 0.782082736492157,
+          "rank": 2,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/core/exceptions.py:117-120"
+        },
+        {
+          "entity_id": "django.db.migrations.loader.MigrationLoader.build_graph",
+          "semantic_score": 0.7811962366104126,
+          "rank": 3,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/db/migrations/loader.py:274-342"
+        },
+        {
+          "entity_id": "django.contrib.gis.utils.ogrinspect.mapping",
+          "semantic_score": 0.7775871753692627,
+          "rank": 4,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/utils/ogrinspect.py:19-56"
+        },
+        {
+          "entity_id": "django.contrib.auth.backends.RemoteUserBackend",
+          "semantic_score": 0.7740551233291626,
+          "rank": 5,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/auth/backends.py:255-342"
+        },
+        {
+          "entity_id": "django.contrib.gis.gdal.layer.Layer.__init__",
+          "semantic_score": 0.7720537185668945,
+          "rank": 6,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/gdal/layer.py:27-40"
+        },
+        {
+          "entity_id": "django.contrib.gis.utils.layermapping.LayerMapping.check_layer",
+          "semantic_score": 0.770494818687439,
+          "rank": 7,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/utils/layermapping.py:192-308"
+        },
+        {
+          "entity_id": "django.db.migrations.graph.MigrationGraph.ensure_not_cyclic",
+          "semantic_score": 0.7673758268356323,
+          "rank": 8,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/db/migrations/graph.py:271-294"
+        },
+        {
+          "entity_id": "django.contrib.gis.utils.layermapping.LayerMapping.__init__",
+          "semantic_score": 0.7671206593513489,
+          "rank": 9,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/contrib/gis/utils/layermapping.py:97-177"
+        },
+        {
+          "entity_id": "django.utils.decorators.decorator_from_middleware",
+          "semantic_score": 0.7670964598655701,
+          "rank": 10,
+          "retrieval_source": "glove",
+          "representation_version": "C",
+          "source_location": "django/utils/decorators.py:114-120"
+        }
+      ]
+    }
+  }
+}

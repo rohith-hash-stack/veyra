@@ -80,6 +80,13 @@ class GloveMeanPool:
                 vectors[i] = np.mean(word_vecs, axis=0)
         return vectors
 
+    def embed_query(self, text: str) -> np.ndarray:
+        """Same mean-pooling as `embed()`, for a single query string --
+        given the uniform `embed_query(text) -> np.ndarray` interface
+        `TfidfLsa` also exposes, so downstream scripts don't need to know
+        which model they're calling."""
+        return self.embed([text])[0]
+
 
 class TfidfLsa:
     """TF-IDF followed by truncated SVD (latent semantic analysis) --

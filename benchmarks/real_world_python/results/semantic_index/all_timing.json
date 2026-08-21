@@ -1,0 +1,74 @@
+{
+  "flask": {
+    "tfidf-lsa": {
+      "index_build_s": 1.2198479175567627,
+      "represent_s": 0.004364728927612305,
+      "embed_s": 1.2754311561584473,
+      "total_s": 2.4996438026428223,
+      "n_entities": 2607,
+      "storage_bytes": 6417171
+    },
+    "glove": {
+      "index_build_s": 1.2513811588287354,
+      "represent_s": 0.004980325698852539,
+      "embed_s": 0.5704038143157959,
+      "total_s": 1.8267652988433838,
+      "n_entities": 2607,
+      "storage_bytes": 494586866
+    }
+  },
+  "fastapi": {
+    "tfidf-lsa": {
+      "index_build_s": 9.071669578552246,
+      "represent_s": 0.024674177169799805,
+      "embed_s": 3.126093626022339,
+      "total_s": 12.222437381744385,
+      "n_entities": 13891,
+      "storage_bytes": 18650911
+    },
+    "glove": {
+      "index_build_s": 6.224081516265869,
+      "represent_s": 0.022898435592651367,
+      "embed_s": 2.6318185329437256,
+      "total_s": 8.878798484802246,
+      "n_entities": 13891,
+      "storage_bytes": 509637619
+    }
+  },
+  "sqlalchemy": {
+    "tfidf-lsa": {
+      "index_build_s": 69.62979364395142,
+      "represent_s": 0.18532323837280273,
+      "embed_s": 29.738529682159424,
+      "total_s": 99.55364656448364,
+      "n_entities": 87782,
+      "storage_bytes": 109574482
+    },
+    "glove": {
+      "index_build_s": 48.85202121734619,
+      "represent_s": 0.16665983200073242,
+      "embed_s": 18.55648946762085,
+      "total_s": 67.57517051696777,
+      "n_entities": 87782,
+      "storage_bytes": 607371754
+    }
+  },
+  "django": {
+    "tfidf-lsa": {
+      "index_build_s": 63.63175296783447,
+      "represent_s": 0.18171310424804688,
+      "embed_s": 27.041659832000732,
+      "total_s": 90.85512590408325,
+      "n_entities": 92679,
+      "storage_bytes": 127548457
+    },
+    "glove": {
+      "index_build_s": 50.88758373260498,
+      "represent_s": 0.2267594337463379,
+      "embed_s": 20.70356559753418,
+      "total_s": 71.8179087638855,
+      "n_entities": 92679,
+      "storage_bytes": 613735817
+    }
+  }
+}

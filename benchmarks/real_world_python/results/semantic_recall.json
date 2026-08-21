@@ -1,0 +1,830 @@
+{
+  "tfidf-lsa": {
+    "flask": {
+      "total_symbols": 25,
+      "recall_at_counts": {
+        "1": 2,
+        "5": 10,
+        "10": 13,
+        "20": 16,
+        "50": 21,
+        "100": 23
+      },
+      "recall_at_fraction": {
+        "1": 0.08,
+        "5": 0.4,
+        "10": 0.52,
+        "20": 0.64,
+        "50": 0.84,
+        "100": 0.92
+      },
+      "per_query": {
+        "flask-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.app.Flask": 2,
+            "flask.sansio.app.App": 3
+          }
+        },
+        "flask-02": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.sessions.SecureCookieSessionInterface": 40,
+            "flask.sessions.SecureCookieSession": 71
+          }
+        },
+        "flask-03": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.wrappers.Request": 1
+          }
+        },
+        "flask-04": {
+          "deterministic_grade": true,
+          "symbols": {
+            "Scaffold.route": 1,
+            "Scaffold.add_url_rule": 2,
+            "App.add_url_rule": 2
+          }
+        },
+        "flask-05": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.blueprints.Blueprint": 9,
+            "flask.sansio.blueprints.Blueprint": 9
+          }
+        },
+        "flask-06": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Flask.wsgi_app": 5,
+            "Flask.full_dispatch_request": 26,
+            "Flask.dispatch_request": 2,
+            "Flask.preprocess_request": 60,
+            "Flask.finalize_request": 35
+          }
+        },
+        "flask-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 1122
+          }
+        },
+        "flask-08": {
+          "deterministic_grade": true,
+          "symbols": {
+            "Flask.run": 20
+          }
+        },
+        "flask-09": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "App.raise_routing_exception": 38
+          }
+        },
+        "flask-10": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Flask.handle_user_exception": 12,
+            "Flask.handle_exception": 21
+          }
+        },
+        "flask-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.testing.FlaskClient": 6,
+            "flask.testing.EnvironBuilder": 2023
+          }
+        },
+        "flask-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "App.register_blueprint": 2,
+            "Blueprint.register": 5,
+            "BlueprintSetupState.add_url_rule": 19
+          }
+        }
+      }
+    },
+    "fastapi": {
+      "total_symbols": 22,
+      "recall_at_counts": {
+        "1": 0,
+        "5": 0,
+        "10": 1,
+        "20": 1,
+        "50": 3,
+        "100": 4
+      },
+      "recall_at_fraction": {
+        "1": 0.0,
+        "5": 0.0,
+        "10": 0.045454545454545456,
+        "20": 0.045454545454545456,
+        "50": 0.13636363636363635,
+        "100": 0.18181818181818182
+      },
+      "per_query": {
+        "fastapi-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.applications.FastAPI": 42
+          }
+        },
+        "fastapi-02": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.routing.APIRoute": 2087
+          }
+        },
+        "fastapi-03": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.param_functions.Depends": 9
+          }
+        },
+        "fastapi-04": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "FastAPI.add_api_route": 639,
+            "APIRouter.add_api_route": 639
+          }
+        },
+        "fastapi-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "get_dependant": 82,
+            "APIRoute": 3445
+          }
+        },
+        "fastapi-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_dependant": 1539,
+            "solve_dependencies": 351,
+            "get_request_handler": 5042
+          }
+        },
+        "fastapi-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_openapi": 1544,
+            "get_openapi_path": 1562
+          }
+        },
+        "fastapi-08": {
+          "deterministic_grade": false,
+          "symbols": {
+            "RequestValidationError": 2055,
+            "request_validation_exception_handler": 703
+          }
+        },
+        "fastapi-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "HTTPException": 1784,
+            "http_exception_handler": 5085
+          }
+        },
+        "fastapi-10": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_openapi_path": 1649,
+            "APIRoute": 2965
+          }
+        },
+        "fastapi-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "solve_dependencies": 746
+          }
+        },
+        "fastapi-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "OAuth2PasswordBearer": 45,
+            "SecurityBase": 293,
+            "get_dependant": 2411
+          }
+        }
+      }
+    },
+    "sqlalchemy": {
+      "total_symbols": 21,
+      "recall_at_counts": {
+        "1": 0,
+        "5": 1,
+        "10": 4,
+        "20": 4,
+        "50": 5,
+        "100": 7
+      },
+      "recall_at_fraction": {
+        "1": 0.0,
+        "5": 0.047619047619047616,
+        "10": 0.19047619047619047,
+        "20": 0.19047619047619047,
+        "50": 0.23809523809523808,
+        "100": 0.3333333333333333
+      },
+      "per_query": {
+        "sqla-01": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.orm.session.Session": 24
+          }
+        },
+        "sqla-02": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.engine.base.Engine": 8
+          }
+        },
+        "sqla-03": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.sql.schema.Table": 179
+          }
+        },
+        "sqla-04": {
+          "deterministic_grade": false,
+          "symbols": {
+            "create_engine": 918,
+            "Engine": 7,
+            "Connection": 1236
+          }
+        },
+        "sqla-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Session.add": 4
+          }
+        },
+        "sqla-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Session.add": 623,
+            "Session.commit": 542,
+            "Session.flush": 575
+          }
+        },
+        "sqla-07": {
+          "deterministic_grade": true,
+          "symbols": {
+            "relationship": 54,
+            "_LazyLoader": 1490
+          }
+        },
+        "sqla-08": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Session.flush": 90,
+            "Session.commit": 8
+          }
+        },
+        "sqla-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "create_engine": 419
+          }
+        },
+        "sqla-10": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.log": 478
+          }
+        },
+        "sqla-11": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "_LazyLoader": 2765,
+            "relationship": 287
+          }
+        },
+        "sqla-12": {
+          "deterministic_grade": true,
+          "symbols": {
+            "DeclarativeBase": 1952,
+            "Mapper": 307,
+            "Table": 1668
+          }
+        }
+      }
+    },
+    "django": {
+      "total_symbols": 20,
+      "recall_at_counts": {
+        "1": 0,
+        "5": 0,
+        "10": 0,
+        "20": 1,
+        "50": 3,
+        "100": 4
+      },
+      "recall_at_fraction": {
+        "1": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.05,
+        "50": 0.15,
+        "100": 0.2
+      },
+      "per_query": {
+        "django-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "django.db.models.query.QuerySet": 2422
+          }
+        },
+        "django-02": {
+          "deterministic_grade": false,
+          "symbols": {
+            "django.db.models.base.Model": 145
+          }
+        },
+        "django-03": {
+          "deterministic_grade": true,
+          "symbols": {
+            "django.middleware.csrf.CsrfViewMiddleware": 17
+          }
+        },
+        "django-04": {
+          "deterministic_grade": false,
+          "symbols": {
+            "authenticate": 128,
+            "ModelBackend.authenticate": 128
+          }
+        },
+        "django-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "django.db.models.manager.Manager": 27,
+            "django.db.models.query.QuerySet": 22318
+          }
+        },
+        "django-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "WSGIHandler": 2447,
+            "BaseHandler.get_response": 604,
+            "BaseHandler._get_response": 720,
+            "URLResolver.resolve": 2509
+          }
+        },
+        "django-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "BaseHandler.load_middleware": 121,
+            "BaseHandler.get_response": 602
+          }
+        },
+        "django-08": {
+          "deterministic_grade": true,
+          "symbols": {
+            "CsrfViewMiddleware": 69
+          }
+        },
+        "django-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "authenticate": 49
+          }
+        },
+        "django-10": {
+          "deterministic_grade": true,
+          "symbols": {
+            "MigrationExecutor": 1825
+          }
+        },
+        "django-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Manager": 139,
+            "BaseManager.from_queryset": 669
+          }
+        },
+        "django-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "ModelAdmin": 4739,
+            "AdminSite.get_urls": 334
+          }
+        }
+      }
+    }
+  },
+  "glove": {
+    "flask": {
+      "total_symbols": 25,
+      "recall_at_counts": {
+        "1": 4,
+        "5": 9,
+        "10": 11,
+        "20": 19,
+        "50": 22,
+        "100": 24
+      },
+      "recall_at_fraction": {
+        "1": 0.16,
+        "5": 0.36,
+        "10": 0.44,
+        "20": 0.76,
+        "50": 0.88,
+        "100": 0.96
+      },
+      "per_query": {
+        "flask-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.app.Flask": 12,
+            "flask.sansio.app.App": 16
+          }
+        },
+        "flask-02": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.sessions.SecureCookieSessionInterface": 3,
+            "flask.sessions.SecureCookieSession": 20
+          }
+        },
+        "flask-03": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.wrappers.Request": 1
+          }
+        },
+        "flask-04": {
+          "deterministic_grade": true,
+          "symbols": {
+            "Scaffold.route": 1,
+            "Scaffold.add_url_rule": 2,
+            "App.add_url_rule": 2
+          }
+        },
+        "flask-05": {
+          "deterministic_grade": true,
+          "symbols": {
+            "flask.blueprints.Blueprint": 17,
+            "flask.sansio.blueprints.Blueprint": 17
+          }
+        },
+        "flask-06": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Flask.wsgi_app": 60,
+            "Flask.full_dispatch_request": 46,
+            "Flask.dispatch_request": 1,
+            "Flask.preprocess_request": 21,
+            "Flask.finalize_request": 17
+          }
+        },
+        "flask-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.sessions.SecureCookieSessionInterface.get_signing_serializer": 62
+          }
+        },
+        "flask-08": {
+          "deterministic_grade": true,
+          "symbols": {
+            "Flask.run": 4
+          }
+        },
+        "flask-09": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "App.raise_routing_exception": 11
+          }
+        },
+        "flask-10": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Flask.handle_user_exception": 19,
+            "Flask.handle_exception": 44
+          }
+        },
+        "flask-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "flask.testing.FlaskClient": 2,
+            "flask.testing.EnvironBuilder": 302
+          }
+        },
+        "flask-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "App.register_blueprint": 1,
+            "Blueprint.register": 6,
+            "BlueprintSetupState.add_url_rule": 10
+          }
+        }
+      }
+    },
+    "fastapi": {
+      "total_symbols": 22,
+      "recall_at_counts": {
+        "1": 1,
+        "5": 1,
+        "10": 1,
+        "20": 1,
+        "50": 1,
+        "100": 3
+      },
+      "recall_at_fraction": {
+        "1": 0.045454545454545456,
+        "5": 0.045454545454545456,
+        "10": 0.045454545454545456,
+        "20": 0.045454545454545456,
+        "50": 0.045454545454545456,
+        "100": 0.13636363636363635
+      },
+      "per_query": {
+        "fastapi-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.applications.FastAPI": 134
+          }
+        },
+        "fastapi-02": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.routing.APIRoute": 5583
+          }
+        },
+        "fastapi-03": {
+          "deterministic_grade": true,
+          "symbols": {
+            "fastapi.param_functions.Depends": 60
+          }
+        },
+        "fastapi-04": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "FastAPI.add_api_route": 1924,
+            "APIRouter.add_api_route": 1924
+          }
+        },
+        "fastapi-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "get_dependant": 6453,
+            "APIRoute": 4045
+          }
+        },
+        "fastapi-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_dependant": 8229,
+            "solve_dependencies": 287,
+            "get_request_handler": 1654
+          }
+        },
+        "fastapi-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_openapi": 12770,
+            "get_openapi_path": 8914
+          }
+        },
+        "fastapi-08": {
+          "deterministic_grade": false,
+          "symbols": {
+            "RequestValidationError": 6081,
+            "request_validation_exception_handler": 3148
+          }
+        },
+        "fastapi-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "HTTPException": 97,
+            "http_exception_handler": 7126
+          }
+        },
+        "fastapi-10": {
+          "deterministic_grade": false,
+          "symbols": {
+            "get_openapi_path": 6840,
+            "APIRoute": 6980
+          }
+        },
+        "fastapi-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "solve_dependencies": 543
+          }
+        },
+        "fastapi-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "OAuth2PasswordBearer": 1,
+            "SecurityBase": 1121,
+            "get_dependant": 6225
+          }
+        }
+      }
+    },
+    "sqlalchemy": {
+      "total_symbols": 21,
+      "recall_at_counts": {
+        "1": 0,
+        "5": 2,
+        "10": 2,
+        "20": 4,
+        "50": 6,
+        "100": 11
+      },
+      "recall_at_fraction": {
+        "1": 0.0,
+        "5": 0.09523809523809523,
+        "10": 0.09523809523809523,
+        "20": 0.19047619047619047,
+        "50": 0.2857142857142857,
+        "100": 0.5238095238095238
+      },
+      "per_query": {
+        "sqla-01": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.orm.session.Session": 197
+          }
+        },
+        "sqla-02": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.engine.base.Engine": 11
+          }
+        },
+        "sqla-03": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.sql.schema.Table": 587
+          }
+        },
+        "sqla-04": {
+          "deterministic_grade": false,
+          "symbols": {
+            "create_engine": 20,
+            "Engine": 1805,
+            "Connection": 308
+          }
+        },
+        "sqla-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "Session.add": 66
+          }
+        },
+        "sqla-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Session.add": 68,
+            "Session.commit": 43,
+            "Session.flush": 100
+          }
+        },
+        "sqla-07": {
+          "deterministic_grade": true,
+          "symbols": {
+            "relationship": 5,
+            "_LazyLoader": 192
+          }
+        },
+        "sqla-08": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Session.flush": 57,
+            "Session.commit": 2
+          }
+        },
+        "sqla-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "create_engine": 22
+          }
+        },
+        "sqla-10": {
+          "deterministic_grade": false,
+          "symbols": {
+            "sqlalchemy.log": 605
+          }
+        },
+        "sqla-11": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "_LazyLoader": 1215,
+            "relationship": 90
+          }
+        },
+        "sqla-12": {
+          "deterministic_grade": true,
+          "symbols": {
+            "DeclarativeBase": 509,
+            "Mapper": 3572,
+            "Table": 2474
+          }
+        }
+      }
+    },
+    "django": {
+      "total_symbols": 20,
+      "recall_at_counts": {
+        "1": 1,
+        "5": 3,
+        "10": 3,
+        "20": 4,
+        "50": 6,
+        "100": 9
+      },
+      "recall_at_fraction": {
+        "1": 0.05,
+        "5": 0.15,
+        "10": 0.15,
+        "20": 0.2,
+        "50": 0.3,
+        "100": 0.45
+      },
+      "per_query": {
+        "django-01": {
+          "deterministic_grade": true,
+          "symbols": {
+            "django.db.models.query.QuerySet": 3553
+          }
+        },
+        "django-02": {
+          "deterministic_grade": false,
+          "symbols": {
+            "django.db.models.base.Model": 213
+          }
+        },
+        "django-03": {
+          "deterministic_grade": true,
+          "symbols": {
+            "django.middleware.csrf.CsrfViewMiddleware": 12
+          }
+        },
+        "django-04": {
+          "deterministic_grade": false,
+          "symbols": {
+            "authenticate": 2,
+            "ModelBackend.authenticate": 2
+          }
+        },
+        "django-05": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "django.db.models.manager.Manager": 21,
+            "django.db.models.query.QuerySet": 24271
+          }
+        },
+        "django-06": {
+          "deterministic_grade": false,
+          "symbols": {
+            "WSGIHandler": 28891,
+            "BaseHandler.get_response": 499,
+            "BaseHandler._get_response": 1307,
+            "URLResolver.resolve": 1320
+          }
+        },
+        "django-07": {
+          "deterministic_grade": false,
+          "symbols": {
+            "BaseHandler.load_middleware": 81,
+            "BaseHandler.get_response": 48
+          }
+        },
+        "django-08": {
+          "deterministic_grade": true,
+          "symbols": {
+            "CsrfViewMiddleware": 162
+          }
+        },
+        "django-09": {
+          "deterministic_grade": false,
+          "symbols": {
+            "authenticate": 1
+          }
+        },
+        "django-10": {
+          "deterministic_grade": true,
+          "symbols": {
+            "MigrationExecutor": 5719
+          }
+        },
+        "django-11": {
+          "deterministic_grade": false,
+          "symbols": {
+            "Manager": 6545,
+            "BaseManager.from_queryset": 22921
+          }
+        },
+        "django-12": {
+          "deterministic_grade": "PARTIAL",
+          "symbols": {
+            "ModelAdmin": 54,
+            "AdminSite.get_urls": 94
+          }
+        }
+      }
+    }
+  }
+}
