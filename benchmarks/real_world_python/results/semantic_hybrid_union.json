@@ -1,0 +1,22 @@
+{
+  "tfidf-lsa": {
+    "total_symbols": 88,
+    "deterministic_only_recall": 57,
+    "semantic_only_recall": 32,
+    "union_recall": 62,
+    "deterministic_recall_fraction": 0.6477272727272727,
+    "semantic_recall_fraction": 0.36363636363636365,
+    "union_recall_fraction": 0.7045454545454546,
+    "net_new_from_union": 5
+  },
+  "glove": {
+    "total_symbols": 88,
+    "deterministic_only_recall": 57,
+    "semantic_only_recall": 35,
+    "union_recall": 65,
+    "deterministic_recall_fraction": 0.6477272727272727,
+    "semantic_recall_fraction": 0.3977272727272727,
+    "union_recall_fraction": 0.7386363636363636,
+    "net_new_from_union": 8
+  }
+}

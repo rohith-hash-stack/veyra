@@ -1,0 +1,1078 @@
+{
+  "tfidf-lsa": {
+    "matrix": [
+      {
+        "repo": "flask",
+        "query_id": "flask-01",
+        "symbol": "flask.app.Flask",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-01",
+        "symbol": "flask.sansio.app.App",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-02",
+        "symbol": "flask.sessions.SecureCookieSessionInterface",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-02",
+        "symbol": "flask.sessions.SecureCookieSession",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-03",
+        "symbol": "flask.wrappers.Request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "Scaffold.route",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "Scaffold.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "App.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-05",
+        "symbol": "flask.blueprints.Blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-05",
+        "symbol": "flask.sansio.blueprints.Blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.wsgi_app",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.full_dispatch_request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.dispatch_request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.preprocess_request",
+        "classification": "neither"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.finalize_request",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-07",
+        "symbol": "flask.sessions.SecureCookieSessionInterface.get_signing_serializer",
+        "classification": "neither"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-08",
+        "symbol": "Flask.run",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-09",
+        "symbol": "App.raise_routing_exception",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-10",
+        "symbol": "Flask.handle_user_exception",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-10",
+        "symbol": "Flask.handle_exception",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-11",
+        "symbol": "flask.testing.FlaskClient",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-11",
+        "symbol": "flask.testing.EnvironBuilder",
+        "classification": "neither"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "App.register_blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "Blueprint.register",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "BlueprintSetupState.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-01",
+        "symbol": "fastapi.applications.FastAPI",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-02",
+        "symbol": "fastapi.routing.APIRoute",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-03",
+        "symbol": "fastapi.param_functions.Depends",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-04",
+        "symbol": "FastAPI.add_api_route",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-04",
+        "symbol": "APIRouter.add_api_route",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-05",
+        "symbol": "get_dependant",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-05",
+        "symbol": "APIRoute",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "get_dependant",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "solve_dependencies",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "get_request_handler",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-07",
+        "symbol": "get_openapi",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-07",
+        "symbol": "get_openapi_path",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-08",
+        "symbol": "RequestValidationError",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-08",
+        "symbol": "request_validation_exception_handler",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-09",
+        "symbol": "HTTPException",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-09",
+        "symbol": "http_exception_handler",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-10",
+        "symbol": "get_openapi_path",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-10",
+        "symbol": "APIRoute",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-11",
+        "symbol": "solve_dependencies",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "OAuth2PasswordBearer",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "SecurityBase",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "get_dependant",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-01",
+        "symbol": "sqlalchemy.orm.session.Session",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-02",
+        "symbol": "sqlalchemy.engine.base.Engine",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-03",
+        "symbol": "sqlalchemy.sql.schema.Table",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "create_engine",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "Engine",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "Connection",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-05",
+        "symbol": "Session.add",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.add",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.commit",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.flush",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-07",
+        "symbol": "relationship",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-07",
+        "symbol": "_LazyLoader",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-08",
+        "symbol": "Session.flush",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-08",
+        "symbol": "Session.commit",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-09",
+        "symbol": "create_engine",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-10",
+        "symbol": "sqlalchemy.log",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-11",
+        "symbol": "_LazyLoader",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-11",
+        "symbol": "relationship",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "DeclarativeBase",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "Mapper",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "Table",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-01",
+        "symbol": "django.db.models.query.QuerySet",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-02",
+        "symbol": "django.db.models.base.Model",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-03",
+        "symbol": "django.middleware.csrf.CsrfViewMiddleware",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-04",
+        "symbol": "authenticate",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-04",
+        "symbol": "ModelBackend.authenticate",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-05",
+        "symbol": "django.db.models.manager.Manager",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-05",
+        "symbol": "django.db.models.query.QuerySet",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "WSGIHandler",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "BaseHandler.get_response",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "BaseHandler._get_response",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "URLResolver.resolve",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-07",
+        "symbol": "BaseHandler.load_middleware",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-07",
+        "symbol": "BaseHandler.get_response",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-08",
+        "symbol": "CsrfViewMiddleware",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-09",
+        "symbol": "authenticate",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-10",
+        "symbol": "MigrationExecutor",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-11",
+        "symbol": "Manager",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-11",
+        "symbol": "BaseManager.from_queryset",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-12",
+        "symbol": "ModelAdmin",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-12",
+        "symbol": "AdminSite.get_urls",
+        "classification": "deterministic_only"
+      }
+    ],
+    "counts": {
+      "both": 27,
+      "deterministic_only": 30,
+      "semantic_only": 5,
+      "neither": 26
+    }
+  },
+  "glove": {
+    "matrix": [
+      {
+        "repo": "flask",
+        "query_id": "flask-01",
+        "symbol": "flask.app.Flask",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-01",
+        "symbol": "flask.sansio.app.App",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-02",
+        "symbol": "flask.sessions.SecureCookieSessionInterface",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-02",
+        "symbol": "flask.sessions.SecureCookieSession",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-03",
+        "symbol": "flask.wrappers.Request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "Scaffold.route",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "Scaffold.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-04",
+        "symbol": "App.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-05",
+        "symbol": "flask.blueprints.Blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-05",
+        "symbol": "flask.sansio.blueprints.Blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.wsgi_app",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.full_dispatch_request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.dispatch_request",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.preprocess_request",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-06",
+        "symbol": "Flask.finalize_request",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-07",
+        "symbol": "flask.sessions.SecureCookieSessionInterface.get_signing_serializer",
+        "classification": "neither"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-08",
+        "symbol": "Flask.run",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-09",
+        "symbol": "App.raise_routing_exception",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-10",
+        "symbol": "Flask.handle_user_exception",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-10",
+        "symbol": "Flask.handle_exception",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-11",
+        "symbol": "flask.testing.FlaskClient",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-11",
+        "symbol": "flask.testing.EnvironBuilder",
+        "classification": "neither"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "App.register_blueprint",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "Blueprint.register",
+        "classification": "both"
+      },
+      {
+        "repo": "flask",
+        "query_id": "flask-12",
+        "symbol": "BlueprintSetupState.add_url_rule",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-01",
+        "symbol": "fastapi.applications.FastAPI",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-02",
+        "symbol": "fastapi.routing.APIRoute",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-03",
+        "symbol": "fastapi.param_functions.Depends",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-04",
+        "symbol": "FastAPI.add_api_route",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-04",
+        "symbol": "APIRouter.add_api_route",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-05",
+        "symbol": "get_dependant",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-05",
+        "symbol": "APIRoute",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "get_dependant",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "solve_dependencies",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-06",
+        "symbol": "get_request_handler",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-07",
+        "symbol": "get_openapi",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-07",
+        "symbol": "get_openapi_path",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-08",
+        "symbol": "RequestValidationError",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-08",
+        "symbol": "request_validation_exception_handler",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-09",
+        "symbol": "HTTPException",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-09",
+        "symbol": "http_exception_handler",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-10",
+        "symbol": "get_openapi_path",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-10",
+        "symbol": "APIRoute",
+        "classification": "neither"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-11",
+        "symbol": "solve_dependencies",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "OAuth2PasswordBearer",
+        "classification": "both"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "SecurityBase",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "fastapi",
+        "query_id": "fastapi-12",
+        "symbol": "get_dependant",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-01",
+        "symbol": "sqlalchemy.orm.session.Session",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-02",
+        "symbol": "sqlalchemy.engine.base.Engine",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-03",
+        "symbol": "sqlalchemy.sql.schema.Table",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "create_engine",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "Engine",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-04",
+        "symbol": "Connection",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-05",
+        "symbol": "Session.add",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.add",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.commit",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-06",
+        "symbol": "Session.flush",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-07",
+        "symbol": "relationship",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-07",
+        "symbol": "_LazyLoader",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-08",
+        "symbol": "Session.flush",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-08",
+        "symbol": "Session.commit",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-09",
+        "symbol": "create_engine",
+        "classification": "both"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-10",
+        "symbol": "sqlalchemy.log",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-11",
+        "symbol": "_LazyLoader",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-11",
+        "symbol": "relationship",
+        "classification": "neither"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "DeclarativeBase",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "Mapper",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "sqlalchemy",
+        "query_id": "sqla-12",
+        "symbol": "Table",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-01",
+        "symbol": "django.db.models.query.QuerySet",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-02",
+        "symbol": "django.db.models.base.Model",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-03",
+        "symbol": "django.middleware.csrf.CsrfViewMiddleware",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-04",
+        "symbol": "authenticate",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-04",
+        "symbol": "ModelBackend.authenticate",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-05",
+        "symbol": "django.db.models.manager.Manager",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-05",
+        "symbol": "django.db.models.query.QuerySet",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "WSGIHandler",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "BaseHandler.get_response",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "BaseHandler._get_response",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-06",
+        "symbol": "URLResolver.resolve",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-07",
+        "symbol": "BaseHandler.load_middleware",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-07",
+        "symbol": "BaseHandler.get_response",
+        "classification": "semantic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-08",
+        "symbol": "CsrfViewMiddleware",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-09",
+        "symbol": "authenticate",
+        "classification": "both"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-10",
+        "symbol": "MigrationExecutor",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-11",
+        "symbol": "Manager",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-11",
+        "symbol": "BaseManager.from_queryset",
+        "classification": "neither"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-12",
+        "symbol": "ModelAdmin",
+        "classification": "deterministic_only"
+      },
+      {
+        "repo": "django",
+        "query_id": "django-12",
+        "symbol": "AdminSite.get_urls",
+        "classification": "deterministic_only"
+      }
+    ],
+    "counts": {
+      "both": 27,
+      "deterministic_only": 30,
+      "semantic_only": 8,
+      "neither": 23
+    }
+  }
+}
