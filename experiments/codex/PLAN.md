@@ -1,231 +1,1421 @@
-# Codex — Structural Fact-Sheet Retrieval (Living Plan)
+# Codex — Repository Intelligence Graph (Living Plan)
 
-> A sub-project of Veyra. This is the resumable reference document for Codex specifically —
-> read this before resuming or extending the work. Companion data:
-> `experiments/coverage_denominator/structured_summary.py` (the proof-of-concept script) and
-> `benchmarks/real_world_python/results/structured_summary_experiment.json` (its real results).
+> A standalone project for building a repository intelligence layer between a Git repository and AI/LLM systems.
+>
+> **Codex is independent of ARCF and Veyra.**
+>
+> This document is the resumable reference plan for Codex. The project should **replicate established ecosystem capabilities before inventing new mechanisms**. Only after the replication baseline is complete should Codex investigate gaps and differentiated capabilities.
 
-Status: **EXPERIMENTAL — not shipped, not wired into production `_entity_text()`.**
-Branch: `experiment/real-world-python-benchmark`. Last updated: 2026-08-21 (proof-of-concept
-run and measured; no further phases started yet).
+**Status:** RESEARCH / EXPERIMENTAL — architecture and implementation not yet started under this plan.
 
----
-
-## Core Principle
-
-Veyra's retrieval already struggles with a real, measured problem: a natural-language question
-and a correct entity's own docstring/source often don't share enough literal vocabulary for the
-coverage floor to accept the match, even when the entity is exactly right and well-ranked. Codex's
-bet is that the fix isn't to loosen the floor (every attempt at that has leaked on negative
-queries) and isn't to guess a smarter tokenizer (the stopword experiment showed shared-tokenizer
-tricks cut both ways) — it's to give each entity **more real, deterministic vocabulary to be
-found by**, drawn entirely from relationships Veyra has *already verified*, phrased the way a
-person actually asks questions about code ("what does X call," "what does X contain").
+**Primary objective:**
 
 ```text
-Verified graph edges (CONTAINS / CALLS / INHERITS) → structured per-entity fact sheet
-                                                              → appended to existing indexed text
-                                                              → retrieved via the SAME BM25 +
-                                                                coverage + z-score pipeline,
-                                                                unchanged
+Git Repository
+      ↓
+Repository Intelligence Layer
+      ↓
+Evidence-backed Graph
+      ↓
+Graph / Context Retrieval
+      ↓
+LLM
 ```
 
-No new confidence mechanism, no new acceptance rule, no ML, no fabricated edges — Codex only
-ever changes what text an entity is *findable by*, never how retrieval decides to trust it.
+Codex's purpose is to convert a raw repository into a deterministic, queryable representation of its structure, relationships, dependencies, runtime observations, and history so that humans and LLMs do not have to reconstruct repository architecture from raw source alone.
 
 ---
 
-## Why this, and not the other things tried
+## 1. Core Principle
 
-Three other approaches were tried this pass and are documented for context, not repeated here:
+Codex will follow a **replicate → validate → identify gaps → extend** strategy.
 
-- **Loosening the coverage floor via relative signals** (percentile/z-of-coverage/margin) —
-  rejected (Fix 9): every one leaks on negative queries, because a relative measure always has
-  "a best candidate" whether or not the pool contains a real answer.
-- **Semantic/embedding retrieval** (GloVe, TF-IDF+LSA) — NO-GO for the two models actually
-  testable in this environment (Phase E): recall degrades sharply on larger repos, and negative-
-  query similarity scores overlap almost entirely with positive-query scores — no safe threshold.
-- **Extending the shared tokenizer's stopword list** (`experiments/coverage_denominator/`) —
-  a wash: fixed real cases, broke others, because the words that dilute a *question's* denominator
-  are sometimes genuine *content* in a document's own real text (`fastapi.param_functions.Depends`'s
-  own docstring literally says "FastAPI will call it for you").
+It will NOT begin by creating a new parser, new graph schema, new visualization model, or new LLM architecture when an established ecosystem already provides an equivalent capability.
 
-Codex is different in kind from all three: it never touches confidence math, and it never touches
-tokenization symmetry between query and document. It only adds real, additional, already-verified
-text to what an entity's document *is* — the same category of intervention as `_entity_text()`
-itself, not a new mechanism layered on top of acceptance.
-
----
-
-## Relevant existing Veyra mechanisms Codex builds on
-
-Codex does not introduce new extraction, new storage, or new relationship types. Everything it
-uses already exists and is already verified elsewhere in the codebase:
-
-- **`veyra.vbg.models.RelationshipType`** — the closed relationship vocabulary (`CONTAINS`,
-  `IMPORTS`, `CALLS`, `REFERENCES`, `INHERITS`, `IMPLEMENTS`, `DEPENDS_ON`, `DEFINED_IN`).
-  Codex's proof-of-concept uses `CONTAINS` (via `children`), `CALLS` (in/out), and `INHERITS`
-  (in/out) only — see *Scoping decisions* below for why `REFERENCES`/`IMPORTS` are excluded so far.
-- **`veyra.retrieval.index.IndexedEntity`** — already carries `.parents`/`.children`/`.siblings`
-  (Phase 2.4's Neighborhood Model) and `.outgoing_relationships`/`.incoming_relationships`
-  (real edges, `(relationship_type.value, target_or_source_id)` tuples) for every entity, computed
-  once at index-build time. Codex reads these fields directly; it queries no new storage.
-  fields.
-- **`veyra.questions` (Phase 2.5/2.6, `QuestionCategory`: SYMBOL/STRUCTURAL/RELATIONSHIP/
-  DEPENDENCY/CALL_FLOW/INHERITANCE/REFERENCE/NEIGHBORHOOD/LEXICAL/OCCURRENCE)** — the real,
-  already-implemented deterministic Question Generator + Static Verification. Built for a
-  *different* purpose (M2's own structural-questions arm, per `PLAN.md`'s "three distinct
-  purposes for questions" separation) and never wired into retrieval — Codex's fact-sheet
-  templates are a parallel, retrieval-scoped idea, not a reuse of `Question`/`Answer` objects,
-  but the category vocabulary above is a natural reference point if Codex's templates grow.
-- **Structural corroboration** (the shipped Final-Hardening-pass mechanism, `src/veyra/retrieval/
-  context.py`) — proved that borrowing a real CONTAINS neighbor's evidence can recover genuine
-  matches without leaking on negative queries, at real, measured cost/benefit (9/28 recovered,
-  0 net negative-query regression). Codex generalizes the same trust boundary (real edges only,
-  never CALLS-inferred, never fabricated) into the *document representation* instead of the
-  *acceptance decision*.
-- **`_entity_text()` (`src/veyra/retrieval/search.py`)** — the exact, single integration point:
-  `name + docstring + source`. Codex's `_augmented_entity_text()` wraps this, appending its
-  fact-sheet block rather than replacing anything — the proof-of-concept never modifies this
-  function in `src/veyra/`, only monkeypatches it for the duration of an experiment process.
-- **The real call-resolution measurement (7.7–28.3% at best, 0% for `obj.method()`/dynamic
-  dispatch)** — the known ceiling Codex does *not* escape. Confirmed directly on `authenticate()`
-  itself: its real resolved `CALLS` edges are its own private helpers
-  (`_clean_credentials`, `_get_compatible_backends`); the semantically important line
-  (`backend.authenticate(request, **credentials)`, a dynamic dispatch inside a loop) is not a
-  resolved edge at all. Codex can only ever report real edges — it will never invent the
-  `ModelBackend.authenticate` connection static analysis never found.
-
----
-
-## What's been measured so far (Phase 1 — proof of concept)
-
-**Implementation** (`experiments/coverage_denominator/structured_summary.py`): for every entity,
-render up to five lines, only when the real data exists (never a placeholder for an absent
-relationship):
+The working principle is:
 
 ```text
-What does {name} contain?        <- entity.children (short names)
-What does {name} call?           <- outgoing CALLS edges
-Who calls {name}?                <- incoming CALLS edges
-What does {name} inherit from?   <- outgoing INHERITS edges
-What inherits from {name}?       <- incoming INHERITS edges
+Existing ecosystem capability
+          ↓
+Reuse / integrate / reproduce
+          ↓
+Validate against real repositories
+          ↓
+Document what is still missing
+          ↓
+Build only the missing capability
 ```
 
-Appended (not replacing) to the existing `name + docstring + source` text. Neighbor names are
-rendered as their **short (last dotted segment) name**, not the full `entity_id` — a deliberate
-choice to avoid reintroducing the exact dotted-qualified-path tokenization noise the stopword
-experiment found (a fully-qualified path splits into separate, misleadingly-weighted tokens).
+The project should therefore avoid:
 
-**Real result** (4 repos, 56 queries, before/after, committed at `7f6723e`):
-
-| | Result |
-|---|---|
-| Negative-query regressions | **0** — same clean safety property held throughout the whole hardening pass |
-| Real gains | `django-04` recovers `authenticate()` — the **second, structurally independent** mechanism to recover this exact case (structural corroboration partially did, the stopword fix did, Codex does too) — a meaningfully reproducible signal, not a fragile artifact. `flask-06` gains a third of its five needed symbols. |
-| Real losses | `fastapi-05` loses `APIRoute` to **ranking crowding** (still `accepted=True`, coverage clears via a structural neighbor, but pushed to rank 13/19 — outside `top_k=10`). `fastapi-04` loses `FastAPI.add_api_route` to a **new mechanism**: z-score suppression — appending similar template phrasing to *many* corpus entities at once appears to compress the query's candidate-pool score distribution, so a genuinely good candidate stands out *less* in relative terms even as its own coverage improved. |
-
-**Read on this**: more encouraging than the stopword experiment (no shared-tokenizer risk — this
-never touches how a *question* gets tokenized, so it can't remove real matched evidence the way
-stripping `call`/`use` did), and the `authenticate()` recovery reproducing via an independent
-mechanism is real signal. Still a genuine trade, not a clean win — two new failure modes
-(crowding, z-suppression) are real costs, not free.
+* rebuilding mature code-indexing infrastructure unnecessarily;
+* inventing a proprietary graph schema before understanding existing standards;
+* using an LLM to infer relationships that deterministic tooling can establish;
+* claiming novelty for capabilities already demonstrated by Sourcegraph, RepoGraph, CodeSee, SCIP, or related systems;
+* mixing Codex architecture with ARCF/Veyra architecture.
 
 ---
 
-## Scoping decisions made so far (and why)
+# 2. Problem Codex Is Solving
 
-- **CONTAINS + CALLS + INHERITS only, not REFERENCES or IMPORTS.** `REFERENCES` was measured at
-  4 total edges across Django's entire 92,679-entity graph — essentially unpopulated, not a
-  reliable signal to build a template on. `IMPORTS` is module-level (real, denser — 612 edges in
-  Flask, 18,694 in Django), but it describes *dependency structure*, not *entity relevance* — a
-  file importing a module says little about what a specific function/class inside that file does.
-  Worth revisiting if a later phase specifically targets dependency-shaped queries.
-- **Never use CALLS for anything beyond reporting a real, already-resolved edge.** Same standing
-  rule as structural corroboration: CALLS resolution is too unreliable (7.7–28.3%) to *infer*
-  anything from its *absence* — Codex's fact sheet reports what real CALLS edges exist and stays
-  silent about the rest, exactly like `_neighbor_matched_idf_coverage` already does.
-- **Supplement, never replace, the existing text.** A class/method with a rich docstring keeps
-  every bit of that; Codex only ever adds, matching how structural corroboration is additive
-  (an OR-path) rather than a replacement of the coverage floor.
-- **Short names, not full `entity_id`s, in the rendered fact sheet.** Directly informed by the
-  stopword experiment's dotted-path finding — this was a deliberate correction, not an oversight.
+A raw Git repository is difficult for both humans and LLMs to understand at repository scale.
 
----
+The LLM must otherwise perform several tasks itself:
 
-## Roadmap (phases — mark each as it lands, mirroring `PLAN.md`'s own discipline)
+```text
+Locate symbols
+      ↓
+Understand files
+      ↓
+Find references
+      ↓
+Find implementations
+      ↓
+Trace calls
+      ↓
+Understand inheritance
+      ↓
+Identify dependencies
+      ↓
+Reconstruct architecture
+      ↓
+Trace execution
+      ↓
+Inspect history
+      ↓
+Reason about the result
+```
 
-### Phase 1 — Proof of concept — **DONE, measured, not shipped**
-Flat fact-sheet block, CONTAINS/CALLS/INHERITS core, appended to existing text. Real 4-repo/
-56-query result recorded above.
+Codex proposes moving the deterministic portions of that work into a repository intelligence layer.
 
-### Phase 2 — Fix the z-suppression mechanism — **NOT STARTED**
-The `fastapi-04` loss is a *ranking*-side cost, not a coverage-side one — its coverage improved,
-its relative standing (z) dropped. Candidate approaches to test, each requiring the same full
-before/after + negative-query validation as everything else in this project before being
-preferred:
-  - Down-weight the structured-summary block's contribution to BM25/ranking specifically, while
-    keeping its full contribution to coverage matching (asymmetric treatment, same shape as the
-    asymmetric-coverage-formula idea raised in the stopword-experiment discussion).
-  - Measure whether the compression is corpus-wide or concentrated in a few high-degree entities
-    (a class with unusually many children/calls could be flooding its own text disproportionately)
-    before assuming a global fix is needed.
+The LLM should therefore receive:
 
-### Phase 3 — Per-node-type templates — **NOT STARTED**
-The proof of concept uses one flat template for every node type. The flowchart reference image
-this project started from suggests real differentiation is worth trying:
-  - **Class**: Attributes (Variable children), Methods (Method children), Creates/Uses (real
-    outgoing CALLS/REFERENCES to other classes).
-  - **Method**: Defined in (module, from `source_location` — already deterministic, no textual
-    guess needed), Calls/Flow (outgoing CALLS), Uses Variables (if extractable), Used By
-    (incoming CALLS).
-  - **Variable**: Defined in, Created in, Used in (methods that reference it), Related siblings.
-  - Each template variant needs its own before/after measurement — no assumption that
-    differentiation helps until checked, same discipline as every other change this project has
-    made.
+```text
+Question
+   ↓
+Codex graph/context query
+   ↓
+Verified repository evidence
+   ↓
+Relevant source + relationships + provenance
+   ↓
+LLM reasoning
+```
 
-### Phase 4 — Multi-hop call hierarchy — **NOT STARTED, higher risk**
-The reference image's "Call Hierarchy" panel chains several hops
-(`requests.get()` → `Session.request()` → `Session.send()` → ...). Codex's Phase 1 is 1-hop only.
-Multi-hop widens what's findable but also further crowds ranking and multiplies exposure to
-unresolved-CALLS gaps compounding across hops. Needs its own bounded-depth experiment (real
-recovery vs. real cost, same rigor as structural corroboration's own 1-hop-only decision was
-justified) before being attempted — not a default extension.
+The goal is not to eliminate the LLM.
 
-### Phase 5 — Full validation before any ship decision — **NOT STARTED**
-Before Codex could ever be proposed for production: full 4-repo/56-query re-run with whatever
-the final template design is, explicit gain/loss table per query (not just aggregate counts, per
-this project's own standing discipline), 0 negative-query regressions required (non-negotiable,
-same bar as every other shipped mechanism), and a written before/after report matching the style
-of `FINAL_RETRIEVAL_HARDENING_REPORT.md`.
+The goal is to ensure the LLM spends its capability on **interpretation, explanation and reasoning**, rather than repeatedly reconstructing repository structure.
 
 ---
 
-## Key Design Decisions Log
+# 3. Existing Ecosystems to Replicate First
 
-| # | Decision | Rationale | Date |
-|---|---|---|---|
-| C1 | Supplement `_entity_text()`, never replace it | Matches structural corroboration's additive-OR-path precedent; a class with a good docstring keeps every bit of it | 2026-08-21 |
-| C2 | CONTAINS + CALLS + INHERITS only; REFERENCES and IMPORTS excluded | REFERENCES measured near-unpopulated (4 edges in all of Django); IMPORTS is module-level dependency structure, not entity relevance | 2026-08-21 |
-| C3 | Short (last-segment) names for neighbors in rendered text, never full `entity_id` | Directly avoids the dotted-qualified-path tokenization noise the stopword experiment found | 2026-08-21 |
-| C4 | Never treat CALLS absence as a negative signal, only report real resolved edges | Same standing rule as structural corroboration; CALLS resolution (7.7-28.3%) is too unreliable to infer anything from silence | 2026-08-21 |
-| C5 | No new confidence/acceptance mechanism -- text-representation change only | Keeps Codex orthogonal to the (separately open) coverage-formula and z-score-in-acceptance questions; isolates what's being tested | 2026-08-21 |
+Codex will explicitly study and reproduce the relevant capabilities of existing systems before designing new ones.
+
+## 3.1 Sourcegraph Code Intelligence / Code Graph
+
+Sourcegraph already provides compiler-accurate code navigation concepts including definitions, references and implementations, and its Code Graph is used by Cody to retrieve structurally relevant context for LLM responses.
+
+Sourcegraph's Code Graph is therefore the primary reference for:
+
+* symbol indexing;
+* definitions;
+* references;
+* implementations;
+* inheritance relationships;
+* repository navigation;
+* graph-assisted context retrieval;
+* LLM context selection.
+
+Sourcegraph documents Code Graph as a structural representation of how code elements are interconnected and used.
+
+**Codex decision:**
+Do not recreate this functionality conceptually until the existing approach has been reproduced and measured.
 
 ---
 
-## Open Decisions (resume here)
+## 3.2 SCIP — Code Intelligence Protocol
 
-- **Phase 2's exact fix for z-suppression** is not chosen yet — asymmetric ranking/coverage
-  weighting is the leading candidate, not yet built or tested.
-- **Whether Phase 3's per-node-type differentiation is worth the added complexity** is unmeasured
-  — Phase 1's flat template already shows real signal; whether splitting it out recovers
-  meaningfully more, or just adds surface area, is an open empirical question, not a foregone
-  conclusion.
-- **Integration point if Codex ever ships**: still undecided whether this becomes a permanent
-  change to `_entity_text()` itself, a separate, parallel text field indexed alongside it, or
-  something in between. Not a blocking decision for further experimentation, but should be
-  settled before Phase 5.
+SCIP provides a language-agnostic indexing protocol for code navigation.
 
-Nothing above is scheduled — this document exists so any future session (or the next phase of
-this one) can read the real state, the real numbers, and the real next step without re-deriving
-any of it.
+It already supports indexers across languages including:
+
+* C/C++;
+* C#;
+* Dart;
+* Go;
+* Java;
+* Kotlin;
+* Scala;
+* PHP;
+* Python;
+* Ruby;
+* Rust;
+* TypeScript;
+* JavaScript.
+
+SCIP is therefore the preferred candidate for Codex's initial cross-language code-index foundation rather than inventing an incompatible proprietary representation.
+
+Codex should investigate:
+
+```text
+Repository
+    ↓
+Existing SCIP indexer
+    ↓
+SCIP index
+    ↓
+Codex graph representation
+```
+
+before implementing custom language analyzers.
+
+---
+
+## 3.3 Tree-sitter / Syntax-Level Parsing
+
+Tree-sitter provides incremental parsing and concrete syntax trees across many languages. It is useful where Codex requires syntax-level information that existing semantic indexes do not expose.
+
+Codex should therefore use Tree-sitter where appropriate rather than building language parsers from scratch.
+
+Potential role:
+
+```text
+SCIP / compiler intelligence
+        +
+Tree-sitter syntax structure
+        ↓
+Codex normalized repository model
+```
+
+---
+
+## 3.4 RepoGraph
+
+RepoGraph demonstrates the repository-level code-graph approach for AI software engineering and uses a repository-wide graph as navigation/guidance for AI systems. Its published work reports improvements when integrated into multiple software-engineering systems.
+
+Codex should reproduce the core idea:
+
+```text
+Repository
+    ↓
+Repository-level graph
+    ↓
+Graph-guided context
+    ↓
+AI/LLM
+```
+
+before attempting a novel graph-to-LLM mechanism.
+
+---
+
+## 3.5 Graph-Integrated LLM Approaches
+
+Code Graph Model (CGM) represents a more advanced direction where repository structural dependencies are integrated more directly into LLM processing.
+
+This should be treated as a **later reference architecture**, not the first implementation.
+
+Codex first needs to establish whether a conventional:
+
+```text
+Graph
+  ↓
+Graph query
+  ↓
+Relevant context
+  ↓
+LLM
+```
+
+architecture already provides sufficient value.
+
+Only then should graph-integrated model architectures be evaluated.
+
+---
+
+## 3.6 Visual Repository Graphs
+
+CodeSee demonstrates a different but relevant direction: visual semantic flow representations intended to help humans understand what a project does. Its current implementation uses AI-generated semantic feature/flow information rather than being limited to traditional call or import graphs.
+
+Codex should replicate the useful visual interaction patterns while maintaining a stricter evidence model:
+
+```text
+Node
+Edge
+Relationship type
+Evidence source
+Source location
+Resolution status
+```
+
+Codex should not assume that AI-generated visual relationships are equivalent to compiler/static-analysis evidence.
+
+---
+
+# 4. Codex Evidence Model
+
+Codex's central artifact is an **Evidence Graph**.
+
+Every graph element should have provenance.
+
+Example:
+
+```text
+authenticate()
+      │
+      │ CALLS
+      ▼
+_clean_credentials()
+```
+
+Evidence:
+
+```text
+source      = static-analysis
+resolver    = SCIP/compiler/indexer
+location    = file.py:42
+verified    = true
+```
+
+External:
+
+```text
+authenticate()
+      │
+      │ CALLS
+      ▼
+[UNRESOLVED EXTERNAL]
+```
+
+Evidence:
+
+```text
+source      = static-analysis
+resolution  = unresolved
+verified    = relationship exists
+target      = unknown
+```
+
+Runtime:
+
+```text
+authenticate()
+      │
+      │ OBSERVED_CALL
+      ▼
+OAuthClient.authenticate()
+```
+
+Evidence:
+
+```text
+source      = runtime
+execution   = test_123
+timestamp   = ...
+```
+
+Git:
+
+```text
+authenticate()
+      │
+      │ MODIFIED_BY
+      ▼
+commit abc123
+```
+
+Evidence:
+
+```text
+source      = git
+commit      = abc123
+timestamp   = ...
+```
+
+---
+
+# 5. Relationship Vocabulary
+
+The initial graph should use established concepts wherever possible.
+
+Core structural relationships:
+
+```text
+CONTAINS
+DEFINES
+REFERENCES
+CALLS
+INHERITS
+IMPLEMENTS
+IMPORTS
+DEPENDS_ON
+```
+
+Additional evidence relationships:
+
+```text
+OBSERVED_CALL
+OBSERVED_EXECUTION
+MODIFIED_BY
+INTRODUCED_BY
+DELETED_BY
+RENAMED_BY
+CO_CHANGED_WITH
+```
+
+External boundaries:
+
+```text
+EXTERNAL_LIBRARY
+EXTERNAL_API
+EXTERNAL_SERVICE
+UNRESOLVED_SYMBOL
+UNRESOLVED_DISPATCH
+```
+
+The exact final schema should not be frozen until the existing ecosystem schemas and index formats have been compared.
+
+---
+
+# 6. Phase 0 — Ecosystem Inventory — FIRST
+
+**Status: NOT STARTED**
+
+Before writing Codex implementation code, produce a capability matrix covering:
+
+| Capability             | Sourcegraph | SCIP | RepoGraph | CodeSee | Other | Codex status |
+| ---------------------- | ----------- | ---- | --------- | ------- | ----- | ------------ |
+| Symbol extraction      |             |      |           |         |       |              |
+| Definitions            |             |      |           |         |       |              |
+| References             |             |      |           |         |       |              |
+| Implementations        |             |      |           |         |       |              |
+| Inheritance            |             |      |           |         |       |              |
+| Call relationships     |             |      |           |         |       |              |
+| Import relationships   |             |      |           |         |       |              |
+| External dependencies  |             |      |           |         |       |              |
+| Visualization          |             |      |           |         |       |              |
+| Graph retrieval        |             |      |           |         |       |              |
+| LLM context generation |             |      |           |         |       |              |
+| Runtime tracing        |             |      |           |         |       |              |
+| Git history            |             |      |           |         |       |              |
+| Incremental updates    |             |      |           |         |       |              |
+| Provenance             |             |      |           |         |       |              |
+| Unresolved/open edges  |             |      |           |         |       |              |
+
+**Exit criterion:**
+
+No major Codex feature is implemented until the team can answer:
+
+> "Does an existing ecosystem already provide this?"
+
+---
+
+# 7. Phase 1 — Replicate Static Code Intelligence
+
+**Status: NOT STARTED**
+
+Objective:
+
+Produce a repository graph using existing code-intelligence infrastructure.
+
+Preferred experiment:
+
+```text
+Git Repository
+      ↓
+SCIP / existing language indexer
+      ↓
+Definitions / references / implementations
+      ↓
+Codex normalized graph
+```
+
+Test repositories should include multiple languages.
+
+Initial language set:
+
+```text
+Python
+Java
+JavaScript
+TypeScript
+Go
+```
+
+No custom language parser should be written unless an existing ecosystem cannot provide the required information.
+
+### Required graph nodes
+
+```text
+Repository
+Module
+File
+Class
+Interface
+Function
+Method
+Variable
+Parameter
+External symbol
+```
+
+### Required relationships
+
+```text
+DEFINES
+CONTAINS
+REFERENCES
+CALLS
+INHERITS
+IMPLEMENTS
+IMPORTS
+```
+
+### Validation
+
+For each repository:
+
+* count indexed symbols;
+* compare definitions;
+* compare references;
+* compare implementations;
+* measure unresolved relationships;
+* inspect representative call chains;
+* record false-positive and false-negative relationships.
+
+---
+
+# 8. Phase 2 — Replicate Repository-Level Graph Navigation
+
+**Status: NOT STARTED**
+
+Objective:
+
+Reproduce the repository-wide graph navigation concept demonstrated by RepoGraph and Sourcegraph.
+
+Example:
+
+```text
+User query:
+"Where is authentication implemented?"
+```
+
+Graph traversal:
+
+```text
+authentication
+     ↓
+symbol candidates
+     ↓
+implementations
+     ↓
+callers
+     ↓
+dependencies
+```
+
+The output should be a graph-derived context package:
+
+```text
+Target symbols
+Relevant neighbors
+Relationship paths
+Source locations
+Evidence
+```
+
+This phase should answer:
+
+> Can graph traversal reduce repository search effort without requiring the LLM to reconstruct the relationships?
+
+---
+
+# 9. Phase 3 — Replicate LLM Context Integration
+
+**Status: NOT STARTED**
+
+Objective:
+
+Build the simplest possible:
+
+```text
+User question
+      ↓
+Graph retrieval
+      ↓
+Relevant repository evidence
+      ↓
+LLM
+```
+
+No graph-integrated neural architecture yet.
+
+Compare:
+
+```text
+Baseline A:
+Raw text / normal retrieval → LLM
+
+Baseline B:
+Graph retrieval → LLM
+
+Baseline C:
+Graph + source retrieval → LLM
+```
+
+Measure:
+
+* context tokens;
+* irrelevant context;
+* answer correctness;
+* repository navigation steps;
+* latency;
+* LLM calls;
+* context size;
+* hallucinated relationships.
+
+Sourcegraph's current architecture is a useful reference because Cody combines keyword/search context with Code Graph information when gathering context for an LLM.
+
+---
+
+# 10. Phase 4 — Replicate Visual Repository Representation
+
+**Status: NOT STARTED**
+
+Objective:
+
+Automatically generate a visual representation immediately after repository ingestion.
+
+Initial views:
+
+### Repository hierarchy
+
+```text
+Repository
+ ├── Package
+ │    ├── Class
+ │    │    ├── Method
+ │    │    └── Method
+ │    └── Class
+ └── Package
+```
+
+### Call graph
+
+```text
+A
+ ↓
+B
+ ↓
+C
+```
+
+### Inheritance graph
+
+```text
+Base
+ ▲
+ ├── ChildA
+ └── ChildB
+```
+
+### Dependency graph
+
+```text
+Application
+ ├── Internal module
+ ├── External library
+ └── External API
+```
+
+### Combined graph
+
+Allow users to switch projections instead of rendering every relationship simultaneously.
+
+The visualization should always expose relationship provenance.
+
+---
+
+# 11. Phase 5 — External / Open Connections
+
+**Status: NOT STARTED**
+
+This phase implements one of Codex's explicit product requirements.
+
+When a relationship is established but its destination cannot be resolved inside the repository:
+
+```text
+Application
+     │
+     ▼
+requests.get()
+     │
+     ▼
+[EXTERNAL LIBRARY]
+```
+
+or:
+
+```text
+Service
+     │
+     ▼
+POST /payments
+     │
+     ▼
+[EXTERNAL API]
+```
+
+or:
+
+```text
+obj.authenticate()
+     │
+     ▼
+[UNRESOLVED DISPATCH]
+```
+
+Codex must represent the boundary rather than inventing the destination.
+
+This distinction becomes a first-class graph state:
+
+```text
+RESOLVED
+UNRESOLVED
+EXTERNAL
+RUNTIME_ONLY
+STATIC_ONLY
+```
+
+---
+
+# 12. Phase 6 — Incremental Repository Updates
+
+**Status: NOT STARTED**
+
+Objective:
+
+The graph should not need to be rebuilt from scratch after every source change.
+
+Investigate existing incremental mechanisms first.
+
+Tree-sitter already supports incremental parsing and efficient syntax-tree updates.
+
+Desired model:
+
+```text
+Initial clone
+     ↓
+Full index
+     ↓
+Graph v1
+     ↓
+Developer changes file
+     ↓
+Incremental analysis
+     ↓
+Graph v2
+```
+
+Only affected nodes and relationships should be recomputed where the underlying tools support it.
+
+---
+
+# 13. Phase 7 — Runtime Intelligence
+
+**Status: NOT STARTED — HIGHER RISK**
+
+Objective:
+
+Enrich static relationships with actual runtime observations.
+
+Desired model:
+
+```text
+STATIC GRAPH
+A ──CALLS──> B
+
+RUNTIME
+Test_001
+A ──OBSERVED_CALL──> B
+```
+
+Runtime evidence should **never silently replace static evidence**.
+
+Instead:
+
+```text
+Relationship
+    ├── STATIC evidence
+    └── RUNTIME evidence
+```
+
+Potential runtime information:
+
+```text
+Executed function
+Observed call
+Execution path
+Branch taken
+External API invoked
+Database interaction
+Exception path
+Timing
+```
+
+This phase should begin with instrumentation capabilities already available in the target language ecosystem rather than implementing a universal tracing engine.
+
+---
+
+# 14. Phase 8 — Git History Intelligence
+
+**Status: NOT STARTED**
+
+Objective:
+
+Add repository evolution as another evidence dimension.
+
+Extract:
+
+```text
+Commit
+Parent commit
+Changed file
+Changed symbol
+Author
+Timestamp
+Diff
+Rename
+Deletion
+Addition
+```
+
+Derive deterministic historical relationships where justified:
+
+```text
+MODIFIED_BY
+INTRODUCED_BY
+DELETED_BY
+RENAMED_BY
+CO_CHANGED_WITH
+```
+
+Example:
+
+```text
+AuthenticationService
+      │
+      ├── INTRODUCED_BY → abc123
+      ├── MODIFIED_BY → def456
+      ├── MODIFIED_BY → ghi789
+      └── CO_CHANGED_WITH → OAuthClient
+```
+
+The LLM can then reason over historical evidence rather than searching Git history itself.
+
+Important constraint:
+
+Git evidence does not automatically establish developer intent.
+
+Codex must distinguish:
+
+```text
+FACT:
+"These files changed together."
+
+from:
+
+INFERENCE:
+"These files were changed together because of authentication refactoring."
+```
+
+The second is an LLM interpretation, not a graph fact.
+
+---
+
+# 15. Phase 9 — Unified Repository Intelligence Graph
+
+**Status: NOT STARTED**
+
+After static, visualization, runtime and Git capabilities have individually been reproduced:
+
+```text
+                 REPOSITORY
+                     │
+       ┌─────────────┼─────────────┐
+       ▼             ▼             ▼
+    STATIC        RUNTIME         GIT
+   EVIDENCE       EVIDENCE      HISTORY
+       │             │             │
+       └─────────────┼─────────────┘
+                     ▼
+          REPOSITORY INTELLIGENCE
+                   GRAPH
+                     │
+       ┌─────────────┼─────────────┐
+       ▼             ▼             ▼
+   Visualizer     Graph Query     LLM Context
+```
+
+This becomes the first real Codex baseline.
+
+---
+
+# 16. Phase 10 — Gap Analysis
+
+**Status: NOT STARTED**
+
+Only after Phases 0–9 are working should Codex ask:
+
+> What is still missing from existing ecosystems?
+
+Potential gap categories to investigate:
+
+### A. Unified evidence provenance
+
+Can Codex expose:
+
+```text
+Why does this edge exist?
+Which analyzer produced it?
+Which source line proves it?
+Was it statically resolved?
+Was it runtime observed?
+Which commit introduced it?
+```
+
+as one unified model?
+
+### B. Static + runtime reconciliation
+
+Can Codex represent:
+
+```text
+Static says:
+A → B
+
+Runtime says:
+A → C
+```
+
+without destroying either fact?
+
+### C. Open-world boundaries
+
+Can external libraries, APIs, services and unresolved dispatches be represented naturally rather than treated as missing graph data?
+
+### D. Historical graph
+
+Can structural graph and Git evolution be queried together?
+
+Example:
+
+> "Show me the current authentication flow and how it changed over the last six months."
+
+### E. Living graph
+
+Can the graph update automatically after:
+
+```text
+edit
+build
+test
+run
+commit
+merge
+```
+
+without requiring a complete re-index?
+
+### F. Evidence-aware LLM context
+
+Can Codex give the LLM:
+
+```text
+facts
++
+relationships
++
+source
++
+runtime observations
++
+history
++
+provenance
+```
+
+while explicitly separating facts from inference?
+
+### G. Multi-view graph
+
+Can one underlying graph generate:
+
+```text
+Architecture view
+Call-flow view
+Dependency view
+Runtime view
+Inheritance view
+Git evolution view
+LLM context view
+```
+
+without maintaining independent representations?
+
+---
+
+# 17. Phase 11 — Gap Experiments
+
+**Status: NOT STARTED**
+
+Each identified gap becomes an independent experiment.
+
+No feature should be implemented merely because it sounds useful.
+
+For every proposed gap:
+
+```text
+Existing capability
+       ↓
+Observed limitation
+       ↓
+Concrete hypothesis
+       ↓
+Minimal implementation
+       ↓
+Before / after measurement
+       ↓
+Keep / reject
+```
+
+This prevents Codex from becoming another large speculative architecture.
+
+---
+
+# 18. Phase 12 — Codex Differentiation
+
+**Status: NOT STARTED**
+
+Only mechanisms that survive the gap experiments become Codex-specific capabilities.
+
+The final question is:
+
+> What does Codex provide that existing code intelligence + graph + visualization + AI systems do not already provide adequately?
+
+Potential differentiation must be demonstrated experimentally rather than assumed.
+
+---
+
+# 19. Non-Goals
+
+Codex will NOT initially attempt to:
+
+* train a new LLM;
+* create a new foundation model;
+* invent a new universal parser;
+* replace Sourcegraph/SCIP/Tree-sitter without justification;
+* create an LLM-generated graph when deterministic evidence is available;
+* infer undocumented architecture as fact;
+* claim complete call resolution where static analysis cannot resolve a call;
+* merge runtime observations into static truth without provenance;
+* treat Git co-change as proof of semantic dependency;
+* reproduce every ecosystem feature simultaneously.
+
+---
+
+# 20. Validation Philosophy
+
+Codex will use real repositories rather than synthetic toy projects wherever possible.
+
+Each phase requires:
+
+```text
+Capability
++
+Known ground truth
++
+Real repository
++
+Measured result
++
+Failure analysis
+```
+
+For graph relationships:
+
+```text
+Precision
+Recall
+Unresolved rate
+False-positive rate
+False-negative rate
+```
+
+For LLM integration:
+
+```text
+Answer accuracy
+Context tokens
+Relevant-context ratio
+Latency
+LLM calls
+Hallucination rate
+```
+
+For visualization:
+
+```text
+Node coverage
+Edge coverage
+Relationship correctness
+Navigation usefulness
+Rendering performance
+```
+
+For runtime:
+
+```text
+Observed-path coverage
+Static/runtime agreement
+Unresolved-path rate
+Instrumentation overhead
+```
+
+For Git history:
+
+```text
+Symbol-history accuracy
+Rename tracking
+Change attribution
+Historical relationship accuracy
+```
+
+---
+
+# 21. Project Milestones
+
+## M0 — Ecosystem Understanding
+
+**Goal:** Know what already exists.
+
+Deliverable:
+
+```text
+Codex Ecosystem Capability Matrix
+```
+
+---
+
+## M1 — Static Intelligence Baseline
+
+**Goal:** Existing indexers → repository graph.
+
+Deliverable:
+
+```text
+Multi-language structural graph
+```
+
+---
+
+## M2 — Graph Navigation
+
+**Goal:** Repository-level graph traversal.
+
+Deliverable:
+
+```text
+Question → graph → relevant repository context
+```
+
+---
+
+## M3 — LLM Context Baseline
+
+**Goal:** Graph-assisted LLM context.
+
+Deliverable:
+
+```text
+Question → graph context → LLM
+```
+
+---
+
+## M4 — Visual Repository Intelligence
+
+**Goal:** Automatically generated repository graph views.
+
+Deliverable:
+
+```text
+Clone repository
+      ↓
+Graph generated
+      ↓
+Visual representation
+```
+
+---
+
+## M5 — External/Open Boundaries
+
+**Goal:** Correctly represent unresolved and external relationships.
+
+Deliverable:
+
+```text
+Internal ──→ External
+Internal ──→ Unresolved
+```
+
+---
+
+## M6 — Incremental / Living Graph
+
+**Goal:** Keep graph synchronized with source changes.
+
+Deliverable:
+
+```text
+Code change → graph update
+```
+
+---
+
+## M7 — Runtime Intelligence
+
+**Goal:** Add actual execution evidence.
+
+Deliverable:
+
+```text
+Static graph + Runtime graph
+```
+
+---
+
+## M8 — Git Intelligence
+
+**Goal:** Add evolution/history.
+
+Deliverable:
+
+```text
+Current architecture + historical architecture
+```
+
+---
+
+## M9 — Unified Evidence Graph
+
+**Goal:** Combine all evidence dimensions.
+
+Deliverable:
+
+```text
+Static
+Runtime
+Git
+External
+Provenance
+        ↓
+Unified Evidence Graph
+```
+
+---
+
+## M10 — Gap Discovery
+
+**Goal:** Identify capabilities not adequately solved by existing ecosystems.
+
+Deliverable:
+
+```text
+Codex Gap Report
+```
+
+---
+
+## M11 — Differentiated Capabilities
+
+**Goal:** Build only experimentally justified gaps.
+
+Deliverable:
+
+```text
+Codex-specific innovations
+```
+
+---
+
+## M12 — Final Evaluation
+
+**Goal:** Determine whether Codex provides measurable value beyond existing approaches.
+
+Compare:
+
+```text
+Raw repository → LLM
+Existing code intelligence → LLM
+Existing graph → LLM
+Codex → LLM
+```
+
+Measure:
+
+```text
+Context efficiency
+Answer accuracy
+Repository understanding
+Navigation effort
+Hallucination rate
+Latency
+Cost
+Runtime usefulness
+Historical understanding
+```
+
+---
+
+# 22. Target Architecture
+
+The intended final architecture is:
+
+```text
+                         GIT REPOSITORY
+                               │
+                               ▼
+                  ┌────────────────────────┐
+                  │ Existing Ecosystem     │
+                  │ Indexers / Parsers     │
+                  │ SCIP / Tree-sitter     │
+                  └────────────┬───────────┘
+                               │
+                  ┌────────────┼────────────┐
+                  ▼            ▼            ▼
+              STRUCTURE     RUNTIME        GIT
+               EVIDENCE     EVIDENCE      HISTORY
+                  │            │            │
+                  └────────────┼────────────┘
+                               ▼
+                  ┌────────────────────────┐
+                  │ CODEX EVIDENCE GRAPH   │
+                  │                        │
+                  │ Nodes                  │
+                  │ Relationships          │
+                  │ Provenance              │
+                  │ Resolution status       │
+                  │ Source locations        │
+                  │ Runtime observations    │
+                  │ Historical evidence     │
+                  └────────────┬───────────┘
+                               │
+               ┌───────────────┼────────────────┐
+               ▼               ▼                ▼
+          VISUALIZATION    GRAPH QUERY       LLM CONTEXT
+               │               │                │
+               ▼               └────────┬───────┘
+          Human understanding            ▼
+                                      LLM
+                                        │
+                                        ▼
+                              Reasoning / Explanation
+```
+
+---
+
+# 23. Core Architectural Rule
+
+Codex should maintain a strict boundary:
+
+```text
+DETERMINISTIC LAYER
+-------------------
+What exists?
+Where is it?
+What connects to what?
+What implements what?
+What was executed?
+What changed?
+What evidence proves it?
+              ↓
+LLM LAYER
+---------
+What does it mean?
+Why is it designed this way?
+What is the likely intent?
+How should it be explained?
+What could be improved?
+```
+
+The LLM may reason **from evidence**.
+
+It must not silently become the source of structural truth.
+
+---
+
+# 24. Current Decision
+
+The previous retrieval-focused Codex experiment is **not the main project direction anymore**.
+
+It may be retained as an isolated experiment/reference because it demonstrated that structural facts can influence retrieval, but it should not dictate the new architecture.
+
+The new Codex strategy is:
+
+```text
+DO NOT:
+Build a new repository intelligence system from scratch.
+
+DO:
+1. Study existing ecosystems.
+2. Reuse their mature components.
+3. Reproduce their capabilities.
+4. Validate them on real repositories.
+5. Combine compatible capabilities.
+6. Identify what remains unsolved.
+7. Build only those gaps.
+```
+
+---
+
+# 25. Immediate Next Step
+
+**Do not implement Codex yet.**
+
+The next action is **M0 — Ecosystem Capability Matrix**.
+
+The first concrete research set should be:
+
+```text
+Sourcegraph Code Graph
+SCIP
+Tree-sitter
+RepoGraph
+CodeSee
+Graph-RAG approaches
+Graph-integrated LLM approaches
+Runtime tracing ecosystems
+Git history / code evolution tools
+```
+
+For each, determine:
+
+```text
+What it already solves
+How it solves it
+What can be reused
+What can be reproduced
+What it does not solve
+What evidence supports its capability
+```
+
+Only after that matrix is complete should Codex architecture be frozen.
+
+---
+
+## Guiding statement
+
+> **Codex is not an attempt to reinvent repository intelligence. Codex first assembles and validates the best existing repository-intelligence capabilities into one evidence-backed graph. Its actual innovation begins only at the boundaries where those ecosystems leave measurable gaps.**
